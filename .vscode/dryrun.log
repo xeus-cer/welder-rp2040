@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/stanke/pico/picotest'
+make: Leaving directory '/home/stanke/pico/picotest'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

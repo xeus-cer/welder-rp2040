@@ -1,0 +1,6 @@
+[submodule "lib/xerxes-devices"]
+	path = lib/xerxes-devices
+	url = git@github.com:xeus-cer/xerxes-devices.git
+[submodule "lib/xerxes-protocol-cpp"]
+	path = lib/xerxes-protocol-cpp
+	url = git@github.com:xeus-cer/xerxes-protocol-cpp.git
