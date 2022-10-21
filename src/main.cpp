@@ -14,8 +14,16 @@
 #include "hardware/structs/pll.h"
 #include "hardware/structs/clocks.h"
 #include "hardware/pwm.h"
+#include "pico/util/queue.h"
+
 
 using namespace std;
+
+
+queue_t tx_fifo;
+bool tx_needs_data = 0;
+bool rx_has_data = 0;
+
  
 void measure_freqs(void) {
     uint f_pll_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_SYS_CLKSRC_PRIMARY);
@@ -27,6 +35,7 @@ void measure_freqs(void) {
     uint f_clk_adc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_ADC);
     uint f_clk_rtc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_RTC);
  
+    /*
     printf("pll_sys  = %dkHz\n", f_pll_sys);
     printf("pll_usb  = %dkHz\n", f_pll_usb);
     printf("rosc     = %dkHz\n", f_rosc);
@@ -36,7 +45,7 @@ void measure_freqs(void) {
     printf("clk_adc  = %dkHz\n", f_clk_adc);
     printf("clk_rtc  = %dkHz\n", f_clk_rtc);
     std::cout << std::endl << std::endl;
- 
+ */
     // Can't measure clk_ref / xosc as it is the ref
 }
 
@@ -47,9 +56,9 @@ void initialize_uart(void)
     // Initialise UART 0 on 115200baud
     uart_init(uart0, 115200);
  
-    // Set the GPIO pin mux to the UART - 0 is TX, 1 is RX
-    gpio_set_function(0, GPIO_FUNC_UART);
-    gpio_set_function(1, GPIO_FUNC_UART);
+    // Set the GPIO pin mux to the UART - 16 is TX, 17 is RX
+    gpio_set_function(16, GPIO_FUNC_UART);
+    gpio_set_function(17, GPIO_FUNC_UART);
 
     uart_set_fifo_enabled(uart0, 1);	
 }
@@ -86,7 +95,9 @@ bool uart0_is_rx_ready()
 
 void fetch_handler(uint8_t c)
 {
-    gpio_put(PICO_DEFAULT_LED_PIN, !gpio_get(PICO_DEFAULT_LED_PIN));
+    gpio_put(PICO_DEFAULT_LED_PIN, 1);
+    sleep_ms(5);
+    gpio_put(PICO_DEFAULT_LED_PIN, 0);
 }
 
 
@@ -101,45 +112,34 @@ void sleep_dormant()
     printf("XOSC going dormant\n");
     uart_default_tx_wait_blocking();
 
-    // Go to sleep until we see a high edge on GPIO 10
-    //sleep_goto_dormant_until_edge_high(10);
-
-    uint i = 0;
-    while (1) {
-        printf("XOSC awake %d\n", i++);
-    }
+    // Go to sleep until we see a high edge on GPIO 17 - RX
+    // sleep_goto_dormant_until_edge_high(17);
+    cout << "Pico woke" << endl;
 }
+
 
 void toggler()
 {
+    uint64_t i = 0;
     while(1)
     {
-        gpio_put(0, !gpio_get(0));
+        gpio_put(PICO_DEFAULT_LED_PIN, !gpio_get(PICO_DEFAULT_LED_PIN));
+        sleep_ms(500);
+        queue_add_blocking(&tx_fifo, &i);
+        i++;
     }
 }
 
 static uint PWM_0A = 0;
 static uint PWM_1B = 3;
 
-int main(void)
+void pwm_user_init()
 {
-    this_dev_addr = 0x01;
 
-	stdio_init_all();
-    initialize_uart();
-	
-	gpio_init(PICO_DEFAULT_LED_PIN);
-	gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
     gpio_init(PWM_0A);
     gpio_set_dir(PWM_0A, GPIO_OUT);
     gpio_init(PWM_1B);
     gpio_set_dir(PWM_1B, GPIO_IN);
-
-    XerxesBusSetup(uart0_read, uart0_write, nop, nop, tx_done, uart0_is_rx_ready);
-
-    XerxesDeviceSetup(DEVID_POLLUTANTS_PM_VOC_NOX, fetch_handler, nop);
-
-    //multicore_launch_core1(toggler);
 
     // Tell GPIO 0 and 1 they are allocated to the PWM
     gpio_set_function(0, GPIO_FUNC_PWM);
@@ -166,15 +166,52 @@ int main(void)
     pwm_config_set_clkdiv_mode(&cfg2, PWM_DIV_B_RISING);
     pwm_init(slice2, &cfg2, true);
 
+}
+
+
+void uart_interrupt_handler()
+{
+    rx_has_data = uart0_is_rx_ready();
+    if(uart_is_writable(uart0) && queue_is_empty(&tx_fifo)){
+        tx_needs_data = true;
+    }
+}
+
+
+int main(void)
+{
+    this_dev_addr = 0x01;
+
+	stdio_init_all();
+    initialize_uart();
+	
+	gpio_init(PICO_DEFAULT_LED_PIN);
+	gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
+
+    XerxesBusSetup(uart0_read, uart0_write, nop, nop, tx_done, uart0_is_rx_ready);
+
+    XerxesDeviceSetup(DEVID_IO_8DI_8DO, fetch_handler, nop);
+
+    queue_init(&tx_fifo, 8, 0x100);
+    
+    multicore_launch_core1(toggler);
+
+
+    irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
+    // enable uart interrupt for TX needs data, disable for RX has data
+    uart_set_irq_enables(uart0, false, true);
+
 
 	while (1)
 	{
+        gpio_put(PICO_DEFAULT_LED_PIN, 1);
         XerxesSync();
-        measure_freqs();
-        fetch_handler(0);
-        cout << config.csr << ", " << config.div << ", " << config.top << endl;
-        cout << "Counter: " << pwm_get_counter(slice2) << endl;
-
-        sleep_ms(500);
+        gpio_put(PICO_DEFAULT_LED_PIN, 0);
+        // measure_freqs();
+        uint64_t rcv = 0;
+        if(queue_try_remove(&tx_fifo, &rcv)) cout << rcv << endl;
+        sleep_ms(100);
+        // cout << config.csr << ", " << config.div << ", " << config.top << endl;
+        // cout << "Counter: " << pwm_get_counter(slice2) << endl;
 	}
 }
