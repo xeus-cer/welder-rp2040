@@ -9,5 +9,26 @@
         "**/Thumbs.db": true,
         "build": false
     },
-    "explorerExclude.backup": {}
+    "explorerExclude.backup": {},
+    "MicroPython.executeButton": [
+        {
+            "text": "▶",
+            "tooltip": "Run",
+            "alignment": "left",
+            "command": "extension.executeFile",
+            "priority": 3.5
+        }
+    ],
+    "MicroPython.syncButton": [
+        {
+            "text": "$(sync)",
+            "tooltip": "sync",
+            "alignment": "left",
+            "command": "extension.execute",
+            "priority": 4
+        }
+    ],
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }

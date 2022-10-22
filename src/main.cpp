@@ -15,6 +15,8 @@
 #include "hardware/structs/clocks.h"
 #include "hardware/pwm.h"
 #include "pico/util/queue.h"
+#include "pico/stdio/driver.h"
+#include "pico/stdio_uart.h"
 
 
 using namespace std;
@@ -54,7 +56,7 @@ uint8_t this_dev_addr;
 void initialize_uart(void)
 {
     // Initialise UART 0 on 115200baud
-    uart_init(uart0, 115200);
+    uart_init(uart0, 38400);
  
     // Set the GPIO pin mux to the UART - 16 is TX, 17 is RX
     gpio_set_function(16, GPIO_FUNC_UART);
@@ -196,6 +198,7 @@ int main(void)
     
     multicore_launch_core1(toggler);
 
+    stdio_set_driver_enabled(&stdio_uart, false);
 
     irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
     // enable uart interrupt for TX needs data, disable for RX has data
@@ -204,12 +207,13 @@ int main(void)
 
 	while (1)
 	{
-        gpio_put(PICO_DEFAULT_LED_PIN, 1);
+        
         XerxesSync();
-        gpio_put(PICO_DEFAULT_LED_PIN, 0);
+        
         // measure_freqs();
         uint64_t rcv = 0;
         if(queue_try_remove(&tx_fifo, &rcv)) cout << rcv << endl;
+        if(rx_has_data || tx_needs_data) cout << rx_has_data << tx_needs_data << endl;
         sleep_ms(100);
         // cout << config.csr << ", " << config.div << ", " << config.top << endl;
         // cout << "Counter: " << pwm_get_counter(slice2) << endl;
