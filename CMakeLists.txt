@@ -12,9 +12,15 @@ set(CMAKE_CXX_STANDARD 23)
 pico_sdk_init()
 
 include_directories(
-	"lib",
+	"lib/xerxes-protocol-cpp"
 	"include"
 	)
+
+# Add -O0 to remove optimizations when using gcc
+IF(CMAKE_COMPILER_IS_GNUCC)
+	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
+	set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
+ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 add_executable(picotest
 	src/main.cpp
@@ -32,7 +38,9 @@ target_link_libraries(
 	hardware_uart
 	hardware_pwm
 	hardware_sleep
-	xerxes
+	hardware_flash
+	hardware_sync
+	xerxes_protocol
 	)
 
 pico_enable_stdio_usb(picotest 1)

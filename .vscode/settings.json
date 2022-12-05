@@ -1,4 +1,25 @@
 {
+// These settings tweaks to the cmake plugin will ensure
+// that you debug using cortex-debug instead of trying to launch
+// a Pico binary on the host
+"cmake.statusbar.advanced": {
+    "debug": {
+        "visibility": "hidden"
+    },
+    "launch": {
+        "visibility": "hidden"
+    },
+    "build": {
+        "visibility": "default"
+    },
+    "buildTarget": {
+        "visibility": "hidden"
+    }
+},
+"cmake.buildBeforeRun": true,
+"C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+"cortex-debug.openocdPath": "/usr/local/bin/openocd",
+
     "C_Cpp.errorSquiggles": "Disabled",
     "files.exclude": {
         "**/.git": true,
@@ -29,6 +50,33 @@
         }
     ],
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "utility": "cpp"
     }
 }
