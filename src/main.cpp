@@ -26,6 +26,7 @@
 #include "errors.h"
 #include "protocol.h"
 #include "devids.h"
+#include "RingBuffer.hpp"
 
 
 using namespace std;
@@ -41,7 +42,7 @@ static const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLAS
 /* Allocate memory for register */
 volatile static uint8_t main_register[REGISTER_SIZE];
 
-/* VOLATILE - NOT PERMANENT VALUES ### */
+/* ### NON VOLATILE - PERMANENT VALUES ### */
 #define GAIN_PV0_OFFSET      0
 #define GAIN_PV1_OFFSET      8
 #define GAIN_PV2_OFFSET      16
@@ -62,25 +63,35 @@ static float* offset_pv2    = (float *)(main_register + OFFSET_PV2_OFFSET);
 static float* offset_pv3    = (float *)(main_register + OFFSET_PV3_OFFSET);
 
 
-/* ### NON VOLATILE - PERMANENT VALUES ### */
+/* ### VOLATILE - PROCESS VALUES ### */
 #define STATUS_OFFSET   NON_VOLATILE_SIZE + 0       // 128
 #define ERROR_OFFSET    NON_VOLATILE_SIZE + 8       // 136
 #define UID_OFFSET      NON_VOLATILE_SIZE + 16      // 144
 
-#define PV0_OFFSET      NON_VOLATILE_SIZE + 24      // 152  
-#define PV1_OFFSET      NON_VOLATILE_SIZE + 32      // 160
-#define PV2_OFFSET      NON_VOLATILE_SIZE + 40      // 168
-#define PV3_OFFSET      NON_VOLATILE_SIZE + 48      // 176
+#define PV0_OFFSET          NON_VOLATILE_SIZE + 24      // 152  
+#define PV1_OFFSET          NON_VOLATILE_SIZE + 32      // 160
+#define PV2_OFFSET          NON_VOLATILE_SIZE + 40      // 168
+#define PV3_OFFSET          NON_VOLATILE_SIZE + 48      // 176
 
-#define MEAN_PV0_OFFSET  NON_VOLATILE_SIZE + 56     // 184
-#define MEAN_PV1_OFFSET  NON_VOLATILE_SIZE + 64     // 192
-#define MEAN_PV2_OFFSET  NON_VOLATILE_SIZE + 72     // 200
-#define MEAN_PV3_OFFSET  NON_VOLATILE_SIZE + 80     // 208
+#define MEAN_PV0_OFFSET     NON_VOLATILE_SIZE + 56     // 184
+#define MEAN_PV1_OFFSET     NON_VOLATILE_SIZE + 64     // 192
+#define MEAN_PV2_OFFSET     NON_VOLATILE_SIZE + 72     // 200
+#define MEAN_PV3_OFFSET     NON_VOLATILE_SIZE + 80     // 208
  
-#define STDEV_PV0_OFFSET NON_VOLATILE_SIZE + 88     // 216
-#define STDEV_PV1_OFFSET NON_VOLATILE_SIZE + 96     // 224
-#define STDEV_PV2_OFFSET NON_VOLATILE_SIZE + 104    // 232
-#define STDEV_PV3_OFFSET NON_VOLATILE_SIZE + 112    // 240
+#define STDEV_PV0_OFFSET    NON_VOLATILE_SIZE + 88     // 216
+#define STDEV_PV1_OFFSET    NON_VOLATILE_SIZE + 96     // 224
+#define STDEV_PV2_OFFSET    NON_VOLATILE_SIZE + 104    // 232
+#define STDEV_PV3_OFFSET    NON_VOLATILE_SIZE + 112    // 240
+
+#define MIN_PV0_OFFSET      NON_VOLATILE_SIZE + 120     // 248
+#define MIN_PV1_OFFSET      NON_VOLATILE_SIZE + 128     // 256
+#define MIN_PV2_OFFSET      NON_VOLATILE_SIZE + 136     // 264
+#define MIN_PV3_OFFSET      NON_VOLATILE_SIZE + 144     // 272
+ 
+#define MAX_PV0_OFFSET      NON_VOLATILE_SIZE + 152    // 280
+#define MAX_PV1_OFFSET      NON_VOLATILE_SIZE + 160    // 288
+#define MAX_PV2_OFFSET      NON_VOLATILE_SIZE + 168    // 296
+#define MAX_PV3_OFFSET      NON_VOLATILE_SIZE + 176    // 304
 
 static uint64_t* error  = (uint64_t *)(main_register + ERROR_OFFSET);
 static uint64_t* status = (uint64_t *)(main_register + STATUS_OFFSET);
@@ -91,14 +102,25 @@ static float* pv1 = (float *)(main_register + PV1_OFFSET);
 static float* pv2 = (float *)(main_register + PV2_OFFSET);
 static float* pv3 = (float *)(main_register + PV3_OFFSET);
 
-static float* mean_pv0   = (float *)(main_register + MEAN_PV0_OFFSET);
-static float* mean_pv1   = (float *)(main_register + MEAN_PV1_OFFSET);
-static float* mean_pv2   = (float *)(main_register + MEAN_PV2_OFFSET);
-static float* mean_pv3   = (float *)(main_register + MEAN_PV3_OFFSET);
-static float* stdev_pv0  = (float *)(main_register + STDEV_PV0_OFFSET);
-static float* stdev_pv1  = (float *)(main_register + STDEV_PV1_OFFSET);
-static float* stdev_pv2  = (float *)(main_register + STDEV_PV2_OFFSET);
-static float* stdev_pv3  = (float *)(main_register + STDEV_PV3_OFFSET);
+static float* mean_pv0  = (float *)(main_register + MEAN_PV0_OFFSET);
+static float* mean_pv1  = (float *)(main_register + MEAN_PV1_OFFSET);
+static float* mean_pv2  = (float *)(main_register + MEAN_PV2_OFFSET);
+static float* mean_pv3  = (float *)(main_register + MEAN_PV3_OFFSET);
+
+static float* stdev_pv0 = (float *)(main_register + STDEV_PV0_OFFSET);
+static float* stdev_pv1 = (float *)(main_register + STDEV_PV1_OFFSET);
+static float* stdev_pv2 = (float *)(main_register + STDEV_PV2_OFFSET);
+static float* stdev_pv3 = (float *)(main_register + STDEV_PV3_OFFSET);
+
+static float* min_pv0   = (float *)(main_register + MIN_PV0_OFFSET);
+static float* min_pv1   = (float *)(main_register + MIN_PV1_OFFSET);
+static float* min_pv2   = (float *)(main_register + MIN_PV2_OFFSET);
+static float* min_pv3   = (float *)(main_register + MIN_PV3_OFFSET);
+
+static float* max_pv0   = (float *)(main_register + MAX_PV0_OFFSET);
+static float* max_pv1   = (float *)(main_register + MAX_PV1_OFFSET);
+static float* max_pv2   = (float *)(main_register + MAX_PV2_OFFSET);
+static float* max_pv3   = (float *)(main_register + MAX_PV3_OFFSET);
 
 
 
