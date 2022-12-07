@@ -11,6 +11,11 @@ set(CMAKE_CXX_STANDARD 23)
 
 pico_sdk_init()
 
+find_package(
+	Serialization
+	REQUIRED
+)
+
 include_directories(
 	"lib/xerxes-protocol-cpp"
 	"include"
@@ -26,7 +31,9 @@ add_executable(picotest
 	src/main.cpp
 	)
 
-add_subdirectory(lib/xerxes-protocol-cpp)
+add_subdirectory(
+	lib/xerxes-protocol-cpp
+)
 
 target_link_libraries(
 	picotest 
@@ -41,6 +48,8 @@ target_link_libraries(
 	hardware_flash
 	hardware_sync
 	xerxes_protocol
+
+	Serialization::Serialization
 	)
 
 pico_enable_stdio_usb(picotest 1)

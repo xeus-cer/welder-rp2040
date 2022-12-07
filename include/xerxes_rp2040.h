@@ -27,10 +27,15 @@
 #define RS_RX_PIN   UART0_RX_PIN
 
 
+#ifdef __cplusplus
 extern "C"
 {
+#endif 
+
     //code goes here
 
+#ifdef __cplusplus
 }
+#endif 
 
 #endif // XERXES_RP2040_H
