@@ -46,6 +46,7 @@ target_link_libraries(
 	hardware_sleep
 	hardware_flash
 	hardware_sync
+	hardware_spi
 	xerxes_protocol
 
 	Serialization::Serialization

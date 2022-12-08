@@ -6,40 +6,45 @@
 #include <cmath>
 #include <iostream>
 
+namespace Xerxes
+{
+
+
 template <class T>
 class RingBuffer
 {
 private:
     uint32_t currentPos {0};
     uint32_t maxSize;
+protected:
     uint32_t maxCursor {0};
     T* buffer;
+    bool saturated {false};
+
 public:
     RingBuffer(const uint32_t &maxSize);
     RingBuffer(std::initializer_list<T> il);
     ~RingBuffer();
-    void insertOne(T el);
 
-    double getMean();
-    double getStdDev();
-    double getMax();
-    double getMin();
-    double getLast();
+    void insertOne(const T el);
+    const T & getLast();
 };
 
 
 template <class T>
-RingBuffer<T>::RingBuffer(std::initializer_list<T> il)
+RingBuffer<T>::RingBuffer(std::initializer_list<T> il) : currentPos(0)
 {
-    assert(il.size() > 0);
-    maxSize = il.size();
-    buffer = new T[il.size()]{};
-    int i=0;
+    size_t size = il.size();
+    assert(size > 0);
+    maxSize = size;
+    buffer = new T[size]{};
+    int i = 0;
     for(const auto el : il)
     {
         buffer[i++] = el;
     }
-    maxCursor = il.size();
+    maxCursor = size;
+    saturated = true;
 }
 
 
@@ -59,11 +64,12 @@ RingBuffer<T>::~RingBuffer()
 
 
 template <class T>
-void RingBuffer<T>::insertOne(T el)
+void RingBuffer<T>::insertOne(const T el)
 {
     if(currentPos >= maxSize)
     {
         currentPos = 0;
+        saturated = true;
     }
 
     this->buffer[currentPos++] = el;
@@ -72,75 +78,19 @@ void RingBuffer<T>::insertOne(T el)
 
 
 template <class T>
-double RingBuffer<T>::getStdDev()
+const T & RingBuffer<T>::getLast()
 {
-    double mean = this->getMean();
-    double sumOfErrorsSquared(0);
-    double StdDev(0);
-
-    uint32_t len = 0;
-    for(int i=0; i<maxCursor; i++)
+    if(this->currentPos > 0)
     {
-        sumOfErrorsSquared += pow(abs(mean - buffer[i]), 2);
-        len++;
+        return this->buffer[this->currentPos - 1];
     }
-    
-    StdDev = sqrt(sumOfErrorsSquared / len);
-
-    return StdDev;
-}
-
-
-template <class T>
-double RingBuffer<T>::getMean()
-{
-    double mean(0);
-    double sumOfElements(0);
-
-    uint32_t len = 0;
-    for(int i=0; i<maxCursor; i++)
+    else
     {
-        sumOfElements += buffer[i];
-        len++;
+        return this->buffer[this->maxCursor - 1];
     }
-    
-    mean = sumOfElements / len;
-    
-    return mean;
 }
 
-
-template <class T>
-double RingBuffer<T>::getMin()
-{
-    double min = INFINITY;
-    for(int i=0; i<maxCursor; i++)
-    {
-        if(buffer[i] < min) min=buffer[i];
-    }
     
-    return min;
-}
-
-
-template <class T>
-double RingBuffer<T>::getMax()
-{
-    double max = -INFINITY;
-    for(int i=0; i<maxCursor; i++)
-    {
-        if(buffer[i] > max) max=buffer[i];
-    }
-    
-    return max;
-}
-
-template <class T>
-double RingBuffer<T>::getLast()
-{
-    double last = buffer[currentPos - 1];
-    return last;
-}
-
+} // namespace Xerxes
 
 #endif // RINGBUFFER_HPP
