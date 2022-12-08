@@ -27,7 +27,7 @@
 #include <Serialization/Serialization.h>
 
 #include "xerxes_rp2040.h"
-#include "errors.h"
+#include "Errors.h"
 #include "protocol.h"
 #include "devids.h"
 #include "StatisticBuffer.hpp"
