@@ -2,6 +2,7 @@
 #define __PROTOCOL_HPP
 
 #include "RS485.hpp"
+#include "Message.hpp"
 
 namespace Xerxes
 {
@@ -14,8 +15,8 @@ public:
     Protocol(Network *network);
     ~Protocol();
 
-    void sendMessage(const uint8_t address, uint8_t *data);
-    void readMessage(const uint8_t *rcvBuf, const uint32_t timeoutMs);
+    uint16_t sendMessage(const Message &message);
+    uint16_t readMessage(const uint8_t *rcvBuf, const uint32_t timeoutMs);
 };
 
 Protocol::Protocol(Network *network) : xn(network)
@@ -24,6 +25,19 @@ Protocol::Protocol(Network *network) : xn(network)
 
 Protocol::~Protocol()
 {
+}
+
+uint16_t Protocol::sendMessage(const Message &message)
+{
+    return xn->sendData(message.toPacket());
+}
+
+
+uint16_t Protocol::readMessage(const uint8_t *rcvBuf, const uint32_t timeoutMs)
+{
+    uint16_t received {0};
+    //TODO Magick
+    return received;
 }
 
 

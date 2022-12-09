@@ -1,6 +1,8 @@
 #ifndef __NETWORK_HPP
 #define __NETWORK_HPP
 
+#include "Packet.hpp"
+
 namespace Xerxes
 {
     
@@ -12,7 +14,7 @@ public:
     Network(/* args */);
     ~Network();
 
-    virtual bool sendData(const uint8_t destinationAddress, const uint8_t &data);
+    virtual uint16_t sendData(Packet toSend);
     virtual uint16_t readData(uint8_t *receiveBuffer, uint32_t timeoutMs);
 };
 

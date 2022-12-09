@@ -65,22 +65,14 @@ void ABP::update()
     uint16_t p_val;
     uint16_t t_val;
 
-    // SPI_CS active low
+    // SPI_CS active low, read data
     gpio_put(SPI0_CSN_PIN, 0);
     sleep_us(1);
     spi_read_blocking(spi0, 0, data, 4);
-    // spi_read_blocking(spi0, 0, &b0, 1);
-    // spi_read_blocking(spi0, 0, &b1, 1);
-    // spi_read_blocking(spi0, 0, &t0, 1);
-    // spi_read_blocking(spi0, 0, &t1, 1);
-    // spi_read16_blocking(spi0, 0, &p_val, 1);
-    // spi_read16_blocking(spi0, 0, &t_val, 1);
-    
     sleep_us(1);
-
     gpio_put(SPI0_CSN_PIN, 1);
-    // = (uint16_t)(((b0 & 0b00111111)<<8) + b1);
-    // = (uint16_t)(((t0<<8) + (t1 & 0b11100000))>>5);
+
+    // convert data, see datasheet
     p_val = (uint16_t)(((data[0] & 0b00111111)<<8) + data[1]);
     t_val = (uint16_t)(((data[2]<<8) + (data[3] & 0b11100000))>>5);
     
@@ -100,7 +92,6 @@ void ABP::read(std::array<float*, 4> pvs)
 
 void ABP::read(float *v0, float *v1, float *v2, float *v3)
 {
-    // TODO: cez array pls
     *v0 = pv0;
     *v1 = pv1;
     *v2 = pv2;

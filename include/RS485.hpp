@@ -1,9 +1,11 @@
 #ifndef __RS485_HPP
 #define __RS485_HPP
 
+
 #include "Network.hpp"
 #include "pico/util/queue.h"
 #include "Packet.hpp"
+
 
 namespace Xerxes
 {
@@ -18,31 +20,31 @@ public:
     RS485(queue_t *queueTx, queue_t *queueRx);
     ~RS485();
 
-    bool sendData(Packet &toSend);
+    uint16_t sendData(const Packet toSend);
     uint16_t readData(uint8_t *receiveBuffer, uint32_t timeoutMs);
 };
+
 
 RS485::RS485(queue_t *queueTx, queue_t *queueRx) : qtx(queueTx), qrx(queueRx)
 {
 }
+
 
 RS485::~RS485()
 {
 }
 
 
-bool RS485::sendData(Packet &toSend)
+uint16_t RS485::sendData(const Packet toSend)
 {
-
-    if(!queue_try_add(qtx, &toSend.soh)) return false;
-    if(!queue_try_add(qtx, &toSend.msgLen)) return false;
-
-    for(const auto &el:toSend.data)
+    uint16_t sent {0};
+    for(const auto &el:toSend.getData())
     {
-        if(!queue_try_add(qtx, &el)) return false;
+        if(!queue_try_add(qtx, &el)) break;
+        sent++; // byte was sent successfully
     }
 
-    return true;
+    return sent;
 }
 
 

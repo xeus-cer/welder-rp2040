@@ -11,7 +11,6 @@ namespace Xerxes
 class Message
 {
 private:
-    Packet packet;
     std::vector<uint8_t> messageBytes {};
 public:
     uint8_t srcAddr;
@@ -21,7 +20,7 @@ public:
     Message(const uint8_t source, const uint8_t destination, const uint16_t msgid, std::vector<uint8_t> &payload);
     ~Message();
 
-    
+    Packet toPacket();
 };
 
 
@@ -32,7 +31,6 @@ Message::Message(
     std::vector<uint8_t> &payload
     ) : srcAddr(source), dstAddr(destination), msgId(msgid)
 {
-    //TODO: do something with payload and calculate rest
     this->payload = payload;
 
     messageBytes.emplace_back(srcAddr);
@@ -44,10 +42,17 @@ Message::Message(
     {
         messageBytes.emplace_back(el);
     }
-
-    packet = Packet(messageBytes);
 }
 
+Message::~Message()
+{
+
+}
+
+Packet Message::toPacket()
+{
+    return Packet(messageBytes);
+}
 
 } // namespace Xerxes
 
