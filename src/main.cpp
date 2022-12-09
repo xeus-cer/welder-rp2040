@@ -33,6 +33,7 @@
 #include "StatisticBuffer.hpp"
 #include "Definitions.h"
 #include "Honeywell/ABP.hpp"
+#include "Slave.hpp"
 
 
 using namespace std;
@@ -254,13 +255,13 @@ void core1Entry()
             auto cycleDuration = endOfCycle - startOfCycle;
             int64_t sleepFor = *desiredCycleTimeUs - cycleDuration;
 
-            // sleep for the remaining time
             if(i++ % 100 == 0)
             {
                 DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
                 DEBUG_MSG("Val: " << *meanPv0 << "Pa, stdev: " << *stdDevPv0);
             }
 
+            // sleep for the remaining time
             if(sleepFor > 0)
             {
                 sleep_us(sleepFor);

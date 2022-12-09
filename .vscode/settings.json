@@ -61,7 +61,16 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "array": "cpp",
+        "bit": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "functional": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "ranges": "cpp",
+        "tuple": "cpp"
     },
     "MicroPython.executeButton": [
         {

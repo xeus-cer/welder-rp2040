@@ -12,7 +12,8 @@
 // how many samples are rotated in ring buffer
 #define RING_BUFFER_LEN     100
 
-// non volatile range
+/* memory mapping offsets: */
+/* non volatile range */
 #define GAIN_PV0_OFFSET     0
 #define GAIN_PV1_OFFSET     8
 #define GAIN_PV2_OFFSET     16
@@ -24,6 +25,7 @@
 #define OFFSET_PV3_OFFSET   56
 
 #define OFFSET_CYCLE_TIME   64
+#define OFFSET_ADDRESS      72
 
 
 //volatile range
