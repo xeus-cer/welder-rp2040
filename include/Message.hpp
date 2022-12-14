@@ -20,7 +20,8 @@ public:
     Message(const uint8_t source, const uint8_t destination, const uint16_t msgid, std::vector<uint8_t> &payload);
     ~Message();
 
-    Packet toPacket();
+    Packet toPacket() const;
+
 };
 
 
@@ -44,12 +45,13 @@ Message::Message(
     }
 }
 
+
 Message::~Message()
 {
 
 }
 
-Packet Message::toPacket()
+Packet Message::toPacket() const
 {
     return Packet(messageBytes);
 }

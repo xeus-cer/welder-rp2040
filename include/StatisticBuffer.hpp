@@ -41,6 +41,9 @@ template <class T>
 void StatisticBuffer<T>::updateStatistics()
 {
     mean = 0;
+    min = INFINITY;
+    max = -INFINITY;
+
     double sumOfElements {0};
     double sumOfSquaredErrors {0};
 
@@ -88,7 +91,7 @@ const float & StatisticBuffer<T>::getMean()
 template <class T>
 const float & StatisticBuffer<T>::getMin()
 {
-    return min;
+    return this->min;
 }
 
 

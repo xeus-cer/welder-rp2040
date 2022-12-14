@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <iostream>
-#include "../include/StatisticBuffer.hpp"
+#include "StatisticBuffer.hpp"
 
 
 TEST(StatisticBuffer, getStdDevDouble)
@@ -71,14 +71,10 @@ TEST(RingBuffer, getLast)
 
 TEST(StatisticBuffer, initializerList)
 {
-    Xerxes::StatisticBuffer<float> rb {-5, 1, 3.14, -INFINITY, 9};
+    Xerxes::StatisticBuffer<float> rb {-5, 1, 3.14, -INFINITY, 9, 8};
+    rb.updateStatistics();
 
     EXPECT_FLOAT_EQ(rb.getMin(), -INFINITY);
-    EXPECT_FLOAT_EQ(rb.getLast(), 9);
-}
-
-
-int main(int argc, char** argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    EXPECT_FLOAT_EQ(rb.getMax(), 9);
+    EXPECT_FLOAT_EQ(rb.getLast(), 8);
 }

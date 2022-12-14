@@ -124,12 +124,7 @@ void userInitQueue();
 void userInitFlash();
 void userLoadDefaultValues();
 
-bool tx_done();
-void nop();
-uint8_t uart0_read();
-void uart0_write(uint8_t c);
-bool uart0_is_rx_ready();
-void fetch_handler(uint8_t c);
+
 void core1Entry();
 void measurementLoop();
 void uart_interrupt_handler();
@@ -192,6 +187,7 @@ int main(void)
         watchdog_update();
 
         // try to read serial for incoming char
+        /* handled in IRQ
         if(uart_is_readable(uart0))
         {
             gpio_put(USR_LED_PIN, 1);
@@ -209,6 +205,7 @@ int main(void)
             }
             gpio_put(USR_LED_PIN, 0);
         }
+        */
 
         // try to send char over serial if present in FIFO buffer
         if(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
@@ -341,51 +338,11 @@ void userInitUart(void)
     uart_set_fifo_enabled(uart0, 1);	
     stdio_set_driver_enabled(&stdio_uart, false);
 
-    // irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
-    // irq_set_enabled(UART0_IRQ, true);
+    irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
+    irq_set_enabled(UART0_IRQ, true);
 
     // enable uart interrupt
-    //uart_set_irq_enables(uart0, true, false);
-}
-
-
-bool tx_done()
-{
-    return queue_is_empty(&txFifo);
-}
-
-
-void nop()
-{
-    __asm("nop");
-}
-
-
-uint8_t uart0_read()
-{
-    uint8_t rcvd;
-    queue_remove_blocking(&rxFifo, &rcvd);
-    return rcvd;
-}
-
-
-void uart0_write(uint8_t c)
-{
-    queue_add_blocking(&txFifo, &c);
-}
-
-
-bool uart0_is_rx_ready()
-{
-    return !queue_is_empty(&rxFifo);
-}
-
-
-void fetch_handler(uint8_t c)
-{
-    gpio_put(USR_LED_PIN, 1);
-    sleep_ms(5);
-    gpio_put(USR_LED_PIN, 0);
+    uart_set_irq_enables(uart0, true, false);
 }
 
 
@@ -395,7 +352,13 @@ void uart_interrupt_handler()
     if(uart_is_readable(uart0))
     {
         char rcvd = uart_getc(uart0);
-        queue_try_add(&rxFifo, &rcvd);
+
+        auto success = queue_try_add(&rxFifo, &rcvd);
+        if(!success)
+        {
+            // set cpu overload flag
+            *error |= ERROR_CPU_OVERLOAD;
+        }
     }
 
     irq_clear(UART0_IRQ);

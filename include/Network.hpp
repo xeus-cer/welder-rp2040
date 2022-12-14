@@ -14,7 +14,7 @@ public:
     Network(/* args */);
     ~Network();
 
-    virtual uint16_t sendData(Packet toSend);
+    virtual uint16_t sendData(const Packet & toSend);
     virtual uint16_t readData(uint8_t *receiveBuffer, uint32_t timeoutMs);
 };
 
