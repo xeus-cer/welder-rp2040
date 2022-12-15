@@ -3,7 +3,7 @@
 
 
 #include "hardware/spi.h"
-#include "Sensor.hpp"
+#include "Sensors/Sensor.hpp"
 #include <array>
 
 namespace Xerxes
@@ -15,7 +15,7 @@ const float VALmax  = 14745.0;  // counts = 90% 2^14
 const float Pmin    = 0.0;      // mbar    
 const float Pmax    = 600.0;    // mbar, or: 611.8298 mm
 
-class ABP : Sensor
+class ABP : public Sensor
 {
 private:
     double pv0;    
@@ -27,7 +27,6 @@ public:
     using Sensor::Sensor;
     void init();
     void update();
-    void read(float *v0, float *v1, float *v2, float *v3);
     void read(std::array<float*, 4> pvs);
     void stop();
 };
@@ -87,15 +86,6 @@ void ABP::read(std::array<float*, 4> pvs)
     *pvs[1] = pv1;
     *pvs[2] = pv2;
     *pvs[3] = pv3;
-}
-
-
-void ABP::read(float *v0, float *v1, float *v2, float *v3)
-{
-    *v0 = pv0;
-    *v1 = pv1;
-    *v2 = pv2;
-    *v3 = pv3;
 }
 
 

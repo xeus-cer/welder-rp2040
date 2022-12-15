@@ -24,7 +24,7 @@ namespace Xerxes
 uint32_t remainingTime(const uint32_t & start, const uint32_t &timeout);
 
     
-class RS485 : Network
+class RS485 : public Network
 {
 private:
     queue_t *qtx;
@@ -35,7 +35,7 @@ public:
     RS485(queue_t *queueTx, queue_t *queueRx);
     ~RS485();
 
-    uint16_t sendData(const Packet & toSend);
+    bool sendData(const Packet & toSend) const;
 
 
     /**
@@ -69,7 +69,7 @@ RS485::~RS485()
 }
 
 
-uint16_t RS485::sendData(const Packet & toSend)
+bool RS485::sendData(const Packet & toSend) const
 {
     uint16_t sent {0};
     for(const auto &el:toSend.getData())
@@ -78,7 +78,7 @@ uint16_t RS485::sendData(const Packet & toSend)
         sent++; // byte was sent successfully
     }
 
-    return sent;
+    return sent == toSend.size();
 }
 
 

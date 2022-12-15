@@ -18,10 +18,10 @@ private:
 public:
     Packet(std::vector<uint8_t> &message);
     ~Packet();
-    size_t size();
-    std::vector<uint8_t> & getData() const;
+    size_t size() const;
+    std::vector<uint8_t> getData() const;
     static Packet EmptyPacket();
-    uint8_t & at(const uint8_t pos) const;
+    uint8_t at(const uint8_t pos) const;
 };
 
 
@@ -50,13 +50,13 @@ Packet::~Packet()
 }
 
 
-size_t Packet::size()
+size_t Packet::size() const
 {
     return data.size();
 }
 
 
-std::vector<uint8_t> & Packet::getData() const
+std::vector<uint8_t> Packet::getData() const
 {
     return this->data;
 }
@@ -69,7 +69,7 @@ Packet Packet::EmptyPacket()
 }
 
 
-uint8_t & Packet::at(const uint8_t pos) const
+uint8_t Packet::at(const uint8_t pos) const
 {
     return data.at(pos);
 }

@@ -28,12 +28,14 @@
 
 #include "xerxes_rp2040.h"
 #include "Errors.h"
-#include "protocol.h"
+#include "MessageId.h"
 #include "devids.h"
 #include "StatisticBuffer.hpp"
 #include "Definitions.h"
-#include "Honeywell/ABP.hpp"
+#include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
+
+#include "Protocol.hpp"
 
 
 using namespace std;
@@ -65,6 +67,7 @@ static float* offsetPv2     = (float *)(mainRegister + OFFSET_PV2_OFFSET);
 static float* offsetPv3     = (float *)(mainRegister + OFFSET_PV3_OFFSET);
 
 static uint32_t *desiredCycleTimeUs  = (uint32_t *)(mainRegister + OFFSET_CYCLE_TIME);
+static uint8_t *devAddress  = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
 
 
 /* ### VOLATILE - PROCESS VALUES ### */
@@ -110,13 +113,17 @@ Xerxes::StatisticBuffer<float> rbpv3(RING_BUFFER_LEN);
 
 std::array<Xerxes::StatisticBuffer<float>,4> ringBuffers = {rbpv0, rbpv1, rbpv2, rbpv3};
 
-Xerxes::ABP pressureSensor; 
+Xerxes::Sensor *pSensor = new Xerxes::ABP(); 
 
-static bool powersafe = false;
+static bool usrSwitchOn = false;
 
 // queue for incoming and outgoing data
 queue_t txFifo;
 queue_t rxFifo;
+
+Xerxes::RS485 xn(&txFifo, &rxFifo);
+Xerxes::Protocol xp(&xn);
+Xerxes::Slave xs(&xp, *devAddress);
 
 void userInitUart();
 void userInitGpio();
@@ -130,9 +137,27 @@ void measurementLoop();
 void uart_interrupt_handler();
 void updateFlash();
 
-bool hasValidXerxesMessage(queue_t* qrx);
-
 void measureProcessValues(std::array<float*, 4> & processValues);
+
+void test()
+{
+    //Toto funguje
+    vector<uint8_t> payload;
+    
+    for(const auto &el:meanValues)
+    {
+        serialize<LittleEndian>(*el, std::back_inserter(payload));
+    }            
+
+    Xerxes::Message xm(1, 2, MSGID_PRESSURE, payload);
+    xp.sendMessage(xm);
+}
+
+void ping(uint8_t source)
+{
+    xs.send(source, MSGID_PING_REPLY);
+}
+
 
 int main(void)
 {   
@@ -146,7 +171,7 @@ int main(void)
     updateFlash();
     userLoadDefaultValues();
     
-    powersafe = gpio_get(USR_SW_PIN);
+    usrSwitchOn = gpio_get(USR_SW_PIN);
 
     // wait for button push
     while(gpio_get(USR_BTN_PIN))
@@ -157,7 +182,7 @@ int main(void)
     gpio_put(USR_LED_PIN, 0);
 
     // while in sleep run from lower powered XOSC (prlly 12MHz) 
-    if(powersafe) sleep_run_from_xosc();
+    if(usrSwitchOn) sleep_run_from_xosc();
 
     //determine reason for restart:
     if (watchdog_caused_reboot())
@@ -175,7 +200,9 @@ int main(void)
     
     cout << "Errors: " << bitset<64>(*error) << endl;
 
-    pressureSensor.init();
+    pSensor->init();
+
+    xs.bind(MSGID_PING, ping);
     
     multicore_launch_core1(core1Entry);
     cout << "Core 1 launched. Communication ready!" << endl;
@@ -201,7 +228,7 @@ int main(void)
             {
                 // set cpu overload flag
                 *error |= ERROR_CPU_OVERLOAD;
-
++
             }
             gpio_put(USR_LED_PIN, 0);
         }
@@ -229,9 +256,8 @@ int main(void)
         {
             // rx fifo is full, set the cpu_overload error flag
             *error |= ERROR_UART_OVERLOAD;
-        }
 
-        sleep_us(100);
+        }
     }
 }
 
@@ -247,6 +273,8 @@ void core1Entry()
 
             measurementLoop();
 
+            xs.call(MSGID_PING, 0);
+
             // calculate how long it took to finish cycle
             auto endOfCycle = time_us_64();
             auto cycleDuration = endOfCycle - startOfCycle;
@@ -258,6 +286,7 @@ void core1Entry()
                 DEBUG_MSG("Val: " << *meanPv0 << "Pa, stdev: " << *stdDevPv0);
             }
 
+
             // sleep for the remaining time
             if(sleepFor > 0)
             {
@@ -268,6 +297,10 @@ void core1Entry()
                 *error |= ERROR_SENSOR_OVERLOAD;
             }
         }
+        else
+        {
+            sleep_us(100);
+        }
     }
 }
 
@@ -276,9 +309,8 @@ void measurementLoop()
 {       
     // measure process value
     
-    pressureSensor.update();
-    pressureSensor.read(processValues[0], processValues[1], processValues[2], processValues[3]);
-    pressureSensor.read(processValues);
+    pSensor->update();
+    pSensor->read(processValues);
 
     // for each process value and ring buffer
     for(int i=0; i<4; i++)
@@ -342,7 +374,7 @@ void userInitUart(void)
     irq_set_enabled(UART0_IRQ, true);
 
     // enable uart interrupt
-    uart_set_irq_enables(uart0, true, false);
+    uart_set_irq_enables(uart0, true, true);
 }
 
 
@@ -359,6 +391,11 @@ void uart_interrupt_handler()
             // set cpu overload flag
             *error |= ERROR_CPU_OVERLOAD;
         }
+    }
+
+    if(uart_is_writable(uart0))
+    {
+        
     }
 
     irq_clear(UART0_IRQ);
@@ -390,7 +427,6 @@ void updateFlash()
 
     restore_interrupts(status);
 }
-
 
 
 void userLoadDefaultValues()

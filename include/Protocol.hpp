@@ -15,8 +15,8 @@ public:
     Protocol(Network *network);
     ~Protocol();
 
-    uint16_t sendMessage(const Message &message);
-    uint16_t readMessage(const uint8_t *rcvBuf, const uint32_t timeoutMs);
+    bool sendMessage(Message &message) const;
+    bool readMessage(Message *message, const uint32_t timeoutUs);
 };
 
 Protocol::Protocol(Network *network) : xn(network)
@@ -27,17 +27,22 @@ Protocol::~Protocol()
 {
 }
 
-uint16_t Protocol::sendMessage(const Message &message)
+bool Protocol::sendMessage(Message &message) const
 {
     return xn->sendData(message.toPacket());
 }
 
 
-uint16_t Protocol::readMessage(const uint8_t *rcvBuf, const uint32_t timeoutMs)
+bool Protocol::readMessage(Message *message, const uint32_t timeoutUs)
 {
     uint16_t received {0};
+    
+    uint8_t source, destination;
+    msgid_t msgId;
     //TODO Magick
-    return received;
+
+    message->update(source, destination, msgId);
+    return true;
 }
 
 

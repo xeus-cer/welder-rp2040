@@ -14,8 +14,8 @@ public:
     Network(/* args */);
     ~Network();
 
-    virtual uint16_t sendData(const Packet & toSend);
-    virtual uint16_t readData(uint8_t *receiveBuffer, uint32_t timeoutMs);
+    virtual bool sendData(const Packet & toSend) const = 0;
+    virtual bool readData(const uint32_t timeoutUs, Packet * packet) = 0;
 };
 
 Network::Network(/* args */)

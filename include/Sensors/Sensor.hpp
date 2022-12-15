@@ -14,7 +14,7 @@ public:
     
     virtual void init() = 0;
     virtual void update() = 0;
-    virtual void read(float *v0, float *v1, float *v2, float *v3) = 0;
+    virtual void read(std::array<float*, 4> pvs) = 0;
     virtual void stop() = 0;
 };
 
