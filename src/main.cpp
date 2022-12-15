@@ -153,9 +153,9 @@ void test()
     xp.sendMessage(xm);
 }
 
-void ping(uint8_t source)
+void ping(const Xerxes::Message &msg)
 {
-    xs.send(source, MSGID_PING_REPLY);
+    xs.send(msg.srcAddr, MSGID_PING_REPLY);
 }
 
 
@@ -273,7 +273,7 @@ void core1Entry()
 
             measurementLoop();
 
-            xs.call(MSGID_PING, 0);
+            xs.call(Xerxes::Message(0, 1, MSGID_PING));
 
             // calculate how long it took to finish cycle
             auto endOfCycle = time_us_64();
@@ -391,11 +391,6 @@ void uart_interrupt_handler()
             // set cpu overload flag
             *error |= ERROR_CPU_OVERLOAD;
         }
-    }
-
-    if(uart_is_writable(uart0))
-    {
-        
     }
 
     irq_clear(UART0_IRQ);

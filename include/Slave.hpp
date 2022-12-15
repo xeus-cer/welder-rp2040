@@ -16,14 +16,14 @@ class Slave
 {
 private:
     Protocol *xp;
-    std::unordered_map<msgid_t, std::function<void(uint8_t)>> bindings;
+    std::unordered_map<msgid_t, std::function<void(const Message&)>> bindings;
     uint8_t address;
 
 public:
     Slave(Protocol *protocol, const uint8_t address);
     ~Slave();
-    void bind(const msgid_t msgId, std::function<void(uint8_t)> _f);
-    void call(const msgid_t msgId, const uint8_t sourceAddress);
+    void bind(const msgid_t msgId, std::function<void(const Message&)> _f);
+    void call(const Message &msg);
 
     bool send(const uint8_t destinationAddress, const msgid_t msgId);
     bool send(const uint8_t destinationAddress, const msgid_t msgId, const std::vector<uint8_t> &payload);
@@ -32,7 +32,6 @@ public:
 
 Slave::Slave(Protocol *protocol, const uint8_t address) : xp(protocol), address(address)
 {
-    bind(MSGID_READ, readReg); //TODO toto nemoze ist cez bindy 
 }
 
 Slave::~Slave()
@@ -40,17 +39,17 @@ Slave::~Slave()
 }
 
 
-void Slave::bind(const msgid_t msgId, std::function<void(uint8_t)> _f)
+void Slave::bind(const msgid_t msgId, std::function<void(const Message&)> _f)
 {
     bindings.emplace(msgId, _f);
 }
 
 
-void Slave::call(const msgid_t msgId, const uint8_t sourceAddress) 
+void Slave::call(const Message &msg) 
 {
-    if(bindings.contains(msgId)){
+    if(bindings.contains(msg.msgId)){
         // call a function binded to messageId
-        bindings[msgId](sourceAddress);
+        bindings[msg.msgId](msg);
     }
 }
 
@@ -73,10 +72,10 @@ bool Slave::sync(uint32_t timeoutUs)
 {
     // check for incoming message
 
-    // if no message is in buffer
     Message ingress = Message();
     if(!xp->readMessage(&ingress, timeoutUs))
     {
+        // if no message is in buffer
         return false;
     }
             
@@ -85,7 +84,7 @@ bool Slave::sync(uint32_t timeoutUs)
     msgid_t msgId = ingress.msgId;
     
     // call appropriate function
-    call(msgId, sourceAddr);
+    call(ingress);
     return true;
 }
     
