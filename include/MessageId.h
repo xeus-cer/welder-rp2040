@@ -51,7 +51,7 @@ const msgid_t MSGID_SYNC                          = 0x0101;
 /** Set register to a value 
  * The message prototype is <MSGID_SET> <REG_ID> <LEN> <BYTE_1> ... <BYTE_N>
  */    
-const msgid_t MSGID_SET                           = 0x0200;
+const msgid_t MSGID_WRITE                         = 0x0200;
     
 /** Read  up to <LEN> bytes from device register, starting at <REG_ID>
  * The request prototype is <MSGID_READ> <REG_ID> <LEN>

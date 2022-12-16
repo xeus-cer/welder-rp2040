@@ -16,7 +16,6 @@ find_package(
 pico_sdk_init()
 	
 include_directories(
-	"lib/xerxes-protocol-cpp"
 	"include"
 )
 
@@ -30,9 +29,6 @@ add_executable(picotest
 	src/main.cpp
 )
 
-add_subdirectory(
-	lib/xerxes-protocol-cpp
-)
 
 target_link_libraries(
 	picotest 
@@ -47,7 +43,6 @@ target_link_libraries(
 	hardware_flash
 	hardware_sync
 	hardware_spi
-	xerxes_protocol
 
 	Serialization::Serialization
 	)

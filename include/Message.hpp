@@ -23,6 +23,8 @@ public:
     void update(const uint8_t source, const uint8_t destination, const uint16_t msgid);
 
     Packet toPacket();
+    std::vector<uint8_t>::const_iterator payloadBegin();
+    std::vector<uint8_t>::const_iterator end();
 
 };
 
@@ -88,6 +90,18 @@ void Message::update(
     messageBytes.emplace_back(dstAddr);
     messageBytes.emplace_back(msgId % 0x100); // low byte
     messageBytes.emplace_back(msgId >> 8); // high byte - because of little endianness
+}
+
+
+std::vector<uint8_t>::const_iterator Message::payloadBegin()
+{
+    return messageBytes.begin() + 4;
+}
+
+
+std::vector<uint8_t>::const_iterator Message::end()
+{
+    return messageBytes.end();
 }
 
 } // namespace Xerxes

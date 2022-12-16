@@ -8,8 +8,8 @@
 namespace Xerxes
 {
 
-void writeReg(const uint8_t source);
-void readReg(const uint8_t source);
+void writeReg(const Message &incoming);
+void readReg(const Message &incoming);
 
 
 class Slave
@@ -18,9 +18,10 @@ private:
     Protocol *xp;
     std::unordered_map<msgid_t, std::function<void(const Message&)>> bindings;
     uint8_t address;
+    volatile uint8_t *mainReg;
 
 public:
-    Slave(Protocol *protocol, const uint8_t address);
+    Slave(Protocol *protocol, const uint8_t address, volatile uint8_t *mainRegister);
     ~Slave();
     void bind(const msgid_t msgId, std::function<void(const Message&)> _f);
     void call(const Message &msg);
@@ -30,8 +31,10 @@ public:
     bool sync(const uint32_t timeoutUs);
 };
 
-Slave::Slave(Protocol *protocol, const uint8_t address) : xp(protocol), address(address)
+Slave::Slave(Protocol *protocol, const uint8_t address, volatile uint8_t *mainRegister) : xp(protocol), address(address), mainReg(mainRegister)
 {
+    bind(MSGID_READ, readReg);
+    bind(MSGID_WRITE, writeReg);
 }
 
 Slave::~Slave()
@@ -88,6 +91,23 @@ bool Slave::sync(uint32_t timeoutUs)
     return true;
 }
     
+
+void writeReg(const Message &incoming)
+{
+    // The message prototype is <MSGID_SET> <REG_ID> <LEN> <BYTE_1> ... <BYTE_N>
+    
+    for(auto const it = incoming.payloadBegin(); it != incoming.end(); ++it)
+    {
+        std::cout << *it;
+    }
+
+}
+
+
+void readReg(const Message &incoming)
+{
+
+}
 
 } // namespace Xerxes
 

@@ -29,12 +29,10 @@
 #include "xerxes_rp2040.h"
 #include "Errors.h"
 #include "MessageId.h"
-#include "devids.h"
 #include "StatisticBuffer.hpp"
 #include "Definitions.h"
 #include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
-
 #include "Protocol.hpp"
 
 
@@ -42,8 +40,7 @@ using namespace std;
 
 
 #ifdef NDEBUG
-//#define DEBUG_MSG(str) do { } while ( false )
-#define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
+#define DEBUG_MSG(str) do { } while ( false )
 #else
 #define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
 #endif
@@ -123,7 +120,7 @@ queue_t rxFifo;
 
 Xerxes::RS485 xn(&txFifo, &rxFifo);
 Xerxes::Protocol xp(&xn);
-Xerxes::Slave xs(&xp, *devAddress);
+Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 void userInitUart();
 void userInitGpio();
@@ -308,7 +305,6 @@ void core1Entry()
 void measurementLoop()
 {       
     // measure process value
-    
     pSensor->update();
     pSensor->read(processValues);
 
@@ -373,8 +369,8 @@ void userInitUart(void)
     irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
     irq_set_enabled(UART0_IRQ, true);
 
-    // enable uart interrupt
-    uart_set_irq_enables(uart0, true, true);
+    // enable uart interrupt for receiving
+    uart_set_irq_enables(uart0, true, false);
 }
 
 
