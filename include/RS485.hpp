@@ -21,7 +21,7 @@ namespace Xerxes
  * @param timeout in us
  * @return uint16_t remaining time in us
  */
-uint32_t remainingTime(const uint32_t & start, const uint32_t &timeout);
+uint32_t remainingTime(const uint64_t & start, const uint64_t &timeout);
 
     
 class RS485 : public Network
@@ -44,7 +44,7 @@ public:
      * @param timeoutUs timeout in us
      * @return Packet 
      */
-    bool readData(const uint32_t timeoutUs, Packet * packet);
+    bool readData(const uint64_t timeoutUs, Packet &packet);
     
     /**
      * @brief check whether there is valid packet in the buffer
@@ -52,7 +52,7 @@ public:
      * @return true valid packet awaits in the incoming buffer
      * @return false otherwise
      */
-    bool receivePacket(const uint32_t timeoutUs);
+    bool receivePacket(const uint64_t timeoutUs);
 
 
     Packet parsePacket();
@@ -82,40 +82,48 @@ bool RS485::sendData(const Packet & toSend) const
 }
 
 
-bool RS485::readData(const uint32_t timeoutUs, Packet * packet)
+bool RS485::readData(const uint64_t timeoutUs, Packet &packet)
 {
     // start timer
     uint64_t start = time_us_64();
 
-    // clear the message buffer
-    incomingMessage.clear();
-
-    while(
-        !time_reached(start + timeoutUs) && 
-        !receivePacket(remainingTime(start, timeoutUs))
-    )
+    // if RX queue is empty, immediately return
+    if(queue_is_empty(qrx))
     {
-        sleep_us(100);
+        return false;
     }
 
-    *packet = Packet(incomingMessage);
+    if(receivePacket(remainingTime(start, timeoutUs)))
+    {
+        packet = Packet(incomingMessage);
+        return true;
+    }
 
     return false;
 }
 
 
-bool RS485::receivePacket(const uint32_t timeoutUs)
+bool RS485::receivePacket(const uint64_t timeoutUs)
 {
     // check if the packet is in fifo buffer
     uint8_t nextVal;
+    #ifdef NDEBUG
+    uint64_t tout = time_us_64() + timeoutUs;
+    #else
+    absolute_time_t tout;
+    tout._private_us_since_boot
+    tout._private_us_since_boot = time_us_64() + timeoutUs;
+    #endif
 
-    uint64_t start = time_us_64();
     uint8_t chks = SOH;
 
     uint8_t msgLen;
     bool waitForSoh = true;
 
-    while(!time_reached(start + timeoutUs))
+    // clear buffer
+    incomingMessage.clear();
+
+    while(!time_reached(tout))
     {
         if(waitForSoh)
         {
@@ -132,13 +140,15 @@ bool RS485::receivePacket(const uint32_t timeoutUs)
             // SOH was found, get msgLen
             if(queue_try_remove(qrx, &msgLen))
             {
+                // add msglen to checksum
                 chks += msgLen;
                 break; //break from this loop, continue to receive all data
             }
         }
     }
 
-    while(!time_reached(start + timeoutUs) && msgLen)
+    msgLen -= 3; // SOH and len was received, checksum is received at the end hence -3
+    while(!time_reached(tout) && msgLen)
     {
         if(queue_try_remove(qrx, &nextVal))
         {
@@ -149,15 +159,15 @@ bool RS485::receivePacket(const uint32_t timeoutUs)
         }
     }
 
-    while(!time_reached(start + timeoutUs))
+    while(!time_reached(tout))
     {
         //wait for checksum byte
-
         if(queue_try_remove(qrx, &nextVal))
         {
             chks += nextVal;
             if(chks == 0)
             {
+                // successfully received whole message
                 return true;
             }   
             else
@@ -171,7 +181,7 @@ bool RS485::receivePacket(const uint32_t timeoutUs)
 }
 
 
-uint32_t remainingTime(const uint32_t & start, const uint32_t &timeout)
+uint32_t remainingTime(const uint64_t & start, const uint64_t &timeout)
 {
     auto current_time = time_us_64();
     return timeout - (current_time - start);

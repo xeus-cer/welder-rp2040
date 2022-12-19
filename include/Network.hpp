@@ -3,6 +3,8 @@
 
 #include "Packet.hpp"
 
+#define BROADCAST_ADDR  0xff
+
 namespace Xerxes
 {
     
@@ -15,7 +17,7 @@ public:
     ~Network();
 
     virtual bool sendData(const Packet & toSend) const = 0;
-    virtual bool readData(const uint32_t timeoutUs, Packet * packet) = 0;
+    virtual bool readData(const uint64_t timeoutUs, Packet &packet) = 0;
 };
 
 Network::Network(/* args */)

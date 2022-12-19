@@ -75,19 +75,15 @@ bool Slave::sync(uint32_t timeoutUs)
 {
     // check for incoming message
 
-    Message ingress = Message();
-    if(!xp->readMessage(&ingress, timeoutUs))
+    Message incoming = Message();
+    if(!xp->readMessage(incoming, timeoutUs))
     {
         // if no message is in buffer
         return false;
     }
-            
-    // read msgId
-    uint8_t sourceAddr = ingress.srcAddr;
-    msgid_t msgId = ingress.msgId;
     
     // call appropriate function
-    call(ingress);
+    call(incoming);
     return true;
 }
     
@@ -96,7 +92,7 @@ void writeReg(const Message &incoming)
 {
     // The message prototype is <MSGID_SET> <REG_ID> <LEN> <BYTE_1> ... <BYTE_N>
     
-    for(auto const it = incoming.payloadBegin(); it != incoming.end(); ++it)
+    for(auto it = incoming.payloadBegin(); it != incoming.end(); ++it)
     {
         std::cout << *it;
     }
@@ -108,6 +104,7 @@ void readReg(const Message &incoming)
 {
 
 }
+
 
 } // namespace Xerxes
 

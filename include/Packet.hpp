@@ -14,8 +14,9 @@ class Packet
 private:
     uint8_t checksum;
     std::vector<uint8_t> data = std::vector<uint8_t> {};
-
+    size_t _size;
 public:
+    Packet();
     Packet(std::vector<uint8_t> &message);
     ~Packet();
     size_t size() const;
@@ -24,7 +25,9 @@ public:
     uint8_t at(const uint8_t pos) const;
 };
 
-
+Packet::Packet()
+{
+}
 
 Packet::Packet(std::vector<uint8_t> &message)
 {

@@ -16,7 +16,7 @@ public:
     ~Protocol();
 
     bool sendMessage(Message &message) const;
-    bool readMessage(Message *message, const uint32_t timeoutUs);
+    bool readMessage(Message &message, const uint64_t timeoutUs);
 };
 
 Protocol::Protocol(Network *network) : xn(network)
@@ -33,16 +33,17 @@ bool Protocol::sendMessage(Message &message) const
 }
 
 
-bool Protocol::readMessage(Message *message, const uint32_t timeoutUs)
+bool Protocol::readMessage(Message &message, const uint64_t timeoutUs)
 {
-    uint16_t received {0};
+    Packet packet = Packet();
     
-    uint8_t source, destination;
-    msgid_t msgId;
-    //TODO Magick
+    if(xn->readData(timeoutUs, packet))
+    {        
+        message = Message(packet);
+        return true;
+    }
 
-    message->update(source, destination, msgId);
-    return true;
+    return false;
 }
 
 

@@ -4,6 +4,7 @@
 #include <array>
 #include <vector>
 #include "Packet.hpp"
+#include "MessageId.h"
 
 namespace Xerxes
 {
@@ -18,19 +19,36 @@ public:
     uint16_t msgId;
     Message(const uint8_t source, const uint8_t destination, const uint16_t msgid, const std::vector<uint8_t> &payload);
     Message(const uint8_t source, const uint8_t destination, const uint16_t msgid);
+    Message(const Packet &packet);
     Message();
     ~Message();
     void update(const uint8_t source, const uint8_t destination, const uint16_t msgid);
 
     Packet toPacket();
-    std::vector<uint8_t>::const_iterator payloadBegin();
-    std::vector<uint8_t>::const_iterator end();
+    std::vector<uint8_t>::const_iterator payloadBegin() const;
+    std::vector<uint8_t>::const_iterator end() const;
 
 };
 
 
 Message::Message()
 {
+}
+
+
+Message::Message(const Packet &packet)
+{
+    srcAddr = packet.at(2);
+    dstAddr = packet.at(3);
+    msgid_u msgIdRaw;
+    msgIdRaw.msgid_8.msgid_l = packet.at(4);
+    msgIdRaw.msgid_8.msgid_h = packet.at(5);
+    msgId = msgIdRaw.msgid_16;
+
+    for(uint16_t i=2; i<packet.size()-1; i++)
+    {
+        messageBytes.emplace_back(packet.at(i));
+    }
 }
 
 
@@ -93,13 +111,13 @@ void Message::update(
 }
 
 
-std::vector<uint8_t>::const_iterator Message::payloadBegin()
+std::vector<uint8_t>::const_iterator Message::payloadBegin() const
 {
     return messageBytes.begin() + 4;
 }
 
 
-std::vector<uint8_t>::const_iterator Message::end()
+std::vector<uint8_t>::const_iterator Message::end() const
 {
     return messageBytes.end();
 }

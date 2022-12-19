@@ -45,7 +45,7 @@
             "runToEntryPoint": "main",
             // Work around for stopping at main on restart
             "postRestartCommands": [
-                "break main",
+            //     "break main",
                 "continue"
             ],
             "searchDir": ["/home/stanke/projekty/openocd/tcl"],

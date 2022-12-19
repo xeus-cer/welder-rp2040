@@ -29,11 +29,13 @@
 #include "xerxes_rp2040.h"
 #include "Errors.h"
 #include "MessageId.h"
+#include "DeviceIds.h"
 #include "StatisticBuffer.hpp"
 #include "Definitions.h"
 #include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
+#include "DirectionControl.hpp"
 
 
 using namespace std;
@@ -136,23 +138,31 @@ void updateFlash();
 
 void measureProcessValues(std::array<float*, 4> & processValues);
 
-void test()
-{
-    //Toto funguje
-    vector<uint8_t> payload;
-    
-    for(const auto &el:meanValues)
-    {
-        serialize<LittleEndian>(*el, std::back_inserter(payload));
-    }            
 
-    Xerxes::Message xm(1, 2, MSGID_PRESSURE, payload);
-    xp.sendMessage(xm);
+// This is the decorator function. It takes a function as an argument and returns
+// a new function that adds additional behavior to the original function.
+template <typename Func>
+auto unicast(Func f) {
+  // The returned function is a lambda function that takes the same arguments as the original
+  // function and calls it with the given arguments.
+  return [f](const Xerxes::Message &msg) {
+    if(msg.dstAddr!= 0xff && *devAddress == msg.dstAddr)
+    {
+    // Call the original function with the given arguments.
+        f(msg);
+    }
+    else
+    {       
+        // do nothing
+    }
+  };
 }
+
 
 void ping(const Xerxes::Message &msg)
 {
-    xs.send(msg.srcAddr, MSGID_PING_REPLY);
+    std::vector<uint8_t> payload {DEVID_PRESSURE_60MBAR, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
+    xs.send(msg.srcAddr, MSGID_PING_REPLY, payload);
 }
 
 
@@ -171,11 +181,11 @@ int main(void)
     usrSwitchOn = gpio_get(USR_SW_PIN);
 
     // wait for button push
-    while(gpio_get(USR_BTN_PIN))
+    /*while(gpio_get(USR_BTN_PIN))
     {
         gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
         sleep_ms(100);
-    }
+    }*/
     gpio_put(USR_LED_PIN, 0);
 
     // while in sleep run from lower powered XOSC (prlly 12MHz) 
@@ -199,7 +209,7 @@ int main(void)
 
     pSensor->init();
 
-    xs.bind(MSGID_PING, ping);
+    xs.bind(MSGID_PING, unicast(ping));
     
     multicore_launch_core1(core1Entry);
     cout << "Core 1 launched. Communication ready!" << endl;
@@ -232,7 +242,7 @@ int main(void)
         */
 
         // try to send char over serial if present in FIFO buffer
-        if(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
+        while(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
         {
             uint8_t to_send, sent;
             queue_try_remove(&txFifo, &to_send);
@@ -255,6 +265,8 @@ int main(void)
             *error |= ERROR_UART_OVERLOAD;
 
         }
+
+        xs.sync(3000);
     }
 }
 
@@ -269,8 +281,6 @@ void core1Entry()
             auto startOfCycle = time_us_64();
 
             measurementLoop();
-
-            xs.call(Xerxes::Message(0, 1, MSGID_PING));
 
             // calculate how long it took to finish cycle
             auto endOfCycle = time_us_64();
