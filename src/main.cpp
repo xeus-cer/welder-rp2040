@@ -3,6 +3,7 @@
 #include <array>
 #include <stdlib.h>
 #include <bitset>
+#include <cstring>
 
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
@@ -67,6 +68,7 @@ static float* offsetPv3     = (float *)(mainRegister + OFFSET_PV3_OFFSET);
 
 static uint32_t *desiredCycleTimeUs  = (uint32_t *)(mainRegister + OFFSET_CYCLE_TIME);
 static uint8_t *devAddress  = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
+static ConfigBits *config   = (ConfigBits *)(mainRegister + OFFSET_CONFIG_BITS); 
 
 
 /* ### VOLATILE - PROCESS VALUES ### */
@@ -136,8 +138,6 @@ void measurementLoop();
 void uart_interrupt_handler();
 void updateFlash();
 
-void measureProcessValues(std::array<float*, 4> & processValues);
-
 
 // This is the decorator function. It takes a function as an argument and returns
 // a new function that adds additional behavior to the original function.
@@ -159,6 +159,27 @@ auto unicast(Func f) {
 }
 
 
+void writeReg(const Xerxes::Message &msg)
+{
+    uint8_t offset = msg.at(4);
+
+    for(uint16_t i = 5; i < msg.size(); i++)
+    {
+        // IMPROVEMENT: implement READ_ONLY MEMORY
+        uint8_t byte = msg.at(i);
+        mainRegister[offset + i - 5] = byte;
+    }
+
+    xs.send(msg.srcAddr, MSGID_ACK_OK);
+}
+
+
+void sync(const Xerxes::Message &msg)
+{
+    measurementLoop();
+}
+
+
 void ping(const Xerxes::Message &msg)
 {
     std::vector<uint8_t> payload {DEVID_PRESSURE_60MBAR, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
@@ -175,21 +196,23 @@ int main(void)
     userInitGpio();
     userInitQueue();
     userInitFlash();
-    updateFlash();
-    userLoadDefaultValues();
+    if(config->firstRun) userLoadDefaultValues();
     
     usrSwitchOn = gpio_get(USR_SW_PIN);
 
-    // wait for button push
-    /*while(gpio_get(USR_BTN_PIN))
+    if(!gpio_get(USR_BTN_PIN))
     {
-        gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
-        sleep_ms(100);
-    }*/
+        while(1)
+        {
+            gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
+            sleep_ms(100);
+        }
+    }
+    
     gpio_put(USR_LED_PIN, 0);
 
     // while in sleep run from lower powered XOSC (prlly 12MHz) 
-    if(usrSwitchOn) sleep_run_from_xosc();
+    if(config->lowPower) sleep_run_from_xosc();
 
     //determine reason for restart:
     if (watchdog_caused_reboot())
@@ -210,36 +233,16 @@ int main(void)
     pSensor->init();
 
     xs.bind(MSGID_PING, unicast(ping));
-    
+    xs.bind(MSGID_WRITE, unicast(writeReg));
+    xs.bind(MSGID_SYNC, sync);
+
     multicore_launch_core1(core1Entry);
     cout << "Core 1 launched. Communication ready!" << endl;
-    
 
     while(1)
     {    
         // update watchdog
         watchdog_update();
-
-        // try to read serial for incoming char
-        /* handled in IRQ
-        if(uart_is_readable(uart0))
-        {
-            gpio_put(USR_LED_PIN, 1);
-            // read 1 char from serial
-            uint8_t rcvd;
-            uart_read_blocking(uart0, &rcvd, 1);
-
-            //add it to the FIFO
-            auto success = queue_try_add(&rxFifo, &rcvd);
-            if(!success)
-            {
-                // set cpu overload flag
-                *error |= ERROR_CPU_OVERLOAD;
-+
-            }
-            gpio_put(USR_LED_PIN, 0);
-        }
-        */
 
         // try to send char over serial if present in FIFO buffer
         while(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
@@ -280,7 +283,10 @@ void core1Entry()
         {
             auto startOfCycle = time_us_64();
 
-            measurementLoop();
+            if(config->freeRun)
+            {
+                measurementLoop();
+            }                
 
             // calculate how long it took to finish cycle
             auto endOfCycle = time_us_64();
@@ -306,7 +312,7 @@ void core1Entry()
         }
         else
         {
-            sleep_us(100);
+            sleep_us(1000);
         }
     }
 }
@@ -332,7 +338,6 @@ void measurementLoop()
             standardDeviations[i]
         );
     }
-
 }
 
 
@@ -411,6 +416,11 @@ void userInitFlash()
     //read UID
     flash_get_unique_id((uint8_t *)uid);
 
+    // std::memcpy(&config, &flash_target_contents[OFFSET_CONFIG_BITS], 1);
+    // it takes approx 750us to program 256bytes of flash
+    std::memcpy((uint8_t *)mainRegister, flash_target_contents, NON_VOLATILE_SIZE);
+
+
     //erase flash, must be done in sector size
     // flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
     restore_interrupts(status);
@@ -443,4 +453,6 @@ void userLoadDefaultValues()
     *offsetPv0  = 0;
 
     *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
+    config->firstRun = false;
+    updateFlash();
 }

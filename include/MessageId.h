@@ -40,7 +40,8 @@ const msgid_t MSGID_ACK_NOK                       = 0x0003;
     
     
 /**
- * Request to send measurements
+ * @brief Obsolete
+ * 
  */
 const msgid_t MSGID_FETCH_MEASUREMENT             = 0x0100;
     
@@ -49,7 +50,7 @@ const msgid_t MSGID_SYNC                          = 0x0101;
     
     
 /** Set register to a value 
- * The message prototype is <MSGID_SET> <REG_ID> <LEN> <BYTE_1> ... <BYTE_N>
+ * The message prototype is <MSGID_SET> <REG_ID> <BYTE_1> ... <BYTE_N>
  */    
 const msgid_t MSGID_WRITE                         = 0x0200;
     

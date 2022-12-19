@@ -111,7 +111,6 @@ bool RS485::receivePacket(const uint64_t timeoutUs)
     uint64_t tout = time_us_64() + timeoutUs;
     #else
     absolute_time_t tout;
-    tout._private_us_since_boot
     tout._private_us_since_boot = time_us_64() + timeoutUs;
     #endif
 

@@ -17,17 +17,19 @@
 /* memory mapping offsets: */
 /* non volatile range */
 #define GAIN_PV0_OFFSET     0
-#define GAIN_PV1_OFFSET     8
-#define GAIN_PV2_OFFSET     16
-#define GAIN_PV3_OFFSET     24
+#define GAIN_PV1_OFFSET     4
+#define GAIN_PV2_OFFSET     8
+#define GAIN_PV3_OFFSET     12
 
-#define OFFSET_PV0_OFFSET   32
-#define OFFSET_PV1_OFFSET   40
-#define OFFSET_PV2_OFFSET   48
-#define OFFSET_PV3_OFFSET   56
+#define OFFSET_PV0_OFFSET   16
+#define OFFSET_PV1_OFFSET   20
+#define OFFSET_PV2_OFFSET   24
+#define OFFSET_PV3_OFFSET   28
 
-#define OFFSET_CYCLE_TIME   64
-#define OFFSET_ADDRESS      72
+#define OFFSET_CYCLE_TIME   32
+#define OFFSET_ADDRESS      36
+
+#define OFFSET_CONFIG_BITS  40
 
 
 //volatile range
@@ -60,12 +62,31 @@
 #define MAX_PV2_OFFSET      NON_VOLATILE_SIZE + 168     // 424
 #define MAX_PV3_OFFSET      NON_VOLATILE_SIZE + 176     // 432
 
+/* config masks */
+/* If true use free run, if false: wait for sync packet */
+#define MASK_CONFIG_FREE_RUN        1<<0
+/* If true, enable low power sleep and disable USB */
+#define MASK_CONFIG_LOW_POWER       1<<1
+
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US   10000  // 100ms
+#define DEFAULT_CYCLE_TIME_US       10000  // 100ms
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1
 #define PROTOCOL_VERSION_MIN        4
+
+
+typedef struct ConfigBits {
+  bool freeRun :    1 = false;
+  bool lowPower :   1 = false;
+  bool bit2 :       1 = false;
+  bool bit3 :       1 = false;
+  bool bit4 :       1 = false;
+  bool bit5 :       1 = false;
+  bool bit6 :       1 = false;
+  bool firstRun :   1 = true;
+} ConfigBits;
+
 
 #endif //DEFINITIONS_H

@@ -8,9 +8,6 @@
 namespace Xerxes
 {
 
-void writeReg(const Message &incoming);
-void readReg(const Message &incoming);
-
 
 class Slave
 {
@@ -33,8 +30,6 @@ public:
 
 Slave::Slave(Protocol *protocol, const uint8_t address, volatile uint8_t *mainRegister) : xp(protocol), address(address), mainReg(mainRegister)
 {
-    bind(MSGID_READ, readReg);
-    bind(MSGID_WRITE, writeReg);
 }
 
 Slave::~Slave()
@@ -86,25 +81,6 @@ bool Slave::sync(uint32_t timeoutUs)
     call(incoming);
     return true;
 }
-    
-
-void writeReg(const Message &incoming)
-{
-    // The message prototype is <MSGID_SET> <REG_ID> <LEN> <BYTE_1> ... <BYTE_N>
-    
-    for(auto it = incoming.payloadBegin(); it != incoming.end(); ++it)
-    {
-        std::cout << *it;
-    }
-
-}
-
-
-void readReg(const Message &incoming)
-{
-
-}
-
 
 } // namespace Xerxes
 

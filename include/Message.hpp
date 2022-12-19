@@ -23,6 +23,8 @@ public:
     Message();
     ~Message();
     void update(const uint8_t source, const uint8_t destination, const uint16_t msgid);
+    size_t size() const;
+    uint8_t at(const uint8_t pos) const;
 
     Packet toPacket();
     std::vector<uint8_t>::const_iterator payloadBegin() const;
@@ -113,14 +115,28 @@ void Message::update(
 
 std::vector<uint8_t>::const_iterator Message::payloadBegin() const
 {
-    return messageBytes.begin() + 4;
+    return messageBytes.cbegin() + 4;
 }
 
 
 std::vector<uint8_t>::const_iterator Message::end() const
 {
-    return messageBytes.end();
+    return messageBytes.cend();
 }
+
+
+size_t Message::size() const
+{
+    return messageBytes.size();
+}
+
+
+
+uint8_t Message::at(const uint8_t pos) const
+{
+    return messageBytes.at(pos);
+}
+
 
 } // namespace Xerxes
 
