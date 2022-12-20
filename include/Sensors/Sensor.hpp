@@ -18,9 +18,11 @@ public:
     virtual void stop() = 0;
 };
 
+
 Sensor::Sensor(/* args */)
 {
 }
+
 
 Sensor::~Sensor()
 {

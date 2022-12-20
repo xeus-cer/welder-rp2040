@@ -1,19 +1,18 @@
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef __ERROR_H
+#define __ERROR_H
 
-// Data egress too low
-#define ERROR_UART_OVERLOAD     1 << 0;
+extern "C"
+{
 
-// CPU unable to process data ingress
-#define ERROR_CPU_OVERLOAD      1 << 1;
+enum : uint64_t
+{
+    ERROR_UART_OVERLOAD     = 1 << 0,
+    ERROR_CPU_OVERLOAD      = 1 << 1,
+    ERROR_BUS_COLLISION     = 1 << 2,
+    ERROR_WATCHDOG_TIMEOUT  = 1 << 3,
+    ERROR_SENSOR_OVERLOAD   = 1 << 4
+};
 
-// detected collision on bus
-#define ERROR_BUS_COLLISION     1 << 2;
+}  // extern "C"
 
-// watchdog caused reboot
-#define ERROR_WATCHDOG_TIMEOUT  1 << 3;
-
-// sensor overload - measurement frequency lower than expected
-#define ERROR_SENSOR_OVERLOAD   1 << 4;
-
-#endif // ERROR_H
+#endif // __ERROR_H

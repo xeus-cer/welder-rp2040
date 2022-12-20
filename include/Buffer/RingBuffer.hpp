@@ -35,7 +35,6 @@ template <class T>
 RingBuffer<T>::RingBuffer(std::initializer_list<T> il) : currentPos(0)
 {
     size_t size = il.size();
-    assert(size > 0);
     maxSize = size;
     buffer = new T[size]{};
     int i = 0;
@@ -51,8 +50,6 @@ RingBuffer<T>::RingBuffer(std::initializer_list<T> il) : currentPos(0)
 template <class T>
 RingBuffer<T>::RingBuffer(const uint32_t &maxSize) : maxSize(maxSize), currentPos(0), maxCursor(0)
 {   
-    assert(maxSize > 0);
-
     this->buffer = new T[maxSize]{0};
 }
 

@@ -29,7 +29,6 @@ add_executable(picotest
 	src/main.cpp
 )
 
-
 target_link_libraries(
 	picotest 
 	pico_stdlib 

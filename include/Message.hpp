@@ -1,8 +1,8 @@
 #ifndef __MESSAGE_HPP
 #define __MESSAGE_HPP
 
-#include <array>
 #include <vector>
+#include <cstdint>
 #include "Packet.hpp"
 #include "MessageId.h"
 

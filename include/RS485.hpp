@@ -71,6 +71,7 @@ RS485::~RS485()
 
 bool RS485::sendData(const Packet & toSend) const
 {
+    // improve: this can check if queue has enought space before trying to send data
     uint16_t sent {0};
     for(const auto &el:toSend.getData())
     {
@@ -78,6 +79,8 @@ bool RS485::sendData(const Packet & toSend) const
         sent++; // byte was sent successfully
     }
 
+    
+    // return true if whole packet was sent
     return sent == toSend.size();
 }
 

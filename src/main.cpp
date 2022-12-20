@@ -3,7 +3,7 @@
 #include <array>
 #include <stdlib.h>
 #include <bitset>
-#include <cstring>
+#include <cstdint>
 
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
@@ -20,26 +20,25 @@
 #include "pico/stdio/driver.h"
 #include "pico/stdio_uart.h"
 #include "pico/sleep.h"
-#include "hardware/rtc.h"
-#include "hardware/flash.h"
-#include "hardware/sync.h"
+#include "hardware/rtc.h"   
 #include "hardware/watchdog.h"
+#include "hardware/irq.h"
 
 #include <Serialization/Serialization.h>
 
 #include "xerxes_rp2040.h"
 #include "Errors.h"
-#include "MessageId.h"
-#include "DeviceIds.h"
-#include "StatisticBuffer.hpp"
 #include "Definitions.h"
 #include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
-#include "DirectionControl.hpp"
+#include "MessageId.h"
+#include "DeviceIds.h"
+#include "Actions.hpp"
 
 
 using namespace std;
+using namespace Xerxes;
 
 
 #ifdef NDEBUG
@@ -49,142 +48,26 @@ using namespace std;
 #endif
 
 
-static const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
-static volatile bool awake = true;
-
-/* Allocate memory for register */
-volatile static uint8_t mainRegister[REGISTER_SIZE];
-
-/* ### NON VOLATILE - PERMANENT VALUES ### */
-static float* gainPv0       = (float *)(mainRegister + GAIN_PV0_OFFSET);
-static float* gainPv1       = (float *)(mainRegister + GAIN_PV1_OFFSET);
-static float* gainPv2       = (float *)(mainRegister + GAIN_PV2_OFFSET);
-static float* gainPv3       = (float *)(mainRegister + GAIN_PV3_OFFSET);
-
-static float* offsetPv0     = (float *)(mainRegister + OFFSET_PV0_OFFSET);
-static float* offsetPv1     = (float *)(mainRegister + OFFSET_PV1_OFFSET);
-static float* offsetPv2     = (float *)(mainRegister + OFFSET_PV2_OFFSET);
-static float* offsetPv3     = (float *)(mainRegister + OFFSET_PV3_OFFSET);
-
-static uint32_t *desiredCycleTimeUs  = (uint32_t *)(mainRegister + OFFSET_CYCLE_TIME);
-static uint8_t *devAddress  = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
-static ConfigBits *config   = (ConfigBits *)(mainRegister + OFFSET_CONFIG_BITS); 
-
-
-/* ### VOLATILE - PROCESS VALUES ### */
-static uint64_t* error      = (uint64_t *)(mainRegister + ERROR_OFFSET);
-static uint64_t* status     = (uint64_t *)(mainRegister + STATUS_OFFSET);
-static uint64_t* uid        = (uint64_t *)(mainRegister + UID_OFFSET);
-
-static float* pv0           = (float *)(mainRegister + PV0_OFFSET);
-static float* pv1           = (float *)(mainRegister + PV1_OFFSET);
-static float* pv2           = (float *)(mainRegister + PV2_OFFSET);
-static float* pv3           = (float *)(mainRegister + PV3_OFFSET);
-std::array<float*, 4> processValues = {pv0, pv1, pv2, pv3};
-
-static float* meanPv0       = (float *)(mainRegister + MEAN_PV0_OFFSET);
-static float* meanPv1       = (float *)(mainRegister + MEAN_PV1_OFFSET);
-static float* meanPv2       = (float *)(mainRegister + MEAN_PV2_OFFSET);
-static float* meanPv3       = (float *)(mainRegister + MEAN_PV3_OFFSET);
-std::array<float*, 4> meanValues = {meanPv0, meanPv1, meanPv2, meanPv3};
-
-static float* stdDevPv0     = (float *)(mainRegister + STDEV_PV0_OFFSET);
-static float* stdDevPv1     = (float *)(mainRegister + STDEV_PV1_OFFSET);
-static float* stdDevPv2     = (float *)(mainRegister + STDEV_PV2_OFFSET);
-static float* stdDevPv3     = (float *)(mainRegister + STDEV_PV3_OFFSET);
-std::array<float*, 4> standardDeviations = {stdDevPv0, stdDevPv1, stdDevPv2, stdDevPv3};
-
-static float* minPv0        = (float *)(mainRegister + MIN_PV0_OFFSET);
-static float* minPv1        = (float *)(mainRegister + MIN_PV1_OFFSET);
-static float* minPv2        = (float *)(mainRegister + MIN_PV2_OFFSET);
-static float* minPv3        = (float *)(mainRegister + MIN_PV3_OFFSET);
-std::array<float*, 4> minimumValues = {minPv0, minPv1, minPv2, minPv3};
-
-static float* maxPv0        = (float *)(mainRegister + MAX_PV0_OFFSET);
-static float* maxPv1        = (float *)(mainRegister + MAX_PV1_OFFSET);
-static float* maxPv2        = (float *)(mainRegister + MAX_PV2_OFFSET);
-static float* maxPv3        = (float *)(mainRegister + MAX_PV3_OFFSET);
-std::array<float*, 4> maximumValues = {maxPv0, maxPv1, maxPv2, maxPv3};
-
-// define ringbuffer (circular buffer) for each process value
-Xerxes::StatisticBuffer<float> rbpv0(RING_BUFFER_LEN);
-Xerxes::StatisticBuffer<float> rbpv1(RING_BUFFER_LEN);
-Xerxes::StatisticBuffer<float> rbpv2(RING_BUFFER_LEN);
-Xerxes::StatisticBuffer<float> rbpv3(RING_BUFFER_LEN);
-
-std::array<Xerxes::StatisticBuffer<float>,4> ringBuffers = {rbpv0, rbpv1, rbpv2, rbpv3};
-
-Xerxes::Sensor *pSensor = new Xerxes::ABP(); 
-
-static bool usrSwitchOn = false;
-
 // queue for incoming and outgoing data
 queue_t txFifo;
 queue_t rxFifo;
 
+
+Xerxes::Sensor *pSensor = new Xerxes::ABP();
 Xerxes::RS485 xn(&txFifo, &rxFifo);
 Xerxes::Protocol xp(&xn);
 Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
+
+static bool usrSwitchOn = false;
+
 void userInitUart();
 void userInitGpio();
 void userInitQueue();
-void userInitFlash();
 void userLoadDefaultValues();
 
-
 void core1Entry();
-void measurementLoop();
 void uart_interrupt_handler();
-void updateFlash();
-
-
-// This is the decorator function. It takes a function as an argument and returns
-// a new function that adds additional behavior to the original function.
-template <typename Func>
-auto unicast(Func f) {
-  // The returned function is a lambda function that takes the same arguments as the original
-  // function and calls it with the given arguments.
-  return [f](const Xerxes::Message &msg) {
-    if(msg.dstAddr!= 0xff && *devAddress == msg.dstAddr)
-    {
-    // Call the original function with the given arguments.
-        f(msg);
-    }
-    else
-    {       
-        // do nothing
-    }
-  };
-}
-
-
-void writeReg(const Xerxes::Message &msg)
-{
-    uint8_t offset = msg.at(4);
-
-    for(uint16_t i = 5; i < msg.size(); i++)
-    {
-        // IMPROVEMENT: implement READ_ONLY MEMORY
-        uint8_t byte = msg.at(i);
-        mainRegister[offset + i - 5] = byte;
-    }
-
-    xs.send(msg.srcAddr, MSGID_ACK_OK);
-}
-
-
-void sync(const Xerxes::Message &msg)
-{
-    measurementLoop();
-}
-
-
-void ping(const Xerxes::Message &msg)
-{
-    std::vector<uint8_t> payload {DEVID_PRESSURE_60MBAR, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
-    xs.send(msg.srcAddr, MSGID_PING_REPLY, payload);
-}
 
 
 int main(void)
@@ -220,24 +103,33 @@ int main(void)
         *error |= ERROR_WATCHDOG_TIMEOUT;
     }
 
-    cout << "UID: " << *uid << endl;
+    DEBUG_MSG("UID: " << *uid);
     // enable watchdog for 100ms, pause on debug = true
     watchdog_enable(100, true);
-    cout << "Watchdog enabled for 100ms" << endl;
+    DEBUG_MSG("Watchdog enabled for 100ms");
 
     //XerxesBusSetup(uart0_read, uart0_write, nop, nop, tx_done, uart0_is_rx_ready);
     //XerxesDeviceSetup(DEVID_IO_8DI_8DO, fetch_handler, nop);
     
-    cout << "Errors: " << bitset<64>(*error) << endl;
+    DEBUG_MSG("Errors: " << bitset<64>(*error));
 
     pSensor->init();
 
-    xs.bind(MSGID_PING, unicast(ping));
-    xs.bind(MSGID_WRITE, unicast(writeReg));
-    xs.bind(MSGID_SYNC, sync);
+    xs.bind(MSGID_PING, unicast(pingCallback));
+    xs.bind(MSGID_WRITE, unicast(writeRegCallback));
+    xs.bind(MSGID_READ, unicast(readRegCallback));
+    xs.bind(MSGID_SYNC_ALL, syncCallback);
+    xs.bind(MSGID_SYNC_ONE, unicast(syncCallback));
+    xs.bind(MSGID_SLEEP_ALL, sleepCallback);
+    xs.bind(MSGID_SLEEP_ONE, unicast(sleepCallback));
+
+    /* enable user interrupt 
+    irq_set_exclusive_handler(26, user_interrupt_handler);
+    irq_set_enabled(26, true); */
 
     multicore_launch_core1(core1Entry);
-    cout << "Core 1 launched. Communication ready!" << endl;
+    DEBUG_MSG("Core 1 launched. Communication ready!");
+
 
     while(1)
     {    
@@ -279,14 +171,11 @@ void core1Entry()
     uint64_t i=0;
     while(1)
     {
-        if(awake)
+        if(config->freeRun)
         {
             auto startOfCycle = time_us_64();
 
-            if(config->freeRun)
-            {
-                measurementLoop();
-            }                
+            measurementLoop();            
 
             // calculate how long it took to finish cycle
             auto endOfCycle = time_us_64();
@@ -312,31 +201,8 @@ void core1Entry()
         }
         else
         {
-            sleep_us(1000);
+            sleep_us(100);
         }
-    }
-}
-
-
-void measurementLoop()
-{       
-    // measure process value
-    pSensor->update();
-    pSensor->read(processValues);
-
-    // for each process value and ring buffer
-    for(int i=0; i<4; i++)
-    {
-        float pv = *processValues[i];
-        ringBuffers[i].insertOne(pv);
-        ringBuffers[i].updateStatistics();
-        // update min, max stdev etc...
-        ringBuffers[i].getStatistics(
-            minimumValues[i],
-            maximumValues[i],
-            meanValues[i],
-            standardDeviations[i]
-        );
     }
 }
 
@@ -368,7 +234,7 @@ void userInitGpio()
 void userInitUart(void)
 {
     // Initialise UART 0 on 115200baud
-    cout << "Baudrate:" << uart_init(uart0, 115200) << endl;
+    DEBUG_MSG("Baudrate:" << uart_init(uart0, 115200));
  
     // Set the GPIO pin mux to the UART - 16 is TX, 17 is RX
     gpio_set_function(RS_TX_PIN, GPIO_FUNC_UART);
@@ -406,37 +272,6 @@ void uart_interrupt_handler()
 
     irq_clear(UART0_IRQ);
     gpio_put(USR_LED_PIN, 0);
-}
-
-
-void userInitFlash()
-{
-    auto status = save_and_disable_interrupts();
-
-    //read UID
-    flash_get_unique_id((uint8_t *)uid);
-
-    // std::memcpy(&config, &flash_target_contents[OFFSET_CONFIG_BITS], 1);
-    // it takes approx 750us to program 256bytes of flash
-    std::memcpy((uint8_t *)mainRegister, flash_target_contents, NON_VOLATILE_SIZE);
-
-
-    //erase flash, must be done in sector size
-    // flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
-    restore_interrupts(status);
-}
-
-
-void updateFlash()
-{
-    // disable interrupts first
-    auto status = save_and_disable_interrupts();
-
-    // write flash, must be done in page size
-    // it takes approx 450us to write 128bytes of data
-    flash_range_program(FLASH_TARGET_OFFSET, (const uint8_t *)mainRegister, NON_VOLATILE_SIZE);
-
-    restore_interrupts(status);
 }
 
 
