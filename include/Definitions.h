@@ -77,7 +77,7 @@
 #define PROTOCOL_VERSION_MIN        4
 
 
-typedef struct ConfigBits {
+typedef struct {
   bool freeRun :    1 = false;
   bool lowPower :   1 = false;
   bool bit2 :       1 = false;

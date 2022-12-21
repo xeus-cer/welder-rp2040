@@ -3,6 +3,7 @@
 
 #include <functional>
 #include "UserFlash.hpp"
+#include "DeviceIds.h"
 
 
 extern Xerxes::Slave xs;
@@ -76,7 +77,7 @@ void writeRegCallback(const Xerxes::Message &msg)
         uint8_t byte = msg.at(i);
         mainRegister[offset + i - 5] = byte;
     }
-
+    updateFlash();
     xs.send(msg.srcAddr, MSGID_ACK_OK);
 }
 

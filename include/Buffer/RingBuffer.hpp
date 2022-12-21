@@ -22,6 +22,7 @@ protected:
     bool saturated {false};
 
 public:
+    RingBuffer();
     RingBuffer(const uint32_t &maxSize);
     RingBuffer(std::initializer_list<T> il);
     ~RingBuffer();
@@ -29,6 +30,12 @@ public:
     void insertOne(const T el);
     const T & getLast();
 };
+
+
+template <class T>
+RingBuffer<T>::RingBuffer()
+{
+}
 
 
 template <class T>

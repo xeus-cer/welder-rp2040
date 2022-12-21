@@ -109,18 +109,14 @@ bool RS485::readData(const uint64_t timeoutUs, Packet &packet)
 bool RS485::receivePacket(const uint64_t timeoutUs)
 {
     // check if the packet is in fifo buffer
-    uint8_t nextVal;
-    #ifdef NDEBUG
+    uint8_t nextVal = 0;
+    
     uint64_t tout = time_us_64() + timeoutUs;
-    #else
-    absolute_time_t tout;
-    tout._private_us_since_boot = time_us_64() + timeoutUs;
-    #endif
 
     uint8_t chks = SOH;
 
-    uint8_t msgLen;
-    bool waitForSoh = true;
+    uint8_t msgLen = 0;
+    volatile bool waitForSoh = true;
 
     // clear buffer
     incomingMessage.clear();

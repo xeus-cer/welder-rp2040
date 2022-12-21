@@ -7,7 +7,6 @@
 
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
-#include "hardware/gpio.h"
 #include "boards/pico.h"
 #include "hardware/adc.h"
 #include "hardware/uart.h"
@@ -16,7 +15,6 @@
 #include "hardware/structs/pll.h"
 #include "hardware/structs/clocks.h"
 #include "hardware/pwm.h"
-#include "pico/util/queue.h"
 #include "pico/stdio/driver.h"
 #include "pico/stdio_uart.h"
 #include "pico/sleep.h"
@@ -32,8 +30,6 @@
 #include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
-#include "MessageId.h"
-#include "DeviceIds.h"
 #include "Actions.hpp"
 
 
@@ -61,13 +57,14 @@ Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 static bool usrSwitchOn = false;
 
+
 void userInitUart();
 void userInitGpio();
 void userInitQueue();
+void userInitFlash();
 void userLoadDefaultValues();
-
-void core1Entry();
 void uart_interrupt_handler();
+void core1Entry();
 
 
 int main(void)
@@ -85,7 +82,12 @@ int main(void)
 
     if(!gpio_get(USR_BTN_PIN))
     {
-        while(1)
+        while(!gpio_get(USR_BTN_PIN))
+        {
+            gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
+            sleep_ms(100);
+        }
+        while(gpio_get(USR_BTN_PIN))
         {
             gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
             sleep_ms(100);
@@ -112,6 +114,7 @@ int main(void)
     //XerxesDeviceSetup(DEVID_IO_8DI_8DO, fetch_handler, nop);
     
     DEBUG_MSG("Errors: " << bitset<64>(*error));
+
 
     pSensor->init();
 
@@ -161,7 +164,7 @@ int main(void)
 
         }
 
-        xs.sync(3000);
+        xs.sync(10000);
     }
 }
 
@@ -205,6 +208,7 @@ void core1Entry()
         }
     }
 }
+
 
 
 void userInitQueue()
@@ -261,8 +265,8 @@ void uart_interrupt_handler()
     if(uart_is_readable(uart0))
     {
         char rcvd = uart_getc(uart0);
-
         auto success = queue_try_add(&rxFifo, &rcvd);
+
         if(!success)
         {
             // set cpu overload flag
