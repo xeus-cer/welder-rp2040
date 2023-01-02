@@ -142,6 +142,7 @@ int main(void)
         // try to send char over serial if present in FIFO buffer
         while(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
         {
+            //gpio_put(USR_LED_PIN, 1);
             uint8_t to_send, sent;
             queue_try_remove(&txFifo, &to_send);
 
@@ -155,6 +156,7 @@ int main(void)
             {
                 *error |= ERROR_BUS_COLLISION;
             }
+            //gpio_put(USR_LED_PIN, 0);
         }
 
         if(queue_is_full(&txFifo))
@@ -164,7 +166,7 @@ int main(void)
 
         }
 
-        xs.sync(10000);
+        xs.sync(1000);
     }
 }
 
@@ -178,7 +180,7 @@ void core1Entry()
         {
             auto startOfCycle = time_us_64();
 
-            measurementLoop();            
+            measurementLoop();          
 
             // calculate how long it took to finish cycle
             auto endOfCycle = time_us_64();
@@ -188,7 +190,7 @@ void core1Entry()
             if(i++ % 100 == 0)
             {
                 DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
-                DEBUG_MSG("Val: " << *meanPv0 << "Pa, stdev: " << *stdDevPv0);
+                DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
             }
 
 
@@ -206,6 +208,7 @@ void core1Entry()
         {
             sleep_us(100);
         }
+        
     }
 }
 

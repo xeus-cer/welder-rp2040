@@ -22,7 +22,7 @@ void measurementLoop()
         float pv = *processValues[i];
         ringBuffers[i].insertOne(pv);
         ringBuffers[i].updateStatistics();
-        // update min, max stdev etc...
+        // update min, max stddev etc...
         ringBuffers[i].getStatistics(
             minimumValues[i],
             maximumValues[i],

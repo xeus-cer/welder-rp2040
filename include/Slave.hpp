@@ -52,7 +52,7 @@ void Slave::bind(const msgid_t msgId, std::function<void(const Message&)> _f)
 void Slave::call(const Message &msg) 
 {
     if(bindings.contains(msg.msgId)){
-        // call a function binded to messageId
+        // call a function bound to messageId
         bindings[msg.msgId](msg);
     }
 }

@@ -71,7 +71,7 @@ RS485::~RS485()
 
 bool RS485::sendData(const Packet & toSend) const
 {
-    // improve: this can check if queue has enought space before trying to send data
+    // improve: this can check if queue has enough space before trying to send data
     uint16_t sent {0};
     for(const auto &el:toSend.getData())
     {
@@ -111,7 +111,12 @@ bool RS485::receivePacket(const uint64_t timeoutUs)
     // check if the packet is in fifo buffer
     uint8_t nextVal = 0;
     
+    #ifdef NDEBUG
     uint64_t tout = time_us_64() + timeoutUs;
+    #else
+    absolute_time_t tout;
+    tout._private_us_since_boot = time_us_64() + timeoutUs;
+    #endif // NDEBUG
 
     uint8_t chks = SOH;
 
