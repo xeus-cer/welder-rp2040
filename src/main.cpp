@@ -142,7 +142,6 @@ int main(void)
         // try to send char over serial if present in FIFO buffer
         while(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
         {
-            //gpio_put(USR_LED_PIN, 1);
             uint8_t to_send, sent;
             queue_try_remove(&txFifo, &to_send);
 
@@ -156,7 +155,7 @@ int main(void)
             {
                 *error |= ERROR_BUS_COLLISION;
             }
-            //gpio_put(USR_LED_PIN, 0);
+            gpio_put(USR_LED_PIN, 0);
         }
 
         if(queue_is_full(&txFifo))
@@ -193,7 +192,6 @@ void core1Entry()
                 DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
             }
 
-
             // sleep for the remaining time
             if(sleepFor > 0)
             {
@@ -206,9 +204,8 @@ void core1Entry()
         }
         else
         {
-            sleep_us(100);
-        }
-        
+            sleep_us(1000);
+        }   
     }
 }
 
@@ -241,7 +238,7 @@ void userInitGpio()
 void userInitUart(void)
 {
     // Initialise UART 0 on 115200baud
-    DEBUG_MSG("Baudrate:" << uart_init(uart0, 115200));
+    DEBUG_MSG("Baudrate:" << uart_init(uart0, DEFAULT_BAUDRATE));
  
     // Set the GPIO pin mux to the UART - 16 is TX, 17 is RX
     gpio_set_function(RS_TX_PIN, GPIO_FUNC_UART);

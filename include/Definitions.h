@@ -3,10 +3,11 @@
 
 #include "hardware/flash.h"
 
-#define DEFAULT_BAUDRATE    250000
+#define DEFAULT_BAUDRATE    115200
 
-#define REGISTER_SIZE       512
 #define NON_VOLATILE_SIZE   FLASH_PAGE_SIZE // 256
+#define REGISTER_SIZE       NON_VOLATILE_SIZE * 2
+
 #define RX_TX_QUEUE_SIZE    256 // bytes
 // #undef PICO_FLASH_SIZE_BYTES
 #define FLASH_TARGET_OFFSET 2 * 1024 * 1024 - (FLASH_SECTOR_SIZE)
