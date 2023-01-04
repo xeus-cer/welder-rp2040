@@ -31,6 +31,7 @@
 #define OFFSET_ADDRESS      36
 
 #define OFFSET_CONFIG_BITS  40
+#define OFFSET_CLOCK_KHZ    44
 
 
 //volatile range
@@ -71,7 +72,7 @@
 
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US       100000  // 100ms
+#define DEFAULT_CYCLE_TIME_US       10'000  // 10ms
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1

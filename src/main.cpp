@@ -66,54 +66,17 @@ void uart_interrupt_handler();
 void core1Entry();
 
 
-void main2()
-{
-    stdio_init_all();
-    userInitUart();
-
-    // disable interrupts first
-    auto status = save_and_disable_interrupts();
-
-    uint8_t towrite[NON_VOLATILE_SIZE];
-    uint8_t toread[NON_VOLATILE_SIZE];
-    static const uint8_t *flashContent = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
-
-    for(int i=0; i<NON_VOLATILE_SIZE; i++)
-    {
-        towrite[i] = i%0x100;
-    }
-
-    flash_range_erase(FLASH_TARGET_OFFSET, NON_VOLATILE_SIZE);
-
-    for(int i=0; i<NON_VOLATILE_SIZE; i++)
-    {
-        cout << hex << flashContent[i];
-    }
-
-    // write flash, must be done in page size
-    // it takes approx 450us to write 128bytes of data
-    flash_range_program(FLASH_TARGET_OFFSET, towrite, NON_VOLATILE_SIZE);
-
-    // std::memcpy(&config, &flash_target_contents[OFFSET_CONFIG_BITS], 1);
-    // it takes approx 750us to program 256bytes of flash
-
-    std::memcpy(toread, flashContent, NON_VOLATILE_SIZE);
-    
-    //erase flash, must be done in sector size
-    // flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
-    restore_interrupts(status);
-}
-
-
 int main(void)
 { 
     stdio_init_all();
-    set_sys_clock_khz(133*KHZ, true);
 
-    userInitUart();
+    // set_sys_clock_khz(144'000, false);
+
     userInitGpio();
+    userInitUart();
     userInitQueue();
     userInitFlash();
+
 
     // if user button is pressed, load default values
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
@@ -121,7 +84,7 @@ int main(void)
     usrSwitchOn = gpio_get(USR_SW_PIN);
     
     gpio_put(USR_LED_PIN, 1);
-    sleep_ms(50);
+    sleep_ms(1);
     gpio_put(USR_LED_PIN, 0);
 
     // while in sleep run from lower powered XOSC (prlly 12MHz) 
@@ -167,6 +130,7 @@ int main(void)
         // try to send char over serial if present in FIFO buffer
         while(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
         {
+            gpio_put(USR_LED_PIN, 1);
             uint8_t to_send, sent;
             queue_try_remove(&txFifo, &to_send);
 
@@ -213,8 +177,11 @@ void core1Entry()
 
             if(i++ % 100 == 0)
             {
+                gpio_put(USR_LED_PIN, 1);
                 DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
                 DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
+                sleep_us(1'000);
+                gpio_put(USR_LED_PIN, 0);
             }
 
             // sleep for the remaining time
@@ -273,7 +240,7 @@ void userInitUart(void)
     gpio_set_dir(RS_EN_PIN, GPIO_OUT);
     gpio_put(RS_EN_PIN, true);
 
-    uart_set_fifo_enabled(uart0, 1);	
+    uart_set_fifo_enabled(uart0, true);	
     stdio_set_driver_enabled(&stdio_uart, false);
 
     irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
@@ -289,7 +256,7 @@ void uart_interrupt_handler()
     gpio_put(USR_LED_PIN, 1);
     if(uart_is_readable(uart0))
     {
-        char rcvd = uart_getc(uart0);
+        unsigned char rcvd = uart_getc(uart0);
         auto success = queue_try_add(&rxFifo, &rcvd);
 
         if(!success)
@@ -318,5 +285,6 @@ void userLoadDefaultValues()
 
     *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
     config->all = 0;
+    *clockKhz = 133'000;
     updateFlash();
 }

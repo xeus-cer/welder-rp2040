@@ -26,6 +26,7 @@ static float* offsetPv3     = (float *)(mainRegister + OFFSET_PV3_OFFSET);
 static uint32_t *desiredCycleTimeUs  = (uint32_t *)(mainRegister + OFFSET_CYCLE_TIME);
 static uint8_t *devAddress  = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
 static ConfigBitsUnion *config   = (ConfigBitsUnion *)(mainRegister + OFFSET_CONFIG_BITS); 
+static uint32_t *clockKhz = (uint32_t *)(mainRegister + OFFSET_CLOCK_KHZ);  // not used yet, TODO: Implement
 
 
 /* ### VOLATILE - PROCESS VALUES ### */
