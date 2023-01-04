@@ -26,7 +26,6 @@
 
 #include "xerxes_rp2040.h"
 #include "Errors.h"
-#include "Definitions.h"
 #include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
@@ -67,37 +66,67 @@ void uart_interrupt_handler();
 void core1Entry();
 
 
+void main2()
+{
+    stdio_init_all();
+    userInitUart();
+
+    // disable interrupts first
+    auto status = save_and_disable_interrupts();
+
+    uint8_t towrite[NON_VOLATILE_SIZE];
+    uint8_t toread[NON_VOLATILE_SIZE];
+    static const uint8_t *flashContent = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET);
+
+    for(int i=0; i<NON_VOLATILE_SIZE; i++)
+    {
+        towrite[i] = i%0x100;
+    }
+
+    flash_range_erase(FLASH_TARGET_OFFSET, NON_VOLATILE_SIZE);
+
+    for(int i=0; i<NON_VOLATILE_SIZE; i++)
+    {
+        cout << hex << flashContent[i];
+    }
+
+    // write flash, must be done in page size
+    // it takes approx 450us to write 128bytes of data
+    flash_range_program(FLASH_TARGET_OFFSET, towrite, NON_VOLATILE_SIZE);
+
+    // std::memcpy(&config, &flash_target_contents[OFFSET_CONFIG_BITS], 1);
+    // it takes approx 750us to program 256bytes of flash
+
+    std::memcpy(toread, flashContent, NON_VOLATILE_SIZE);
+    
+    //erase flash, must be done in sector size
+    // flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
+    restore_interrupts(status);
+}
+
+
 int main(void)
-{   
-	stdio_init_all();
+{ 
+    stdio_init_all();
     set_sys_clock_khz(133*KHZ, true);
 
     userInitUart();
     userInitGpio();
     userInitQueue();
     userInitFlash();
-    if(config->firstRun) userLoadDefaultValues();
+
+    // if user button is pressed, load default values
+    if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
     usrSwitchOn = gpio_get(USR_SW_PIN);
-
-    if(!gpio_get(USR_BTN_PIN))
-    {
-        while(!gpio_get(USR_BTN_PIN))
-        {
-            gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
-            sleep_ms(100);
-        }
-        while(gpio_get(USR_BTN_PIN))
-        {
-            gpio_put(USR_LED_PIN, !gpio_get(USR_LED_PIN));
-            sleep_ms(100);
-        }
-    }
     
+    gpio_put(USR_LED_PIN, 1);
+    sleep_ms(50);
     gpio_put(USR_LED_PIN, 0);
 
     // while in sleep run from lower powered XOSC (prlly 12MHz) 
-    if(config->lowPower) sleep_run_from_xosc();
+    // TODO: Does not work yet, need better understanding
+    // if(config->bits.lowPower) sleep_run_from_xosc();
 
     //determine reason for restart:
     if (watchdog_caused_reboot())
@@ -108,23 +137,19 @@ int main(void)
     DEBUG_MSG("UID: " << *uid);
     // enable watchdog for 100ms, pause on debug = true
     watchdog_enable(100, true);
-    DEBUG_MSG("Watchdog enabled for 100ms");
-
-    //XerxesBusSetup(uart0_read, uart0_write, nop, nop, tx_done, uart0_is_rx_ready);
-    //XerxesDeviceSetup(DEVID_IO_8DI_8DO, fetch_handler, nop);
-    
-    DEBUG_MSG("Errors: " << bitset<64>(*error));
+    DEBUG_MSG("Watchdog enabled for 100ms, Errors: " << bitset<64>(*error));
 
 
     pSensor->init();
 
-    xs.bind(MSGID_PING, unicast(pingCallback));
-    xs.bind(MSGID_WRITE, unicast(writeRegCallback));
-    xs.bind(MSGID_READ, unicast(readRegCallback));
-    xs.bind(MSGID_SYNC_ALL, syncCallback);
-    xs.bind(MSGID_SYNC_ONE, unicast(syncCallback));
-    xs.bind(MSGID_SLEEP_ALL, sleepCallback);
-    xs.bind(MSGID_SLEEP_ONE, unicast(sleepCallback));
+    xs.bind(MSGID_PING,         unicast(    pingCallback));
+    xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
+    xs.bind(MSGID_READ,         unicast(    readRegCallback));
+    xs.bind(MSGID_SYNC_ALL,     broadcast(  syncCallback));
+    xs.bind(MSGID_SYNC_ONE,     unicast(    syncCallback));
+    xs.bind(MSGID_SLEEP_ALL,    broadcast(  sleepCallback));
+    xs.bind(MSGID_SLEEP_ONE,    unicast(    sleepCallback));
+    xs.bind(MSGID_RESET,        broadcast(  softResetCallback));
 
     /* enable user interrupt 
     irq_set_exclusive_handler(26, user_interrupt_handler);
@@ -175,7 +200,7 @@ void core1Entry()
     uint64_t i=0;
     while(1)
     {
-        if(config->freeRun)
+        if(config->bits.freeRun)
         {
             auto startOfCycle = time_us_64();
 
@@ -273,25 +298,25 @@ void uart_interrupt_handler()
             *error |= ERROR_CPU_OVERLOAD;
         }
     }
-
-    irq_clear(UART0_IRQ);
     gpio_put(USR_LED_PIN, 0);
+    irq_clear(UART0_IRQ);
 }
 
 
 void userLoadDefaultValues()
 {
+
+    for(uint i=0; i<REGISTER_SIZE; i++)
+    {
+        mainRegister[i] = 0;
+    }
+
     *gainPv0    = 1;
     *gainPv1    = 1;    
     *gainPv1    = 1;
     *gainPv1    = 1;
 
-    *offsetPv0  = 0;
-    *offsetPv0  = 0;
-    *offsetPv0  = 0;
-    *offsetPv0  = 0;
-
     *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
-    config->firstRun = false;
+    config->all = 0;
     updateFlash();
 }
