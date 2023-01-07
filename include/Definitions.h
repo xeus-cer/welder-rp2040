@@ -82,7 +82,7 @@
 
 typedef struct {
   bool freeRun :    1;
-  bool disableUsb : 1;
+  bool bit1 :       1;
   bool bit2 :       1;
   bool bit3 :       1;
   bool bit4 :       1;

@@ -58,7 +58,7 @@ Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 void userInitUsb()
 {
     // either init usb or disable it and its clocks
-    if(config->bits.disableUsb)
+    if(false)  // currently disabled - unstable
     {
         clock_configure(
             clk_usb,
@@ -148,10 +148,8 @@ int main(void)
     xs.bind(MSGID_PING,         unicast(    pingCallback));
     xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
     xs.bind(MSGID_READ,         unicast(    readRegCallback));
-    xs.bind(MSGID_SYNC_ALL,     broadcast(  syncCallback));
-    xs.bind(MSGID_SYNC_ONE,     unicast(    syncCallback));
-    xs.bind(MSGID_SLEEP_ALL,    broadcast(  sleepCallback));
-    xs.bind(MSGID_SLEEP_ONE,    unicast(    sleepCallback));
+    xs.bind(MSGID_SYNC,         broadcast(  syncCallback));
+    xs.bind(MSGID_SLEEP,        broadcast(  sleepCallback));
     xs.bind(MSGID_RESET,        broadcast(  softResetCallback));
 
     /* enable user interrupt 

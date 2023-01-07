@@ -40,11 +40,8 @@ const msgid_t MSGID_ACK_NOK                       = 0x0003;
 
 /** Broadcast sleep to put all devices into low power state 
  * The message prototype  is [MSGID_SLEEP_ALL] <uint32_t>[DURATION_US]  */
-const msgid_t MSGID_SLEEP_ALL                     = 0x0004;
+const msgid_t MSGID_SLEEP                         = 0x0004;
 
-/** Unicast sleep to put just one device to sleep = low power state 
- * The message prototype  is [MSGID_SLEEP_ONE] <uint32_t>[DURATION_US]  */
-const msgid_t MSGID_SLEEP_ONE                     = 0x0005;
 
 /**
  * @brief Request for soft reset of the device 
@@ -58,11 +55,9 @@ const msgid_t MSGID_RESET                         = 0x00ff;
  */
 const msgid_t MSGID_FETCH_MEASUREMENT             = 0x0100;
     
-/** Broadcast Synchronisaton message - sync all devices */
-const msgid_t MSGID_SYNC_ALL                      = 0x0101;
+/** Synchronisaton message - sync all devices */
+const msgid_t MSGID_SYNC                          = 0x0101;
 
-/** Synchronisaton message - sync just one device*/
-const msgid_t MSGID_SYNC_ONE                      = 0x0102;
     
     
 /** Set register to a value 
