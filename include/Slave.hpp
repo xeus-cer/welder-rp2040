@@ -83,6 +83,14 @@ bool Slave::sync(uint32_t timeoutUs)
         return false;
     }
     
+
+    printf("Received:\n");
+    for(int i=0; i<incoming.size(); i++)
+    {
+        printf("%X", incoming.at(i));
+    }
+    printf("\n");
+    
     // call appropriate function
     call(incoming);
     return true;

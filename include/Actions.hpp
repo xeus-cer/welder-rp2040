@@ -4,6 +4,7 @@
 #include <functional>
 #include "UserFlash.hpp"
 #include "DeviceIds.h"
+#include "Sleep.hpp"
 
 
 extern Xerxes::Slave xs;
@@ -134,7 +135,6 @@ void readRegCallback(const Xerxes::Message &msg)
 }
 
 
-
 void sleepCallback(const Xerxes::Message &msg)
 {
     uint8_t raw_duration[4];
@@ -145,7 +145,9 @@ void sleepCallback(const Xerxes::Message &msg)
     }
 
     uint32_t *durationUs = (uint32_t *)raw_duration;
-    sleep_us(*durationUs);
+    
+    printf("LP Sleep for %d us.\n", *durationUs);
+    sleep_lp(*durationUs);
 }
 
 

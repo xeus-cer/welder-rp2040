@@ -96,7 +96,7 @@ bool RS485::readData(const uint64_t timeoutUs, Packet &packet)
         return false;
     }
 
-    if(receivePacket(remainingTime(start, timeoutUs)))
+    if(receivePacket(timeoutUs))
     {
         packet = Packet(incomingMessage);
         return true;

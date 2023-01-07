@@ -42,6 +42,7 @@ using namespace Xerxes;
 #define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
 #endif
 
+#define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
 
 // queue for incoming and outgoing data
 queue_t txFifo;
@@ -53,6 +54,48 @@ Xerxes::RS485 xn(&txFifo, &rxFifo);
 Xerxes::Protocol xp(&xn);
 Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
+
+void userInitUsb()
+{
+    // either init usb or disable it and its clocks
+    if(config->bits.disableUsb)
+    {
+        clock_configure(
+            clk_usb,
+            0,
+            0,
+            0,
+            0
+        );    
+    }
+    else
+    {
+        stdio_usb_init();
+    }
+}
+ 
+
+void measure_freqs(void) {
+    uint f_pll_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_SYS_CLKSRC_PRIMARY);
+    uint f_pll_usb = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_USB_CLKSRC_PRIMARY);
+    uint f_rosc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_ROSC_CLKSRC);
+    uint f_clk_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
+    uint f_clk_peri = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_PERI);
+    uint f_clk_usb = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_USB);
+    uint f_clk_adc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_ADC);
+    uint f_clk_rtc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_RTC);
+ 
+    printf("pll_sys  = %dkHz\n", f_pll_sys);
+    printf("pll_usb  = %dkHz\n", f_pll_usb);
+    printf("rosc     = %dkHz\n", f_rosc);
+    printf("clk_sys  = %dkHz\n", f_clk_sys);
+    printf("clk_peri = %dkHz\n", f_clk_peri);
+    printf("clk_usb  = %dkHz\n", f_clk_usb);
+    printf("clk_adc  = %dkHz\n", f_clk_adc);
+    printf("clk_rtc  = %dkHz\n\n", f_clk_rtc);
+ 
+    // Can't measure clk_ref / xosc as it is the ref
+}
 
 static bool usrSwitchOn = false;
 
@@ -70,26 +113,23 @@ int main(void)
 { 
     stdio_init_all();
 
-    // set_sys_clock_khz(144'000, false);
+    sleep_ms(3000);
+
+    // sleep_lp(10);
+
+    measure_freqs();
 
     userInitGpio();
     userInitUart();
     userInitQueue();
     userInitFlash();
-
+    userInitUsb();
 
     // if user button is pressed, load default values
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
     usrSwitchOn = gpio_get(USR_SW_PIN);
     
-    gpio_put(USR_LED_PIN, 1);
-    sleep_ms(1);
-    gpio_put(USR_LED_PIN, 0);
-
-    // while in sleep run from lower powered XOSC (prlly 12MHz) 
-    // TODO: Does not work yet, need better understanding
-    // if(config->bits.lowPower) sleep_run_from_xosc();
 
     //determine reason for restart:
     if (watchdog_caused_reboot())
@@ -118,7 +158,11 @@ int main(void)
     irq_set_exclusive_handler(26, user_interrupt_handler);
     irq_set_enabled(26, true); */
 
-    multicore_launch_core1(core1Entry);
+    if(config->bits.freeRun)
+    {
+        multicore_launch_core1(core1Entry);
+    }
+
     DEBUG_MSG("Core 1 launched. Communication ready!");
 
 
@@ -154,7 +198,7 @@ int main(void)
 
         }
 
-        xs.sync(1000);
+        xs.sync(5000);
     }
 }
 
@@ -162,42 +206,35 @@ int main(void)
 void core1Entry()
 {
     uint64_t i=0;
-    while(1)
+    while(config->bits.freeRun)
     {
-        if(config->bits.freeRun)
+        auto startOfCycle = time_us_64();
+
+        measurementLoop();          
+
+        // calculate how long it took to finish cycle
+        auto endOfCycle = time_us_64();
+        auto cycleDuration = endOfCycle - startOfCycle;
+        int64_t sleepFor = *desiredCycleTimeUs - cycleDuration;
+
+        if(i++ % 100 == 0)
         {
-            auto startOfCycle = time_us_64();
+            gpio_put(USR_LED_PIN, 1);
+            DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
+            DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
+            sleep_us(100);
+            gpio_put(USR_LED_PIN, 0);
+        }
 
-            measurementLoop();          
-
-            // calculate how long it took to finish cycle
-            auto endOfCycle = time_us_64();
-            auto cycleDuration = endOfCycle - startOfCycle;
-            int64_t sleepFor = *desiredCycleTimeUs - cycleDuration;
-
-            if(i++ % 100 == 0)
-            {
-                gpio_put(USR_LED_PIN, 1);
-                DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
-                DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
-                sleep_us(1'000);
-                gpio_put(USR_LED_PIN, 0);
-            }
-
-            // sleep for the remaining time
-            if(sleepFor > 0)
-            {
-                sleep_us(sleepFor);
-            }
-            else
-            {
-                *error |= ERROR_SENSOR_OVERLOAD;
-            }
+        // sleep for the remaining time
+        if(sleepFor > 0)
+        {
+            sleep_us(sleepFor);
         }
         else
         {
-            sleep_us(1000);
-        }   
+            *error |= ERROR_SENSOR_OVERLOAD;
+        }
     }
 }
 
@@ -285,6 +322,6 @@ void userLoadDefaultValues()
 
     *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
     config->all = 0;
-    *clockKhz = 133'000;
+    *clockKhz = DEFAULT_CLOCK_KHZ;  // not implemented yet
     updateFlash();
 }

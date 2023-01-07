@@ -73,6 +73,7 @@
 
 /* Default values */
 #define DEFAULT_CYCLE_TIME_US       10'000  // 10ms
+#define DEFAULT_CLOCK_KHZ           125'000 // 133kHz
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1
@@ -81,7 +82,7 @@
 
 typedef struct {
   bool freeRun :    1;
-  bool lowPower :   1;
+  bool disableUsb : 1;
   bool bit2 :       1;
   bool bit3 :       1;
   bool bit4 :       1;
