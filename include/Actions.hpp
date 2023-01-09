@@ -145,9 +145,9 @@ void sleepCallback(const Xerxes::Message &msg)
     }
 
     uint32_t *durationUs = (uint32_t *)raw_duration;
+    uint64_t cleanUs = static_cast<uint64_t>(*durationUs);
     
-    printf("LP Sleep for %d us.\n", *durationUs);
-    sleep_lp(*durationUs);
+    sleep_lp(cleanUs);
 }
 
 

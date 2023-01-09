@@ -93,6 +93,15 @@ void measure_freqs(void) {
     printf("clk_usb  = %dkHz\n", f_clk_usb);
     printf("clk_adc  = %dkHz\n", f_clk_adc);
     printf("clk_rtc  = %dkHz\n\n", f_clk_rtc);
+
+    // pll_sys  = 125001kHz
+    // pll_usb  = 48001kHz
+    // rosc     = 5321kHz
+    // clk_sys  = 125000kHz
+    // clk_peri = 125000kHz
+    // clk_usb  = 48000kHz
+    // clk_adc  = 48000kHz
+    // clk_rtc  = 47kHz
  
     // Can't measure clk_ref / xosc as it is the ref
 }
@@ -100,6 +109,7 @@ void measure_freqs(void) {
 static bool usrSwitchOn = false;
 
 
+void userInitClocks();
 void userInitUart();
 void userInitGpio();
 void userInitQueue();
@@ -113,24 +123,24 @@ int main(void)
 { 
     stdio_init_all();
 
-    sleep_ms(3000);
+    sleep_ms(1500);
 
     // sleep_lp(10);
 
-    measure_freqs();
 
     userInitGpio();
+    userInitClocks();
     userInitUart();
     userInitQueue();
     userInitFlash();
     userInitUsb();
+    measure_freqs();
 
     // if user button is pressed, load default values
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
     usrSwitchOn = gpio_get(USR_SW_PIN);
     
-
     //determine reason for restart:
     if (watchdog_caused_reboot())
     {
@@ -139,7 +149,7 @@ int main(void)
 
     DEBUG_MSG("UID: " << *uid);
     // enable watchdog for 100ms, pause on debug = true
-    watchdog_enable(100, true);
+    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
     DEBUG_MSG("Watchdog enabled for 100ms, Errors: " << bitset<64>(*error));
 
 
@@ -197,6 +207,24 @@ int main(void)
         }
 
         xs.sync(5000);
+
+        clock_configure(
+            clk_sys,
+            CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
+            CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_ROSC_CLKSRC,
+            12 * MHZ,
+            12 * MHZ
+        );
+
+        sleep_us(10);
+
+        clock_configure(
+            clk_sys,
+            CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
+            CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,
+            125 * MHZ,
+            125 * MHZ
+        );
     }
 }
 
@@ -322,4 +350,25 @@ void userLoadDefaultValues()
     config->all = 0;
     *clockKhz = DEFAULT_CLOCK_KHZ;  // not implemented yet
     updateFlash();
+}
+
+
+void userInitClocks()
+{
+    // change peripheral clock to lower frequency - 48MHz
+    clock_configure(
+        clk_peri,
+        0,
+        DEFAULT_PERI_CLOCK_SRC,
+        DEFAULT_PERI_CLOCK_FREQ,
+        DEFAULT_PERI_CLOCK_FREQ
+    );
+
+    clock_configure(
+        clk_adc,
+        0,
+        DEFAULT_ADC_CLOCK_SRC,
+        DEFAULT_ADC_CLOCK_FREQ,
+        DEFAULT_ADC_CLOCK_FREQ
+    );
 }

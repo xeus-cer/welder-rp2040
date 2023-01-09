@@ -2,6 +2,7 @@
 #define DEFINITIONS_H
 
 #include "hardware/flash.h"
+#include "hardware/clocks.h"
 
 #define DEFAULT_BAUDRATE    115200
 
@@ -72,8 +73,15 @@
 
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US       10'000  // 10ms
-#define DEFAULT_CLOCK_KHZ           125'000 // 133kHz
+#define DEFAULT_CYCLE_TIME_US       10'000      // 10ms
+#define DEFAULT_CLOCK_KHZ           125'000     // 133kHz
+#define DEFAULT_WATCHDOG_DELAY      100         // ms
+
+/* Default clocks */
+#define DEFAULT_ADC_CLOCK_SRC       CLOCKS_CLK_ADC_CTRL_AUXSRC_VALUE_XOSC_CLKSRC
+#define DEFAULT_ADC_CLOCK_FREQ      12 * MHZ
+#define DEFAULT_PERI_CLOCK_SRC      CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_USB
+#define DEFAULT_PERI_CLOCK_FREQ     48 * MHZ
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1
