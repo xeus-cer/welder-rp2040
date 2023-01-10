@@ -13,7 +13,7 @@ namespace Xerxes
 const float VALmin  = 1638.0;   // counts = 10% 2^14
 const float VALmax  = 14745.0;  // counts = 90% 2^14
 const float Pmin    = 0.0;      // mbar    
-const float Pmax    = 600.0;    // mbar, or: 611.8298 mm
+const float Pmax    = 60.0;    // mbar, or: 611.8298 mm
 
 class ABP : public Sensor
 {
@@ -63,15 +63,17 @@ void ABP::update()
     // uint8_t b0, b1, t0, t1;
     uint16_t p_val;
     uint16_t t_val;
+    uint8_t status;
 
     // SPI_CS active low, read data
     gpio_put(SPI0_CSN_PIN, 0);
-    sleep_us(1);
+    sleep_us(3);
     spi_read_blocking(spi0, 0, data, 4);
-    sleep_us(1);
+    sleep_us(3);
     gpio_put(SPI0_CSN_PIN, 1);
 
     // convert data, see datasheet
+    status = data[0] >> 6;
     p_val = (uint16_t)(((data[0] & 0b00111111)<<8) + data[1]);
     t_val = (uint16_t)(((data[2]<<8) + (data[3] & 0b11100000))>>5);
     
@@ -93,6 +95,9 @@ void ABP::stop()
 {
     gpio_put(EXT_3V3_EN_PIN, false);
     spi_deinit(spi0);
+    gpio_set_dir(EXT_3V3_EN_PIN, GPIO_IN);
+    gpio_set_dir(SPI0_CSN_PIN, GPIO_IN);
+
 }
 
 } //namespace Xerxes

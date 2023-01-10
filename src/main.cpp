@@ -10,10 +10,6 @@
 #include "boards/pico.h"
 #include "hardware/adc.h"
 #include "hardware/uart.h"
-#include "hardware/pll.h"
-#include "hardware/clocks.h"
-#include "hardware/structs/pll.h"
-#include "hardware/structs/clocks.h"
 #include "hardware/pwm.h"
 #include "pico/stdio/driver.h"
 #include "pico/stdio_uart.h"
@@ -22,14 +18,13 @@
 #include "hardware/watchdog.h"
 #include "hardware/irq.h"
 
-#include <Serialization/Serialization.h>
-
 #include "xerxes_rp2040.h"
 #include "Errors.h"
 #include "Sensors/Honeywell/ABP.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
+#include "ClockUtils.hpp"
 
 
 using namespace std;
@@ -37,79 +32,32 @@ using namespace Xerxes;
 
 
 #ifdef NDEBUG
-#define DEBUG_MSG(str) do { } while ( false )
+// in release build
+// #define DEBUG_MSG(str) do { } while ( false )
 #else
-#define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
+// in debug
 #endif
 
 #define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
+
 
 // queue for incoming and outgoing data
 queue_t txFifo;
 queue_t rxFifo;
 
-
+#ifdef TYPE_PRESSURE
 Xerxes::Sensor *pSensor = new Xerxes::ABP();
+#endif // TYPE_PRESSURE
+
 Xerxes::RS485 xn(&txFifo, &rxFifo);
 Xerxes::Protocol xp(&xn);
 Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 
-void userInitUsb()
-{
-    // either init usb or disable it and its clocks
-    if(false)  // currently disabled - unstable
-    {
-        clock_configure(
-            clk_usb,
-            0,
-            0,
-            0,
-            0
-        );    
-    }
-    else
-    {
-        stdio_usb_init();
-    }
-}
- 
-
-void measure_freqs(void) {
-    uint f_pll_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_SYS_CLKSRC_PRIMARY);
-    uint f_pll_usb = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_PLL_USB_CLKSRC_PRIMARY);
-    uint f_rosc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_ROSC_CLKSRC);
-    uint f_clk_sys = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_SYS);
-    uint f_clk_peri = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_PERI);
-    uint f_clk_usb = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_USB);
-    uint f_clk_adc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_ADC);
-    uint f_clk_rtc = frequency_count_khz(CLOCKS_FC0_SRC_VALUE_CLK_RTC);
- 
-    printf("pll_sys  = %dkHz\n", f_pll_sys);
-    printf("pll_usb  = %dkHz\n", f_pll_usb);
-    printf("rosc     = %dkHz\n", f_rosc);
-    printf("clk_sys  = %dkHz\n", f_clk_sys);
-    printf("clk_peri = %dkHz\n", f_clk_peri);
-    printf("clk_usb  = %dkHz\n", f_clk_usb);
-    printf("clk_adc  = %dkHz\n", f_clk_adc);
-    printf("clk_rtc  = %dkHz\n\n", f_clk_rtc);
-
-    // pll_sys  = 125001kHz
-    // pll_usb  = 48001kHz
-    // rosc     = 5321kHz
-    // clk_sys  = 125000kHz
-    // clk_peri = 125000kHz
-    // clk_usb  = 48000kHz
-    // clk_adc  = 48000kHz
-    // clk_rtc  = 47kHz
- 
-    // Can't measure clk_ref / xosc as it is the ref
-}
-
-static bool usrSwitchOn = false;
+static bool usrSwitchOn;
+static volatile bool busy;
 
 
-void userInitClocks();
 void userInitUart();
 void userInitGpio();
 void userInitQueue();
@@ -117,23 +65,18 @@ void userInitFlash();
 void userLoadDefaultValues();
 void uart_interrupt_handler();
 void core1Entry();
+void syncOnce();
 
 
 int main(void)
 { 
-    stdio_init_all();
-
-    sleep_ms(1500);
-
-    // sleep_lp(10);
-
-
-    userInitGpio();
     userInitClocks();
+    stdio_init_all();
+    userInitGpio();
+    stdio_usb_init();
     userInitUart();
     userInitQueue();
     userInitFlash();
-    userInitUsb();
     measure_freqs();
 
     // if user button is pressed, load default values
@@ -155,6 +98,7 @@ int main(void)
 
     pSensor->init();
 
+    // bind callbacks
     xs.bind(MSGID_PING,         unicast(    pingCallback));
     xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
     xs.bind(MSGID_READ,         unicast(    readRegCallback));
@@ -206,25 +150,21 @@ int main(void)
 
         }
 
+        /* Sync and return in less than 5ms */
         xs.sync(5000);
 
-        clock_configure(
-            clk_sys,
-            CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
-            CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_ROSC_CLKSRC,
-            12 * MHZ,
-            12 * MHZ
-        );
+        #ifdef NDEBUG
+        /* Save some power in Release by lowering the clock */
+        if(!busy)
+        {
+            setClockSysLP();
+            sleep_us(100);
+            setClockSysDefault();
+        }else{
+            sleep_us(100);
+        }
+        #endif // NDEBUG
 
-        sleep_us(10);
-
-        clock_configure(
-            clk_sys,
-            CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
-            CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS,
-            125 * MHZ,
-            125 * MHZ
-        );
     }
 }
 
@@ -235,8 +175,7 @@ void core1Entry()
     while(config->bits.freeRun)
     {
         auto startOfCycle = time_us_64();
-
-        measurementLoop();          
+        syncOnce();          
 
         // calculate how long it took to finish cycle
         auto endOfCycle = time_us_64();
@@ -248,14 +187,14 @@ void core1Entry()
             gpio_put(USR_LED_PIN, 1);
             DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
             DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
-            sleep_us(100);
             gpio_put(USR_LED_PIN, 0);
         }
-
         // sleep for the remaining time
         if(sleepFor > 0)
         {
+            busy = false;   
             sleep_us(sleepFor);
+            busy = true;
         }
         else
         {
@@ -276,11 +215,11 @@ void userInitQueue()
 void userInitGpio()
 {
     gpio_init(USR_SW_PIN);
-	gpio_init(PICO_DEFAULT_LED_PIN);
+	gpio_init(USR_LED_PIN);
     gpio_init(USR_BTN_PIN);
     
     gpio_set_dir(USR_SW_PIN, GPIO_IN);
-	gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
+	gpio_set_dir(USR_LED_PIN, GPIO_OUT);
     gpio_set_dir(USR_BTN_PIN, GPIO_IN);
 
     gpio_pull_up(USR_SW_PIN);
@@ -348,27 +287,32 @@ void userLoadDefaultValues()
 
     *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
     config->all = 0;
-    *clockKhz = DEFAULT_CLOCK_KHZ;  // not implemented yet
     updateFlash();
 }
 
 
-void userInitClocks()
-{
-    // change peripheral clock to lower frequency - 48MHz
-    clock_configure(
-        clk_peri,
-        0,
-        DEFAULT_PERI_CLOCK_SRC,
-        DEFAULT_PERI_CLOCK_FREQ,
-        DEFAULT_PERI_CLOCK_FREQ
-    );
+void syncOnce()
+{       
+    // measure process value
+    pSensor->update();
+    pSensor->read(processValues);
 
-    clock_configure(
-        clk_adc,
-        0,
-        DEFAULT_ADC_CLOCK_SRC,
-        DEFAULT_ADC_CLOCK_FREQ,
-        DEFAULT_ADC_CLOCK_FREQ
-    );
+    // for each process value and ring buffer
+    for(int i=0; i<4; i++)
+    {
+        float pv = *processValues[i];
+        ringBuffers[i].insertOne(pv);
+        if(config->bits.calcStat)
+        {
+            ringBuffers[i].updateStatistics();
+            // update min, max stddev etc...
+            ringBuffers[i].getStatistics(
+                minimumValues[i],
+                maximumValues[i],
+                meanValues[i],
+                standardDeviations[i]
+            );
+        }
+    }
+
 }

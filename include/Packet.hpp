@@ -2,6 +2,8 @@
 #define __PACKET_HPP
 
 
+#include <vector>
+
 #define SOH 0x01 // start of header ASCII char
 
 

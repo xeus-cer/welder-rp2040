@@ -74,14 +74,25 @@
 
 /* Default values */
 #define DEFAULT_CYCLE_TIME_US       10'000      // 10ms
-#define DEFAULT_CLOCK_KHZ           125'000     // 133kHz
 #define DEFAULT_WATCHDOG_DELAY      100         // ms
 
 /* Default clocks */
+#define DEFAULT_USB_CLOCK_FREQ      48 * MHZ
+#define DEFAULT_XOSC_CLOCK_FREQ     12 * MHZ
+
 #define DEFAULT_ADC_CLOCK_SRC       CLOCKS_CLK_ADC_CTRL_AUXSRC_VALUE_XOSC_CLKSRC
-#define DEFAULT_ADC_CLOCK_FREQ      12 * MHZ
+#define DEFAULT_ADC_CLOCK_FREQ      DEFAULT_XOSC_CLOCK_FREQ
 #define DEFAULT_PERI_CLOCK_SRC      CLOCKS_CLK_PERI_CTRL_AUXSRC_VALUE_CLKSRC_PLL_USB
-#define DEFAULT_PERI_CLOCK_FREQ     48 * MHZ
+#define DEFAULT_PERI_CLOCK_FREQ     DEFAULT_USB_CLOCK_FREQ
+
+/* system clock */
+#define DEFAULT_SYS_CLOCK_SRC       CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_CLKSRC_PLL_SYS
+#define DEFAULT_SYS_PLL_FREQ        1500 * MHZ
+#define DEFAULT_SYS_PLL_POST_1      5
+#define DEFAULT_SYS_PLL_POST_2      2
+#define DEFAULT_SYS_CLOCK_FREQ      DEFAULT_SYS_PLL_FREQ / DEFAULT_SYS_PLL_POST_1 / DEFAULT_SYS_PLL_POST_2  // 150MHz = 1500 / 5 / 2
+#define DEFAULT_SYS_VOLTAGE         VREG_VOLTAGE_1_00
+
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1
@@ -89,8 +100,8 @@
 
 
 typedef struct {
-  bool freeRun :    1;
-  bool bit1 :       1;
+  bool freeRun :    1; // enable free run of sensor
+  bool calcStat :   1; // 
   bool bit2 :       1;
   bool bit3 :       1;
   bool bit4 :       1;

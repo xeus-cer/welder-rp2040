@@ -8,11 +8,6 @@ project(picotest C CXX ASM)
 # set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 23)
 
-find_package(
-	Serialization
-	REQUIRED
-)
-
 pico_sdk_init()
 	
 include_directories(
@@ -24,6 +19,10 @@ IF(CMAKE_COMPILER_IS_GNUCC)
 	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
 	set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0")
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
+
+
+
+add_compile_definitions(TYPE_PRESSURE)
 
 add_executable(picotest
 	src/main.cpp
@@ -42,8 +41,6 @@ target_link_libraries(
 	hardware_flash
 	hardware_sync
 	hardware_spi
-
-	Serialization::Serialization
 	)
 
 	

@@ -8,31 +8,7 @@
 
 
 extern Xerxes::Slave xs;
-extern Xerxes::Sensor *pSensor;
-
-
-void measurementLoop()
-{       
-    // measure process value
-    pSensor->update();
-    pSensor->read(processValues);
-
-    // for each process value and ring buffer
-    for(int i=0; i<4; i++)
-    {
-        float pv = *processValues[i];
-        ringBuffers[i].insertOne(pv);
-        ringBuffers[i].updateStatistics();
-        // update min, max stddev etc...
-        ringBuffers[i].getStatistics(
-            minimumValues[i],
-            maximumValues[i],
-            meanValues[i],
-            standardDeviations[i]
-        );
-    }
-
-}
+extern void syncOnce();
 
 
 /**
@@ -96,19 +72,21 @@ void pingCallback(const Xerxes::Message &msg)
 
 void syncCallback(const Xerxes::Message &msg)
 {
-    measurementLoop();
+    syncOnce();
 }
 
 
 void writeRegCallback(const Xerxes::Message &msg)
 {
-    uint8_t offset = msg.at(4);
+    uint8_t offsetL = msg.at(4);
+    uint8_t offsetH = msg.at(5);
+    uint16_t offset = (offsetH << 8) + offsetL;
 
-    for(uint16_t i = 5; i < msg.size(); i++)
+    for(uint16_t i = 6; i < msg.size(); i++)
     {
         // IMPROVEMENT: implement READ_ONLY MEMORY
         uint8_t byte = msg.at(i);
-        mainRegister[offset + i - 5] = byte;
+        mainRegister[offset + i - 6] = byte;
     }
     updateFlash();
     xs.send(msg.srcAddr, MSGID_ACK_OK);
@@ -120,8 +98,11 @@ void readRegCallback(const Xerxes::Message &msg)
     /* Read  up to <LEN> bytes from device register, starting at <REG_ID>
      * The request prototype is <MSGID_READ> <REG_ID> <LEN> */
 
-    uint8_t offset = msg.at(4);
-    uint8_t len = msg.at(5);
+    uint8_t offsetL = msg.at(4);
+    uint8_t offsetH = msg.at(5);
+    uint16_t offset = (offsetH << 8) + offsetL;
+
+    uint8_t len = msg.at(6);
 
     std::vector<uint8_t> payload {};
 
@@ -135,6 +116,11 @@ void readRegCallback(const Xerxes::Message &msg)
 }
 
 
+/**
+ * @brief Attempt to perform low power sleep
+ * 
+ * @param msg 
+ */
 void sleepCallback(const Xerxes::Message &msg)
 {
     uint8_t raw_duration[4];
