@@ -73,7 +73,7 @@
 
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US       10'000      // 10ms
+#define DEFAULT_CYCLE_TIME_US       100'000     // 100ms
 #define DEFAULT_WATCHDOG_DELAY      100         // ms
 
 /* Default clocks */

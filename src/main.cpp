@@ -12,7 +12,7 @@
 #include "hardware/uart.h"
 #include "hardware/pwm.h"
 #include "pico/stdio/driver.h"
-#include "pico/stdio_uart.h"
+// #include "pico/stdio_uart.h"
 #include "pico/sleep.h"
 #include "hardware/rtc.h"   
 #include "hardware/watchdog.h"
@@ -55,7 +55,7 @@ Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 
 static bool usrSwitchOn;
-static volatile bool busy;
+static volatile bool busy = false;
 
 
 void userInitUart();
@@ -124,7 +124,7 @@ int main(void)
         watchdog_update();
 
         // try to send char over serial if present in FIFO buffer
-        while(!queue_is_empty(&txFifo) && uart_is_writable(uart0))
+        while(!queue_is_empty(&txFifo) && uart_is_writable(uart0)) // FIXME - Watchdog may reset here !!!
         {
             gpio_put(USR_LED_PIN, 1);
             uint8_t to_send, sent;
@@ -158,10 +158,10 @@ int main(void)
         if(!busy)
         {
             setClockSysLP();
-            sleep_us(100);
+            sleep_us(50);
             setClockSysDefault();
         }else{
-            sleep_us(100);
+            sleep_us(50);
         }
         #endif // NDEBUG
 
@@ -232,7 +232,7 @@ void userInitGpio()
 void userInitUart(void)
 {
     // Initialise UART 0 on 115200baud
-    DEBUG_MSG("Baudrate:" << uart_init(uart0, DEFAULT_BAUDRATE));
+    uart_init(uart0, DEFAULT_BAUDRATE);
  
     // Set the GPIO pin mux to the UART - 16 is TX, 17 is RX
     gpio_set_function(RS_TX_PIN, GPIO_FUNC_UART);
@@ -243,7 +243,7 @@ void userInitUart(void)
     gpio_put(RS_EN_PIN, true);
 
     uart_set_fifo_enabled(uart0, true);	
-    stdio_set_driver_enabled(&stdio_uart, false);
+    // stdio_set_driver_enabled(&stdio_uart, false);
 
     irq_set_exclusive_handler(UART0_IRQ, uart_interrupt_handler);
     irq_set_enabled(UART0_IRQ, true);
