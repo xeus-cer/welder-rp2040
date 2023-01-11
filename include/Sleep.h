@@ -1,8 +1,8 @@
-#ifndef __SLEEP_HPP
+#ifndef __SLEEP_H
 
 
 #include "xerxes_rp2040.h"
-#include "ClockUtils.hpp"
+#include "ClockUtils.h"
 
 void sleep_lp(uint64_t us)
 {
@@ -29,4 +29,4 @@ void sleep_lp(uint64_t us)
 }
 
 
-#endif // !__SLEEP_HPP
+#endif // !__SLEEP_H

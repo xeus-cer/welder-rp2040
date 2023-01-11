@@ -24,28 +24,11 @@
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
-#include "ClockUtils.hpp"
+#include "ClockUtils.h"
 
 
 using namespace std;
 using namespace Xerxes;
-
-
-#ifdef NDEBUG
-#define DEBUG_MSG(str) do { } while ( false )
-#else
-#define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
-#endif
-
-
-#ifdef NDEBUG
-#define SET_CLOCK_LP() do {setClockSysLP();} while ( false )
-#define SET_CLOCK_NORM() do {setClockSysDefault();} while ( false )
-#else
-// in debug build do nothing because debuggers are not able to work with low frequency
-#define SET_CLOCK_LP() do { } while ( false )
-#define SET_CLOCK_NORM() do { } while ( false )
-#endif
 
 
 // queue for incoming and outgoing data
@@ -62,8 +45,7 @@ Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 
 static bool usrSwitchOn;
-static volatile bool core0busy = false;
-static volatile bool core1busy = false;
+static volatile bool core1idle = true;
 
 
 void userInitUart();
@@ -76,16 +58,40 @@ void core1Entry();
 void syncOnce();
 
 
-int main(void)
-{ 
+int main2()
+{
     userInitClocks();
-    stdio_init_all();
+    measure_freqs();
     userInitGpio();
     stdio_usb_init();
     userInitUart();
     userInitQueue();
     userInitFlash();
     measure_freqs();
+
+    while(1)
+    {
+        gpio_put(USR_LED_PIN, 1);
+        cout << "Hello world" << endl;
+        gpio_put(USR_LED_PIN, 0);
+
+        setClockSysLP();
+        sleep_ms(1000);
+        setClockSysDefault();
+    }
+}
+
+int main(void)
+{ 
+    sleep_ms(1500);
+    cout << "Xerxes RP2040 - Slave init" << endl;
+    userInitClocks();
+    userInitGpio();
+    stdio_usb_init();
+    userInitUart();
+    userInitQueue();
+    userInitFlash();
+    // measure_freqs();
 
     // if user button is pressed, load default values
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
@@ -97,12 +103,9 @@ int main(void)
     {
         *error |= ERROR_WATCHDOG_TIMEOUT;
     }
-
-    DEBUG_MSG("UID: " << *uid);
+    
     // enable watchdog for 100ms, pause on debug = true
     watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
-    DEBUG_MSG("Watchdog enabled for 100ms, Errors: " << bitset<64>(*error));
-
 
     pSensor->init();
 
@@ -120,8 +123,6 @@ int main(void)
         multicore_launch_core1(core1Entry);
     }
 
-    DEBUG_MSG("Core 1 launched. Communication ready!");
-
 
     while(1)
     {    
@@ -135,10 +136,12 @@ int main(void)
             uint8_t to_send, sent;
             queue_try_remove(&txFifo, &to_send);
 
+            irq_set_enabled(UART0_IRQ, false);
             //write char to bus
             uart_write_blocking(uart0, &to_send, 1);
             // read back the character
             uart_read_blocking(uart0, &sent, 1);
+            
 
             // check if sent character is the same as received = no collision on the bus
             if(to_send != sent)
@@ -158,45 +161,48 @@ int main(void)
         /* Sync and return in less than 5ms */
         xs.sync(5000);
 
-
-        core0busy = false;
-        if(!core1busy) SET_CLOCK_LP();
-        sleep_us(50);
-        core0busy = true;
-        SET_CLOCK_NORM();
+        // save power in release mode
+        #ifdef NDEBUG
+            if(core1idle) setClockSysLP();
+            sleep_us(50);
+            if(clock_get_hz(clk_sys) < DEFAULT_SYS_CLOCK_FREQ) setClockSysDefault();
+        #endif // NDEBUG
     }
 }
 
 
 void core1Entry()
 {
-    uint64_t i=0;
+    uint32_t i=0;
+    uint64_t endOfCycle;
+    uint64_t cycleDuration;
+    int64_t sleepFor;
+
     while(config->bits.freeRun)
     {
         auto startOfCycle = time_us_64();
         syncOnce();          
 
-        // calculate how long it took to finish cycle
-        auto endOfCycle = time_us_64();
-        auto cycleDuration = endOfCycle - startOfCycle;
-        int64_t sleepFor = *desiredCycleTimeUs - cycleDuration;
-
         if(i++ % 100 == 0)
         {
             gpio_put(USR_LED_PIN, 1);
-            DEBUG_MSG("Cycle duration: " << cycleDuration << "us.");
-            DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
+            i = 0;
+            cout << "Cycle duration: " << cycleDuration << "us.";
+            cout << "Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0;
             gpio_put(USR_LED_PIN, 0);
         }
+
+        // calculate how long it took to finish cycle
+        endOfCycle = time_us_64();
+        cycleDuration = endOfCycle - startOfCycle;
+        sleepFor = *desiredCycleTimeUs - cycleDuration;
         
         // sleep for the remaining time
         if(sleepFor > 0)
         {
-            core1busy = false;
-            if(!core0busy) SET_CLOCK_LP();
+            core1idle = true;
             sleep_us(sleepFor);
-            SET_CLOCK_NORM();
-            core1busy = true;
+            core1idle = false;
         }
         else
         {

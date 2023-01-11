@@ -1,5 +1,5 @@
-#ifndef __CLOCK_UTILS_HPP
-#define __CLOCK_UTILS_HPP
+#ifndef __CLOCK_UTILS_H
+#define __CLOCK_UTILS_H
 
 #include "hardware/clocks.h"
 #include "hardware/pll.h"
@@ -86,36 +86,38 @@ void setClockSysLP()
     // change clock source to XOSC so we can deinit PLL sys
     clock_configure(
         clk_sys,
-        CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
-        CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_XOSC_CLKSRC,
+        CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLK_REF,
+        0,
         DEFAULT_XOSC_CLOCK_FREQ,
         DEFAULT_XOSC_CLOCK_FREQ
     );
 
+    measure_freqs();
+
     // deinit system PLL to save power
-    pll_deinit(pll_sys);
+    //pll_deinit(pll_sys);
 
     // lower clock voltage to save more power
-    vreg_set_voltage(DEFAULT_SYS_VOLTAGE_LP);
+    //vreg_set_voltage(DEFAULT_SYS_VOLTAGE_LP);
 }
 
 
 void setClockSysDefault()
 {
     // change clock source to XOSC so we can change PLL sys
-    clock_configure(
+    /*clock_configure(
         clk_sys,
         CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
         CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_XOSC_CLKSRC,
         DEFAULT_XOSC_CLOCK_FREQ,
         DEFAULT_XOSC_CLOCK_FREQ
-    );
+    );*/
 
     // change voltage of VReg back to operating value
-    vreg_set_voltage(DEFAULT_SYS_VOLTAGE);
+    //vreg_set_voltage(DEFAULT_SYS_VOLTAGE);
 
     // Reconfigure PLL sys back to the default state
-    pll_init(pll_sys, 1, DEFAULT_SYS_PLL_FREQ, DEFAULT_SYS_PLL_POST_1, DEFAULT_SYS_PLL_POST_2);
+    //pll_init(pll_sys, 1, DEFAULT_SYS_PLL_FREQ, DEFAULT_SYS_PLL_POST_1, DEFAULT_SYS_PLL_POST_2);
     
     // change clock source back to PLL sys
     clock_configure(
@@ -136,4 +138,4 @@ void userInitClocks()
 }
 
 
-#endif // !__CLOCK_UTILS_HPP    
+#endif // !__CLOCK_UTILS_H    
