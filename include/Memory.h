@@ -1,4 +1,4 @@
-#ifndef __MEMORY_HPP
+#ifndef __MEMORY_H
 
 #include <cstdint>
 #include <array>
@@ -73,4 +73,4 @@ Xerxes::StatisticBuffer<float> rbpv3(RING_BUFFER_LEN);
 std::array<Xerxes::StatisticBuffer<float>,4> ringBuffers = {rbpv0, rbpv1, rbpv2, rbpv3};
 
 
-#endif // !__MEMORY_HPP
+#endif // !__MEMORY_H

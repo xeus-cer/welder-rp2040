@@ -32,13 +32,20 @@ using namespace Xerxes;
 
 
 #ifdef NDEBUG
-// in release build
-// #define DEBUG_MSG(str) do { } while ( false )
+#define DEBUG_MSG(str) do { } while ( false )
 #else
-// in debug
+#define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
 #endif
 
-#define DEBUG_MSG(str) do { std::cout << str << std::endl; } while( false )
+
+#ifdef NDEBUG
+#define SET_CLOCK_LP() do {setClockSysLP();} while ( false )
+#define SET_CLOCK_NORM() do {setClockSysDefault();} while ( false )
+#else
+// in debug build do nothing because debuggers are not able to work with low frequency
+#define SET_CLOCK_LP() do { } while ( false )
+#define SET_CLOCK_NORM() do { } while ( false )
+#endif
 
 
 // queue for incoming and outgoing data
@@ -55,7 +62,8 @@ Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 
 static bool usrSwitchOn;
-static volatile bool busy = false;
+static volatile bool core0busy = false;
+static volatile bool core1busy = false;
 
 
 void userInitUart();
@@ -106,9 +114,6 @@ int main(void)
     xs.bind(MSGID_SLEEP,        broadcast(  sleepCallback));
     xs.bind(MSGID_RESET,        broadcast(  softResetCallback));
 
-    /* enable user interrupt 
-    irq_set_exclusive_handler(26, user_interrupt_handler);
-    irq_set_enabled(26, true); */
 
     if(config->bits.freeRun)
     {
@@ -124,7 +129,7 @@ int main(void)
         watchdog_update();
 
         // try to send char over serial if present in FIFO buffer
-        while(!queue_is_empty(&txFifo) && uart_is_writable(uart0)) // FIXME - Watchdog may reset here !!!
+        while(!queue_is_empty(&txFifo) && uart_is_writable(uart0)) // WARNING: Watchdog may reset here !!!
         {
             gpio_put(USR_LED_PIN, 1);
             uint8_t to_send, sent;
@@ -153,18 +158,12 @@ int main(void)
         /* Sync and return in less than 5ms */
         xs.sync(5000);
 
-        #ifdef NDEBUG
-        /* Save some power in Release by lowering the clock */
-        if(!busy)
-        {
-            setClockSysLP();
-            sleep_us(50);
-            setClockSysDefault();
-        }else{
-            sleep_us(50);
-        }
-        #endif // NDEBUG
 
+        core0busy = false;
+        if(!core1busy) SET_CLOCK_LP();
+        sleep_us(50);
+        core0busy = true;
+        SET_CLOCK_NORM();
     }
 }
 
@@ -189,12 +188,15 @@ void core1Entry()
             DEBUG_MSG("Val: " << *meanPv0 << "Pa, stddev: " << *stdDevPv0);
             gpio_put(USR_LED_PIN, 0);
         }
+        
         // sleep for the remaining time
         if(sleepFor > 0)
         {
-            busy = false;   
+            core1busy = false;
+            if(!core0busy) SET_CLOCK_LP();
             sleep_us(sleepFor);
-            busy = true;
+            SET_CLOCK_NORM();
+            core1busy = true;
         }
         else
         {

@@ -36,6 +36,7 @@ void setClockPeriDefault()
 
 void setClockUsbDefault()
 {
+    // initialize PLL_USB
     pll_init(pll_usb, 1, 480 * MHZ, 5, 2);
 
     clock_configure(
@@ -82,6 +83,7 @@ void measure_freqs(void) {
 
 void setClockSysLP()
 {
+    // change clock source to XOSC so we can deinit PLL sys
     clock_configure(
         clk_sys,
         CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
@@ -89,13 +91,18 @@ void setClockSysLP()
         DEFAULT_XOSC_CLOCK_FREQ,
         DEFAULT_XOSC_CLOCK_FREQ
     );
+
+    // deinit system PLL to save power
     pll_deinit(pll_sys);
-    vreg_set_voltage(VREG_VOLTAGE_0_95);
+
+    // lower clock voltage to save more power
+    vreg_set_voltage(DEFAULT_SYS_VOLTAGE_LP);
 }
 
 
 void setClockSysDefault()
 {
+    // change clock source to XOSC so we can change PLL sys
     clock_configure(
         clk_sys,
         CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
@@ -103,12 +110,14 @@ void setClockSysDefault()
         DEFAULT_XOSC_CLOCK_FREQ,
         DEFAULT_XOSC_CLOCK_FREQ
     );
-    // change voltage of VReg to default value
+
+    // change voltage of VReg back to operating value
     vreg_set_voltage(DEFAULT_SYS_VOLTAGE);
 
     // Reconfigure PLL sys back to the default state
     pll_init(pll_sys, 1, DEFAULT_SYS_PLL_FREQ, DEFAULT_SYS_PLL_POST_1, DEFAULT_SYS_PLL_POST_2);
     
+    // change clock source back to PLL sys
     clock_configure(
         clk_sys,
         CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
