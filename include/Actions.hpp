@@ -82,6 +82,8 @@ void writeRegCallback(const Xerxes::Message &msg)
     uint8_t offsetH = msg.at(5);
     uint16_t offset = (offsetH << 8) + offsetL;
 
+    // FIXME: stop core1 before writing to memory !!!
+    
     for(uint16_t i = 6; i < msg.size(); i++)
     {
         // IMPROVEMENT: implement READ_ONLY MEMORY

@@ -9,6 +9,15 @@
 #include "hardware/vreg.h"
 
 
+void userInitClocks();
+void setClockSysDefault();
+void setClockAdcDefault();
+void setClockPeriDefault();
+void setClockUsbDefault();
+void setClockSysLP();   
+void measure_freqs(void);
+
+
 void setClockAdcDefault()
 {
     clock_configure(
@@ -34,17 +43,21 @@ void setClockPeriDefault()
 }
 
 
-void setClockUsbDefault()
+void initPllUsb()
 {
     // initialize PLL_USB
-    pll_init(pll_usb, 1, 480 * MHZ, 5, 2);
+    pll_init(pll_usb, 1, 768 * MHZ, 4, 4);  // 768MHz / 4 / 4 = 48MHz
+}
 
+
+void setClockUsbDefault()
+{
     clock_configure(
         clk_usb, 
         0, 
         CLOCKS_CLK_USB_CTRL_AUXSRC_VALUE_CLKSRC_PLL_USB, 
-        48 * MHZ, 
-        48 * MHZ
+        DEFAULT_USB_CLOCK_FREQ, 
+        DEFAULT_USB_CLOCK_FREQ
     );
 }
 
@@ -81,44 +94,59 @@ void measure_freqs(void) {
 }
 
 
-void setClockSysLP()
+void setClocksLP()
 {
-    // change clock source to XOSC so we can deinit PLL sys
-    clock_configure(
-        clk_sys,
-        CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLK_REF,
-        0,
-        DEFAULT_XOSC_CLOCK_FREQ,
-        DEFAULT_XOSC_CLOCK_FREQ
-    );
+    clock_stop(clk_adc);
 
-    measure_freqs();
+    // don't stop peripheral clock as it is used by the UART
+    // clock_stop(clk_peri);
 
-    // deinit system PLL to save power
-    //pll_deinit(pll_sys);
+    clock_stop(clk_usb);
+
+    setClockSysLP();    
+
+    // do not deinit PLL_USB as it is used by the USB, UART and SPI
+    // pll_deinit(pll_usb);
 
     // lower clock voltage to save more power
-    //vreg_set_voltage(DEFAULT_SYS_VOLTAGE_LP);
+    vreg_set_voltage(DEFAULT_SYS_VOLTAGE_LP);
+}
+
+
+void setClocksHP()
+{
+    // change voltage of VReg back to operating value
+    vreg_set_voltage(DEFAULT_SYS_VOLTAGE);
+    
+    // change clock source back to PLL sys
+    setClockSysDefault();
+
+    // restart USB clock
+    setClockUsbDefault();
+
+    // peripheral clock is not stopped in LP mode so no need to restart it
+    // setClockPeriDefault();
+
+    // reconfigure ADC clock to default state
+    setClockAdcDefault();
+}
+
+
+void setClockSysLP()
+{
+    // change clock speed to lower frequency consuming less power, use XOSC as clock source
+    clock_configure(
+        clk_sys,
+        DEFAULT_SYS_CLOCK_SRC_LP,
+        0, // no auxiliary clock source
+        DEFAULT_SYS_CLOCK_FREQ_LP,
+        DEFAULT_SYS_CLOCK_FREQ_LP
+    );
 }
 
 
 void setClockSysDefault()
 {
-    // change clock source to XOSC so we can change PLL sys
-    /*clock_configure(
-        clk_sys,
-        CLOCKS_CLK_SYS_CTRL_SRC_VALUE_CLKSRC_CLK_SYS_AUX,
-        CLOCKS_CLK_SYS_CTRL_AUXSRC_VALUE_XOSC_CLKSRC,
-        DEFAULT_XOSC_CLOCK_FREQ,
-        DEFAULT_XOSC_CLOCK_FREQ
-    );*/
-
-    // change voltage of VReg back to operating value
-    //vreg_set_voltage(DEFAULT_SYS_VOLTAGE);
-
-    // Reconfigure PLL sys back to the default state
-    //pll_init(pll_sys, 1, DEFAULT_SYS_PLL_FREQ, DEFAULT_SYS_PLL_POST_1, DEFAULT_SYS_PLL_POST_2);
-    
     // change clock source back to PLL sys
     clock_configure(
         clk_sys,
@@ -135,6 +163,7 @@ void userInitClocks()
     setClockSysDefault();
     setClockAdcDefault();
     setClockPeriDefault();
+    setClockUsbDefault();
 }
 
 
