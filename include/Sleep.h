@@ -1,9 +1,13 @@
 #ifndef __SLEEP_H
+#define __SLEEP_H
 
 
 #include "xerxes_rp2040.h"
 #include "ClockUtils.h"
+#include "hardware/watchdog.h"
 
+
+// watchdog friendly sleep in low power mode
 void sleep_lp(uint64_t us)
 {
     // disable communication

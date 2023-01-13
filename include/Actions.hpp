@@ -5,6 +5,7 @@
 #include "UserFlash.hpp"
 #include "DeviceIds.h"
 #include "Sleep.h"
+#include "InitUtils.h"
 
 
 extern Xerxes::Slave xs;
@@ -77,20 +78,42 @@ void syncCallback(const Xerxes::Message &msg)
 
 
 void writeRegCallback(const Xerxes::Message &msg)
-{
+{   
+    // FIXME: stop core1 before writing to memory !!!
+
+    /* Write <LEN> bytes to device register, starting at <REG_ID>
+     * The request prototype is <MSGID_WRITE> <REG_ID> <LEN> <DATA> */
+
+    // read offset from message
     uint8_t offsetL = msg.at(4);
     uint8_t offsetH = msg.at(5);
+    // convert to uint16_t
     uint16_t offset = (offsetH << 8) + offsetL;
+        
+    // check if offset is valid (not read only memory and not negative)
+    if(offset >= READ_ONLY_OFFSET || offset < 0)
+    {
+        // send ACK_NOK
+        xs.send(msg.srcAddr, MSGID_ACK_NOK);
+        return;
+    }
 
-    // FIXME: stop core1 before writing to memory !!!
-    
+    // disable interrupts
+    auto status = save_and_disable_interrupts();
+
+    // write data to memory
     for(uint16_t i = 6; i < msg.size(); i++)
     {
-        // IMPROVEMENT: implement READ_ONLY MEMORY
         uint8_t byte = msg.at(i);
         mainRegister[offset + i - 6] = byte;
     }
+    // restore interrupts
+    restore_interrupts(status);
+
+    // update flash
     updateFlash();
+
+    // send ACK_OK
     xs.send(msg.srcAddr, MSGID_ACK_OK);
 }
 
@@ -138,10 +161,28 @@ void sleepCallback(const Xerxes::Message &msg)
     sleep_lp(cleanUs);
 }
 
-
+/**
+ * @brief Attempt to perform soft reset
+ * 
+ * @param msg
+ * 
+ * @note This function does not return
+ */
 void softResetCallback(const Xerxes::Message &msg)
 {
     watchdog_reboot(0,0,0);
+}
+
+
+/**
+ * @brief Attempt to perform factory reset
+ * 
+ * @param msg 
+ */
+void factoryResetCallback(const Xerxes::Message &msg)
+{   
+
+    userLoadDefaultValues();
 }
 
 

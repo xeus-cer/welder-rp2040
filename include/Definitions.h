@@ -4,19 +4,24 @@
 #include "hardware/flash.h"
 #include "hardware/clocks.h"
 
-#define DEFAULT_BAUDRATE    115200
+#define DEFAULT_BAUDRATE            115200
 
-#define NON_VOLATILE_SIZE   FLASH_PAGE_SIZE       // 256
-#define REGISTER_SIZE       NON_VOLATILE_SIZE * 2
+#define VOLATILE_OFFSET             FLASH_PAGE_SIZE       // 256
+#define READ_ONLY_OFFSET            FLASH_PAGE_SIZE * 2   // 512
+#define MESSAGE_OFFSET              FLASH_PAGE_SIZE * 3   // 768
+#define REGISTER_SIZE               FLASH_PAGE_SIZE * 4   // 1024
 
-#define RX_TX_QUEUE_SIZE    256 // bytes
+#define RX_TX_QUEUE_SIZE            256 // bytes
 // #undef PICO_FLASH_SIZE_BYTES
-#define FLASH_TARGET_OFFSET 2 * 1024 * 1024 - (FLASH_SECTOR_SIZE)
+#define FLASH_TARGET_OFFSET         2 * 1024 * 1024 - (FLASH_SECTOR_SIZE)
 
 // how many samples are rotated in ring buffer
 #define RING_BUFFER_LEN     100
 
-/* memory mapping offsets: */
+// ############################### //
+// BEGIN OF MEMORY MAPPING OFFSETS //
+// ############################### //
+
 /* non volatile range */
 // memory offset of the gain of the process values
 #define GAIN_PV0_OFFSET             0
@@ -30,53 +35,67 @@
 #define OFFSET_PV2_OFFSET           24
 #define OFFSET_PV3_OFFSET           28
 
-// memory offset of cycle time in microseconds
+// memory offset of cycle time in microseconds (4 bytes)
 #define OFFSET_DESIRED_CYCLE_TIME   32
-#define OFFSET_NET_CYCLE_TIME       36
 
-// memory offset of address of the device
-#define OFFSET_ADDRESS              44
-
-// memory offset of config bits
+// memory offset of config bits (1 byte)
 #define OFFSET_CONFIG_BITS          40
 
+// memory offset of address of the device (1 byte)
+#define OFFSET_ADDRESS              44
 
-//volatile range
-// memory offset of the status of the device
-#define STATUS_OFFSET               NON_VOLATILE_SIZE + 0       // 256
-// memory offset of the errors of the device
-#define ERROR_OFFSET                NON_VOLATILE_SIZE + 8       // 264
-// memory offset of the uid of the device
-#define UID_OFFSET                  NON_VOLATILE_SIZE + 16      // 272
+// ############################# //
+// ###### Volatile range ####### //
+// ############################# /
 
 // memory offset of the process values
-#define PV0_OFFSET                  NON_VOLATILE_SIZE + 20      // 276
-#define PV1_OFFSET                  NON_VOLATILE_SIZE + 24      // 280
-#define PV2_OFFSET                  NON_VOLATILE_SIZE + 28      // 284
-#define PV3_OFFSET                  NON_VOLATILE_SIZE + 32      // 288
+#define PV0_OFFSET                  VOLATILE_OFFSET + 0       // 256
+#define PV1_OFFSET                  VOLATILE_OFFSET + 4       // 260
+#define PV2_OFFSET                  VOLATILE_OFFSET + 8       // 264
+#define PV3_OFFSET                  VOLATILE_OFFSET + 12      // 268
 
 // memory offset of the mean values of the process values
-#define MEAN_PV0_OFFSET             NON_VOLATILE_SIZE + 36      // 292
-#define MEAN_PV1_OFFSET             NON_VOLATILE_SIZE + 40      // 296
-#define MEAN_PV2_OFFSET             NON_VOLATILE_SIZE + 44      // 300 
-#define MEAN_PV3_OFFSET             NON_VOLATILE_SIZE + 48      // 304
+#define MEAN_PV0_OFFSET             VOLATILE_OFFSET + 16      // 272
+#define MEAN_PV1_OFFSET             VOLATILE_OFFSET + 20      // 276
+#define MEAN_PV2_OFFSET             VOLATILE_OFFSET + 24      // 280
+#define MEAN_PV3_OFFSET             VOLATILE_OFFSET + 28      // 284
  
 // memory offset of the standard deviation of the process values
-#define STDEV_PV0_OFFSET            NON_VOLATILE_SIZE + 52      // 308
-#define STDEV_PV1_OFFSET            NON_VOLATILE_SIZE + 56      // 312
-#define STDEV_PV2_OFFSET            NON_VOLATILE_SIZE + 60      // 316
-#define STDEV_PV3_OFFSET            NON_VOLATILE_SIZE + 64      // 320
+#define STDDEV_PV0_OFFSET           VOLATILE_OFFSET + 32      // 288
+#define STDDEV_PV1_OFFSET           VOLATILE_OFFSET + 36      // 292
+#define STDDEV_PV2_OFFSET           VOLATILE_OFFSET + 40      // 296
+#define STDDEV_PV3_OFFSET           VOLATILE_OFFSET + 44      // 300
 
 // memory offset of the minimum and maximum values of the process values
-#define MIN_PV0_OFFSET              NON_VOLATILE_SIZE + 68      // 324
-#define MIN_PV1_OFFSET              NON_VOLATILE_SIZE + 72      // 328
-#define MIN_PV2_OFFSET              NON_VOLATILE_SIZE + 76      // 332
-#define MIN_PV3_OFFSET              NON_VOLATILE_SIZE + 80      // 336
+#define MIN_PV0_OFFSET              VOLATILE_OFFSET + 48      // 304
+#define MIN_PV1_OFFSET              VOLATILE_OFFSET + 52      // 308
+#define MIN_PV2_OFFSET              VOLATILE_OFFSET + 56      // 312
+#define MIN_PV3_OFFSET              VOLATILE_OFFSET + 60      // 316
  
-#define MAX_PV0_OFFSET              NON_VOLATILE_SIZE + 84      // 340
-#define MAX_PV1_OFFSET              NON_VOLATILE_SIZE + 88      // 344
-#define MAX_PV2_OFFSET              NON_VOLATILE_SIZE + 92      // 348
-#define MAX_PV3_OFFSET              NON_VOLATILE_SIZE + 96      // 352
+#define MAX_PV0_OFFSET              VOLATILE_OFFSET + 64      // 320
+#define MAX_PV1_OFFSET              VOLATILE_OFFSET + 68      // 324
+#define MAX_PV2_OFFSET              VOLATILE_OFFSET + 72      // 328
+#define MAX_PV3_OFFSET              VOLATILE_OFFSET + 76      // 332
+
+// memory offset for the safety lock of the device memory (1 byte)
+#define MEM_LOCKED_OFFSET           VOLATILE_OFFSET + 128     // 384
+
+// ############################# //
+// ###### READ ONLY RANGE ###### //
+// ############################# //
+
+// memory offset of the status of the device (8 bytes)
+#define STATUS_OFFSET               READ_ONLY_OFFSET + 0    // 512
+// memory offset of the errors of the device (8 bytes)
+#define ERROR_OFFSET                READ_ONLY_OFFSET + 8    // 520
+// memory offset of the uid of the device (8 bytes)
+#define UID_OFFSET                  READ_ONLY_OFFSET + 16   // 528
+// memory offset of the net cycle time (4 bytes)
+#define OFFSET_NET_CYCLE_TIME       READ_ONLY_OFFSET + 32   // 544
+
+// ############################# //
+// END of memory mapping offsets //
+// ############################# //
 
 /* config masks */
 /* If true use free run, if false: wait for sync packet */
@@ -86,7 +105,7 @@
 
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US       10'000      // 10 ms
+#define DEFAULT_CYCLE_TIME_US       100'000     // 100 ms
 #define DEFAULT_WATCHDOG_DELAY      100         // ms
 
 /* Default clocks */

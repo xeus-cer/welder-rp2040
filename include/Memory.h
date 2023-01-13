@@ -1,4 +1,5 @@
 #ifndef __MEMORY_H
+#define __MEMORY_H
 
 #include <cstdint>
 #include <array>
@@ -30,10 +31,6 @@ static uint32_t *netCycleTimeUs         = (uint32_t *)(mainRegister + OFFSET_NET
 
 
 /* ### VOLATILE - PROCESS VALUES ### */
-static uint64_t* error      = (uint64_t *)(mainRegister + ERROR_OFFSET);
-static uint64_t* status     = (uint64_t *)(mainRegister + STATUS_OFFSET);
-static uint64_t* uid        = (uint64_t *)(mainRegister + UID_OFFSET);
-
 static float* pv0           = (float *)(mainRegister + PV0_OFFSET);
 static float* pv1           = (float *)(mainRegister + PV1_OFFSET);
 static float* pv2           = (float *)(mainRegister + PV2_OFFSET);
@@ -46,10 +43,10 @@ static float* meanPv2       = (float *)(mainRegister + MEAN_PV2_OFFSET);
 static float* meanPv3       = (float *)(mainRegister + MEAN_PV3_OFFSET);
 std::array<float*, 4> meanValues = {meanPv0, meanPv1, meanPv2, meanPv3};
 
-static float* stdDevPv0     = (float *)(mainRegister + STDEV_PV0_OFFSET);
-static float* stdDevPv1     = (float *)(mainRegister + STDEV_PV1_OFFSET);
-static float* stdDevPv2     = (float *)(mainRegister + STDEV_PV2_OFFSET);
-static float* stdDevPv3     = (float *)(mainRegister + STDEV_PV3_OFFSET);
+static float* stdDevPv0     = (float *)(mainRegister + STDDEV_PV0_OFFSET);
+static float* stdDevPv1     = (float *)(mainRegister + STDDEV_PV1_OFFSET);
+static float* stdDevPv2     = (float *)(mainRegister + STDDEV_PV2_OFFSET);
+static float* stdDevPv3     = (float *)(mainRegister + STDDEV_PV3_OFFSET);
 std::array<float*, 4> standardDeviations = {stdDevPv0, stdDevPv1, stdDevPv2, stdDevPv3};
 
 static float* minPv0        = (float *)(mainRegister + MIN_PV0_OFFSET);
@@ -63,6 +60,13 @@ static float* maxPv1        = (float *)(mainRegister + MAX_PV1_OFFSET);
 static float* maxPv2        = (float *)(mainRegister + MAX_PV2_OFFSET);
 static float* maxPv3        = (float *)(mainRegister + MAX_PV3_OFFSET);
 std::array<float*, 4> maximumValues = {maxPv0, maxPv1, maxPv2, maxPv3};
+
+/* ### READ ONLY VALUES ### */
+static uint8_t* memLocked   = (uint8_t *)(mainRegister + MEM_LOCKED_OFFSET);
+
+static uint64_t* error      = (uint64_t *)(mainRegister + ERROR_OFFSET);
+static uint64_t* status     = (uint64_t *)(mainRegister + STATUS_OFFSET);
+static uint64_t* uid        = (uint64_t *)(mainRegister + UID_OFFSET);
 
 // define ringbuffer (circular buffer) for each process value
 Xerxes::StatisticBuffer<float> rbpv0(RING_BUFFER_LEN);
