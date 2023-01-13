@@ -62,11 +62,15 @@ static float* maxPv3        = (float *)(mainRegister + MAX_PV3_OFFSET);
 std::array<float*, 4> maximumValues = {maxPv0, maxPv1, maxPv2, maxPv3};
 
 /* ### READ ONLY VALUES ### */
-static uint8_t* memLocked   = (uint8_t *)(mainRegister + MEM_LOCKED_OFFSET);
+static uint8_t* memUnlocked   = (uint8_t *)(mainRegister + MEM_UNLOCKED_OFFSET);
 
 static uint64_t* error      = (uint64_t *)(mainRegister + ERROR_OFFSET);
 static uint64_t* status     = (uint64_t *)(mainRegister + STATUS_OFFSET);
 static uint64_t* uid        = (uint64_t *)(mainRegister + UID_OFFSET);
+
+/* ### MESSAGE STRING MEMORY ### */
+static char* message    = (char *)(mainRegister + MESSAGE_OFFSET);
+
 
 // define ringbuffer (circular buffer) for each process value
 Xerxes::StatisticBuffer<float> rbpv0(RING_BUFFER_LEN);

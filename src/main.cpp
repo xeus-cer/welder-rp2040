@@ -26,10 +26,10 @@ using namespace Xerxes;
 Xerxes::Sensor *pSensor = new Xerxes::ABP();
 #endif // TYPE_PRESSURE
 
+
 Xerxes::RS485 xn(&txFifo, &rxFifo);
 Xerxes::Protocol xp(&xn);
 Xerxes::Slave xs(&xp, *devAddress, mainRegister);
-
 
 static bool usrSwitchOn;
 static volatile bool core1idle = true;
@@ -41,11 +41,8 @@ void syncOnce();
 
 int main(void)
 { 
-    userInitClocks();
-    userInitGpio();
-    userInitQueue();
-    userInitFlash();
-
+    // init system
+    userInit();
 
     // check if user switch is on, if so, use usb uart
     bool useUsb = gpio_get(USR_SW_PIN);
@@ -59,7 +56,7 @@ int main(void)
         // cout labels of all values
         cout << "meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
         // cout separator for next line, char  # for the amount of previous characters
-        cout << "###############################################################################################################################################################################" << endl;
+        cout << "######################################################################################################################################################" << endl;
     }
     else
     {
@@ -67,7 +64,7 @@ int main(void)
         userInitUart();
     }
 
-    // if user button is pressed, load default values
+    // if user button is pressed, load default values a.k.a. FACTORY RESET
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
         
     //determine reason for restart:
@@ -76,6 +73,7 @@ int main(void)
         *error |= ERROR_WATCHDOG_TIMEOUT;
     }
 
+    // init sensor
     pSensor->init();
 
     // bind callbacks
@@ -176,31 +174,47 @@ void core1Entry()
     uint64_t endOfCycle = 0;
     uint64_t cycleDuration = 0;
     int64_t sleepFor = 0;
+    
+    // Initialize the current core such that it can be a "victim" of lockout 
+    // (i.e. forced to pause in a known state by the other core)
+    multicore_lockout_victim_init();
 
-    while(config->bits.freeRun)
+    // core1 mainloop
+    while(true)
     {
-        auto startOfCycle = time_us_64();
-
-        gpio_put(USR_LED_PIN, 1);
-        syncOnce();          
-        gpio_put(USR_LED_PIN, 0);
-
-        // calculate how long it took to finish cycle
-        endOfCycle = time_us_64();
-        cycleDuration = endOfCycle - startOfCycle;
-        *netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
-        sleepFor = *desiredCycleTimeUs - cycleDuration;
-        
-        // sleep for the remaining time
-        if(sleepFor > 0)
+        if(config->bits.freeRun)
         {
-            core1idle = true;
-            sleep_us(sleepFor);
-            core1idle = false;
+            // core is set to free run, start cycle
+            auto startOfCycle = time_us_64();
+
+            gpio_put(USR_LED_PIN, 1);
+            syncOnce();          
+            gpio_put(USR_LED_PIN, 0);
+
+            // calculate how long it took to finish cycle
+            endOfCycle = time_us_64();
+            cycleDuration = endOfCycle - startOfCycle;
+            *netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
+            sleepFor = *desiredCycleTimeUs - cycleDuration;
+            
+            // sleep for the remaining time
+            if(sleepFor > 0)
+            {
+                core1idle = true;
+                sleep_us(sleepFor);
+                core1idle = false;
+            }
+            else
+            {
+                *error |= ERROR_SENSOR_OVERLOAD;
+            }
         }
         else
         {
-            *error |= ERROR_SENSOR_OVERLOAD;
+            // core is set to sleep, wait 1ms for wakeup
+            core1idle = true;
+            sleep_us(1000);
+            core1idle = false;
         }
     }
     

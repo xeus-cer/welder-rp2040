@@ -46,7 +46,7 @@
 
 // ############################# //
 // ###### Volatile range ####### //
-// ############################# /
+// ############################# //
 
 // memory offset of the process values
 #define PV0_OFFSET                  VOLATILE_OFFSET + 0       // 256
@@ -78,7 +78,7 @@
 #define MAX_PV3_OFFSET              VOLATILE_OFFSET + 76      // 332
 
 // memory offset for the safety lock of the device memory (1 byte)
-#define MEM_LOCKED_OFFSET           VOLATILE_OFFSET + 128     // 384
+#define MEM_UNLOCKED_OFFSET         VOLATILE_OFFSET + 128     // 384
 
 // ############################# //
 // ###### READ ONLY RANGE ###### //
@@ -90,6 +90,7 @@
 #define ERROR_OFFSET                READ_ONLY_OFFSET + 8    // 520
 // memory offset of the uid of the device (8 bytes)
 #define UID_OFFSET                  READ_ONLY_OFFSET + 16   // 528
+
 // memory offset of the net cycle time (4 bytes)
 #define OFFSET_NET_CYCLE_TIME       READ_ONLY_OFFSET + 32   // 544
 

@@ -79,8 +79,6 @@ void syncCallback(const Xerxes::Message &msg)
 
 void writeRegCallback(const Xerxes::Message &msg)
 {   
-    // FIXME: stop core1 before writing to memory !!!
-
     /* Write <LEN> bytes to device register, starting at <REG_ID>
      * The request prototype is <MSGID_WRITE> <REG_ID> <LEN> <DATA> */
 
@@ -98,6 +96,15 @@ void writeRegCallback(const Xerxes::Message &msg)
         return;
     }
 
+    bool core1blocked = false;
+
+    if(config->bits.freeRun)
+    {
+        // pause core1 to avoid memory corruption
+        multicore_lockout_start_blocking();
+        core1blocked = true;
+    }
+
     // disable interrupts
     auto status = save_and_disable_interrupts();
 
@@ -107,6 +114,13 @@ void writeRegCallback(const Xerxes::Message &msg)
         uint8_t byte = msg.at(i);
         mainRegister[offset + i - 6] = byte;
     }
+
+    if(core1blocked)
+    {
+        // resume core1
+        multicore_lockout_end_blocking();
+    }
+
     // restore interrupts
     restore_interrupts(status);
 
@@ -123,19 +137,32 @@ void readRegCallback(const Xerxes::Message &msg)
     /* Read  up to <LEN> bytes from device register, starting at <REG_ID>
      * The request prototype is <MSGID_READ> <REG_ID> <LEN> */
 
+    // read offset from message in little endian
     uint8_t offsetL = msg.at(4);
     uint8_t offsetH = msg.at(5);
+    // convert to uint16_t
     uint16_t offset = (offsetH << 8) + offsetL;
 
+    // read length to read from message (num of bytes to read)
     uint8_t len = msg.at(6);
 
+    // check if offset and length are valid (not longer than register size)
+    if(offset + len > REGISTER_SIZE)
+    {
+        // send ACK_NOK
+        xs.send(msg.srcAddr, MSGID_ACK_NOK);
+        return;
+    }
+    
     std::vector<uint8_t> payload {};
 
+    // read data from memory into payload vector
     for(uint16_t i = offset; i < offset + len; i++)
     {
         payload.emplace_back(mainRegister[i]);
     }
 
+    // send data to master device (MSGID_READ_VALUE + payload) 
     xs.send(msg.srcAddr, MSGID_READ_VALUE, payload);
 
 }
@@ -181,8 +208,20 @@ void softResetCallback(const Xerxes::Message &msg)
  */
 void factoryResetCallback(const Xerxes::Message &msg)
 {   
-
-    userLoadDefaultValues();
+    // check if memory is unlocked (factory reset is allowed only if memory is unlocked)
+    if(*memUnlocked)
+    {
+        // reset memory
+        userLoadDefaultValues();
+        // reset device
+        watchdog_reboot(0,0,0);
+    }
+    else
+    {
+        // send ACK_NOK
+        xs.send(msg.srcAddr, MSGID_ACK_NOK);
+        return;
+    }
 }
 
 
