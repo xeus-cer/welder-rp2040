@@ -8,7 +8,7 @@
 #include "Memory.h"
 
 
-void userInitFlash()
+bool userInitFlash()
 {
     // disable interrupts first
     auto status = save_and_disable_interrupts();
@@ -16,13 +16,23 @@ void userInitFlash()
     //read UID
     flash_get_unique_id((uint8_t *)uid);
 
-    // std::memcpy(&config, &flash_target_contents[OFFSET_CONFIG_BITS], 1);
-    // it takes approx 750us to program 256bytes of flash
+    // read flash
     std::memcpy((uint8_t *)mainRegister, flash_target_contents, VOLATILE_OFFSET);
-    
-    //erase flash, must be done in sector size
-    // flash_range_erase(FLASH_TARGET_OFFSET, FLASH_SECTOR_SIZE);
+
+    // check if flash is empty
+    bool empty = true;
+    for(uint16_t i = 0; i < VOLATILE_OFFSET; i++)
+    {
+        if(mainRegister[i] != 0xFF)
+        {
+            empty = false;
+            break;
+        }
+    }
+       
     restore_interrupts(status);
+    if(empty) return false;
+    else return true;
 }
 
 
@@ -35,14 +45,17 @@ void updateFlash()
     // disable interrupts first
     auto status = save_and_disable_interrupts();
 
+    // erase flash, must be done in sector size, 4KB, it takes 49ms    
     flash_range_erase(FLASH_TARGET_OFFSET, VOLATILE_OFFSET);
 
-    // write flash, must be done in page size
-    // it takes approx 450us to write 128bytes of data
+    // copy memory to buffer
     uint8_t memImage[VOLATILE_OFFSET];
     std::memcpy(memImage, (uint8_t *)mainRegister, sizeof(memImage));
+
+    // write flash, must be done in page size (256bytes), approx 400us
     flash_range_program(FLASH_TARGET_OFFSET, memImage, VOLATILE_OFFSET);
 
+    // finally, restore interrupts
     restore_interrupts(status);
 }
 

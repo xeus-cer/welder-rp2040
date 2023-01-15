@@ -33,10 +33,17 @@ Xerxes::Slave xs(&xp, *devAddress, mainRegister);
 
 static bool usrSwitchOn;
 static volatile bool core1idle = true;
+volatile static bool useUsb = false;
 
 
 void core1Entry();
 void syncOnce();
+
+// inline calculate transfer speed from DEFAULT_BAUDRATE of uart in bytes/s
+constexpr uint32_t transferSpeed = (DEFAULT_BAUDRATE / 10); // 10 bits per byte (8 data bits + 1 start bit + 1 stop bit)
+
+// inline calculate max transfer time in ms
+constexpr uint32_t transferTime = (RX_TX_QUEUE_SIZE / transferSpeed) * 1000;
 
 
 int main(void)
@@ -45,7 +52,7 @@ int main(void)
     userInit();
 
     // check if user switch is on, if so, use usb uart
-    bool useUsb = gpio_get(USR_SW_PIN);
+    useUsb = gpio_get(USR_SW_PIN);
 
     if(useUsb)
     {
@@ -66,11 +73,13 @@ int main(void)
 
     // if user button is pressed, load default values a.k.a. FACTORY RESET
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
-        
+    
+    // clear error register
+    *error = 0;
     //determine reason for restart:
     if (watchdog_caused_reboot())
     {
-        *error |= ERROR_WATCHDOG_TIMEOUT;
+        *error |= ERROR_MASK_WATCHDOG_TIMEOUT;
     }
 
     // init sensor
@@ -85,19 +94,21 @@ int main(void)
     xs.bind(MSGID_RESET_SOFT,   broadcast(  softResetCallback));
     xs.bind(MSGID_RESET_HARD,   unicast(    factoryResetCallback));
 
+    // drain uart fifos, just in case there is something in there
+    while(!queue_is_empty(&txFifo)) queue_remove_blocking(&txFifo, NULL);
+    while(!queue_is_empty(&rxFifo)) queue_remove_blocking(&rxFifo, NULL);
 
-    if(config->bits.freeRun)
-    {
-        multicore_launch_core1(core1Entry);
-    }
-
+    // start core1
+    multicore_launch_core1(core1Entry);
+    
     // enable watchdog for 100ms, pause on debug = true
     watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
 
+    // main loop, runs forever, handles all communication in this loop
     while(1)
     {    
         // update watchdog
-        watchdog_update();
+         watchdog_update();
 
         if(useUsb)
         {
@@ -119,41 +130,32 @@ int main(void)
         }
         else
         {
-            // try to send char over serial if present in FIFO buffer
-            while(!queue_is_empty(&txFifo) && uart_is_writable(uart0)) // WARNING: Watchdog may reset here !!!
-            {
-                gpio_put(USR_LED_PIN, 1);
-                uint8_t to_send, sent;
-                auto removed = queue_try_remove(&txFifo, &to_send); 
-                // TODO: remove all chars from queue and send them in one go
+            // running on RS485, sync for incoming messages from master, timeout = 5ms
+            xs.sync(5000);
+            
+            // send char if tx queue is not empty and uart is writable
+            if(!queue_is_empty(&txFifo))
+            {   
+                uint txLen = queue_get_level(&txFifo);
+                assert(txLen <= RX_TX_QUEUE_SIZE);
 
-                // disable uart interrupt
-                // irq_set_enabled(UART0_IRQ, false);
+                uint8_t toSend[txLen];
 
-                //write char to bus
-                uart_write_blocking(uart0, &to_send, 1);
-
-                // read back the character
-                uart_read_blocking(uart0, &sent, 1);
-                
-
-                // check if sent character is the same as received = no collision on the bus
-                if(to_send != sent)
+                // drain queue
+                for(uint i = 0; i < txLen; i++)
                 {
-                    *error |= ERROR_BUS_COLLISION;
+                    queue_remove_blocking(&txFifo, &toSend[i]);
                 }
-                gpio_put(USR_LED_PIN, 0);
-            }
 
-            if(queue_is_full(&txFifo))
+                // write char to bus, this will clear the interrupt
+                uart_write_blocking(uart0, toSend, txLen);
+            }
+        
+            if(queue_is_full(&txFifo) || queue_is_full(&rxFifo))
             {
                 // rx fifo is full, set the cpu_overload error flag
-                *error |= ERROR_UART_OVERLOAD;
-
+                *error |= ERROR_MASK_UART_OVERLOAD;
             }
-
-            /* Sync and return in less than 5ms */
-            xs.sync(5000);
 
             // save power in release mode
             #ifdef NDEBUG
@@ -175,47 +177,44 @@ void core1Entry()
     uint64_t cycleDuration = 0;
     int64_t sleepFor = 0;
     
-    // Initialize the current core such that it can be a "victim" of lockout 
-    // (i.e. forced to pause in a known state by the other core)
-    multicore_lockout_victim_init();
+    // let core0 lockout core1
+    multicore_lockout_victim_init ();
 
     // core1 mainloop
     while(true)
     {
+        // core is set to free run, start cycle
+        auto startOfCycle = time_us_64();
+
+        // turn on led for a short time
+        gpio_put(USR_LED_PIN, 1);
+
         if(config->bits.freeRun)
         {
-            // core is set to free run, start cycle
-            auto startOfCycle = time_us_64();
+            syncOnce();   
+        }
 
-            gpio_put(USR_LED_PIN, 1);
-            syncOnce();          
-            gpio_put(USR_LED_PIN, 0);
+        // calculate how long it took to finish cycle
+        endOfCycle = time_us_64();
+        cycleDuration = endOfCycle - startOfCycle;
+        *netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
+        sleepFor = *desiredCycleTimeUs - cycleDuration;
 
-            // calculate how long it took to finish cycle
-            endOfCycle = time_us_64();
-            cycleDuration = endOfCycle - startOfCycle;
-            *netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
-            sleepFor = *desiredCycleTimeUs - cycleDuration;
-            
-            // sleep for the remaining time
-            if(sleepFor > 0)
-            {
-                core1idle = true;
-                sleep_us(sleepFor);
-                core1idle = false;
-            }
-            else
-            {
-                *error |= ERROR_SENSOR_OVERLOAD;
-            }
+        // turn off led
+        gpio_put(USR_LED_PIN, 0);
+        
+        // sleep for the remaining time
+        if(sleepFor > 0)
+        {
+            core1idle = true;
+            sleep_us(sleepFor);
+            core1idle = false;
         }
         else
         {
-            // core is set to sleep, wait 1ms for wakeup
-            core1idle = true;
-            sleep_us(1000);
-            core1idle = false;
+            *error |= ERROR_MASK_SENSOR_OVERLOAD;
         }
+        
     }
     
     core1idle = true;

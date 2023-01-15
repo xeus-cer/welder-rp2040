@@ -71,10 +71,11 @@ RS485::~RS485()
 
 bool RS485::sendData(const Packet & toSend) const
 {
-    // improve: this can check if queue has enough space before trying to send data
+    // FIXME: this can check if queue has enough space before trying to send data
     uint16_t sent {0};
     for(const auto &el:toSend.getData())
     {
+        // try to add byte to the queue, if it fails, break the loop
         if(!queue_try_add(qtx, &el)) break;
         sent++; // byte was sent successfully
     }

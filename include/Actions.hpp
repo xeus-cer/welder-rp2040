@@ -96,13 +96,12 @@ void writeRegCallback(const Xerxes::Message &msg)
         return;
     }
 
-    bool core1blocked = false;
-
-    if(config->bits.freeRun)
+    // lock out core1, wait 10ms for core1 to lock out
+    if(!multicore_lockout_start_timeout_us(10'000))
     {
-        // pause core1 to avoid memory corruption
-        multicore_lockout_start_blocking();
-        core1blocked = true;
+        // lockout failed, send ACK_NOK
+        xs.send(msg.srcAddr, MSGID_ACK_NOK);
+        return;
     }
 
     // disable interrupts
@@ -115,17 +114,16 @@ void writeRegCallback(const Xerxes::Message &msg)
         mainRegister[offset + i - 6] = byte;
     }
 
-    if(core1blocked)
-    {
-        // resume core1
-        multicore_lockout_end_blocking();
-    }
-
     // restore interrupts
     restore_interrupts(status);
 
-    // update flash
+    // unlock core1, wait 10ms for core1 to unlock
+    multicore_lockout_end_timeout_us(10'000);
+    
+    // update flash, takes ~50ms to complete hence the 2 watchdog updates
+    watchdog_update();
     updateFlash();
+    watchdog_update();
 
     // send ACK_OK
     xs.send(msg.srcAddr, MSGID_ACK_OK);
@@ -209,7 +207,7 @@ void softResetCallback(const Xerxes::Message &msg)
 void factoryResetCallback(const Xerxes::Message &msg)
 {   
     // check if memory is unlocked (factory reset is allowed only if memory is unlocked)
-    if(*memUnlocked)
+    if(*memUnlocked == MEM_UNLOCKED_VAL)
     {
         // reset memory
         userLoadDefaultValues();

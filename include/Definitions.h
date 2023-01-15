@@ -12,6 +12,7 @@
 #define REGISTER_SIZE               FLASH_PAGE_SIZE * 4   // 1024
 
 #define RX_TX_QUEUE_SIZE            256 // bytes
+#define FIFO_DEPTH                  32  // bytes
 // #undef PICO_FLASH_SIZE_BYTES
 #define FLASH_TARGET_OFFSET         2 * 1024 * 1024 - (FLASH_SECTOR_SIZE)
 
@@ -129,6 +130,8 @@
 #define DEFAULT_SYS_VOLTAGE         VREG_VOLTAGE_DEFAULT // 1.1V
 #define DEFAULT_SYS_VOLTAGE_LP      VREG_VOLTAGE_0_90    // 0.90V
 
+// create magic number for the memory unlock
+constexpr uint32_t MEM_UNLOCKED_VAL = 0x55AA55AA;
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1
