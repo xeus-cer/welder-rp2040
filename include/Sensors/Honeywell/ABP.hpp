@@ -19,12 +19,6 @@ const float Pmax    = 60.0;    // mbar, or: 611.8298 mm
 
 class ABP : public Sensor
 {
-private:
-    double pv0;    
-    double pv1;
-    double pv2;
-    double pv3;
-
 public:
     using Sensor::Sensor;
     void init();

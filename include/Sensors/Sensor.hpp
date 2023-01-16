@@ -6,8 +6,11 @@ namespace Xerxes
     
 class Sensor
 {
-private:
-    /* data */
+protected:
+    double pv0;    
+    double pv1;
+    double pv2;
+    double pv3;
 public:
     Sensor(/* args */);
     ~Sensor();

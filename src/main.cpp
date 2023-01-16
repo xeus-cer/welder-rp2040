@@ -13,6 +13,7 @@
 
 #include "Errors.h"
 #include "Sensors/Honeywell/ABP.hpp"
+#include "Sensors/Murata/SCL3x00.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
@@ -25,6 +26,9 @@ using namespace Xerxes;
 #ifdef TYPE_PRESSURE
 Xerxes::Sensor *pSensor = new Xerxes::ABP();
 #endif // TYPE_PRESSURE
+#ifdef TYPE_INCLINATION
+Xerxes::Sensor *pSensor = new Xerxes::SCL3x00();
+#endif // TYPE_INCLINATION
 
 
 Xerxes::RS485 xn(&txFifo, &rxFifo);
@@ -64,6 +68,9 @@ int main(void)
         cout << "meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
         // cout separator for next line, char  # for the amount of previous characters
         cout << "######################################################################################################################################################" << endl;
+
+        // set to free running mode
+        config->bits.freeRun = 1;
     }
     else
     {
@@ -102,7 +109,8 @@ int main(void)
     multicore_launch_core1(core1Entry);
     
     // enable watchdog for 100ms, pause on debug = true
-    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
+    // watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
+    watchdog_enable(200, true);  // 200ms watchdog timeout just for testing
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
