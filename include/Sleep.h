@@ -5,6 +5,7 @@
 #include "xerxes_rp2040.h"
 #include "ClockUtils.h"
 #include "hardware/watchdog.h"
+#include "hardware/gpio.h"
 
 
 // watchdog friendly sleep in low power mode
@@ -12,6 +13,9 @@ void sleep_lp(uint64_t us)
 {
     // disable communication
     gpio_put(RS_EN_PIN, 0);
+
+    // disable USR_LED
+	gpio_set_dir(USR_LED_PIN, GPIO_IN);
 
     // lower speed and voltage on both cores
     setClocksLP();    
@@ -28,6 +32,10 @@ void sleep_lp(uint64_t us)
 
     // raise the speed back to normal
     setClocksHP();
+
+    // enable USR_LED
+    gpio_set_dir(USR_LED_PIN, GPIO_OUT);
+
     // resume communication
     gpio_put(RS_EN_PIN, 1);
 }
