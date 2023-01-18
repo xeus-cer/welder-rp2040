@@ -1,12 +1,15 @@
-#ifndef __SCL3X00_HPP
-#define __SCL3X00_HPP
+#ifndef __SCL3300_HPP
+#define __SCL3300_HPP
 
 
 #include "hardware/spi.h"
+#include "hardware/clocks.h"
 #include "Sensors/Sensor.hpp"
+#include <memory>
 #include <array>
 #include "xerxes_rp2040.h"
 
+// TODO: THIS IS NOT COMPLETE - DO NOT USE YET
 namespace CMD
 {
 
@@ -45,12 +48,12 @@ namespace Xerxes
 // sensor specific reply struct
 typedef struct 
 {
-        unsigned RW         :1;
-        unsigned ADDR       :5;
-        unsigned RS         :2;
-        unsigned DATA_H     :8;
-        unsigned DATA_L     :8;
-        unsigned CRC        :8;
+        uint8_t RW         :1;
+        uint8_t ADDR       :5;
+        uint8_t RS         :2;
+        uint8_t DATA_H     :8;
+        uint8_t DATA_L     :8;
+        uint8_t CRC        :8;
 } SclPacket_t;
 
 typedef enum
@@ -64,7 +67,7 @@ typedef enum
 // sensor specific variables
 // constexpr float VALmin  = 1638.0;   // counts = 10% 2^14
 
-class SCL3x00 : public Sensor
+class SCL3300 : public Sensor
 {
 private:
     /**
@@ -77,21 +80,21 @@ private:
 
 
     /**
-     * @brief Convert a 32bit integer to a SclPacket_t struct
+     * @brief Convert a SclPacket_t struct to a 32bit integer
      * 
-     * @param rcvd 
-     * @return SclPacket_t 
+     * @param data 4 bytes from SPI transmission
+     * @param packet  which will be populated
      */
-    SclPacket_t ConvToPacket(const uint32_t rcvd);
+    void longToPacket(const uint32_t data, SclPacket_t *packet);
 
 
     /**
      * @brief Convert a SclPacket_t struct to a 32bit integer
      * 
-     * @param packet which will be populated
-     * @return uint32_t 4 bytes from SPI transmission
+     * @param data 4 bytes from SPI transmission
+     * @param packet  which will be populated
      */
-    void longToPacket(const uint32_t data, SclPacket_t *packet);
+    void longToPacket(const uint32_t data, std::unique_ptr<SclPacket_t>& packet);
 
 
     /**
@@ -101,6 +104,15 @@ private:
      * @return angle in degrees
      */
     double getDegFromPacket(SclPacket_t *packet);
+
+
+    /**
+     * @brief Get the Deg From Packet object
+     * 
+     * @param packet    - received data
+     * @return double  - angle in degrees 
+     */
+    double getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet);
 
 
     /**
@@ -119,15 +131,6 @@ private:
     scl_status_t SclStatus();
 
 
-    /**
-     * @brief  Read angle data from the sensor
-     * 
-     * @param packetX - packet with data about the x angle
-     * @param packetY - packet with data about the y angle
-     */
-    void SclReadXY(SclPacket_t *packetX, SclPacket_t *packetY);
-
-
 public:
     using Sensor::Sensor;
     void init();
@@ -137,10 +140,12 @@ public:
 };
 
 
-void SCL3x00::init()
+void SCL3300::init()
 {    
-    // init spi with freq 800kHz, return actual frequency
-    uint baudrate = spi_init(spi0, 800'000);
+    constexpr uint spi_freq = 2 * MHZ;
+    // init spi with freq , return actual frequency
+    uint baudrate = spi_init(spi0, spi_freq);
+    spi_set_format(spi0, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
 
     // Set the GPIO pin mux to the SPI
     gpio_set_function(SPI0_MISO_PIN, GPIO_FUNC_SPI);
@@ -163,15 +168,15 @@ void SCL3x00::init()
     
     sleep_ms(1);
     ExchangeBlock(CMD::Switch_to_bank_0);
-    sleep_ms(1);
+    sleep_ms(3);
 
     received_packet = ExchangeBlock(CMD::SW_Reset);
-    sleep_ms(1);
+    sleep_ms(3);
 
     received_packet = ExchangeBlock(CMD::Change_to_mode_4);
     sleep_ms(1);
     received_packet = ExchangeBlock(CMD::Enable_ANGLE);
-    sleep_ms(100); // FIXME: watchdog unfriendly
+    sleep_ms(100);
 
     received_packet = ExchangeBlock(CMD::Read_Status_Summary);
     received_packet = ExchangeBlock(CMD::Read_Status_Summary);
@@ -186,31 +191,22 @@ void SCL3x00::init()
 }
 
 
-void SCL3x00::update()
+void SCL3300::update()
 {    
     // pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
     // pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
     // declare packet variables
-    SclPacket_t *packetX, *packetY, *packetZ, *packetT = {0};
-
-    // enable spi, active low
-    gpio_put(SPI0_CSN_PIN, 0);
+    auto packetX = std::make_unique<SclPacket_t>();
+    auto packetY = std::make_unique<SclPacket_t>();
+    auto packetZ = std::make_unique<SclPacket_t>();
+    auto packetT = std::make_unique<SclPacket_t>();
+    // pointer above is assigned to wrong memory location - <irq set enabled>
     
     ExchangeBlock(CMD::Read_ANG_X);
     longToPacket(ExchangeBlock(CMD::Read_ANG_Y), packetX);
     longToPacket(ExchangeBlock(CMD::Read_ANG_Z), packetY);
     longToPacket(ExchangeBlock(CMD::Read_Temperature), packetZ);
     longToPacket(ExchangeBlock(CMD::Read_Status_Summary), packetT);
-
-    /* TODO: delete this block after testing
-    *packetX = ConvToPacket(ExchangeBlock(CMD::Read_ANG_Y));
-    *packetY = ConvToPacket(ExchangeBlock(CMD::Read_ANG_Z));
-    *packetZ = ConvToPacket(ExchangeBlock(CMD::Read_Temperature));
-    *packetT = ConvToPacket(ExchangeBlock(CMD::Read_Status_Summary));
-    */
-    
-    // release CS
-    gpio_put(SPI0_CSN_PIN, 1);
 
     // convert data to angles
     pv0 = static_cast<float>(getDegFromPacket(packetX));
@@ -223,7 +219,7 @@ void SCL3x00::update()
 }
 
 
-void SCL3x00::read(std::array<float*, 4> pvs)
+void SCL3300::read(std::array<float*, 4> pvs)
 {
     *pvs[0] = pv0;
     *pvs[1] = pv1;
@@ -232,7 +228,7 @@ void SCL3x00::read(std::array<float*, 4> pvs)
 }
 
 
-void SCL3x00::stop()
+void SCL3300::stop()
 {
     gpio_put(EXT_3V3_EN_PIN, false);
     spi_deinit(spi0);
@@ -242,7 +238,7 @@ void SCL3x00::stop()
 }
 
 
-uint32_t SCL3x00::ExchangeBlock(const uint32_t &block)
+uint32_t SCL3300::ExchangeBlock(const uint32_t &block)
 {
     uint32_t rcvd;
     // SPI_CS active low, read data
@@ -250,13 +246,6 @@ uint32_t SCL3x00::ExchangeBlock(const uint32_t &block)
 
     // exchange data
     spi_write_read_blocking(spi0, (uint8_t*)&block, (uint8_t*)&rcvd, 4);
-
-    /*
-    rcvd  = (uint32_t)SPI_Exchange( (block & 0xff000000) >> 24 ) << 24;
-    rcvd += (uint32_t)SPI_Exchange( (block & 0x00ff0000) >> 16 ) << 16;
-    rcvd += (uint32_t)SPI_Exchange( (block & 0x0000ff00) >> 8  ) << 8;
-    rcvd += (uint32_t)SPI_Exchange( (block & 0x000000ff)       );
-    */
 
     // release CS
     gpio_put(SPI0_CSN_PIN, 1);
@@ -268,21 +257,7 @@ uint32_t SCL3x00::ExchangeBlock(const uint32_t &block)
 }
 
 
-SclPacket_t SCL3x00::ConvToPacket(const uint32_t rcvd)
-{
-    SclPacket_t to_return;
-    to_return.RW        = rcvd >> 31;
-    to_return.ADDR      = rcvd >> 26;
-    to_return.RS        = rcvd >> 24;
-    to_return.DATA_H    = (unsigned char)(rcvd >> 16);
-    to_return.DATA_L    = (unsigned char)(rcvd >> 8);
-    to_return.CRC       = (unsigned char)(rcvd);
-    
-    return to_return;
-}
-
-
-double SCL3x00::getDegFromPacket(SclPacket_t *packet)
+double SCL3300::getDegFromPacket(SclPacket_t *packet)
 {
     uint16_t raw = (uint16_t)(packet->DATA_H << 8) + packet->DATA_L;
     // raw = raw ^ 0x8000;
@@ -291,54 +266,62 @@ double SCL3x00::getDegFromPacket(SclPacket_t *packet)
 }
 
 
-double SCL3x00::SclReadTemp()
+double SCL3300::getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet)
 {
-    SclPacket_t *packet;
+    uint16_t raw = (uint16_t)(packet->DATA_H << 8) + packet->DATA_L;
+    // raw = raw ^ 0x8000;
+    double degrees = (double)raw * 180 / (1 << 15);
+    return 180 + degrees;
+}
 
-    *packet = ConvToPacket(ExchangeBlock(CMD::Read_Temperature));
-    *packet = ConvToPacket(ExchangeBlock(CMD::Read_Temperature));
+
+double SCL3300::SclReadTemp()
+{
+    auto packet = std::make_unique<SclPacket_t>();
+
+    longToPacket(ExchangeBlock(CMD::Read_Temperature), packet);
+    longToPacket(ExchangeBlock(CMD::Read_Temperature), packet);
+
+
     uint16_t raw_temp = (uint16_t)(packet->DATA_H << 8) + packet->DATA_L;
     double degrees = -273 + ((double)raw_temp / 18.9);
     return degrees;
 }
 
 
-scl_status_t SCL3x00::SclStatus()
+scl_status_t SCL3300::SclStatus()
 {
-    SclPacket_t *status;
-    *status = ConvToPacket(ExchangeBlock(CMD::Read_Status_Summary));
-    *status = ConvToPacket(ExchangeBlock(CMD::Read_Status_Summary));
+    auto status = std::make_unique<SclPacket_t>();
+    longToPacket(ExchangeBlock(CMD::Read_Status_Summary), status);
+    longToPacket(ExchangeBlock(CMD::Read_Status_Summary), status);
     
     // RS: '01' - Normal operation, no flags
     return static_cast<scl_status_t>(status->RS);
 }
 
 
-void SCL3x00::SclReadXY(SclPacket_t *packetX, SclPacket_t *packetY)
+void SCL3300::longToPacket(const uint32_t data, SclPacket_t *packet)
 {
-    // enable spi, active low
-    gpio_put(SPI0_CSN_PIN, 0);
-    
-    ExchangeBlock(CMD::Read_ANG_X);
-    *packetX = ConvToPacket(ExchangeBlock(CMD::Read_ANG_Y));
-    *packetY = ConvToPacket(ExchangeBlock(0x00000000));
-    
-    // release CS
-    gpio_put(SPI0_CSN_PIN, 1);
+    packet->RW        = static_cast<uint8_t>(data >> 31);
+    packet->ADDR      = static_cast<uint8_t>(data >> 26);
+    packet->RS        = static_cast<uint8_t>(data >> 24);
+    packet->DATA_H    = static_cast<uint8_t>(data >> 16);
+    packet->DATA_L    = static_cast<uint8_t>(data >> 8);
+    packet->CRC       = static_cast<uint8_t>(data);
 }
 
 
-void SCL3x00::longToPacket(const uint32_t data, SclPacket_t *packet)
+void SCL3300::longToPacket(const uint32_t data, std::unique_ptr<SclPacket_t>& packet)
 {
-    packet->RW        = data >> 31;
-    packet->ADDR      = data >> 26;
-    packet->RS        = data >> 24;
-    packet->DATA_H    = (unsigned char)(data >> 16);
-    packet->DATA_L    = (unsigned char)(data >> 8);
-    packet->CRC       = (unsigned char)(data);
+    packet->RW        = static_cast<uint8_t>(data >> 31);
+    packet->ADDR      = static_cast<uint8_t>(data >> 26);
+    packet->RS        = static_cast<uint8_t>(data >> 24);
+    packet->DATA_H    = static_cast<uint8_t>(data >> 16);
+    packet->DATA_L    = static_cast<uint8_t>(data >> 8);
+    packet->CRC       = static_cast<uint8_t>(data);
 }
 
 
 } //namespace Xerxes
 
-#endif // !__SCL3X00_HPP
+#endif // !__SCL3300_HPP

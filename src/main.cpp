@@ -13,7 +13,7 @@
 
 #include "Errors.h"
 #include "Sensors/Honeywell/ABP.hpp"
-#include "Sensors/Murata/SCL3x00.hpp"
+#include "Sensors/Murata/SCL3400.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
@@ -23,17 +23,16 @@ using namespace std;
 using namespace Xerxes;
 
 
-#ifdef TYPE_PRESSURE
-Xerxes::Sensor *pSensor = new Xerxes::ABP();
+#ifdef TYPE_PRESSURE 
+static ABP sensor;
 #endif // TYPE_PRESSURE
 #ifdef TYPE_INCLINATION
-Xerxes::Sensor *pSensor = new Xerxes::SCL3x00();
+static SCL3400 sensor;
 #endif // TYPE_INCLINATION
 
-
-Xerxes::RS485 xn(&txFifo, &rxFifo);
-Xerxes::Protocol xp(&xn);
-Xerxes::Slave xs(&xp, *devAddress, mainRegister);
+RS485 xn(&txFifo, &rxFifo);
+Protocol xp(&xn);
+Slave xs(&xp, *devAddress, mainRegister);
 
 static bool usrSwitchOn;
 static volatile bool core1idle = true;
@@ -65,12 +64,13 @@ int main(void)
         // wait for usb to be ready
         sleep_ms(2000);
         // cout labels of all values
-        cout << "meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
+        cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
         // cout separator for next line, char  # for the amount of previous characters
         cout << "######################################################################################################################################################" << endl;
 
         // set to free running mode
         config->bits.freeRun = 1;
+        config->bits.calcStat = 1;
     }
     else
     {
@@ -89,8 +89,15 @@ int main(void)
         *error |= ERROR_MASK_WATCHDOG_TIMEOUT;
     }
 
-    // init sensor
-    pSensor->init();
+    // init sensor, depending on type of sensor selected 
+    #ifdef TYPE_PRESSURE 
+    sensor = Xerxes::ABP();
+    #endif // TYPE_PRESSURE
+    #ifdef TYPE_INCLINATION
+    sensor = Xerxes::SCL3400();
+    #endif // TYPE_INCLINATION
+    
+    sensor.init();
 
     // bind callbacks
     xs.bind(MSGID_PING,         unicast(    pingCallback));
@@ -108,9 +115,8 @@ int main(void)
     // start core1
     multicore_launch_core1(core1Entry);
     
-    // enable watchdog for 100ms, pause on debug = true
-    // watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
-    watchdog_enable(200, true);  // 200ms watchdog timeout just for testing
+    // enable watchdog for 200ms, pause on debug = true
+    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
@@ -120,6 +126,8 @@ int main(void)
 
         if(useUsb)
         {
+            // cout values of *pv0 to *pv3
+            cout << *pv0 << ";" << *pv1 << ";" << *pv2 << ";" << *pv3 << ";";
             // cout values of *meanPv0 to *meanPv3
             cout << *meanPv0 << ";" << *meanPv1 << ";" << *meanPv2 << ";" << *meanPv3 << ";";
             // cout values of *minPv0 to *minPv3
@@ -232,8 +240,8 @@ void core1Entry()
 void syncOnce()
 {       
     // measure process value
-    pSensor->update();
-    pSensor->read(processValues);
+    sensor.update();
+    sensor.read(processValues);
 
     // for each process value and ring buffer
     for(int i=0; i<4; i++)
