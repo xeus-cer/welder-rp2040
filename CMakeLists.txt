@@ -21,11 +21,6 @@ IF(CMAKE_COMPILER_IS_GNUCC)
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 
-# add_compile_definitions(TYPE_PRESSURE)
-# add_compile_definitions(TYPE_TEMPERATURE)
-add_compile_definitions(TYPE_INCLINATION)
-# add_compile_definitions(TYPE_DISTANCE)
-
 add_executable(picotest
 	src/main.cpp
 )
@@ -43,7 +38,7 @@ target_link_libraries(
 	hardware_flash
 	hardware_sync
 	hardware_spi
-	)
+)
 
 	
 pico_enable_stdio_usb(picotest 1)

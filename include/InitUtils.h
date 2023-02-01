@@ -84,6 +84,8 @@ void userInitGpio()
     gpio_init(USR_SW_PIN);
 	gpio_init(USR_LED_PIN);
     gpio_init(USR_BTN_PIN);
+
+    gpio_set_drive_strength(USR_LED_PIN, GPIO_DRIVE_STRENGTH_2MA);
     
     gpio_set_dir(USR_SW_PIN, GPIO_IN);
 	gpio_set_dir(USR_LED_PIN, GPIO_OUT);
@@ -113,21 +115,30 @@ void userLoadDefaultValues()
 }
 
 
+void _b()
+{
+    gpio_put(USR_LED_PIN, 1);
+    sleep_ms(1);
+    gpio_put(USR_LED_PIN, 0);
+    sleep_ms(1);
+}
+
+
 void userInit()
 {
     // initialize the clocks
-    userInitClocks();
+    userInitClocks();_b();
 
     // initialize the gpios
-    userInitGpio();
+    userInitGpio();_b();
 
     // initialize the queues for uart communication
-    userInitQueue();
+    userInitQueue();_b();
 
     // initialize the flash memory and load the default values
     if(!userInitFlash())
     {
-        userLoadDefaultValues();
+        userLoadDefaultValues();_b();
     }
 }
 

@@ -8,12 +8,10 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "pico/stdio/driver.h"
-// #include "pico/stdio_uart.h"
 #include "pico/sleep.h"
 
 #include "Errors.h"
-#include "Sensors/Honeywell/ABP.hpp"
-#include "Sensors/Murata/SCL3400.hpp"
+#include "Sensors/all.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
@@ -22,13 +20,10 @@
 using namespace std;
 using namespace Xerxes;
 
+// static ABP sensor;       // pressure sensor 0-60mbar
+static SCL3300 sensor;   // 3 axis inclinometer
+// static SCL3400 sensor;      // 3 axis inclinometer
 
-#ifdef TYPE_PRESSURE 
-static ABP sensor;
-#endif // TYPE_PRESSURE
-#ifdef TYPE_INCLINATION
-static SCL3400 sensor;
-#endif // TYPE_INCLINATION
 
 RS485 xn(&txFifo, &rxFifo);
 Protocol xp(&xn);
@@ -51,22 +46,33 @@ constexpr uint32_t transferTime = (RX_TX_QUEUE_SIZE / transferSpeed) * 1000;
 
 int main(void)
 { 
+    // enable watchdog for 200ms, pause on debug = true
+    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
+    
     // init system
-    userInit();
-
+    userInit();  // 374us
+        
+    // clear error register
+    *error = 0;
+    //determine reason for restart:
+    if (watchdog_caused_reboot())
+    {
+        *error |= ERROR_MASK_WATCHDOG_TIMEOUT;
+    }
+    
     // check if user switch is on, if so, use usb uart
     useUsb = gpio_get(USR_SW_PIN);
-
+    
     if(useUsb)
     {
         // init usb uart
         stdio_usb_init();
         // wait for usb to be ready
-        sleep_ms(2000);
+        sleep_hp(2'000'000);
+        // print out error register
+        cout << "error register: " << bitset<32>(*error) << endl;
         // cout labels of all values
         cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
-        // cout separator for next line, char  # for the amount of previous characters
-        cout << "######################################################################################################################################################" << endl;
 
         // set to free running mode
         config->bits.freeRun = 1;
@@ -77,29 +83,19 @@ int main(void)
         // init uart over RS485
         userInitUart();
     }
-
+    
     // if user button is pressed, load default values a.k.a. FACTORY RESET
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
-    // clear error register
-    *error = 0;
-    //determine reason for restart:
-    if (watchdog_caused_reboot())
-    {
-        *error |= ERROR_MASK_WATCHDOG_TIMEOUT;
-    }
-
     // init sensor, depending on type of sensor selected 
-    #ifdef TYPE_PRESSURE 
-    sensor = Xerxes::ABP();
-    #endif // TYPE_PRESSURE
-    #ifdef TYPE_INCLINATION
-    sensor = Xerxes::SCL3400();
-    #endif // TYPE_INCLINATION
-    
+    // sensor = Xerxes::ABP();
+    // sensor = Xerxes::SCL3400();
+    watchdog_update();
+    sensor = Xerxes::SCL3300();    
     sensor.init();
+    watchdog_update();
 
-    // bind callbacks
+    // bind callbacks, 204us
     xs.bind(MSGID_PING,         unicast(    pingCallback));
     xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
     xs.bind(MSGID_READ,         unicast(    readRegCallback));
@@ -114,9 +110,6 @@ int main(void)
 
     // start core1
     multicore_launch_core1(core1Entry);
-    
-    // enable watchdog for 200ms, pause on debug = true
-    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
@@ -202,7 +195,7 @@ void core1Entry()
         // core is set to free run, start cycle
         auto startOfCycle = time_us_64();
 
-        // turn on led for a short time
+        // turn on led for a short time to signal start of cycle
         gpio_put(USR_LED_PIN, 1);
 
         if(config->bits.freeRun)

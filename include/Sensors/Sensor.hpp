@@ -15,11 +15,22 @@ public:
     Sensor(/* args */);
     ~Sensor();
     
+    // pure virtual functions
     virtual void init() = 0;
     virtual void update() = 0;
-    virtual void read(std::array<float*, 4> pvs) = 0;
     virtual void stop() = 0;
+    
+    void read(std::array<float*, 4> pvs);
 };
+
+
+void Sensor::read(std::array<float*, 4> pvs)
+{
+    *pvs[0] = pv0;
+    *pvs[1] = pv1;
+    *pvs[2] = pv2;
+    *pvs[3] = pv3;
+}
 
 
 Sensor::Sensor(/* args */)
