@@ -61,6 +61,25 @@ extern "C"
 #define CLK_GPOUT1_PIN      23  // CLK_GPOUT1 and TMP1 share the same pin
 
 
+// --- FLASH ---
+
+#define PICO_BOOT_STAGE2_CHOOSE_W25Q080 1
+
+#undef PICO_FLASH_SPI_CLKDIV
+#define PICO_FLASH_SPI_CLKDIV 64
+
+#undef PICO_XOSC_STARTUP_DELAY_MULTIPLIER 
+#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 4096
+
+#undef PICO_FLASH_SIZE_BYTES
+#define PICO_FLASH_SIZE_BYTES (16 * 1024 * 1024)
+
+// All boards have B1 RP2040
+#ifndef PICO_RP2040_B0_SUPPORTED 
+#define PICO_RP2040_B0_SUPPORTED  0
+#endif
+
+
 #ifdef __cplusplus
 }
 #endif // __cplusplus
