@@ -21,23 +21,30 @@
 using namespace std;
 using namespace Xerxes;
 
-// static ABP sensor;       // pressure sensor 0-60mbar
-// static SCL3300 sensor;   // 3 axis inclinometer
-// static SCL3400 sensor;   // 3 axis inclinometer
-static SCL3400 sensor;
+// static ABP sensor;           // pressure sensor 0-60mbar
+// static SCL3300 sensor;       // 3 axis inclinometer
+// static SCL3400 sensor;       // 3 axis inclinometer
+// static AnalogInput sensor;   // 4 channel analog input
+static AnalogInput sensor;  ///< 4 channel analog input
 
 
-RS485 xn(&txFifo, &rxFifo);
-Protocol xp(&xn);
-Slave xs(&xp, *devAddress, mainRegister);
+RS485 xn(&txFifo, &rxFifo);     ///< RS485 interface
+Protocol xp(&xn);               ///< Xerxes protocol implementation
+Slave xs(&xp, *devAddress, mainRegister);   ///< Xerxes slave implementation
 
-static bool usrSwitchOn;
-static volatile bool core1idle = true;
-volatile static bool useUsb = false;
+static bool usrSwitchOn;                ///< user switch state
+static volatile bool core1idle = true;  ///< core1 idle flag
+volatile static bool useUsb = false;    ///< use usb uart flag
 
+/**
+ * @brief Core 1 entry point, runs in background
+ */
+void core1Entry();  
 
-void core1Entry();
-void syncOnce();
+/**
+ * @brief Poll sensor and update values
+ */
+void pollSensor();
 
 // inline calculate transfer speed from DEFAULT_BAUDRATE of uart in bytes/s
 constexpr uint32_t transferSpeed = (DEFAULT_BAUDRATE / 10); // 10 bits per byte (8 data bits + 1 start bit + 1 stop bit)
@@ -92,8 +99,9 @@ int main(void)
     // sensor = Xerxes::ABP();
     // sensor = Xerxes::SCL3400();
     // sensor = Xerxes::SCL3300();
+    // sensor = Xerxes::AnalogInput(2, 3);
     watchdog_update();
-    sensor = Xerxes::SCL3400();
+    sensor = Xerxes::AnalogInput(2, 3);  // 2 channels, 3 bit oversampling, approx 320us per update
     sensor.init();
     watchdog_update();
 
@@ -133,8 +141,7 @@ int main(void)
             cout << *stdDevPv0 << ";" << *stdDevPv1 << ";" << *stdDevPv2 << ";" << *stdDevPv3 << ";";
             // cout timestamp and net cycle time
             auto timestamp = time_us_64();
-            cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;
-            
+            cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;            
 
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);
@@ -202,7 +209,7 @@ void core1Entry()
 
         if(config->bits.freeRun)
         {
-            syncOnce();   
+            pollSensor();   
         }
 
         // calculate how long it took to finish cycle
@@ -232,15 +239,17 @@ void core1Entry()
 }
 
 
-void syncOnce()
+void pollSensor()
 {       
     // measure process value
-    sensor.update();
+    sensor.update();    
+    // read process values from sensor
     sensor.read(processValues);
 
     // for each process value and ring buffer
     for(int i=0; i<4; i++)
     {
+        // insert process value into ring buffer
         float pv = *processValues[i];
         ringBuffers[i].insertOne(pv);
 
@@ -257,5 +266,4 @@ void syncOnce()
             );
         }
     }
-
 }

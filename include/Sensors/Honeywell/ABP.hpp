@@ -12,10 +12,10 @@ namespace Xerxes
 {
 
 // sensor specific variables
-const float VALmin  = 1638.0;   // counts = 10% 2^14
-const float VALmax  = 14745.0;  // counts = 90% 2^14
-const float Pmin    = 0.0;      // mbar    
-const float Pmax    = 60.0;    // mbar, or: 611.8298 mm
+constexpr float VALmin  = 1638.0;   // counts = 10% 2^14
+constexpr float VALmax  = 14745.0;  // counts = 90% 2^14
+constexpr float Pmin    = 0.0;      // mbar    
+constexpr float Pmax    = 60.0;    // mbar, or: 611.8298 mm
 
 class ABP : public Sensor
 {

@@ -4,17 +4,19 @@
 #include "hardware/flash.h"
 #include "hardware/clocks.h"
 
-#define DEFAULT_BAUDRATE            115200
+/** @brief Default baudrate for serial communication */
+#define DEFAULT_BAUDRATE            115200 
 
-#define VOLATILE_OFFSET             FLASH_PAGE_SIZE       // 256
-#define READ_ONLY_OFFSET            FLASH_PAGE_SIZE * 2   // 512
-#define MESSAGE_OFFSET              FLASH_PAGE_SIZE * 3   // 768
-#define REGISTER_SIZE               FLASH_PAGE_SIZE * 4   // 1024
+#define VOLATILE_OFFSET             FLASH_PAGE_SIZE       // 256 bytes
+#define READ_ONLY_OFFSET            FLASH_PAGE_SIZE * 2   // 512 bytes
+#define MESSAGE_OFFSET              FLASH_PAGE_SIZE * 3   // 768 bytes
+#define REGISTER_SIZE               FLASH_PAGE_SIZE * 4   // 1024 bytes
 
-#define RX_TX_QUEUE_SIZE            256 // bytes
-#define FIFO_DEPTH                  32  // bytes
-// #undef PICO_FLASH_SIZE_BYTES
-#define FLASH_TARGET_OFFSET         1 * 1024 * 1024  // 1MiB
+#define RX_TX_QUEUE_SIZE            256 ///< 256 bytes
+#define FIFO_DEPTH                  32  ///< 32 bytes
+
+/** @brief The beginning of user data stored in flash */
+#define FLASH_TARGET_OFFSET         2 * 1024 * 1024 - FLASH_SECTOR_SIZE // end of the 2MiB flash: 2MiB - 4KB
 
 // how many samples are rotated in ring buffer
 #define RING_BUFFER_LEN     100
@@ -107,7 +109,7 @@
 
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US       100'000     // 100 ms
+#define DEFAULT_CYCLE_TIME_US       100000     // 100 ms
 #define DEFAULT_WATCHDOG_DELAY      200         // ms
 
 /* Default clocks */
@@ -130,8 +132,16 @@
 #define DEFAULT_SYS_VOLTAGE         VREG_VOLTAGE_DEFAULT // 1.1V
 #define DEFAULT_SYS_VOLTAGE_LP      VREG_VOLTAGE_0_90    // 0.90V
 
-// create magic number for the memory unlock
+/**
+ * @brief Magic value to unlock the device memory
+ * 
+ * The device memory can be unlocked by writing a value to the memory unlock. To unlock the memory, write this value to the memUnlock variable.
+ * 
+ * @note This value is not a secret. It is just a value that is not likely to be written by accident.
+ * 
+ */
 constexpr uint32_t MEM_UNLOCKED_VAL = 0x55AA55AA;
+
 
 // protocol versions
 #define PROTOCOL_VERSION_MAJ        1
