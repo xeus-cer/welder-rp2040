@@ -46,8 +46,7 @@ constexpr uint32_t transferTime = (RX_TX_QUEUE_SIZE / transferSpeed) * 1000;
 
 
 int main(void)
-{   
-    xosc_init();
+{
     // enable watchdog for 200ms, pause on debug = true
     watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
     
@@ -75,7 +74,6 @@ int main(void)
         cout << "error register: " << bitset<32>(*error) << endl;
         // cout labels of all values
         cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
-        cout << PICO_FLASH_SPI_CLKDIV << PICO_XOSC_STARTUP_DELAY_MULTIPLIER << endl;
         // set to free running mode
         config->bits.freeRun = 1;
         config->bits.calcStat = 1;
