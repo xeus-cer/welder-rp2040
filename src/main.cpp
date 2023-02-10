@@ -21,9 +21,10 @@
 using namespace std;
 using namespace Xerxes;
 
-static ABP sensor;          // pressure sensor 0-60mbar
+// static ABP sensor;       // pressure sensor 0-60mbar
 // static SCL3300 sensor;   // 3 axis inclinometer
 // static SCL3400 sensor;   // 3 axis inclinometer
+static SCL3400 sensor;
 
 
 RS485 xn(&txFifo, &rxFifo);
@@ -92,7 +93,7 @@ int main(void)
     // sensor = Xerxes::SCL3400();
     // sensor = Xerxes::SCL3300();
     watchdog_update();
-    sensor = Xerxes::ABP();
+    sensor = Xerxes::SCL3400();
     sensor.init();
     watchdog_update();
 

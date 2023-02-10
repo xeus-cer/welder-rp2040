@@ -84,7 +84,7 @@ void SCL3400::init()
     // assert(status->RS == NORMAL);
 
     // read out first sequence - usually rubbish anyway
-    this->update();
+    sleep_ms(10);
     this->update();
 }
 
