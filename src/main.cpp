@@ -1,3 +1,4 @@
+#include "xerxes_rp2040.h"
 #include <iostream>
 #include <stdio.h>
 #include <array>
@@ -8,28 +9,26 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "pico/stdio/driver.h"
-// #include "pico/stdio_uart.h"
 #include "pico/sleep.h"
+#include "hardware/xosc.h"
 
 #include "Errors.h"
-#include "Sensors/Honeywell/ABP.hpp"
+#include "Sensors/all.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
 
-
 using namespace std;
 using namespace Xerxes;
 
+// static ABP sensor;       // pressure sensor 0-60mbar
+static SCL3300 sensor;   // 3 axis inclinometer
+// static SCL3400 sensor;      // 3 axis inclinometer
 
-#ifdef TYPE_PRESSURE
-Xerxes::Sensor *pSensor = new Xerxes::ABP();
-#endif // TYPE_PRESSURE
 
-
-Xerxes::RS485 xn(&txFifo, &rxFifo);
-Xerxes::Protocol xp(&xn);
-Xerxes::Slave xs(&xp, *devAddress, mainRegister);
+RS485 xn(&txFifo, &rxFifo);
+Protocol xp(&xn);
+Slave xs(&xp, *devAddress, mainRegister);
 
 static bool usrSwitchOn;
 static volatile bool core1idle = true;
@@ -47,33 +46,13 @@ constexpr uint32_t transferTime = (RX_TX_QUEUE_SIZE / transferSpeed) * 1000;
 
 
 int main(void)
-{ 
-    // init system
-    userInit();
-
-    // check if user switch is on, if so, use usb uart
-    useUsb = gpio_get(USR_SW_PIN);
-
-    if(useUsb)
-    {
-        // init usb uart
-        stdio_usb_init();
-        // wait for usb to be ready
-        sleep_ms(2000);
-        // cout labels of all values
-        cout << "meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
-        // cout separator for next line, char  # for the amount of previous characters
-        cout << "######################################################################################################################################################" << endl;
-    }
-    else
-    {
-        // init uart over RS485
-        userInitUart();
-    }
-
-    // if user button is pressed, load default values a.k.a. FACTORY RESET
-    if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
+{
+    // enable watchdog for 200ms, pause on debug = true
+    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
     
+    // init system
+    userInit();  // 374us
+        
     // clear error register
     *error = 0;
     //determine reason for restart:
@@ -81,11 +60,42 @@ int main(void)
     {
         *error |= ERROR_MASK_WATCHDOG_TIMEOUT;
     }
+    
+    // check if user switch is on, if so, use usb uart
+    useUsb = gpio_get(USR_SW_PIN);
+    
+    if(useUsb)
+    {
+        // init usb uart
+        stdio_usb_init();
+        // wait for usb to be ready
+        sleep_hp(2'000'000);
+        // print out error register
+        cout << "error register: " << bitset<32>(*error) << endl;
+        // cout labels of all values
+        cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
+        // set to free running mode
+        config->bits.freeRun = 1;
+        config->bits.calcStat = 1;
+    }
+    else
+    {
+        // init uart over RS485
+        userInitUart();
+    }
+    
+    // if user button is pressed, load default values a.k.a. FACTORY RESET
+    if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
+    
+    // init sensor, depending on type of sensor selected 
+    // sensor = Xerxes::ABP();
+    // sensor = Xerxes::SCL3400();
+    watchdog_update();
+    sensor = Xerxes::SCL3300();    
+    sensor.init();
+    watchdog_update();
 
-    // init sensor
-    pSensor->init();
-
-    // bind callbacks
+    // bind callbacks, 204us
     xs.bind(MSGID_PING,         unicast(    pingCallback));
     xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
     xs.bind(MSGID_READ,         unicast(    readRegCallback));
@@ -100,9 +110,6 @@ int main(void)
 
     // start core1
     multicore_launch_core1(core1Entry);
-    
-    // enable watchdog for 100ms, pause on debug = true
-    watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
@@ -112,6 +119,8 @@ int main(void)
 
         if(useUsb)
         {
+            // cout values of *pv0 to *pv3
+            cout << *pv0 << ";" << *pv1 << ";" << *pv2 << ";" << *pv3 << ";";
             // cout values of *meanPv0 to *meanPv3
             cout << *meanPv0 << ";" << *meanPv1 << ";" << *meanPv2 << ";" << *meanPv3 << ";";
             // cout values of *minPv0 to *minPv3
@@ -186,7 +195,7 @@ void core1Entry()
         // core is set to free run, start cycle
         auto startOfCycle = time_us_64();
 
-        // turn on led for a short time
+        // turn on led for a short time to signal start of cycle
         gpio_put(USR_LED_PIN, 1);
 
         if(config->bits.freeRun)
@@ -224,8 +233,8 @@ void core1Entry()
 void syncOnce()
 {       
     // measure process value
-    pSensor->update();
-    pSensor->read(processValues);
+    sensor.update();
+    sensor.read(processValues);
 
     // for each process value and ring buffer
     for(int i=0; i<4; i++)

@@ -19,18 +19,10 @@ const float Pmax    = 60.0;    // mbar, or: 611.8298 mm
 
 class ABP : public Sensor
 {
-private:
-    double pv0;    
-    double pv1;
-    double pv2;
-    double pv3;
-
 public:
     using Sensor::Sensor;
     void init();
     void update();
-    void read(std::array<float*, 4> pvs);
-    void stop();
 };
 
 
@@ -83,24 +75,6 @@ void ABP::update()
     pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
 }
 
-
-void ABP::read(std::array<float*, 4> pvs)
-{
-    *pvs[0] = pv0;
-    *pvs[1] = pv1;
-    *pvs[2] = pv2;
-    *pvs[3] = pv3;
-}
-
-
-void ABP::stop()
-{
-    gpio_put(EXT_3V3_EN_PIN, false);
-    spi_deinit(spi0);
-    gpio_set_dir(EXT_3V3_EN_PIN, GPIO_IN);
-    gpio_set_dir(SPI0_CSN_PIN, GPIO_IN);
-
-}
 
 } //namespace Xerxes
 

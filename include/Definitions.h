@@ -14,7 +14,7 @@
 #define RX_TX_QUEUE_SIZE            256 // bytes
 #define FIFO_DEPTH                  32  // bytes
 // #undef PICO_FLASH_SIZE_BYTES
-#define FLASH_TARGET_OFFSET         2 * 1024 * 1024 - (FLASH_SECTOR_SIZE)
+#define FLASH_TARGET_OFFSET         1 * 1024 * 1024  // 1MiB
 
 // how many samples are rotated in ring buffer
 #define RING_BUFFER_LEN     100
@@ -108,7 +108,7 @@
 
 /* Default values */
 #define DEFAULT_CYCLE_TIME_US       100'000     // 100 ms
-#define DEFAULT_WATCHDOG_DELAY      100         // ms
+#define DEFAULT_WATCHDOG_DELAY      200         // ms
 
 /* Default clocks */
 #define DEFAULT_USB_CLOCK_FREQ      48 * MHZ
@@ -139,20 +139,20 @@ constexpr uint32_t MEM_UNLOCKED_VAL = 0x55AA55AA;
 
 
 typedef struct {
-  bool freeRun :    1; // enable free run of sensor
-  bool calcStat :   1; // enable calculation of statistics
-  bool bit2 :       1;
-  bool bit3 :       1;
-  bool bit4 :       1;
-  bool bit5 :       1;
-  bool bit6 :       1;
-  bool bit7 :       1;
+    bool freeRun :    1; // enable free run of sensor
+    bool calcStat :   1; // enable calculation of statistics
+    bool bit2 :       1;
+    bool bit3 :       1;
+    bool bit4 :       1;
+    bool bit5 :       1;
+    bool bit6 :       1;
+    bool bit7 :       1;
 } ConfigBits;
 
 
 union ConfigBitsUnion{
-  ConfigBits bits;
-  uint8_t all;
+    ConfigBits bits;
+    uint8_t all;
 } configBitsUnion;
 
 

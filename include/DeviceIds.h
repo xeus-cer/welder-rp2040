@@ -36,6 +36,10 @@ enum DeviceId : devid_t
 
 /** Inclinometer SCL3300 */
     DEVID_ANGLE_XY_90               = 0x30,
+
+/** Inclinometer SCL3400 */
+    DEVID_ANGLE_XY_30               = 0x31,
+
 /** Distance sensor 0-22mm, resistive, linear*/
     DEVID_DIST_22MM                 = 0x40,
 
