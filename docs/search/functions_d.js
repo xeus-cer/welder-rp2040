@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['sclreadtemp_507',['SclReadTemp',['../classXerxes_1_1SCL3X00.html#afe01d9d12e6ec99593e997a7946c6188',1,'Xerxes::SCL3X00']]],
+  ['sclstatus_508',['SclStatus',['../classXerxes_1_1SCL3X00.html#a96dd1b3d579bcdf7d64c928f1953faa6',1,'Xerxes::SCL3X00']]],
+  ['send_509',['send',['../classXerxes_1_1Slave.html#a15508a34c47a3586896b185d33854faf',1,'Xerxes::Slave::send(const uint8_t destinationAddress, const msgid_t msgId)'],['../classXerxes_1_1Slave.html#a3ac0f7d7c4f05d97ba6d44865bf260aa',1,'Xerxes::Slave::send(const uint8_t destinationAddress, const msgid_t msgId, const std::vector&lt; uint8_t &gt; &amp;payload)']]],
+  ['senddata_510',['sendData',['../classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727',1,'Xerxes::Network::sendData()'],['../classXerxes_1_1RS485.html#af9c1a2d70e74fc314678b6be20355b20',1,'Xerxes::RS485::sendData()']]],
+  ['sendmessage_511',['sendMessage',['../classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e',1,'Xerxes::Protocol']]],
+  ['sensor_512',['Sensor',['../classXerxes_1_1ABP.html#a02d12a78bb21f35825cee309bf0ebc50',1,'Xerxes::ABP::Sensor()'],['../classXerxes_1_1SCL3X00.html#a02d12a78bb21f35825cee309bf0ebc50',1,'Xerxes::SCL3X00::Sensor()'],['../classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50',1,'Xerxes::Sensor::Sensor()']]],
+  ['setclockadcdefault_513',['setClockAdcDefault',['../ClockUtils_8h.html#a4f69283cb39924f85edd178cb8cc4a95',1,'ClockUtils.h']]],
+  ['setclockperidefault_514',['setClockPeriDefault',['../ClockUtils_8h.html#a7b0543ddbba5af1d51166ef7547567f1',1,'ClockUtils.h']]],
+  ['setclockshp_515',['setClocksHP',['../ClockUtils_8h.html#a4ce1b67b7a4d4fab9e03e1d4c07ce589',1,'ClockUtils.h']]],
+  ['setclockslp_516',['setClocksLP',['../ClockUtils_8h.html#ae76d29b8207b04d3453ec058f1fd2f93',1,'ClockUtils.h']]],
+  ['setclocksysdefault_517',['setClockSysDefault',['../ClockUtils_8h.html#a6048a2a35174e2eee37e818b9be773db',1,'ClockUtils.h']]],
+  ['setclocksyslp_518',['setClockSysLP',['../ClockUtils_8h.html#a59f5bd4076b217a2d1cf0cf2bf5017a3',1,'ClockUtils.h']]],
+  ['setclockusbdefault_519',['setClockUsbDefault',['../ClockUtils_8h.html#af271bb19ddfb1227deb35d23aade201d',1,'ClockUtils.h']]],
+  ['size_520',['size',['../classXerxes_1_1Packet.html#a5269f562439267ab86ec7364f09b8502',1,'Xerxes::Packet::size()'],['../classXerxes_1_1Message.html#a9d8b18deecf1c37addede0928019838f',1,'Xerxes::Message::size()']]],
+  ['slave_521',['Slave',['../classXerxes_1_1Slave.html#aeddd8a8e3b33707e2611fbea620da0d6',1,'Xerxes::Slave::Slave(Protocol *protocol, const uint8_t address, volatile uint8_t *mainRegister)'],['../classXerxes_1_1Slave.html#a4f7da1370463b486da631efef56f0783',1,'Xerxes::Slave::Slave()']]],
+  ['sleep_5fhp_522',['sleep_hp',['../Sleep_8h.html#acfe1ebfbffcdfcabd75cf4e22b411fab',1,'Sleep.h']]],
+  ['sleep_5flp_523',['sleep_lp',['../Sleep_8h.html#a0a7f73665991cecfbcacde1e5785b0e0',1,'Sleep.h']]],
+  ['sleepcallback_524',['sleepCallback',['../Actions_8hpp.html#a96bb931acc5c23460fbabc033c81132d',1,'Actions.hpp']]],
+  ['softresetcallback_525',['softResetCallback',['../Actions_8hpp.html#aa21fdf972834bb894e5e87f9f5a747a1',1,'Actions.hpp']]],
+  ['stop_526',['stop',['../classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148',1,'Xerxes::ABP::stop()'],['../classXerxes_1_1Sensor.html#a23620083674b2ae1a9fd2de647c67a11',1,'Xerxes::Sensor::stop()'],['../classXerxes_1_1SCL3X00.html#a0b4ebf3ee67ae632d29d4cd18b2c3764',1,'Xerxes::SCL3X00::stop()'],['../classXerxes_1_1AnalogInput.html#a5060a761add87a2792ad2932a9d95633',1,'Xerxes::AnalogInput::stop()']]],
+  ['sync_527',['sync',['../classXerxes_1_1Slave.html#a640b22e414036f2fef115a7cd37ddf2d',1,'Xerxes::Slave']]],
+  ['synccallback_528',['syncCallback',['../Actions_8hpp.html#a2fcf46a33ee3ba9092b208d3d7fb202a',1,'Actions.hpp']]]
+];

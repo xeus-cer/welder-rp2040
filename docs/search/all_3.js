@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['calcstat_26',['calcStat',['../structConfigBits.html#aa88a1861c6152114052820d7c67c1613',1,'ConfigBits']]],
+  ['calculatecrc_27',['CalculateCRC',['../namespaceXerxes.html#afdd71ba6895074978a5fd6f4322f24a1',1,'Xerxes']]],
+  ['call_28',['call',['../classXerxes_1_1Slave.html#acb81129e2def1591c8134cd0138354eb',1,'Xerxes::Slave']]],
+  ['change_5fto_5fmode_5f1_29',['Change_to_mode_1',['../namespaceCMD.html#a8907048a947827b847859fef4aeaf0b0',1,'CMD']]],
+  ['change_5fto_5fmode_5f2_30',['Change_to_mode_2',['../namespaceCMD.html#a5c3fda0ee8b510a3b5214bdfe69082e9',1,'CMD']]],
+  ['change_5fto_5fmode_5f3_31',['Change_to_mode_3',['../namespaceCMD.html#a94a905c8d5496d78d17c9da244db8455',1,'CMD']]],
+  ['change_5fto_5fmode_5f4_32',['Change_to_mode_4',['../namespaceCMD.html#a6676d359274250b44976c8529aecfebb',1,'CMD']]],
+  ['change_5fto_5fmode_5fa_33',['Change_to_mode_A',['../namespaceCMD.html#a32a608eb1a560e421304736299696086',1,'CMD']]],
+  ['change_5fto_5fmode_5fb_34',['Change_to_mode_B',['../namespaceCMD.html#a19cf84c02556fce00aac53e4b94e2170',1,'CMD']]],
+  ['clk_5fgpin1_5fpin_35',['CLK_GPIN1_PIN',['../xerxes__rp2040_8h.html#a8afdeda204e3b2f7f515c4b06045ea38',1,'xerxes_rp2040.h']]],
+  ['clk_5fgpout1_5fpin_36',['CLK_GPOUT1_PIN',['../xerxes__rp2040_8h.html#a84d6f36ef31c0dd85a90b317fb05f7cc',1,'xerxes_rp2040.h']]],
+  ['clockutils_2eh_37',['ClockUtils.h',['../ClockUtils_8h.html',1,'']]],
+  ['cmd_38',['CMD',['../namespaceCMD.html',1,'']]],
+  ['config_39',['config',['../Memory_8h.html#a41ddfde911f359424ddfaa5c00aa20fe',1,'Memory.h']]],
+  ['configbits_40',['ConfigBits',['../structConfigBits.html',1,'']]],
+  ['configbitsunion_41',['configBitsUnion',['../Definitions_8h.html#af312c99600e3796a697cfe8b88b42077',1,'Definitions.h']]],
+  ['configbitsunion_42',['ConfigBitsUnion',['../unionConfigBitsUnion.html',1,'']]],
+  ['core1entry_43',['core1Entry',['../main_8cpp.html#ab9e7c8e5ee24b50721e4ce761966b211',1,'main.cpp']]],
+  ['crc_44',['CRC',['../structXerxes_1_1SclPacket__t.html#a0dbd5eaa8cf60ecb8c4cbd7cdf9d08f2',1,'Xerxes::SclPacket_t']]],
+  ['crc8_45',['CRC8',['../namespaceXerxes.html#a348609edeee05818ba30fe51f9c511d8',1,'Xerxes']]]
+];

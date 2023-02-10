@@ -1,0 +1,8 @@
+<map id="Xerxes::Sensor" name="Xerxes::Sensor">
+<area shape="rect" id="node1" title=" " alt="" coords="149,5,267,32"/>
+<area shape="rect" id="node2" href="$classXerxes_1_1ABP.html" title=" " alt="" coords="5,80,107,107"/>
+<area shape="rect" id="node3" href="$classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="131,80,285,107"/>
+<area shape="rect" id="node4" href="$classXerxes_1_1SCL3X00.html" title=" " alt="" coords="309,80,441,107"/>
+<area shape="rect" id="node5" href="$classXerxes_1_1SCL3300.html" title=" " alt="" coords="232,155,363,181"/>
+<area shape="rect" id="node6" href="$classXerxes_1_1SCL3400.html" title=" " alt="" coords="387,155,517,181"/>
+</map>
