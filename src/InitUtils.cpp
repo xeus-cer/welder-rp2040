@@ -1,23 +1,28 @@
-#ifndef __INITUTILS_H
-#define __INITUTILS_H
+#include "InitUtils.hpp"
+
 
 #include "xerxes_rp2040.h"
-#include "Memory.h"
-#include "ClockUtils.h"
+#include "ClockUtils.hpp"
+#include "Errors.h"
+#include "UserFlash.hpp"
+#include "Definitions.h"
 
 #include "pico/stdlib.h"
-#include "pico/util/queue.h"
 #include "hardware/uart.h"
 #include "hardware/adc.h"
 #include "hardware/gpio.h"
 #include "hardware/irq.h"
 #include "hardware/flash.h"
 #include "hardware/rtc.h"
+#include "pico/util/queue.h"
 
 
-// queue for incoming and outgoing data
-queue_t txFifo;
-queue_t rxFifo;
+extern uint64_t *error;
+extern uint8_t *mainRegister;
+extern float* gainPv0, *gainPv1, *gainPv2, *gainPv3;
+extern uint32_t *desiredCycleTimeUs;
+extern ConfigBitsUnion *config ;
+extern queue_t txFifo, rxFifo;
 
 
 void userInitQueue()
@@ -115,31 +120,20 @@ void userLoadDefaultValues()
 }
 
 
-void _b()
-{
-    gpio_put(USR_LED_PIN, 1);
-    sleep_ms(1);
-    gpio_put(USR_LED_PIN, 0);
-    sleep_ms(1);
-}
-
-
 void userInit()
 {
     // initialize the clocks
-    userInitClocks();_b();
+    userInitClocks();
 
     // initialize the gpios
-    userInitGpio();_b();
+    userInitGpio();
 
     // initialize the queues for uart communication
-    userInitQueue();_b();
+    userInitQueue();
 
     // initialize the flash memory and load the default values
     if(!userInitFlash())
     {
-        userLoadDefaultValues();_b();
+        userLoadDefaultValues();
     }
 }
-
-#endif // !__INITUTILS_H

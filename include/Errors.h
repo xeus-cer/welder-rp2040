@@ -1,8 +1,12 @@
 #ifndef __ERROR_H
 #define __ERROR_H
 
-extern "C"
-{
+#include <stdint.h>
+
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 enum : uint64_t
 {
@@ -13,6 +17,8 @@ enum : uint64_t
     ERROR_MASK_SENSOR_OVERLOAD   = 1 << 4   // 16
 };
 
-}  // extern "C"
+#ifdef	__cplusplus
+}
+#endif
 
 #endif // __ERROR_H

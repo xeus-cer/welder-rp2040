@@ -4,8 +4,9 @@
 #include <functional>
 #include "UserFlash.hpp"
 #include "DeviceIds.h"
-#include "Sleep.h"
-#include "InitUtils.h"
+#include "Sleep.hpp"
+#include "InitUtils.hpp"
+#include "hardware/watchdog.h"
 
 
 extern Xerxes::Slave xs;

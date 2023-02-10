@@ -1,21 +1,12 @@
-#ifndef __CLOCK_UTILS_H
-#define __CLOCK_UTILS_H
+#include "ClockUtils.hpp"
 
+#include "stdio.h"
 #include "hardware/clocks.h"
 #include "hardware/pll.h"
 #include "hardware/structs/pll.h"
 #include "hardware/structs/clocks.h"
 #include "Definitions.h"
 #include "hardware/vreg.h"
-
-
-void userInitClocks();
-void setClockSysDefault();
-void setClockAdcDefault();
-void setClockPeriDefault();
-void setClockUsbDefault();
-void setClockSysLP();   
-void measure_freqs(void);
 
 
 void setClockAdcDefault()
@@ -165,6 +156,3 @@ void userInitClocks()
     setClockPeriDefault();
     setClockUsbDefault();
 }
-
-
-#endif // !__CLOCK_UTILS_H    

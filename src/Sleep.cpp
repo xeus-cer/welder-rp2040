@@ -1,14 +1,15 @@
-#ifndef __SLEEP_H
-#define __SLEEP_H
+#include "Sleep.hpp"
 
 
 #include "xerxes_rp2040.h"
-#include "ClockUtils.h"
+#include "ClockUtils.hpp"
+#include "Definitions.h"
 #include "hardware/watchdog.h"
+#include "pico/sleep.h"
+#include "pico/stdlib.h"
 #include "hardware/gpio.h"
 
 
-// watchdog friendly sleep in low power mode
 void sleep_lp(uint64_t us)
 {
     // disable communication
@@ -41,7 +42,6 @@ void sleep_lp(uint64_t us)
 }
 
 
-// sleep with watchdog enabled for usb mode
 void sleep_hp(uint64_t us)
 {
     // waste some time - keep watchdog updated 
@@ -54,6 +54,3 @@ void sleep_hp(uint64_t us)
     }   
     sleep_us(us);
 }
-
-
-#endif // !__SLEEP_H

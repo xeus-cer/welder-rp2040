@@ -12,11 +12,14 @@
 #include "pico/sleep.h"
 #include "hardware/xosc.h"
 
+#include "Memory.h"
 #include "Errors.h"
 #include "Sensors/all.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
 #include "Actions.hpp"
+#include "ClockUtils.hpp"
+
 
 using namespace std;
 using namespace Xerxes;
@@ -27,9 +30,13 @@ using namespace Xerxes;
 // static AnalogInput sensor;   // 4 channel analog input
 static AnalogInput sensor;  ///< 4 channel analog input
 
+/// @brief transmit FIFO queue for UART
+queue_t txFifo;
+/// @brief receive FIFO queue for UART
+queue_t rxFifo;
 
-RS485 xn(&txFifo, &rxFifo);     ///< RS485 interface
-Protocol xp(&xn);               ///< Xerxes protocol implementation
+RS485 xn(&txFifo, &rxFifo);     // RS485 interface
+Protocol xp(&xn);               // Xerxes protocol implementation
 Slave xs(&xp, *devAddress, mainRegister);   ///< Xerxes slave implementation
 
 static bool usrSwitchOn;                ///< user switch state

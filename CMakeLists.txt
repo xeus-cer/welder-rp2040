@@ -17,7 +17,11 @@ include_directories(
 
 
 add_executable(${PROJECT_NAME}
-	src/main.cpp
+src/main.cpp
+src/ClockUtils.cpp
+src/Sleep.cpp
+src/InitUtils.cpp
+src/UserFlash.cpp
 )
 
 target_link_libraries(

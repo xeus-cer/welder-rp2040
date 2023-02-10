@@ -163,7 +163,7 @@ typedef struct {
 union ConfigBitsUnion{
     ConfigBits bits;
     uint8_t all;
-} configBitsUnion;
+};
 
 
 #endif //DEFINITIONS_H
