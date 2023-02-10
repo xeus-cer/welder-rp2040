@@ -23,7 +23,18 @@ public:
     using Sensor::Sensor;
     void init();
     void update();
+    void stop();
 };
+
+
+void ABP::stop()
+{
+    gpio_put(EXT_3V3_EN_PIN, false);
+    spi_deinit(spi0);
+    gpio_set_dir(EXT_3V3_EN_PIN, GPIO_IN);
+    gpio_set_dir(SPI0_CSN_PIN, GPIO_IN);
+
+}
 
 
 void ABP::init()
@@ -47,6 +58,7 @@ void ABP::init()
     gpio_set_dir(SPI0_CSN_PIN, GPIO_OUT);
 
     // read out first sequence - usually rubbish anyway
+    sleep_ms(10);
     this->update();
 }
 
