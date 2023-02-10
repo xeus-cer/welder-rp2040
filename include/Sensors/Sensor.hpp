@@ -7,10 +7,10 @@ namespace Xerxes
 class Sensor
 {
 protected:
-    double pv0;    
-    double pv1;
-    double pv2;
-    double pv3;
+    double pv0 = 0;    
+    double pv1 = 0;
+    double pv2 = 0;
+    double pv3 = 0;
 public:
     Sensor(/* args */);
     ~Sensor();
