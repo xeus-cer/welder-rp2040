@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['getdata_474',['getData',['../classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018',1,'Xerxes::Packet']]],
-  ['getlast_475',['getLast',['../classXerxes_1_1RingBuffer.html#a03d821fdbd98db2ab264a39417e858ac',1,'Xerxes::RingBuffer']]],
-  ['getmax_476',['getMax',['../classXerxes_1_1StatisticBuffer.html#a9262dc26f4186f0871d5faaf13cab413',1,'Xerxes::StatisticBuffer']]],
-  ['getmean_477',['getMean',['../classXerxes_1_1StatisticBuffer.html#aa0f1efe5663934fce44983409dc8c914',1,'Xerxes::StatisticBuffer']]],
-  ['getmin_478',['getMin',['../classXerxes_1_1StatisticBuffer.html#a1fe9fb1829714fcc05574206f45cac3a',1,'Xerxes::StatisticBuffer']]],
-  ['getstatistics_479',['getStatistics',['../classXerxes_1_1StatisticBuffer.html#a00b4a9cd81641b15efd5bf228ef4871e',1,'Xerxes::StatisticBuffer']]],
-  ['getstddev_480',['getStdDev',['../classXerxes_1_1StatisticBuffer.html#a49c2fd58fc220b305e7d723d6be5aecb',1,'Xerxes::StatisticBuffer']]]
+  ['init_497',['init',['../classXerxes_1_1AnalogInput.html#a1b79c5c8b43bacbe43c75322f03112a3',1,'Xerxes::AnalogInput::init()'],['../classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75',1,'Xerxes::ABP::init()'],['../classXerxes_1_1SCL3300.html#a8e47941d4d9ad1657a74c6ad8845fde5',1,'Xerxes::SCL3300::init()'],['../classXerxes_1_1SCL3400.html#ab76f2355f722bea477cde61f37663383',1,'Xerxes::SCL3400::init()'],['../classXerxes_1_1Sensor.html#a1ebe3ca6829310e7ee745f895cf4f8ab',1,'Xerxes::Sensor::init()']]],
+  ['initpllusb_498',['initPllUsb',['../ClockUtils_8cpp.html#a1a55da465cc50f9a6865aee768964e1c',1,'ClockUtils.cpp']]],
+  ['insertone_499',['insertOne',['../classXerxes_1_1RingBuffer.html#a6a80a68cd1aaa234ee36c080f016c24e',1,'Xerxes::RingBuffer']]]
 ];

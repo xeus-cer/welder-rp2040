@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['read_5fonly_5foffset_804',['READ_ONLY_OFFSET',['../Definitions_8h.html#ad516916b8ee43f34f044cbf89f91f44d',1,'Definitions.h']]],
-  ['register_5fsize_805',['REGISTER_SIZE',['../Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427',1,'Definitions.h']]],
-  ['ring_5fbuffer_5flen_806',['RING_BUFFER_LEN',['../Definitions_8h.html#a19a15960588be01aae092d55c93bb106',1,'Definitions.h']]],
-  ['rs_5fen_5fpin_807',['RS_EN_PIN',['../xerxes__rp2040_8h.html#a639191369a7c5d1628f44eab42a40fe3',1,'xerxes_rp2040.h']]],
-  ['rs_5frx_5fpin_808',['RS_RX_PIN',['../xerxes__rp2040_8h.html#aabd30688bdf3b9af572e72660e6b2d9f',1,'xerxes_rp2040.h']]],
-  ['rs_5ftx_5fpin_809',['RS_TX_PIN',['../xerxes__rp2040_8h.html#a0ab8731e861162976b2cbaa6b81c60ad',1,'xerxes_rp2040.h']]],
-  ['rx_5ftx_5fqueue_5fsize_810',['RX_TX_QUEUE_SIZE',['../Definitions_8h.html#a5057ce404a1da33c7f2d4c1ed027e2f6',1,'Definitions.h']]]
+  ['spi0_5fclk_5fpin_824',['SPI0_CLK_PIN',['../xerxes__rp2040_8h.html#a1f506818fb07531f02109d004962e7f0',1,'xerxes_rp2040.h']]],
+  ['spi0_5fcsn_5fpin_825',['SPI0_CSN_PIN',['../xerxes__rp2040_8h.html#acc33f26bff933b7b34561e485b8b05e6',1,'xerxes_rp2040.h']]],
+  ['spi0_5fmiso_5fpin_826',['SPI0_MISO_PIN',['../xerxes__rp2040_8h.html#a13ab5492a03325279d7be6d6fe16ee1a',1,'xerxes_rp2040.h']]],
+  ['spi0_5fmosi_5fpin_827',['SPI0_MOSI_PIN',['../xerxes__rp2040_8h.html#afcc66eefc6a5b7144f59b35fbef9b0dc',1,'xerxes_rp2040.h']]],
+  ['status_5foffset_828',['STATUS_OFFSET',['../Definitions_8h.html#ac3959778b8b4ee593c16fa33a06d844c',1,'Definitions.h']]],
+  ['stddev_5fpv0_5foffset_829',['STDDEV_PV0_OFFSET',['../Definitions_8h.html#a62b1fcfba1fa3c9409ea6bd5701b06d2',1,'Definitions.h']]],
+  ['stddev_5fpv1_5foffset_830',['STDDEV_PV1_OFFSET',['../Definitions_8h.html#a1d15218e58f076ad768a944a02b6c547',1,'Definitions.h']]],
+  ['stddev_5fpv2_5foffset_831',['STDDEV_PV2_OFFSET',['../Definitions_8h.html#a36d15cbad9484bc0c5f6f45a0e70c902',1,'Definitions.h']]],
+  ['stddev_5fpv3_5foffset_832',['STDDEV_PV3_OFFSET',['../Definitions_8h.html#a6ddfaeff9a8ad1cd812e31f0fff88156',1,'Definitions.h']]]
 ];

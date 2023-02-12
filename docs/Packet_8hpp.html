@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/Packet.hpp File Reference</title>
+<title>Sensor RP2040: src/Communication/Packet.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,40 +63,51 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_fb35f8d28c5a1c2121d46772e18e7ebe.html">Communication</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Packet.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Packet.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="Packet_8hpp__incl.png" border="0" usemap="#ainclude_2Packet_8hpp" alt=""/></div>
-<map name="ainclude_2Packet_8hpp" id="ainclude_2Packet_8hpp">
-<area shape="rect" title=" " alt="" coords="5,5,149,32"/>
-<area shape="rect" title=" " alt="" coords="46,80,109,107"/>
+<div class="center"><img src="Packet_8hpp__incl.png" border="0" usemap="#asrc_2Communication_2Packet_8hpp" alt=""/></div>
+<map name="asrc_2Communication_2Packet_8hpp" id="asrc_2Communication_2Packet_8hpp">
+<area shape="rect" title=" " alt="" coords="5,5,228,32"/>
+<area shape="rect" title=" " alt="" coords="41,80,104,107"/>
+<area shape="rect" title=" " alt="" coords="129,80,195,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="Packet_8hpp__dep__incl.png" border="0" usemap="#ainclude_2Packet_8hppdep" alt=""/></div>
-<map name="ainclude_2Packet_8hppdep" id="ainclude_2Packet_8hppdep">
-<area shape="rect" title=" " alt="" coords="130,5,274,32"/>
-<area shape="rect" href="Message_8hpp.html" title=" " alt="" coords="5,80,164,107"/>
-<area shape="rect" href="RS485_8hpp.html" title=" " alt="" coords="128,155,271,181"/>
-<area shape="rect" href="Network_8hpp.html" title=" " alt="" coords="240,80,396,107"/>
-<area shape="rect" href="Protocol_8hpp.html" title=" " alt="" coords="66,229,221,256"/>
-<area shape="rect" href="Slave_8hpp.html" title=" " alt="" coords="21,304,159,331"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="91,379,196,405"/>
+<div class="center"><img src="Packet_8hpp__dep__incl.png" border="0" usemap="#asrc_2Communication_2Packet_8hppdep" alt=""/></div>
+<map name="asrc_2Communication_2Packet_8hppdep" id="asrc_2Communication_2Packet_8hppdep">
+<area shape="rect" title=" " alt="" coords="571,5,793,32"/>
+<area shape="rect" href="Message_8hpp.html" title=" " alt="" coords="280,80,519,107"/>
+<area shape="rect" href="RS485_8hpp.html" title=" " alt="" coords="595,155,817,181"/>
+<area shape="rect" href="Network_8hpp.html" title=" " alt="" coords="642,80,877,107"/>
+<area shape="rect" href="Packet_8cpp.html" title=" " alt="" coords="900,80,1123,107"/>
+<area shape="rect" href="Callbacks_8hpp.html" title=" " alt="" coords="125,304,367,331"/>
+<area shape="rect" href="Message_8cpp.html" title=" " alt="" coords="334,155,571,181"/>
+<area shape="rect" href="Protocol_8hpp.html" title=" " alt="" coords="347,229,580,256"/>
+<area shape="rect" href="BindWrapper_8hpp.html" title=" " alt="" coords="5,229,196,256"/>
+<area shape="rect" href="Callbacks_8cpp.html" title=" " alt="" coords="243,379,486,405"/>
+<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="113,379,219,405"/>
+<area shape="rect" href="Protocol_8cpp.html" title=" " alt="" coords="559,304,791,331"/>
+<area shape="rect" href="Slave_8hpp.html" title=" " alt="" coords="392,304,535,331"/>
+<area shape="rect" href="Slave_8cpp.html" title=" " alt="" coords="511,379,653,405"/>
+<area shape="rect" href="RS485_8cpp.html" title=" " alt="" coords="604,229,824,256"/>
+<area shape="rect" href="Network_8cpp.html" title=" " alt="" coords="841,155,1075,181"/>
 </map>
 </div>
 </div>
@@ -112,26 +123,11 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceXerxes"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html">Xerxes</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ab3796cca360697d3658162dba5965e28"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Packet_8hpp.html#ab3796cca360697d3658162dba5965e28">SOH</a>&#160;&#160;&#160;0x01</td></tr>
-<tr class="separator:ab3796cca360697d3658162dba5965e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:af4b039f76253117910748815160f4fe1"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#af4b039f76253117910748815160f4fe1">Xerxes::SOH</a> = 0x01</td></tr>
+<tr class="separator:af4b039f76253117910748815160f4fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="ab3796cca360697d3658162dba5965e28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3796cca360697d3658162dba5965e28">&#9670;&nbsp;</a></span>SOH</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define SOH&#160;&#160;&#160;0x01</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/Protocol.hpp Source File</title>
+<title>Sensor RP2040: src/Communication/Protocol.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_fb35f8d28c5a1c2121d46772e18e7ebe.html">Communication</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -92,52 +92,21 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">readMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>, <span class="keyword">const</span> uint64_t timeoutUs);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">   22</a></span>&#160;<a class="code" href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Protocol::Protocol</a>(<a class="code" href="classXerxes_1_1Network.html">Network</a> *network) : <a class="code" href="main_8cpp.html#a0e04530535720b8c0af1052ec2824b3d">xn</a>(network)</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">   26</a></span>&#160;<a class="code" href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">Protocol::~Protocol</a>()</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">   30</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">Protocol::sendMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">return</span> xn-&gt;<a class="code" href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">sendData</a>(<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>.toPacket());</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">   36</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">Protocol::readMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>, <span class="keyword">const</span> uint64_t timeoutUs)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html">Packet</a> packet = <a class="code" href="classXerxes_1_1Packet.html">Packet</a>();</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span>(xn-&gt;<a class="code" href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">readData</a>(timeoutUs, packet))</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {        </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a> = <a class="code" href="classXerxes_1_1Message.html">Message</a>(packet);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PROTOCOL_HPP</span></div>
-<div class="ttc" id="aMemory_8h_html_a0b2e8c7f76df48129f994ecc46d5c66c"><div class="ttname"><a href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a></div><div class="ttdeci">char * message</div><div class="ttdoc">Message string, holds messages (debug, info, warning, error)</div><div class="ttdef"><b>Definition:</b> Memory.h:77</div></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PROTOCOL_HPP</span></div>
+<div class="ttc" id="aMemory_8h_html_a0b2e8c7f76df48129f994ecc46d5c66c"><div class="ttname"><a href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a></div><div class="ttdeci">char * message</div><div class="ttdoc">Message string, holds messages (debug, info, warning, error)</div><div class="ttdef"><b>Definition:</b> Memory.h:76</div></div>
 <div class="ttc" id="aMessage_8hpp_html"><div class="ttname"><a href="Message_8hpp.html">Message.hpp</a></div></div>
 <div class="ttc" id="aRS485_8hpp_html"><div class="ttname"><a href="RS485_8hpp.html">RS485.hpp</a></div></div>
 <div class="ttc" id="aclassXerxes_1_1Message_html"><div class="ttname"><a href="classXerxes_1_1Message.html">Xerxes::Message</a></div><div class="ttdef"><b>Definition:</b> Message.hpp:13</div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html"><div class="ttname"><a href="classXerxes_1_1Network.html">Xerxes::Network</a></div><div class="ttdef"><b>Definition:</b> Network.hpp:12</div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html_a704b203ed48e3f44b63888aba53cc65b"><div class="ttname"><a href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">Xerxes::Network::readData</a></div><div class="ttdeci">virtual bool readData(const uint64_t timeoutUs, Packet &amp;packet)=0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html_ab1e108dadcc1de0aac8220c2d6719727"><div class="ttname"><a href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">Xerxes::Network::sendData</a></div><div class="ttdeci">virtual bool sendData(const Packet &amp;toSend) const =0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Packet_html"><div class="ttname"><a href="classXerxes_1_1Packet.html">Xerxes::Packet</a></div><div class="ttdef"><b>Definition:</b> Packet.hpp:15</div></div>
+<div class="ttc" id="aclassXerxes_1_1Network_html"><div class="ttname"><a href="classXerxes_1_1Network.html">Xerxes::Network</a></div><div class="ttdef"><b>Definition:</b> Network.hpp:15</div></div>
 <div class="ttc" id="aclassXerxes_1_1Protocol_html"><div class="ttname"><a href="classXerxes_1_1Protocol.html">Xerxes::Protocol</a></div><div class="ttdef"><b>Definition:</b> Protocol.hpp:11</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html_a62f2e0ff7577578cb2a0ab3931487a08"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">Xerxes::Protocol::~Protocol</a></div><div class="ttdeci">~Protocol()</div><div class="ttdef"><b>Definition:</b> Protocol.hpp:26</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html_a701a852a70d4c6999009c7f29f8b909e"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">Xerxes::Protocol::sendMessage</a></div><div class="ttdeci">bool sendMessage(Message &amp;message) const</div><div class="ttdef"><b>Definition:</b> Protocol.hpp:30</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html_a95d50cbd9d68fc4c8805909e085649ce"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">Xerxes::Protocol::readMessage</a></div><div class="ttdeci">bool readMessage(Message &amp;message, const uint64_t timeoutUs)</div><div class="ttdef"><b>Definition:</b> Protocol.hpp:36</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html_aa0ec1a47598a80053dc5e4c8765d3ee8"><div class="ttname"><a href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Xerxes::Protocol::Protocol</a></div><div class="ttdeci">Protocol(Network *network)</div><div class="ttdef"><b>Definition:</b> Protocol.hpp:22</div></div>
-<div class="ttc" id="amain_8cpp_html_a0e04530535720b8c0af1052ec2824b3d"><div class="ttname"><a href="main_8cpp.html#a0e04530535720b8c0af1052ec2824b3d">xn</a></div><div class="ttdeci">Protocol xp &amp; xn</div><div class="ttdoc">Xerxes protocol implementation.</div><div class="ttdef"><b>Definition:</b> main.cpp:32</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html_a62f2e0ff7577578cb2a0ab3931487a08"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">Xerxes::Protocol::~Protocol</a></div><div class="ttdeci">~Protocol()</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:11</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html_a701a852a70d4c6999009c7f29f8b909e"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">Xerxes::Protocol::sendMessage</a></div><div class="ttdeci">bool sendMessage(Message &amp;message) const</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:15</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html_a95d50cbd9d68fc4c8805909e085649ce"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">Xerxes::Protocol::readMessage</a></div><div class="ttdeci">bool readMessage(Message &amp;message, const uint64_t timeoutUs)</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:21</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html_aa0ec1a47598a80053dc5e4c8765d3ee8"><div class="ttname"><a href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Xerxes::Protocol::Protocol</a></div><div class="ttdeci">Protocol(Network *network)</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:7</div></div>
 <div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

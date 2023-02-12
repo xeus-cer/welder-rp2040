@@ -1,5 +1,11 @@
 var searchData=
 [
-  ['tmp0_5fpin_821',['TMP0_PIN',['../xerxes__rp2040_8h.html#a176a89f2f4c3418f39e886baac9610d5',1,'xerxes_rp2040.h']]],
-  ['tmp1_5fpin_822',['TMP1_PIN',['../xerxes__rp2040_8h.html#a856f119358146dcc65b12320417d2507',1,'xerxes_rp2040.h']]]
+  ['uart0_5frx_5fpin_835',['UART0_RX_PIN',['../xerxes__rp2040_8h.html#af99e6777e3f2418cba487ab9c928f769',1,'xerxes_rp2040.h']]],
+  ['uart0_5ftx_5fpin_836',['UART0_TX_PIN',['../xerxes__rp2040_8h.html#af7018c3d4c500f40da605793cb4fcd6d',1,'xerxes_rp2040.h']]],
+  ['uart1_5frx_5fpin_837',['UART1_RX_PIN',['../xerxes__rp2040_8h.html#ab9130e621f608f1ee7c2c402571c88cd',1,'xerxes_rp2040.h']]],
+  ['uart1_5ftx_5fpin_838',['UART1_TX_PIN',['../xerxes__rp2040_8h.html#a37b225cce113e8cf383598b1529e4e46',1,'xerxes_rp2040.h']]],
+  ['uid_5foffset_839',['UID_OFFSET',['../Definitions_8h.html#a3c8c639a6072f8d27e9ac202c82ce0ff',1,'Definitions.h']]],
+  ['usr_5fbtn_5fpin_840',['USR_BTN_PIN',['../xerxes__rp2040_8h.html#a6fc34b00bd5f1094655d55d8e0137235',1,'xerxes_rp2040.h']]],
+  ['usr_5fled_5fpin_841',['USR_LED_PIN',['../xerxes__rp2040_8h.html#a69c8ba05743df48933be84eb44c773b8',1,'xerxes_rp2040.h']]],
+  ['usr_5fsw_5fpin_842',['USR_SW_PIN',['../xerxes__rp2040_8h.html#af39b0c425d31a349255b3e10d93258e1',1,'xerxes_rp2040.h']]]
 ];

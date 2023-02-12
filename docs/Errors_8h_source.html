@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/Errors.h Source File</title>
+<title>Sensor RP2040: src/Core/Errors.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a2f0e5642e47e7ed59fe0f0829eafb5f.html">Core</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -74,26 +74,32 @@ $(function() {
 <a href="Errors_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __ERROR_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __ERROR_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;enum : uint64_t</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed">    9</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed">ERROR_MASK_UART_OVERLOAD</a>     = 1 &lt;&lt; 0,  <span class="comment">// 1</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16">   10</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16">ERROR_MASK_CPU_OVERLOAD</a>      = 1 &lt;&lt; 1,  <span class="comment">// 2</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f">   11</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f">ERROR_MASK_BUS_COLLISION</a>     = 1 &lt;&lt; 2,  <span class="comment">// 4</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c">   12</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c">ERROR_MASK_WATCHDOG_TIMEOUT</a>  = 1 &lt;&lt; 3,  <span class="comment">// 8</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb">ERROR_MASK_SENSOR_OVERLOAD</a>   = 1 &lt;&lt; 4   <span class="comment">// 16</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb">   14</a></span>&#160;};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}  <span class="comment">// extern &quot;C&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __ERROR_H</span></div>
-<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16">ERROR_MASK_CPU_OVERLOAD</a></div><div class="ttdeci">@ ERROR_MASK_CPU_OVERLOAD</div><div class="ttdef"><b>Definition:</b> Errors.h:10</div></div>
-<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed">ERROR_MASK_UART_OVERLOAD</a></div><div class="ttdeci">@ ERROR_MASK_UART_OVERLOAD</div><div class="ttdef"><b>Definition:</b> Errors.h:9</div></div>
-<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f">ERROR_MASK_BUS_COLLISION</a></div><div class="ttdeci">@ ERROR_MASK_BUS_COLLISION</div><div class="ttdef"><b>Definition:</b> Errors.h:11</div></div>
-<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c">ERROR_MASK_WATCHDOG_TIMEOUT</a></div><div class="ttdeci">@ ERROR_MASK_WATCHDOG_TIMEOUT</div><div class="ttdef"><b>Definition:</b> Errors.h:12</div></div>
-<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb">ERROR_MASK_SENSOR_OVERLOAD</a></div><div class="ttdeci">@ ERROR_MASK_SENSOR_OVERLOAD</div><div class="ttdef"><b>Definition:</b> Errors.h:13</div></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifdef  __cplusplus</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;enum : uint64_t</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed">   13</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed">ERROR_MASK_UART_OVERLOAD</a>     = 1 &lt;&lt; 0,  <span class="comment">// 1</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16">   14</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16">ERROR_MASK_CPU_OVERLOAD</a>      = 1 &lt;&lt; 1,  <span class="comment">// 2</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f">   15</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f">ERROR_MASK_BUS_COLLISION</a>     = 1 &lt;&lt; 2,  <span class="comment">// 4</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c">   16</a></span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c">ERROR_MASK_WATCHDOG_TIMEOUT</a>  = 1 &lt;&lt; 3,  <span class="comment">// 8</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb">ERROR_MASK_SENSOR_OVERLOAD</a>   = 1 &lt;&lt; 4   <span class="comment">// 16</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb">   18</a></span>&#160;};</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifdef  __cplusplus</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __ERROR_H</span></div>
+<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16">ERROR_MASK_CPU_OVERLOAD</a></div><div class="ttdeci">@ ERROR_MASK_CPU_OVERLOAD</div><div class="ttdef"><b>Definition:</b> Errors.h:14</div></div>
+<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed">ERROR_MASK_UART_OVERLOAD</a></div><div class="ttdeci">@ ERROR_MASK_UART_OVERLOAD</div><div class="ttdef"><b>Definition:</b> Errors.h:13</div></div>
+<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f">ERROR_MASK_BUS_COLLISION</a></div><div class="ttdeci">@ ERROR_MASK_BUS_COLLISION</div><div class="ttdef"><b>Definition:</b> Errors.h:15</div></div>
+<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c">ERROR_MASK_WATCHDOG_TIMEOUT</a></div><div class="ttdeci">@ ERROR_MASK_WATCHDOG_TIMEOUT</div><div class="ttdef"><b>Definition:</b> Errors.h:16</div></div>
+<div class="ttc" id="aErrors_8h_html_a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb"><div class="ttname"><a href="Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb">ERROR_MASK_SENSOR_OVERLOAD</a></div><div class="ttdeci">@ ERROR_MASK_SENSOR_OVERLOAD</div><div class="ttdef"><b>Definition:</b> Errors.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['error_5foffset_743',['ERROR_OFFSET',['../Definitions_8h.html#a34da2490156c0fde3a3a9e8b658e6639',1,'Definitions.h']]],
-  ['ext_5f3v3_5fen_5fpin_744',['EXT_3V3_EN_PIN',['../xerxes__rp2040_8h.html#ac1e5295cd3ca6fb08889d0d3f6d9f364',1,'xerxes_rp2040.h']]]
+  ['fifo_5fdepth_758',['FIFO_DEPTH',['../Definitions_8h.html#ab297050456738a4bc51658025f2521c6',1,'Definitions.h']]],
+  ['flash_5ftarget_5foffset_759',['FLASH_TARGET_OFFSET',['../Definitions_8h.html#a21df7978a7e635eaa5037d4c853cd15d',1,'Definitions.h']]]
 ];

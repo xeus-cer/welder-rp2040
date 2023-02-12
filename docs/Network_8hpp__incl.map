@@ -1,5 +1,6 @@
-<map id="include/Network.hpp" name="include/Network.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,161,32"/>
-<area shape="rect" id="node2" href="$Packet_8hpp.html" title=" " alt="" coords="37,80,130,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="52,155,115,181"/>
+<map id="src/Communication/Network.hpp" name="src/Communication/Network.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,240,32"/>
+<area shape="rect" id="node2" href="$Packet_8hpp.html" title=" " alt="" coords="76,80,169,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="47,155,110,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="135,155,201,181"/>
 </map>

@@ -1,18 +1,12 @@
 var searchData=
 [
-  ['gain_5fpv0_5foffset_108',['GAIN_PV0_OFFSET',['../Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d',1,'Definitions.h']]],
-  ['gain_5fpv1_5foffset_109',['GAIN_PV1_OFFSET',['../Definitions_8h.html#a7cefdb9c40ac079711a14e964bc52c57',1,'Definitions.h']]],
-  ['gain_5fpv2_5foffset_110',['GAIN_PV2_OFFSET',['../Definitions_8h.html#aa5de2bb4f617035815e182fcb5e82c53',1,'Definitions.h']]],
-  ['gain_5fpv3_5foffset_111',['GAIN_PV3_OFFSET',['../Definitions_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f',1,'Definitions.h']]],
-  ['gainpv0_112',['gainPv0',['../Memory_8h.html#a4d7c469198f8bf0d8a40b801c84524d6',1,'Memory.h']]],
-  ['gainpv1_113',['gainPv1',['../Memory_8h.html#a47e79fff259793d140acff225e8b4f8a',1,'Memory.h']]],
-  ['gainpv2_114',['gainPv2',['../Memory_8h.html#a05b086d589b004128600c05535f2584d',1,'Memory.h']]],
-  ['gainpv3_115',['gainPv3',['../Memory_8h.html#a99878d296378cb4ca8d8b4bb374c06f3',1,'Memory.h']]],
-  ['getdata_116',['getData',['../classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018',1,'Xerxes::Packet']]],
-  ['getlast_117',['getLast',['../classXerxes_1_1RingBuffer.html#a03d821fdbd98db2ab264a39417e858ac',1,'Xerxes::RingBuffer']]],
-  ['getmax_118',['getMax',['../classXerxes_1_1StatisticBuffer.html#a9262dc26f4186f0871d5faaf13cab413',1,'Xerxes::StatisticBuffer']]],
-  ['getmean_119',['getMean',['../classXerxes_1_1StatisticBuffer.html#aa0f1efe5663934fce44983409dc8c914',1,'Xerxes::StatisticBuffer']]],
-  ['getmin_120',['getMin',['../classXerxes_1_1StatisticBuffer.html#a1fe9fb1829714fcc05574206f45cac3a',1,'Xerxes::StatisticBuffer']]],
-  ['getstatistics_121',['getStatistics',['../classXerxes_1_1StatisticBuffer.html#a00b4a9cd81641b15efd5bf228ef4871e',1,'Xerxes::StatisticBuffer']]],
-  ['getstddev_122',['getStdDev',['../classXerxes_1_1StatisticBuffer.html#a49c2fd58fc220b305e7d723d6be5aecb',1,'Xerxes::StatisticBuffer']]]
+  ['i2c0_5fscl_5fpin_123',['I2C0_SCL_PIN',['../xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929',1,'xerxes_rp2040.h']]],
+  ['i2c0_5fsda_5fpin_124',['I2C0_SDA_PIN',['../xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742',1,'xerxes_rp2040.h']]],
+  ['i2c1_5fscl_5fpin_125',['I2C1_SCL_PIN',['../xerxes__rp2040_8h.html#add009e081e638094ee54b280661d862e',1,'xerxes_rp2040.h']]],
+  ['i2c1_5fsda_5fpin_126',['I2C1_SDA_PIN',['../xerxes__rp2040_8h.html#a68697a8aca56f616b38aa23f82edecd5',1,'xerxes_rp2040.h']]],
+  ['init_127',['init',['../classXerxes_1_1AnalogInput.html#a1b79c5c8b43bacbe43c75322f03112a3',1,'Xerxes::AnalogInput::init()'],['../classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75',1,'Xerxes::ABP::init()'],['../classXerxes_1_1SCL3300.html#a8e47941d4d9ad1657a74c6ad8845fde5',1,'Xerxes::SCL3300::init()'],['../classXerxes_1_1SCL3400.html#ab76f2355f722bea477cde61f37663383',1,'Xerxes::SCL3400::init()'],['../classXerxes_1_1Sensor.html#a1ebe3ca6829310e7ee745f895cf4f8ab',1,'Xerxes::Sensor::init()']]],
+  ['initpllusb_128',['initPllUsb',['../ClockUtils_8cpp.html#a1a55da465cc50f9a6865aee768964e1c',1,'ClockUtils.cpp']]],
+  ['initutils_2ecpp_129',['InitUtils.cpp',['../InitUtils_8cpp.html',1,'']]],
+  ['initutils_2ehpp_130',['InitUtils.hpp',['../InitUtils_8hpp.html',1,'']]],
+  ['insertone_131',['insertOne',['../classXerxes_1_1RingBuffer.html#a6a80a68cd1aaa234ee36c080f016c24e',1,'Xerxes::RingBuffer']]]
 ];

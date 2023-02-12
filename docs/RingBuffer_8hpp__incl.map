@@ -1,5 +1,5 @@
-<map id="include/Buffer/RingBuffer.hpp" name="include/Buffer/RingBuffer.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="59,5,274,32"/>
+<map id="src/Buffer/RingBuffer.hpp" name="src/Buffer/RingBuffer.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="73,5,260,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,61,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="85,80,157,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="182,80,245,107"/>

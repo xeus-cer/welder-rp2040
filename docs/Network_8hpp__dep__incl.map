@@ -1,7 +1,12 @@
-<map id="include/Network.hpp" name="include/Network.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="49,5,205,32"/>
-<area shape="rect" id="node2" href="$RS485_8hpp.html" title=" " alt="" coords="56,80,199,107"/>
-<area shape="rect" id="node3" href="$Protocol_8hpp.html" title=" " alt="" coords="50,155,205,181"/>
-<area shape="rect" id="node4" href="$Slave_8hpp.html" title=" " alt="" coords="5,229,143,256"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title=" " alt="" coords="75,304,180,331"/>
+<map id="src/Communication/Network.hpp" name="src/Communication/Network.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="131,5,365,32"/>
+<area shape="rect" id="node2" href="$Network_8cpp.html" title=" " alt="" coords="5,80,240,107"/>
+<area shape="rect" id="node3" href="$RS485_8hpp.html" title=" " alt="" coords="264,80,485,107"/>
+<area shape="rect" id="node4" href="$Protocol_8hpp.html" title=" " alt="" coords="133,155,366,181"/>
+<area shape="rect" id="node10" href="$RS485_8cpp.html" title=" " alt="" coords="390,155,610,181"/>
+<area shape="rect" id="node5" href="$Protocol_8cpp.html" title=" " alt="" coords="28,229,260,256"/>
+<area shape="rect" id="node6" href="$Slave_8hpp.html" title=" " alt="" coords="285,229,427,256"/>
+<area shape="rect" id="node7" href="$Callbacks_8cpp.html" title=" " alt="" coords="17,304,260,331"/>
+<area shape="rect" id="node8" href="$Slave_8cpp.html" title=" " alt="" coords="285,304,427,331"/>
+<area shape="rect" id="node9" href="$main_8cpp.html" title=" " alt="" coords="451,304,557,331"/>
 </map>

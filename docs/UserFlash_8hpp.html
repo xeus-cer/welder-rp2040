@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/UserFlash.hpp File Reference</title>
+<title>Sensor RP2040: src/Hardware/UserFlash.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_392e5fed41b2de721750e308647dcb9c.html">Hardware</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -73,39 +73,25 @@ $(function() {
 <div class="title">UserFlash.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;hardware/flash.h&quot;</code><br />
-<code>#include &quot;hardware/sync.h&quot;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &quot;<a class="el" href="Memory_8h_source.html">Memory.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for UserFlash.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="UserFlash_8hpp__incl.png" border="0" usemap="#ainclude_2UserFlash_8hpp" alt=""/></div>
-<map name="ainclude_2UserFlash_8hpp" id="ainclude_2UserFlash_8hpp">
-<area shape="rect" title=" " alt="" coords="254,5,421,32"/>
-<area shape="rect" title=" " alt="" coords="5,229,136,256"/>
-<area shape="rect" title=" " alt="" coords="339,80,469,107"/>
-<area shape="rect" title=" " alt="" coords="493,80,560,107"/>
-<area shape="rect" href="Memory_8h.html" title=" " alt="" coords="229,80,315,107"/>
-<area shape="rect" title=" " alt="" coords="239,155,305,181"/>
-<area shape="rect" title=" " alt="" coords="315,304,371,331"/>
-<area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="380,155,567,181"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="109,155,214,181"/>
-<area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="414,229,533,256"/>
-<area shape="rect" title=" " alt="" coords="395,304,467,331"/>
-<area shape="rect" title=" " alt="" coords="491,304,554,331"/>
-<area shape="rect" title=" " alt="" coords="579,304,659,331"/>
-<area shape="rect" title=" " alt="" coords="161,229,301,256"/>
+<div class="center"><img src="UserFlash_8hpp__incl.png" border="0" usemap="#asrc_2Hardware_2UserFlash_8hpp" alt=""/></div>
+<map name="asrc_2Hardware_2UserFlash_8hpp" id="asrc_2Hardware_2UserFlash_8hpp">
+<area shape="rect" title=" " alt="" coords="5,5,211,32"/>
+<area shape="rect" title=" " alt="" coords="73,80,143,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="UserFlash_8hpp__dep__incl.png" border="0" usemap="#ainclude_2UserFlash_8hppdep" alt=""/></div>
-<map name="ainclude_2UserFlash_8hppdep" id="ainclude_2UserFlash_8hppdep">
-<area shape="rect" title=" " alt="" coords="5,5,172,32"/>
-<area shape="rect" href="Actions_8hpp.html" title=" " alt="" coords="14,80,163,107"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="36,155,141,181"/>
+<div class="center"><img src="UserFlash_8hpp__dep__incl.png" border="0" usemap="#asrc_2Hardware_2UserFlash_8hppdep" alt=""/></div>
+<map name="asrc_2Hardware_2UserFlash_8hppdep" id="asrc_2Hardware_2UserFlash_8hppdep">
+<area shape="rect" title=" " alt="" coords="265,5,471,32"/>
+<area shape="rect" href="Callbacks_8cpp.html" title=" " alt="" coords="5,80,248,107"/>
+<area shape="rect" href="InitUtils_8cpp.html" title=" " alt="" coords="273,80,463,107"/>
+<area shape="rect" href="UserFlash_8cpp.html" title=" " alt="" coords="487,80,691,107"/>
 </map>
 </div>
 </div>
@@ -113,15 +99,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abebd1f8b845e231d5fd07efebac5d20d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#abebd1f8b845e231d5fd07efebac5d20d">userInitFlash</a> ()</td></tr>
-<tr class="separator:abebd1f8b845e231d5fd07efebac5d20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dc4187ca3355a3e432aaef82707ce51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#a5dc4187ca3355a3e432aaef82707ce51">updateFlash</a> ()</td></tr>
-<tr class="memdesc:a5dc4187ca3355a3e432aaef82707ce51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update flash with current memory contents.  <a href="UserFlash_8hpp.html#a5dc4187ca3355a3e432aaef82707ce51">More...</a><br /></td></tr>
-<tr class="separator:a5dc4187ca3355a3e432aaef82707ce51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8291336aba92fa6f6baa517c0e0d90f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#ac8291336aba92fa6f6baa517c0e0d90f">userInitFlash</a> (uint8_t *<a class="el" href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a>)</td></tr>
+<tr class="memdesc:ac8291336aba92fa6f6baa517c0e0d90f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read flash and copy to RAM.  <a href="UserFlash_8hpp.html#ac8291336aba92fa6f6baa517c0e0d90f">More...</a><br /></td></tr>
+<tr class="separator:ac8291336aba92fa6f6baa517c0e0d90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687372260de592493b8057de0b1df106"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#a687372260de592493b8057de0b1df106">updateFlash</a> (const uint8_t *<a class="el" href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a>)</td></tr>
+<tr class="memdesc:a687372260de592493b8057de0b1df106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update flash with current memory contents.  <a href="UserFlash_8hpp.html#a687372260de592493b8057de0b1df106">More...</a><br /></td></tr>
+<tr class="separator:a687372260de592493b8057de0b1df106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a5dc4187ca3355a3e432aaef82707ce51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dc4187ca3355a3e432aaef82707ce51">&#9670;&nbsp;</a></span>updateFlash()</h2>
+<a id="a687372260de592493b8057de0b1df106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a687372260de592493b8057de0b1df106">&#9670;&nbsp;</a></span>updateFlash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -129,7 +116,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void updateFlash </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>mainRegister</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -139,8 +127,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abebd1f8b845e231d5fd07efebac5d20d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abebd1f8b845e231d5fd07efebac5d20d">&#9670;&nbsp;</a></span>userInitFlash()</h2>
+<a id="ac8291336aba92fa6f6baa517c0e0d90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8291336aba92fa6f6baa517c0e0d90f">&#9670;&nbsp;</a></span>userInitFlash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,11 +136,17 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">bool userInitFlash </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>mainRegister</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read flash and copy to RAM. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if flash is not empty and some data was read </dd>
+<dd>
+false if flash is empty </dd></dl>
 
 </div>
 </div>

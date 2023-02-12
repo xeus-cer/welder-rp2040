@@ -1,6 +1,9 @@
-<map id="include/Sensors/Generic/AnalogInput.hpp" name="include/Sensors/Generic/AnalogInput.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="137,5,316,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,95,128,121"/>
-<area shape="rect" id="node3" href="$Sensor_8hpp.html" title=" " alt="" coords="152,95,301,121"/>
-<area shape="rect" id="node4" href="$xerxes__rp2040_8h.html" title=" " alt="" coords="325,95,456,121"/>
+<map id="src/Sensors/Generic/AnalogInput.hpp" name="src/Sensors/Generic/AnalogInput.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="105,5,255,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,169,128,196"/>
+<area shape="rect" id="node3" href="$Sensor_8hpp.html" title=" " alt="" coords="105,95,255,121"/>
+<area shape="rect" id="node7" href="$xerxes__rp2040_8h.html" title=" " alt="" coords="279,95,476,121"/>
+<area shape="rect" id="node4" title=" " alt="" coords="152,169,208,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="233,169,359,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="383,169,502,196"/>
 </map>

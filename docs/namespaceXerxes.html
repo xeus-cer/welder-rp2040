@@ -89,6 +89,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1RS485.html">RS485</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Slave.html">Slave</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1AnalogInput.html">AnalogInput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Analog input sensor class.  <a href="classXerxes_1_1AnalogInput.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,8 +106,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Sensor.html">Sensor</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Slave.html">Slave</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -118,9 +118,38 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a0f28411848f37bf66bc06ac3ed37af8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a0f28411848f37bf66bc06ac3ed37af8e">pingCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:a0f28411848f37bf66bc06ac3ed37af8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ping callback.  <a href="namespaceXerxes.html#a0f28411848f37bf66bc06ac3ed37af8e">More...</a><br /></td></tr>
+<tr class="separator:a0f28411848f37bf66bc06ac3ed37af8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cedb8b21e79f7434545fb09572d4b92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a9cedb8b21e79f7434545fb09572d4b92">syncCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:a9cedb8b21e79f7434545fb09572d4b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize callback.  <a href="namespaceXerxes.html#a9cedb8b21e79f7434545fb09572d4b92">More...</a><br /></td></tr>
+<tr class="separator:a9cedb8b21e79f7434545fb09572d4b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94afd3fc3c8b1dfdb7175139bcee7362"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a94afd3fc3c8b1dfdb7175139bcee7362">writeRegCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:a94afd3fc3c8b1dfdb7175139bcee7362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write register callback.  <a href="namespaceXerxes.html#a94afd3fc3c8b1dfdb7175139bcee7362">More...</a><br /></td></tr>
+<tr class="separator:a94afd3fc3c8b1dfdb7175139bcee7362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a821dba0bbd8fa0ca4612dae778e1d01d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a821dba0bbd8fa0ca4612dae778e1d01d">readRegCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:a821dba0bbd8fa0ca4612dae778e1d01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read register callback.  <a href="namespaceXerxes.html#a821dba0bbd8fa0ca4612dae778e1d01d">More...</a><br /></td></tr>
+<tr class="separator:a821dba0bbd8fa0ca4612dae778e1d01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec12f5e58f200ba47005df37c3a1d38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#acec12f5e58f200ba47005df37c3a1d38">sleepCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:acec12f5e58f200ba47005df37c3a1d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to perform low power sleep.  <a href="namespaceXerxes.html#acec12f5e58f200ba47005df37c3a1d38">More...</a><br /></td></tr>
+<tr class="separator:acec12f5e58f200ba47005df37c3a1d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad96107690ae37f69da6f92045e23cbc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#ad96107690ae37f69da6f92045e23cbc0">softResetCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:ad96107690ae37f69da6f92045e23cbc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to perform soft reset.  <a href="namespaceXerxes.html#ad96107690ae37f69da6f92045e23cbc0">More...</a><br /></td></tr>
+<tr class="separator:ad96107690ae37f69da6f92045e23cbc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84a6af23f8e4d76ca93538c4c40d6e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a84a6af23f8e4d76ca93538c4c40d6e23">factoryResetCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:a84a6af23f8e4d76ca93538c4c40d6e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to perform factory reset.  <a href="namespaceXerxes.html#a84a6af23f8e4d76ca93538c4c40d6e23">More...</a><br /></td></tr>
+<tr class="separator:a84a6af23f8e4d76ca93538c4c40d6e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ba8e4357abc1a01f99ac1e77551de1b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a4ba8e4357abc1a01f99ac1e77551de1b">remainingTime</a> (const uint64_t &amp;start, const uint64_t &amp;timeout)</td></tr>
 <tr class="memdesc:a4ba8e4357abc1a01f99ac1e77551de1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get amount of time remaining from start to timeout.  <a href="namespaceXerxes.html#a4ba8e4357abc1a01f99ac1e77551de1b">More...</a><br /></td></tr>
 <tr class="separator:a4ba8e4357abc1a01f99ac1e77551de1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a699d6d1b9427522627f6af002e5c4f9d"><td class="memTemplParams" colspan="2">template&lt;typename Func &gt; </td></tr>
+<tr class="memitem:a699d6d1b9427522627f6af002e5c4f9d"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; void(const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a699d6d1b9427522627f6af002e5c4f9d">unicast</a> (Func f)</td></tr>
+<tr class="memdesc:a699d6d1b9427522627f6af002e5c4f9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decorate a function to be unicast targeted.  <a href="namespaceXerxes.html#a699d6d1b9427522627f6af002e5c4f9d">More...</a><br /></td></tr>
+<tr class="separator:a699d6d1b9427522627f6af002e5c4f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f42f1b786d92d0443597b573909b84f"><td class="memTemplParams" colspan="2">template&lt;typename Func &gt; </td></tr>
+<tr class="memitem:a2f42f1b786d92d0443597b573909b84f"><td class="memTemplItemLeft" align="right" valign="top">std::function&lt; void(const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;)&gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a2f42f1b786d92d0443597b573909b84f">broadcast</a> (Func f)</td></tr>
+<tr class="memdesc:a2f42f1b786d92d0443597b573909b84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decorate a function to be broadcast targeted.  <a href="namespaceXerxes.html#a2f42f1b786d92d0443597b573909b84f">More...</a><br /></td></tr>
+<tr class="separator:a2f42f1b786d92d0443597b573909b84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a348609edeee05818ba30fe51f9c511d8"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a348609edeee05818ba30fe51f9c511d8">CRC8</a> (uint8_t BitValue, uint8_t CRC)</td></tr>
 <tr class="separator:a348609edeee05818ba30fe51f9c511d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdd71ba6895074978a5fd6f4322f24a1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#afdd71ba6895074978a5fd6f4322f24a1">CalculateCRC</a> (uint32_t Data)</td></tr>
@@ -128,6 +157,10 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a3cc2e66a8a362160423ea21cbb83f768"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a3cc2e66a8a362160423ea21cbb83f768">BROADCAST_ADDR</a> = 0xff</td></tr>
+<tr class="separator:a3cc2e66a8a362160423ea21cbb83f768"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4b039f76253117910748815160f4fe1"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#af4b039f76253117910748815160f4fe1">SOH</a> = 0x01</td></tr>
+<tr class="separator:af4b039f76253117910748815160f4fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8d40ff2da96b6d98cbb0b8c7962be63"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#ae8d40ff2da96b6d98cbb0b8c7962be63">defaultOversampleBits</a> = 3</td></tr>
 <tr class="memdesc:ae8d40ff2da96b6d98cbb0b8c7962be63"><td class="mdescLeft">&#160;</td><td class="mdescRight">default number of oversampling bits  <a href="namespaceXerxes.html#ae8d40ff2da96b6d98cbb0b8c7962be63">More...</a><br /></td></tr>
 <tr class="separator:ae8d40ff2da96b6d98cbb0b8c7962be63"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,6 +201,42 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a2f42f1b786d92d0443597b573909b84f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f42f1b786d92d0443597b573909b84f">&#9670;&nbsp;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;)&gt; Xerxes::broadcast </td>
+          <td>(</td>
+          <td class="paramtype">Func&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decorate a function to be broadcast targeted. </p>
+<p>a function is called on targeted unicast packet or broadcast packet</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>function to call for unicast packets </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::function&lt;void(const Xerxes::Message &amp;)&gt; decorated lambda function </dd></dl>
+
+</div>
+</div>
 <a id="afdd71ba6895074978a5fd6f4322f24a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afdd71ba6895074978a5fd6f4322f24a1">&#9670;&nbsp;</a></span>CalculateCRC()</h2>
 
@@ -214,6 +283,91 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a84a6af23f8e4d76ca93538c4c40d6e23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84a6af23f8e4d76ca93538c4c40d6e23">&#9670;&nbsp;</a></span>factoryResetCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::factoryResetCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attempt to perform factory reset. </p>
+<dl class="section note"><dt>Note</dt><dd>This function may be called only if memory is unlocked by writing the correct value to the memUnlocked register</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>0x55AA55AA = unlocked, anything else = locked</p>
+
+</div>
+</div>
+<a id="a0f28411848f37bf66bc06ac3ed37af8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f28411848f37bf66bc06ac3ed37af8e">&#9670;&nbsp;</a></span>pingCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::pingCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ping callback. </p>
+<p>Reply to ping request with device id and protocol version</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>incoming message </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a821dba0bbd8fa0ca4612dae778e1d01d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a821dba0bbd8fa0ca4612dae778e1d01d">&#9670;&nbsp;</a></span>readRegCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::readRegCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read register callback. </p>
+<p>Read &lt;LEN&gt; bytes from device register, starting at &lt;REG_ID&gt; The request prototype is &lt;MSGID_READ&gt; &lt;REG_ID&gt; &lt;LEN&gt;</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function is blocking, it will not return until the data is read from the register and sent to the master device. </dd>
+<dd>
+All data are in little endian format - LSB first. </dd></dl>
+
+</div>
+</div>
 <a id="a4ba8e4357abc1a01f99ac1e77551de1b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4ba8e4357abc1a01f99ac1e77551de1b">&#9670;&nbsp;</a></span>remainingTime()</h2>
 
@@ -252,7 +406,174 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="acec12f5e58f200ba47005df37c3a1d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec12f5e58f200ba47005df37c3a1d38">&#9670;&nbsp;</a></span>sleepCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::sleepCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attempt to perform low power sleep. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>incoming message </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad96107690ae37f69da6f92045e23cbc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad96107690ae37f69da6f92045e23cbc0">&#9670;&nbsp;</a></span>softResetCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::softResetCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attempt to perform soft reset. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not return </dd></dl>
+
+</div>
+</div>
+<a id="a9cedb8b21e79f7434545fb09572d4b92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cedb8b21e79f7434545fb09572d4b92">&#9670;&nbsp;</a></span>syncCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::syncCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Synchronize callback. </p>
+<p>Used to simultaneously poll all sensors on the bus</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td>incoming message</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not return an answer, it only polls the sensor </dd></dl>
+
+</div>
+</div>
+<a id="a699d6d1b9427522627f6af002e5c4f9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a699d6d1b9427522627f6af002e5c4f9d">&#9670;&nbsp;</a></span>unicast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void(const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;)&gt; Xerxes::unicast </td>
+          <td>(</td>
+          <td class="paramtype">Func&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decorate a function to be unicast targeted. </p>
+<p>a function is called only on targeted unicast packet</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>function to call for unicast packets </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::function&lt;void(const Xerxes::Message &amp;)&gt; decorated lambda function </dd></dl>
+
+</div>
+</div>
+<a id="a94afd3fc3c8b1dfdb7175139bcee7362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94afd3fc3c8b1dfdb7175139bcee7362">&#9670;&nbsp;</a></span>writeRegCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::writeRegCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write register callback. </p>
+<p>Write &lt;LEN&gt; bytes of &lt;DATA&gt; to the device register, starting at &lt;REG_ID&gt; The request prototype is &lt;MSGID_WRITE&gt; &lt;REG_ID&gt; &lt;LEN&gt; &lt;DATA&gt;</p>
+<dl class="section note"><dt>Note</dt><dd>This function is blocking, it will not return until the data is written to the register</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a3cc2e66a8a362160423ea21cbb83f768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc2e66a8a362160423ea21cbb83f768">&#9670;&nbsp;</a></span>BROADCAST_ADDR</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t Xerxes::BROADCAST_ADDR = 0xff</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1e9ae8411d579b0edb3c39f0605bbd6e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e9ae8411d579b0edb3c39f0605bbd6e">&#9670;&nbsp;</a></span>defaultChannels</h2>
 
@@ -366,6 +687,28 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>bit depth of RP2040 ADC </p>
+
+</div>
+</div>
+<a id="af4b039f76253117910748815160f4fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4b039f76253117910748815160f4fe1">&#9670;&nbsp;</a></span>SOH</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t Xerxes::SOH = 0x01</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

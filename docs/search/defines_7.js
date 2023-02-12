@@ -1,7 +1,19 @@
 var searchData=
 [
-  ['i2c0_5fscl_5fpin_751',['I2C0_SCL_PIN',['../xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929',1,'xerxes_rp2040.h']]],
-  ['i2c0_5fsda_5fpin_752',['I2C0_SDA_PIN',['../xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742',1,'xerxes_rp2040.h']]],
-  ['i2c1_5fscl_5fpin_753',['I2C1_SCL_PIN',['../xerxes__rp2040_8h.html#add009e081e638094ee54b280661d862e',1,'xerxes_rp2040.h']]],
-  ['i2c1_5fsda_5fpin_754',['I2C1_SDA_PIN',['../xerxes__rp2040_8h.html#a68697a8aca56f616b38aa23f82edecd5',1,'xerxes_rp2040.h']]]
+  ['mask_5fconfig_5fcalc_5fstats_768',['MASK_CONFIG_CALC_STATS',['../Definitions_8h.html#a06b8acdf3e17956f7e5de33fd007a6ae',1,'Definitions.h']]],
+  ['mask_5fconfig_5ffree_5frun_769',['MASK_CONFIG_FREE_RUN',['../Definitions_8h.html#acdf7e83d8a6037c60482919cb8637256',1,'Definitions.h']]],
+  ['max_5fpv0_5foffset_770',['MAX_PV0_OFFSET',['../Definitions_8h.html#a61b659c9644eeaa8140bf70fc8ff45a2',1,'Definitions.h']]],
+  ['max_5fpv1_5foffset_771',['MAX_PV1_OFFSET',['../Definitions_8h.html#a7354c939b341c55114059c7966b1cf02',1,'Definitions.h']]],
+  ['max_5fpv2_5foffset_772',['MAX_PV2_OFFSET',['../Definitions_8h.html#ad1e044240e55a3a1c658752b80180ffc',1,'Definitions.h']]],
+  ['max_5fpv3_5foffset_773',['MAX_PV3_OFFSET',['../Definitions_8h.html#a0875c8d38dddd3fde369b70a6df092c0',1,'Definitions.h']]],
+  ['mean_5fpv0_5foffset_774',['MEAN_PV0_OFFSET',['../Definitions_8h.html#a9466eae9fc58e8e3139207852bd8d25b',1,'Definitions.h']]],
+  ['mean_5fpv1_5foffset_775',['MEAN_PV1_OFFSET',['../Definitions_8h.html#a4de00c05d3153ba59fff61236ffae5f5',1,'Definitions.h']]],
+  ['mean_5fpv2_5foffset_776',['MEAN_PV2_OFFSET',['../Definitions_8h.html#a0c864ee91a31a59939aaf2f7f47e726b',1,'Definitions.h']]],
+  ['mean_5fpv3_5foffset_777',['MEAN_PV3_OFFSET',['../Definitions_8h.html#a329e150989b4e43e3f74572e651b1cbb',1,'Definitions.h']]],
+  ['mem_5funlocked_5foffset_778',['MEM_UNLOCKED_OFFSET',['../Definitions_8h.html#ab29cef64192ff9a3b7af6be7ff6456f6',1,'Definitions.h']]],
+  ['message_5foffset_779',['MESSAGE_OFFSET',['../Definitions_8h.html#a0e6700eb736c18bdf2cae9f2d1daf188',1,'Definitions.h']]],
+  ['min_5fpv0_5foffset_780',['MIN_PV0_OFFSET',['../Definitions_8h.html#a362034e4187043adedd4785e07ea60ba',1,'Definitions.h']]],
+  ['min_5fpv1_5foffset_781',['MIN_PV1_OFFSET',['../Definitions_8h.html#ab5c75e223fa2a616763b8b7162c1b54a',1,'Definitions.h']]],
+  ['min_5fpv2_5foffset_782',['MIN_PV2_OFFSET',['../Definitions_8h.html#a373ce3fd3e9d8a563575e3f1784750b8',1,'Definitions.h']]],
+  ['min_5fpv3_5foffset_783',['MIN_PV3_OFFSET',['../Definitions_8h.html#a84bf3009d98a08350d77b02d3c9b61ef',1,'Definitions.h']]]
 ];

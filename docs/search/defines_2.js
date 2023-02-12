@@ -1,5 +1,21 @@
 var searchData=
 [
-  ['clk_5fgpin1_5fpin_723',['CLK_GPIN1_PIN',['../xerxes__rp2040_8h.html#a8afdeda204e3b2f7f515c4b06045ea38',1,'xerxes_rp2040.h']]],
-  ['clk_5fgpout1_5fpin_724',['CLK_GPOUT1_PIN',['../xerxes__rp2040_8h.html#a84d6f36ef31c0dd85a90b317fb05f7cc',1,'xerxes_rp2040.h']]]
+  ['default_5fadc_5fclock_5ffreq_738',['DEFAULT_ADC_CLOCK_FREQ',['../Definitions_8h.html#affcdd4848acb915b80d00e6b1e68ee88',1,'Definitions.h']]],
+  ['default_5fadc_5fclock_5fsrc_739',['DEFAULT_ADC_CLOCK_SRC',['../Definitions_8h.html#a6e99af45326462c8068d12390b553f53',1,'Definitions.h']]],
+  ['default_5fbaudrate_740',['DEFAULT_BAUDRATE',['../Definitions_8h.html#affa2c3ad646ea14cf1a034c341caf19c',1,'Definitions.h']]],
+  ['default_5fcycle_5ftime_5fus_741',['DEFAULT_CYCLE_TIME_US',['../Definitions_8h.html#a638fb5d86e71aa118308b42523f37f83',1,'Definitions.h']]],
+  ['default_5fperi_5fclock_5ffreq_742',['DEFAULT_PERI_CLOCK_FREQ',['../Definitions_8h.html#a9bc3cf13e8bb4b1361f6d37db347258c',1,'Definitions.h']]],
+  ['default_5fperi_5fclock_5fsrc_743',['DEFAULT_PERI_CLOCK_SRC',['../Definitions_8h.html#ad2bcebe0b00723328add70c811fe032f',1,'Definitions.h']]],
+  ['default_5fsys_5fclock_5ffreq_744',['DEFAULT_SYS_CLOCK_FREQ',['../Definitions_8h.html#ac317a1ef1e8dffb1c1db17ffbfaadf97',1,'Definitions.h']]],
+  ['default_5fsys_5fclock_5ffreq_5flp_745',['DEFAULT_SYS_CLOCK_FREQ_LP',['../Definitions_8h.html#a87788f8393757bdf1c1c585356a3aa6b',1,'Definitions.h']]],
+  ['default_5fsys_5fclock_5fsrc_746',['DEFAULT_SYS_CLOCK_SRC',['../Definitions_8h.html#a2d26cb334c365ed94b62eb98f7d1757c',1,'Definitions.h']]],
+  ['default_5fsys_5fclock_5fsrc_5flp_747',['DEFAULT_SYS_CLOCK_SRC_LP',['../Definitions_8h.html#aa33f5ca895479860b056f0d8d753d5b5',1,'Definitions.h']]],
+  ['default_5fsys_5fpll_5ffreq_748',['DEFAULT_SYS_PLL_FREQ',['../Definitions_8h.html#a097f41f25852a7075574369e8d3e000c',1,'Definitions.h']]],
+  ['default_5fsys_5fpll_5fpost_5f1_749',['DEFAULT_SYS_PLL_POST_1',['../Definitions_8h.html#a3135e511faf895465f56f7bba1f46bcf',1,'Definitions.h']]],
+  ['default_5fsys_5fpll_5fpost_5f2_750',['DEFAULT_SYS_PLL_POST_2',['../Definitions_8h.html#a990db582671b953b193ab30abb1dd6bf',1,'Definitions.h']]],
+  ['default_5fsys_5fvoltage_751',['DEFAULT_SYS_VOLTAGE',['../Definitions_8h.html#ac39213cccea17a6e72c1b2f96ca6f11d',1,'Definitions.h']]],
+  ['default_5fsys_5fvoltage_5flp_752',['DEFAULT_SYS_VOLTAGE_LP',['../Definitions_8h.html#a8c3de0e820c049c7733c38e4b25fc856',1,'Definitions.h']]],
+  ['default_5fusb_5fclock_5ffreq_753',['DEFAULT_USB_CLOCK_FREQ',['../Definitions_8h.html#af45a52c5d3101bb31e9435ac0e0556ec',1,'Definitions.h']]],
+  ['default_5fwatchdog_5fdelay_754',['DEFAULT_WATCHDOG_DELAY',['../Definitions_8h.html#a04b9fac70084e153fa3ce2bc772f2ee1',1,'Definitions.h']]],
+  ['default_5fxosc_5fclock_5ffreq_755',['DEFAULT_XOSC_CLOCK_FREQ',['../Definitions_8h.html#a7859d82155cca4a23e6849199ebf70e6',1,'Definitions.h']]]
 ];

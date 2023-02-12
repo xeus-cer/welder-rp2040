@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/Sensors/Generic/AnalogInput.hpp Source File</title>
+<title>Sensor RP2040: src/Sensors/Generic/AnalogInput.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_632e1770b996aebcb52863c08dfee6b2.html">Sensors</a></li><li class="navelem"><a class="el" href="dir_aaeab71371ca9900bfa11e2dcf11fe51.html">Generic</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_afe58f6d0ef7eec69c2706509daaefe7.html">Sensors</a></li><li class="navelem"><a class="el" href="dir_3c1e1a5b7c62d3caa221551e0ecce290.html">Generic</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -76,7 +76,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;hardware/adc.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Sensor_8hpp.html">Sensors/Sensor.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="xerxes__rp2040_8h.html">xerxes_rp2040.h</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="xerxes__rp2040_8h.html">Hardware/xerxes_rp2040.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
@@ -212,11 +212,11 @@ $(function() {
 <div class="ttc" id="aclassXerxes_1_1AnalogInput_html_a82d14edcb7dd530a37c8a378af64d62c"><div class="ttname"><a href="classXerxes_1_1AnalogInput.html#a82d14edcb7dd530a37c8a378af64d62c">Xerxes::AnalogInput::AnalogInput</a></div><div class="ttdeci">AnalogInput(uint8_t numChannels, uint8_t oversampleBits=defaultOversampleBits)</div><div class="ttdoc">Construct a new AnalogInput object.</div><div class="ttdef"><b>Definition:</b> AnalogInput.hpp:50</div></div>
 <div class="ttc" id="aclassXerxes_1_1AnalogInput_html_a9dc8b63ad4764cc01ccba0f4e1d91080"><div class="ttname"><a href="classXerxes_1_1AnalogInput.html#a9dc8b63ad4764cc01ccba0f4e1d91080">Xerxes::AnalogInput::AnalogInput</a></div><div class="ttdeci">AnalogInput()</div><div class="ttdoc">Construct a new Analog Input object.</div><div class="ttdef"><b>Definition:</b> AnalogInput.hpp:64</div></div>
 <div class="ttc" id="aclassXerxes_1_1AnalogInput_html_aba2e6c6055860fde97cf7723f713bed9"><div class="ttname"><a href="classXerxes_1_1AnalogInput.html#aba2e6c6055860fde97cf7723f713bed9">Xerxes::AnalogInput::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">update sensor values, takes approx 1ms for 4 channels with 100 samples</div><div class="ttdef"><b>Definition:</b> AnalogInput.hpp:119</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html"><div class="ttname"><a href="classXerxes_1_1Sensor.html">Xerxes::Sensor</a></div><div class="ttdef"><b>Definition:</b> Sensor.hpp:8</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_a5a17fa45844910837ce7d6f6d463d526"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a5a17fa45844910837ce7d6f6d463d526">Xerxes::Sensor::pv2</a></div><div class="ttdeci">double pv2</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:12</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_aa2d6ef60f4b30577debe114b62b9888f"><div class="ttname"><a href="classXerxes_1_1Sensor.html#aa2d6ef60f4b30577debe114b62b9888f">Xerxes::Sensor::pv3</a></div><div class="ttdeci">double pv3</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:13</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_ab227903b27a7ba7e7705670ae00ecaab"><div class="ttname"><a href="classXerxes_1_1Sensor.html#ab227903b27a7ba7e7705670ae00ecaab">Xerxes::Sensor::pv0</a></div><div class="ttdeci">double pv0</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:10</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_adb25d77c5329853343d523242f3854f9"><div class="ttname"><a href="classXerxes_1_1Sensor.html#adb25d77c5329853343d523242f3854f9">Xerxes::Sensor::pv1</a></div><div class="ttdeci">double pv1</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:11</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html"><div class="ttname"><a href="classXerxes_1_1Sensor.html">Xerxes::Sensor</a></div><div class="ttdef"><b>Definition:</b> Sensor.hpp:14</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a5a17fa45844910837ce7d6f6d463d526"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a5a17fa45844910837ce7d6f6d463d526">Xerxes::Sensor::pv2</a></div><div class="ttdeci">double pv2</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:18</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_aa2d6ef60f4b30577debe114b62b9888f"><div class="ttname"><a href="classXerxes_1_1Sensor.html#aa2d6ef60f4b30577debe114b62b9888f">Xerxes::Sensor::pv3</a></div><div class="ttdeci">double pv3</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:19</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_ab227903b27a7ba7e7705670ae00ecaab"><div class="ttname"><a href="classXerxes_1_1Sensor.html#ab227903b27a7ba7e7705670ae00ecaab">Xerxes::Sensor::pv0</a></div><div class="ttdeci">double pv0</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:16</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_adb25d77c5329853343d523242f3854f9"><div class="ttname"><a href="classXerxes_1_1Sensor.html#adb25d77c5329853343d523242f3854f9">Xerxes::Sensor::pv1</a></div><div class="ttdeci">double pv1</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:17</div></div>
 <div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
 <div class="ttc" id="anamespaceXerxes_html_a1e9ae8411d579b0edb3c39f0605bbd6e"><div class="ttname"><a href="namespaceXerxes.html#a1e9ae8411d579b0edb3c39f0605bbd6e">Xerxes::defaultChannels</a></div><div class="ttdeci">constexpr uint8_t defaultChannels</div><div class="ttdoc">default number of used ADC channels</div><div class="ttdef"><b>Definition:</b> AnalogInput.hpp:15</div></div>
 <div class="ttc" id="anamespaceXerxes_html_ae8d40ff2da96b6d98cbb0b8c7962be63"><div class="ttname"><a href="namespaceXerxes.html#ae8d40ff2da96b6d98cbb0b8c7962be63">Xerxes::defaultOversampleBits</a></div><div class="ttdeci">constexpr uint8_t defaultOversampleBits</div><div class="ttdoc">default number of oversampling bits</div><div class="ttdef"><b>Definition:</b> AnalogInput.hpp:13</div></div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/Memory.h File Reference</title>
+<title>Sensor RP2040: src/Hardware/Memory.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_392e5fed41b2de721750e308647dcb9c.html">Hardware</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,35 +77,32 @@ $(function() {
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &quot;<a class="el" href="StatisticBuffer_8hpp_source.html">Buffer/StatisticBuffer.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Definitions_8h_source.html">Definitions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Definitions_8h_source.html">Core/Definitions.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Memory.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="Memory_8h__incl.png" border="0" usemap="#ainclude_2Memory_8h" alt=""/></div>
-<map name="ainclude_2Memory_8h" id="ainclude_2Memory_8h">
-<area shape="rect" title=" " alt="" coords="106,5,243,32"/>
+<div class="center"><img src="Memory_8h__incl.png" border="0" usemap="#asrc_2Hardware_2Memory_8h" alt=""/></div>
+<map name="asrc_2Hardware_2Memory_8h" id="asrc_2Hardware_2Memory_8h">
+<area shape="rect" title=" " alt="" coords="87,5,263,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,72,107"/>
 <area shape="rect" title=" " alt="" coords="81,229,137,256"/>
 <area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="147,80,333,107"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="358,80,463,107"/>
+<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="357,80,496,107"/>
 <area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="181,155,299,181"/>
 <area shape="rect" title=" " alt="" coords="161,229,233,256"/>
 <area shape="rect" title=" " alt="" coords="258,229,321,256"/>
 <area shape="rect" title=" " alt="" coords="345,229,425,256"/>
-<area shape="rect" title=" " alt="" coords="333,155,464,181"/>
-<area shape="rect" title=" " alt="" coords="489,155,629,181"/>
+<area shape="rect" title=" " alt="" coords="341,155,472,181"/>
+<area shape="rect" title=" " alt="" coords="497,155,637,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="Memory_8h__dep__incl.png" border="0" usemap="#ainclude_2Memory_8hdep" alt=""/></div>
-<map name="ainclude_2Memory_8hdep" id="ainclude_2Memory_8hdep">
-<area shape="rect" title=" " alt="" coords="93,5,230,32"/>
-<area shape="rect" href="InitUtils_8h.html" title=" " alt="" coords="5,80,141,107"/>
-<area shape="rect" href="UserFlash_8hpp.html" title=" " alt="" coords="166,80,333,107"/>
-<area shape="rect" href="Actions_8hpp.html" title=" " alt="" coords="87,155,236,181"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="109,229,214,256"/>
+<div class="center"><img src="Memory_8h__dep__incl.png" border="0" usemap="#asrc_2Hardware_2Memory_8hdep" alt=""/></div>
+<map name="asrc_2Hardware_2Memory_8hdep" id="asrc_2Hardware_2Memory_8hdep">
+<area shape="rect" title=" " alt="" coords="5,5,181,32"/>
+<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="41,80,146,107"/>
 </map>
 </div>
 </div>
@@ -124,13 +121,9 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a814f05c79503db12174f06cc3cfcbfb7"><td class="memItemLeft" align="right" valign="top">const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Memory_8h.html#a814f05c79503db12174f06cc3cfcbfb7">flash_target_contents</a> = (const uint8_t *) (XIP_BASE + <a class="el" href="Definitions_8h.html#a21df7978a7e635eaa5037d4c853cd15d">FLASH_TARGET_OFFSET</a>)</td></tr>
-<tr class="memdesc:a814f05c79503db12174f06cc3cfcbfb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flash memory contents.  <a href="Memory_8h.html#a814f05c79503db12174f06cc3cfcbfb7">More...</a><br /></td></tr>
-<tr class="separator:a814f05c79503db12174f06cc3cfcbfb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a891964616513e09365d7511fb202f64c"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Memory_8h.html#a891964616513e09365d7511fb202f64c">awake</a> = true</td></tr>
 <tr class="separator:a891964616513e09365d7511fb202f64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1f5da2214189be4a9e36d3919099579"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a> [<a class="el" href="Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427">REGISTER_SIZE</a>]</td></tr>
-<tr class="memdesc:ac1f5da2214189be4a9e36d3919099579"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main register allocation for the device.  <a href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">More...</a><br /></td></tr>
 <tr class="separator:ac1f5da2214189be4a9e36d3919099579"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d7c469198f8bf0d8a40b801c84524d6"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Memory_8h.html#a4d7c469198f8bf0d8a40b801c84524d6">gainPv0</a> = (float *)(<a class="el" href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a> + <a class="el" href="Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d">GAIN_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:a4d7c469198f8bf0d8a40b801c84524d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -390,22 +383,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a814f05c79503db12174f06cc3cfcbfb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a814f05c79503db12174f06cc3cfcbfb7">&#9670;&nbsp;</a></span>flash_target_contents</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const uint8_t* flash_target_contents = (const uint8_t *) (XIP_BASE + <a class="el" href="Definitions_8h.html#a21df7978a7e635eaa5037d4c853cd15d">FLASH_TARGET_OFFSET</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Flash memory contents. </p>
-
-</div>
-</div>
 <a id="a4d7c469198f8bf0d8a40b801c84524d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d7c469198f8bf0d8a40b801c84524d6">&#9670;&nbsp;</a></span>gainPv0</h2>
 
@@ -473,8 +450,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Main register allocation for the device. </p>
 
 </div>
 </div>

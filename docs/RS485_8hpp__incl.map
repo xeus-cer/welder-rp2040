@@ -1,12 +1,10 @@
-<map id="include/RS485.hpp" name="include/RS485.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="180,5,323,32"/>
-<area shape="rect" id="node2" href="$Network_8hpp.html" title=" " alt="" coords="5,80,111,107"/>
-<area shape="rect" id="node3" href="$Packet_8hpp.html" title=" " alt="" coords="147,155,241,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="186,80,317,107"/>
-<area shape="rect" id="node6" href="$Message_8hpp.html" title=" " alt="" coords="341,80,449,107"/>
-<area shape="rect" id="node10" title=" " alt="" coords="473,80,560,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="228,229,291,256"/>
-<area shape="rect" id="node7" title=" " alt="" coords="350,155,417,181"/>
-<area shape="rect" id="node8" href="$MessageId_8h.html" title=" " alt="" coords="441,155,545,181"/>
-<area shape="rect" id="node9" title=" " alt="" coords="457,229,528,256"/>
+<map id="src/Communication/RS485.hpp" name="src/Communication/RS485.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="95,5,316,32"/>
+<area shape="rect" id="node2" href="$Network_8hpp.html" title=" " alt="" coords="22,80,128,107"/>
+<area shape="rect" id="node3" href="$Packet_8hpp.html" title=" " alt="" coords="28,155,122,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="284,80,415,107"/>
+<area shape="rect" id="node7" href="$Message_8hpp.html" title=" " alt="" coords="152,80,260,107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="440,80,526,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="166,229,229,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="64,229,131,256"/>
 </map>

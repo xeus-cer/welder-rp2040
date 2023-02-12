@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: include/Network.hpp Source File</title>
+<title>Sensor RP2040: src/Communication/Network.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_fb35f8d28c5a1c2121d46772e18e7ebe.html">Communication</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -76,44 +76,40 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Packet_8hpp.html">Packet.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="Network_8hpp.html#a8450d5398907cd2b9ab0466daf027d73">    6</a></span>&#160;<span class="preprocessor">#define BROADCAST_ADDR  0xff</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Network.html">Network</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">//</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">Network</a>(<span class="comment">/* args */</span>);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">~Network</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">   19</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">sendData</a>(<span class="keyword">const</span> <a class="code" href="classXerxes_1_1Packet.html">Packet</a> &amp; toSend) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">   20</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">readData</a>(<span class="keyword">const</span> uint64_t timeoutUs, <a class="code" href="classXerxes_1_1Packet.html">Packet</a> &amp;packet) = 0;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">   23</a></span>&#160;<a class="code" href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">Network::Network</a>(<span class="comment">/* args */</span>)</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a3cc2e66a8a362160423ea21cbb83f768">   11</a></span>&#160;constexpr uint8_t <a class="code" href="namespaceXerxes.html#a3cc2e66a8a362160423ea21cbb83f768">BROADCAST_ADDR</a> = 0xff;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Network.html">Network</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">//</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">Network</a>(<span class="comment">/* args */</span>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">~Network</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">   22</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">sendData</a>(<span class="keyword">const</span> <a class="code" href="classXerxes_1_1Packet.html">Packet</a> &amp; toSend) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">   23</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">readData</a>(<span class="keyword">const</span> uint64_t timeoutUs, <a class="code" href="classXerxes_1_1Packet.html">Packet</a> &amp;packet) = 0;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">   27</a></span>&#160;<a class="code" href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">Network::~Network</a>()</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__NETWORK_HPP</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__NETWORK_HPP</span></div>
 <div class="ttc" id="aPacket_8hpp_html"><div class="ttname"><a href="Packet_8hpp.html">Packet.hpp</a></div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html"><div class="ttname"><a href="classXerxes_1_1Network.html">Xerxes::Network</a></div><div class="ttdef"><b>Definition:</b> Network.hpp:12</div></div>
+<div class="ttc" id="aclassXerxes_1_1Network_html"><div class="ttname"><a href="classXerxes_1_1Network.html">Xerxes::Network</a></div><div class="ttdef"><b>Definition:</b> Network.hpp:15</div></div>
 <div class="ttc" id="aclassXerxes_1_1Network_html_a704b203ed48e3f44b63888aba53cc65b"><div class="ttname"><a href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">Xerxes::Network::readData</a></div><div class="ttdeci">virtual bool readData(const uint64_t timeoutUs, Packet &amp;packet)=0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html_aa9e0bdc6ffd6310fb680fca877741cbc"><div class="ttname"><a href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">Xerxes::Network::Network</a></div><div class="ttdeci">Network()</div><div class="ttdef"><b>Definition:</b> Network.hpp:23</div></div>
+<div class="ttc" id="aclassXerxes_1_1Network_html_aa9e0bdc6ffd6310fb680fca877741cbc"><div class="ttname"><a href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">Xerxes::Network::Network</a></div><div class="ttdeci">Network()</div><div class="ttdef"><b>Definition:</b> Network.cpp:8</div></div>
 <div class="ttc" id="aclassXerxes_1_1Network_html_ab1e108dadcc1de0aac8220c2d6719727"><div class="ttname"><a href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">Xerxes::Network::sendData</a></div><div class="ttdeci">virtual bool sendData(const Packet &amp;toSend) const =0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html_ad22e6703219370ef2965da737a014232"><div class="ttname"><a href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">Xerxes::Network::~Network</a></div><div class="ttdeci">~Network()</div><div class="ttdef"><b>Definition:</b> Network.hpp:27</div></div>
-<div class="ttc" id="aclassXerxes_1_1Packet_html"><div class="ttname"><a href="classXerxes_1_1Packet.html">Xerxes::Packet</a></div><div class="ttdef"><b>Definition:</b> Packet.hpp:15</div></div>
+<div class="ttc" id="aclassXerxes_1_1Network_html_ad22e6703219370ef2965da737a014232"><div class="ttname"><a href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">Xerxes::Network::~Network</a></div><div class="ttdeci">~Network()</div><div class="ttdef"><b>Definition:</b> Network.cpp:12</div></div>
+<div class="ttc" id="aclassXerxes_1_1Packet_html"><div class="ttname"><a href="classXerxes_1_1Packet.html">Xerxes::Packet</a></div><div class="ttdef"><b>Definition:</b> Packet.hpp:17</div></div>
 <div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
+<div class="ttc" id="anamespaceXerxes_html_a3cc2e66a8a362160423ea21cbb83f768"><div class="ttname"><a href="namespaceXerxes.html#a3cc2e66a8a362160423ea21cbb83f768">Xerxes::BROADCAST_ADDR</a></div><div class="ttdeci">constexpr uint8_t BROADCAST_ADDR</div><div class="ttdef"><b>Definition:</b> Network.hpp:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
