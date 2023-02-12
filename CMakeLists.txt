@@ -16,12 +16,22 @@ include_directories(
 )
 
 
-add_executable(${PROJECT_NAME}
-src/main.cpp
-src/ClockUtils.cpp
-src/Sleep.cpp
-src/InitUtils.cpp
-src/UserFlash.cpp
+add_executable(
+	${PROJECT_NAME}
+
+	src/Callbacks.cpp
+	src/ClockUtils.cpp
+	src/Sleep.cpp
+	src/InitUtils.cpp
+	src/UserFlash.cpp
+	src/Message.cpp
+	src/Packet.cpp
+	src/Protocol.cpp
+	src/RS485.cpp
+	src/Slave.cpp
+	src/Network.cpp
+
+	src/main.cpp
 )
 
 target_link_libraries(

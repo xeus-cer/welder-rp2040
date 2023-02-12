@@ -1,83 +1,25 @@
-#ifndef __ACTIONS_HPP
+#include "Callbacks.hpp"
 
 
-#include <functional>
 #include "UserFlash.hpp"
 #include "DeviceIds.h"
 #include "Sleep.hpp"
 #include "InitUtils.hpp"
 #include "hardware/watchdog.h"
+#include "pico/multicore.h"
 #include "Definitions.h"
+#include "Slave.hpp"
 
 
 extern Xerxes::Slave xs;
 extern void pollSensor();
-extern volatile uint8_t mainRegister[REGISTER_SIZE];
+extern uint8_t mainRegister[REGISTER_SIZE];
 
 
-/**
- * @brief Decorate a function to be unicast targeted
- * 
- * a function is called only on targeted unicast packet
- * 
- * @tparam Func 
- * @param f function to call for unicast packets
- * @return std::function<void(const Xerxes::Message &)> decorated lambda function
- */
-template <typename Func>
-std::function<void(const Xerxes::Message &)> unicast(Func f) 
+namespace Xerxes
 {
-  // The returned function is a lambda function that takes the same arguments as the original
-  // function and calls it with the given arguments.
-    return [f](const Xerxes::Message &msg) {
-        uint8_t *devAddress              = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
-        if(msg.dstAddr!= 0xff && *devAddress == msg.dstAddr)
-        {
-        // Call the original function with the given arguments.
-            f(msg);
-        }
-        else
-        {       
-            // do nothing
-        }
-    };
-}
 
 
-/**
- * @brief Decorate a function to be broadcast targeted
- * 
- * a function is called on targeted unicast packet or broadcast packet
- * 
- * @tparam Func 
- * @param f function to call for unicast packets
- * @return std::function<void(const Xerxes::Message &)> decorated lambda function
- */
-template <typename Func>
-std::function<void(const Xerxes::Message &)> broadcast(Func f) 
-{
-    return [f](const Xerxes::Message &msg) {
-        uint8_t *devAddress              = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
-        if(msg.dstAddr == 0xff || *devAddress == msg.dstAddr)
-        {
-        // Call the original function with the given arguments.
-            f(msg);
-        }
-        else
-        {       
-            // do nothing
-        }
-    };
-}
-
-
-/**
- * @brief Ping callback
- * 
- * Reply to ping request with device id and protocol version
- * 
- * @param msg incoming message
- */
 void pingCallback(const Xerxes::Message &msg)
 {
     std::vector<uint8_t> payload {DEVID_PRESSURE_60MBAR, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
@@ -85,31 +27,12 @@ void pingCallback(const Xerxes::Message &msg)
 }
 
 
-/**
- * @brief Synchronize callback
- * 
- * Used to simultaneously poll all sensors on the bus
- * 
- * @param msg incoming message
- * 
- * @note This function does not return an answer, it only polls the sensor
- */
 void syncCallback(const Xerxes::Message &msg)
 {
     pollSensor();
 }
 
 
-/**
- * @brief Write register callback
- * 
- * Write <LEN> bytes of <DATA> to the device register, starting at <REG_ID>
- * The request prototype is <MSGID_WRITE> <REG_ID> <LEN> <DATA>
- * 
- * @note This function is blocking, it will not return until the data is written to the register
- * 
- * @param msg 
- */
 void writeRegCallback(const Xerxes::Message &msg)
 {   
     // read offset from message
@@ -160,18 +83,6 @@ void writeRegCallback(const Xerxes::Message &msg)
 }
 
 
-/**
- * @brief Read register callback
- * 
- * Read <LEN> bytes from device register, starting at <REG_ID>
- * The request prototype is <MSGID_READ> <REG_ID> <LEN>
- * 
- * @param msg 
- * 
- * @note This function is blocking, it will not return until the data is read from the register
- * and sent to the master device.
- * @note All data are in little endian format - LSB first. 
- */
 void readRegCallback(const Xerxes::Message &msg)
 {
     // read offset from message in little endian
@@ -205,11 +116,6 @@ void readRegCallback(const Xerxes::Message &msg)
 }
 
 
-/**
- * @brief Attempt to perform low power sleep
- * 
- * @param msg incoming message
- */
 void sleepCallback(const Xerxes::Message &msg)
 {
     uint8_t raw_duration[4];
@@ -225,26 +131,13 @@ void sleepCallback(const Xerxes::Message &msg)
     sleep_lp(cleanUs);
 }
 
-/**
- * @brief Attempt to perform soft reset
- * 
- * @param msg
- * 
- * @note This function does not return
- */
+
 void softResetCallback(const Xerxes::Message &msg)
 {
     watchdog_reboot(0,0,0);
 }
 
 
-/**
- * @brief Attempt to perform factory reset
- * 
- * @note This function may be called only if memory is unlocked by writing the correct value to the memUnlocked register
- * 
- * @param msg 
- */
 void factoryResetCallback(const Xerxes::Message &msg)
 {   
     /** @brief 0x55AA55AA = unlocked, anything else = locked */
@@ -267,4 +160,4 @@ void factoryResetCallback(const Xerxes::Message &msg)
 }
 
 
-#endif // !__ACTIONS_HPP
+} // namespace Xerxes

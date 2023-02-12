@@ -11,15 +11,18 @@
 #include "pico/stdio/driver.h"
 #include "pico/sleep.h"
 #include "hardware/xosc.h"
+#include "hardware/watchdog.h"
 
 #include "Errors.h"
 #include "Sensors/all.hpp"
 #include "Slave.hpp"
 #include "Protocol.hpp"
-#include "Actions.hpp"
+#include "Callbacks.hpp"
 #include "ClockUtils.hpp"
 #include "Memory.h"
-
+#include "InitUtils.hpp"
+#include "Sleep.hpp"
+#include "BindWrapper.hpp"
 
 
 using namespace std;
@@ -114,7 +117,7 @@ int main(void)
     sensor.init();
     watchdog_update();
 
-    // bind callbacks, 204us
+    // bind callbacks, ~204us
     xs.bind(MSGID_PING,         unicast(    pingCallback));
     xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
     xs.bind(MSGID_READ,         unicast(    readRegCallback));

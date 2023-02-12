@@ -3,10 +3,13 @@
 
 #include "Packet.hpp"
 
-#define BROADCAST_ADDR  0xff
 
 namespace Xerxes
 {
+
+
+constexpr uint8_t BROADCAST_ADDR = 0xff;
+
     
 class Network
 {
@@ -19,14 +22,6 @@ public:
     virtual bool sendData(const Packet & toSend) const = 0;
     virtual bool readData(const uint64_t timeoutUs, Packet &packet) = 0;
 };
-
-Network::Network(/* args */)
-{
-}
-
-Network::~Network()
-{
-}
 
 
 } // namespace Xerxes
