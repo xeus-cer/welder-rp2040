@@ -7,11 +7,10 @@
 #include "Definitions.h"
 
 
-const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET); ///< Flash memory contents
 volatile bool awake = true;
 
 /* Allocate memory for register */
-volatile uint8_t mainRegister[REGISTER_SIZE];  ///< Main register allocation for the device
+volatile uint8_t mainRegister[REGISTER_SIZE];
 
 /* ### NON VOLATILE - PERMANENT VALUES ### */
 float* gainPv0       = (float *)(mainRegister + GAIN_PV0_OFFSET);

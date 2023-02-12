@@ -17,11 +17,7 @@
 #include "pico/util/queue.h"
 
 
-extern uint64_t *error;
-extern uint8_t *mainRegister;
-extern float* gainPv0, *gainPv1, *gainPv2, *gainPv3;
-extern uint32_t *desiredCycleTimeUs;
-extern ConfigBitsUnion *config ;
+extern volatile uint8_t mainRegister[REGISTER_SIZE];
 extern queue_t txFifo, rxFifo;
 
 
@@ -44,6 +40,7 @@ void uart_interrupt_handler()
         if(!success)
         {
             // set cpu overload flag
+            uint64_t* error      = (uint64_t *)(mainRegister + ERROR_OFFSET);   // Error register, holds error codes
             *error |= ERROR_MASK_CPU_OVERLOAD;
         }
     }
@@ -53,7 +50,7 @@ void uart_interrupt_handler()
 }
 
 
-void userInitUart(void)
+void userInitUart()
 {
     // Initialise UART 0 on 115200baud
     uart_init(uart0, DEFAULT_BAUDRATE);
@@ -109,6 +106,15 @@ void userLoadDefaultValues()
         mainRegister[i] = 0;
     }
 
+    float* gainPv0       = (float *)(mainRegister + GAIN_PV0_OFFSET);
+    float* gainPv1       = (float *)(mainRegister + GAIN_PV1_OFFSET);
+    float* gainPv2       = (float *)(mainRegister + GAIN_PV2_OFFSET);
+    float* gainPv3       = (float *)(mainRegister + GAIN_PV3_OFFSET);
+
+    uint32_t *desiredCycleTimeUs     = (uint32_t *)(mainRegister + OFFSET_DESIRED_CYCLE_TIME);  ///< Desired cycle time of sensor loop in microseconds
+
+    ConfigBitsUnion *config          = (ConfigBitsUnion *)(mainRegister + OFFSET_CONFIG_BITS);  ///< Config bits of the device (1 byte)
+
     *gainPv0    = 1;
     *gainPv1    = 1;    
     *gainPv1    = 1;
@@ -116,7 +122,7 @@ void userLoadDefaultValues()
 
     *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
     config->all = 0;
-    updateFlash();
+    updateFlash((uint8_t *)mainRegister);
 }
 
 
@@ -132,7 +138,7 @@ void userInit()
     userInitQueue();
 
     // initialize the flash memory and load the default values
-    if(!userInitFlash())
+    if(!userInitFlash((uint8_t *)mainRegister))
     {
         userLoadDefaultValues();
     }

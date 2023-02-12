@@ -7,10 +7,12 @@
 #include "Sleep.hpp"
 #include "InitUtils.hpp"
 #include "hardware/watchdog.h"
+#include "Definitions.h"
 
 
 extern Xerxes::Slave xs;
 extern void pollSensor();
+extern volatile uint8_t mainRegister[REGISTER_SIZE];
 
 
 /**
@@ -28,6 +30,7 @@ std::function<void(const Xerxes::Message &)> unicast(Func f)
   // The returned function is a lambda function that takes the same arguments as the original
   // function and calls it with the given arguments.
     return [f](const Xerxes::Message &msg) {
+        uint8_t *devAddress              = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
         if(msg.dstAddr!= 0xff && *devAddress == msg.dstAddr)
         {
         // Call the original function with the given arguments.
@@ -54,6 +57,7 @@ template <typename Func>
 std::function<void(const Xerxes::Message &)> broadcast(Func f) 
 {
     return [f](const Xerxes::Message &msg) {
+        uint8_t *devAddress              = (uint8_t *)(mainRegister + OFFSET_ADDRESS);
         if(msg.dstAddr == 0xff || *devAddress == msg.dstAddr)
         {
         // Call the original function with the given arguments.
@@ -148,7 +152,7 @@ void writeRegCallback(const Xerxes::Message &msg)
     
     // update flash, takes ~50ms to complete hence the 2 watchdog updates
     watchdog_update();
-    updateFlash();
+    updateFlash((uint8_t *)mainRegister);
     watchdog_update();
 
     // send ACK_OK
@@ -243,6 +247,9 @@ void softResetCallback(const Xerxes::Message &msg)
  */
 void factoryResetCallback(const Xerxes::Message &msg)
 {   
+    /** @brief 0x55AA55AA = unlocked, anything else = locked */
+    uint32_t* memUnlocked   = (uint32_t *)(mainRegister + MEM_UNLOCKED_OFFSET);
+
     // check if memory is unlocked (factory reset is allowed only if memory is unlocked)
     if(*memUnlocked == MEM_UNLOCKED_VAL)
     {

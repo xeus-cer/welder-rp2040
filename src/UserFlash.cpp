@@ -6,15 +6,14 @@
 #include "Definitions.h"
 
 
-extern volatile uint8_t *mainRegister;
-extern const uint8_t *flash_target_contents;
-extern uint64_t* uid;
 
-
-bool userInitFlash()
+bool userInitFlash(uint8_t *mainRegister)
 {
     // disable interrupts first
     auto status = save_and_disable_interrupts();
+
+    const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + FLASH_TARGET_OFFSET); // Flash memory contents
+    uint64_t* uid        = (uint64_t *)(mainRegister + UID_OFFSET);     // Unique ID of the device
 
     //read UID
     flash_get_unique_id((uint8_t *)uid);
@@ -39,7 +38,7 @@ bool userInitFlash()
 }
 
 
-void updateFlash()
+void updateFlash(const uint8_t *mainRegister)
 {
     // disable interrupts first
     auto status = save_and_disable_interrupts();

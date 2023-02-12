@@ -1,6 +1,8 @@
 #ifndef __INITUTILS_H
 #define __INITUTILS_H
 
+#include <stdint.h>
+
 
 /**
  * @brief Initialize the queues for the UART
