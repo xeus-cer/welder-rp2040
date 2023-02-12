@@ -2,6 +2,8 @@
 
 
 #include "Definitions.h"
+#include <functional>
+#include "Communication/Message.hpp"
 
 extern volatile uint8_t mainRegister[REGISTER_SIZE];
 

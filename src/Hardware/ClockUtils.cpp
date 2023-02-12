@@ -5,7 +5,7 @@
 #include "hardware/pll.h"
 #include "hardware/structs/pll.h"
 #include "hardware/structs/clocks.h"
-#include "Definitions.h"
+#include "Core/Definitions.h"
 #include "hardware/vreg.h"
 
 

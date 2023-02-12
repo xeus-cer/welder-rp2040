@@ -19,7 +19,9 @@
 #define FLASH_TARGET_OFFSET         2 * 1024 * 1024 - FLASH_SECTOR_SIZE // end of the 2MiB flash: 2MiB - 4KB
 
 // how many samples are rotated in ring buffer
+#ifndef RING_BUFFER_LEN
 #define RING_BUFFER_LEN     100
+#endif // !RING_BUFFER_LEN
 
 // ############################### //
 // BEGIN OF MEMORY MAPPING OFFSETS //
@@ -109,8 +111,13 @@
 
 
 /* Default values */
-#define DEFAULT_CYCLE_TIME_US       100000     // 100 ms
+#ifndef DEFAULT_CYCLE_TIME_US
+#define DEFAULT_CYCLE_TIME_US       10000     // 10 ms
+#endif // !DEFAULT_CYCLE_TIME_US
+
+#ifndef DEFAULT_WATCHDOG_DELAY
 #define DEFAULT_WATCHDOG_DELAY      200         // ms
+#endif // !DEFAULT_WATCHDOG_DELAY
 
 /* Default clocks */
 #define DEFAULT_USB_CLOCK_FREQ      48 * MHZ

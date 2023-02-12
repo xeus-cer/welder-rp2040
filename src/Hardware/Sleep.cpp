@@ -3,7 +3,7 @@
 
 #include "xerxes_rp2040.h"
 #include "ClockUtils.hpp"
-#include "Definitions.h"
+#include "Core/Definitions.h"
 #include "hardware/watchdog.h"
 #include "pico/sleep.h"
 #include "pico/stdlib.h"

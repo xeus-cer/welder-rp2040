@@ -1,14 +1,14 @@
 #include "Callbacks.hpp"
 
 
-#include "UserFlash.hpp"
-#include "DeviceIds.h"
-#include "Sleep.hpp"
-#include "InitUtils.hpp"
+#include "Hardware/UserFlash.hpp"
+#include "Core/DeviceIds.h"
+#include "Hardware/Sleep.hpp"
+#include "Hardware/InitUtils.hpp"
 #include "hardware/watchdog.h"
 #include "pico/multicore.h"
-#include "Definitions.h"
-#include "Slave.hpp"
+#include "Core/Definitions.h"
+#include "Core/Slave.hpp"
 
 
 extern Xerxes::Slave xs;

@@ -3,7 +3,7 @@
 
 #include "hardware/adc.h"
 #include "Sensors/Sensor.hpp"
-#include "xerxes_rp2040.h"
+#include "Hardware/xerxes_rp2040.h"
 
 
 namespace Xerxes

@@ -1,6 +1,12 @@
 #ifndef __SENSOR_HPP
 #define __SENSOR_HPP
 
+#include <array>
+#include "hardware/gpio.h"
+#include "hardware/spi.h"
+#include "hardware/adc.h"
+
+
 namespace Xerxes
 {
     

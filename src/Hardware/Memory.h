@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <array>
 #include "Buffer/StatisticBuffer.hpp"
-#include "Definitions.h"
+#include "Core/Definitions.h"
 
 
 volatile bool awake = true;

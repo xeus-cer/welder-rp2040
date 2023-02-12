@@ -12,24 +12,24 @@ set(CMAKE_CXX_STANDARD 23)
 pico_sdk_init()
 	
 include_directories(
-	"include"
+	"src"
 )
 
 
 add_executable(
 	${PROJECT_NAME}
 
-	src/Callbacks.cpp
-	src/ClockUtils.cpp
-	src/Sleep.cpp
-	src/InitUtils.cpp
-	src/UserFlash.cpp
-	src/Message.cpp
-	src/Packet.cpp
-	src/Protocol.cpp
-	src/RS485.cpp
-	src/Slave.cpp
-	src/Network.cpp
+	src/Communication/Callbacks.cpp
+	src/Hardware/ClockUtils.cpp
+	src/Hardware/Sleep.cpp
+	src/Hardware/InitUtils.cpp
+	src/Hardware/UserFlash.cpp
+	src/Communication/Message.cpp
+	src/Communication/Packet.cpp
+	src/Communication/Protocol.cpp
+	src/Communication/RS485.cpp
+	src/Core/Slave.cpp
+	src/Communication/Network.cpp
 
 	src/main.cpp
 )

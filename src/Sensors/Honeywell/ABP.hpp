@@ -5,7 +5,8 @@
 #include "hardware/spi.h"
 #include "Sensors/Sensor.hpp"
 #include <array>
-#include "xerxes_rp2040.h"
+#include "Hardware/xerxes_rp2040.h"
+#include "hardware/gpio.h"
 
 
 namespace Xerxes

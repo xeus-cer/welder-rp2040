@@ -7,7 +7,7 @@
 #include "Sensors/Sensor.hpp"
 #include <memory>
 #include <array>
-#include "xerxes_rp2040.h"
+#include "Hardware/xerxes_rp2040.h"
 
 
 namespace CMD

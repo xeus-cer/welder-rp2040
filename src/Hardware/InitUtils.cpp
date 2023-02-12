@@ -3,9 +3,9 @@
 
 #include "xerxes_rp2040.h"
 #include "ClockUtils.hpp"
-#include "Errors.h"
+#include "Core/Errors.h"
 #include "UserFlash.hpp"
-#include "Definitions.h"
+#include "Core/Definitions.h"
 
 #include "pico/stdlib.h"
 #include "hardware/uart.h"

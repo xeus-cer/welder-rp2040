@@ -1,10 +1,19 @@
-#include "xerxes_rp2040.h"
+#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/ClockUtils.hpp"
+#include "Hardware/Memory.h"
+#include "Hardware/InitUtils.hpp"
+#include "Hardware/Sleep.hpp"
+#include "Core/Errors.h"
+#include "Core/BindWrapper.hpp"
+#include "Core/Slave.hpp"
+#include "Sensors/all.hpp"
+#include "Communication/Protocol.hpp"
+#include "Communication/Callbacks.hpp"
+
 #include <iostream>
 #include <stdio.h>
-#include <array>
 #include <stdlib.h>
 #include <bitset>
-#include <cstdint>
 
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
@@ -12,17 +21,6 @@
 #include "pico/sleep.h"
 #include "hardware/xosc.h"
 #include "hardware/watchdog.h"
-
-#include "Errors.h"
-#include "Sensors/all.hpp"
-#include "Slave.hpp"
-#include "Protocol.hpp"
-#include "Callbacks.hpp"
-#include "ClockUtils.hpp"
-#include "Memory.h"
-#include "InitUtils.hpp"
-#include "Sleep.hpp"
-#include "BindWrapper.hpp"
 
 
 using namespace std;
