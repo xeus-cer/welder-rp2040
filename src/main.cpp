@@ -56,12 +56,6 @@ void core1Entry();
  */
 void pollSensor();
 
-// inline calculate transfer speed from DEFAULT_BAUDRATE of uart in bytes/s
-constexpr uint32_t transferSpeed = (DEFAULT_BAUDRATE / 10); // 10 bits per byte (8 data bits + 1 start bit + 1 stop bit)
-
-// inline calculate max transfer time in ms
-constexpr uint32_t transferTime = (RX_TX_QUEUE_SIZE / transferSpeed) * 1000;
-
 
 int main(void)
 {
@@ -151,7 +145,7 @@ int main(void)
             cout << *stdDevPv0 << ";" << *stdDevPv1 << ";" << *stdDevPv2 << ";" << *stdDevPv3 << ";";
             // cout timestamp and net cycle time
             auto timestamp = time_us_64();
-            cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;            
+            cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;    
 
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);
