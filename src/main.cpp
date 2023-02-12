@@ -7,19 +7,12 @@
 #include "Core/BindWrapper.hpp"
 #include "Core/Slave.hpp"
 #include "Sensors/all.hpp"
-#include "Communication/Protocol.hpp"
 #include "Communication/Callbacks.hpp"
 
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <bitset>
 
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
-#include "pico/stdio/driver.h"
-#include "pico/sleep.h"
-#include "hardware/xosc.h"
 #include "hardware/watchdog.h"
 
 
@@ -75,6 +68,11 @@ int main(void)
     
     // check if user switch is on, if so, use usb uart
     useUsb = gpio_get(USR_SW_PIN);
+
+    
+    // if user button is pressed, load default values a.k.a. FACTORY RESET
+    if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
+
     
     if(useUsb)
     {
@@ -84,6 +82,8 @@ int main(void)
         sleep_hp(2'000'000);
         // print out error register
         cout << "error register: " << bitset<32>(*error) << endl;
+        // cout sampling speed in Hz
+        cout << "sampling speed: " << (1000000.0f / (float)(*desiredCycleTimeUs)) << "Hz" << endl;
         // cout labels of all values
         cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
         // set to free running mode
@@ -95,9 +95,6 @@ int main(void)
         // init uart over RS485
         userInitUart();
     }
-    
-    // if user button is pressed, load default values a.k.a. FACTORY RESET
-    if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
     // init sensor, depending on type of sensor selected 
     // sensor = Xerxes::ABP();
