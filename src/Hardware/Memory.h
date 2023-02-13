@@ -61,6 +61,11 @@ float* maxPv2        = (float *)(mainRegister + MAX_PV2_OFFSET);
 float* maxPv3        = (float *)(mainRegister + MAX_PV3_OFFSET);
 std::array<float*, 4> maximumValues = {maxPv0, maxPv1, maxPv2, maxPv3};  ///< Array of pointers to maximum values
 
+uint32_t* dv0       = (uint32_t *)(mainRegister + DV0_OFFSET);  ///< Pointer to digital value 0
+uint32_t* dv1       = (uint32_t *)(mainRegister + DV1_OFFSET);  ///< Pointer to digital value 1
+uint32_t* dv2       = (uint32_t *)(mainRegister + DV2_OFFSET);  ///< Pointer to digital value 2
+uint32_t* dv3       = (uint32_t *)(mainRegister + DV3_OFFSET);  ///< Pointer to digital value 3
+
 /* ### READ ONLY VALUES ### */
 
 /** @brief 0x55AA55AA = unlocked, anything else = locked */

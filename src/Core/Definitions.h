@@ -82,6 +82,13 @@
 #define MAX_PV2_OFFSET              VOLATILE_OFFSET + 72      // 328
 #define MAX_PV3_OFFSET              VOLATILE_OFFSET + 76      // 332
 
+// memory offset of the discrete values, eg. digital inputs and outputs
+#define DV0_OFFSET                  VOLATILE_OFFSET + 80      // 336
+#define DV1_OFFSET                  VOLATILE_OFFSET + 84      // 340
+#define DV2_OFFSET                  VOLATILE_OFFSET + 88      // 344
+#define DV3_OFFSET                  VOLATILE_OFFSET + 92      // 348
+
+
 // memory offset for the safety lock of the device memory (1 byte)
 #define MEM_UNLOCKED_OFFSET         VOLATILE_OFFSET + 128     // 384
 

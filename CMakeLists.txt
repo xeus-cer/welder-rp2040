@@ -30,6 +30,11 @@ add_executable(
 	src/Communication/RS485.cpp
 	src/Core/Slave.cpp
 	src/Communication/Network.cpp
+	src/Sensors/Peripheral.cpp
+	src/Sensors/Sensor.cpp
+	src/Sensors/Generic/AnalogInput.cpp
+	src/Sensors/Generic/DigitalInputOutput.cpp
+	src/Sensors/Generic/4DI4DO.cpp
 
 	src/main.cpp
 )

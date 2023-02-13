@@ -60,9 +60,15 @@ extern "C"
 #define CLK_GPIN1_PIN       22  // CLK_GPIN1 and TMP0 share the same pin
 #define CLK_GPOUT1_PIN      23  // CLK_GPOUT1 and TMP1 share the same pin
 
+/// @brief Mask of pins that are used by the shield and not used by the board, eq. 0x3fc0033f
+#define SHIELD_MASK         1 << SPI0_MISO_PIN | 1 << SPI0_CSN_PIN | 1 << SPI0_CLK_PIN | 1 << SPI0_MOSI_PIN | \
+                            1 << I2C0_SDA_PIN | 1 << I2C0_SCL_PIN | \
+                            1 << UART1_TX_PIN | 1 << UART1_RX_PIN | \
+                            1 << ADC0_PIN | 1 << ADC1_PIN | 1 << ADC2_PIN | 1 << ADC3_PIN | \
+                            1 << TMP0_PIN | 1 << TMP1_PIN
+
 
 // --- FLASH ---
-
 #define PICO_BOOT_STAGE2_CHOOSE_W25Q080 1
 
 #undef PICO_FLASH_SPI_CLKDIV

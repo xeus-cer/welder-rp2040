@@ -1,9 +1,7 @@
 #ifndef __ANALOG_INPUT
 #define __ANALOG_INPUT
 
-#include "hardware/adc.h"
 #include "Sensors/Sensor.hpp"
-#include "Hardware/xerxes_rp2040.h"
 
 
 namespace Xerxes
@@ -37,48 +35,17 @@ private:
     uint8_t numChannels             = 4;                                // number of channels, default is 4
 
 public:
-    /**
-     * @brief Construct a new AnalogInput object
-     * 
-     * @param numChannels number of channels, e.g. 4
-     * @param oversampleBits number of bits to oversample, e.g. 3 bits -> 64x oversampling
-     * @note oversampleBits increase duration of update() by 4^oversampleBits, e.g. 3 bits -> 256 samples per channel per update
-     * @note mean sampling time for 4 channels with no oversampling is 10us 
-     * @note mean sampling time for 2 channels with 3 bits oversampling is 5us * 4^2 = 320us
-     * @note mean sampling time for 1 channel with 5 bits oversampling is 2.5us * 4^5 = 2560us
-     */
-    AnalogInput(uint8_t numChannels, uint8_t oversampleBits = defaultOversampleBits) : 
-        oversampleExtraBits(oversampleBits),
-        numChannels(numChannels),
-        overSample(1 << (2 * oversampleBits)), 
-        effectiveBitDepth(rpBitDepth + oversampleBits), 
-        numCounts(1 << effectiveBitDepth) {};
-    
+    using Sensor::Sensor;
 
-    /**
-     * @brief Construct a new Analog Input object
-     * 
-     * @note default is 4 channels with 3 bits oversampling
-     * 
-     */
-    AnalogInput() : 
-        oversampleExtraBits(defaultOversampleBits),
-        overSample(1 << (2 * defaultOversampleBits)), 
-        effectiveBitDepth(rpBitDepth + defaultOversampleBits), 
-        numCounts(1 << effectiveBitDepth),
-        numChannels(defaultChannels) {};
-
-    /**
-     * @brief Destroy the 4AI object    
-     * 
-     */
     ~AnalogInput();
+
+    void init();
 
     /**
      * @brief init sensor, set pins as input, init ADC
      * 
      */
-    void init();
+    void init(uint8_t numChannels, uint8_t oversampleBits = defaultOversampleBits);
 
     /**
      * @brief update sensor values, takes approx 1ms for 4 channels with 100 samples
@@ -93,84 +60,6 @@ public:
     void stop();
 };
 
-
-void AnalogInput::init()
-{
-    // init ADC
-    adc_init();
-    
-    // set pins as input
-    adc_gpio_init(ADC0_PIN);
-    adc_gpio_init(ADC1_PIN);
-    adc_gpio_init(ADC2_PIN);
-    adc_gpio_init(ADC3_PIN);
-
-    // update sensor values
-    this->update();
-}
-
-
-AnalogInput::~AnalogInput()
-{
-    this->stop();
-}
-
-
-void AnalogInput::update()
-{    
-    // oversample and average over 4 channels, effectively increasing bit depth by 4 bits
-    // https://www.silabs.com/documents/public/application-notes/an118.pdf
-    for(uint8_t channel = 0; channel < numChannels; channel++)
-    {
-        // set channel
-        adc_select_input(channel);
-        results[channel] = 0;
-
-        // read samples and average
-        for(uint16_t i = 0; i < overSample; i++)
-        {
-            results[channel] += adc_read();
-        }
-
-        // right shift by oversampleExtraBits to decimate oversampled bits
-        results[channel] >>= oversampleExtraBits;
-    }
-    
-    // convert to value on scale <0, 1)
-    // optimization: use if-else instead of switch, since numChannels is known at compile time
-    if(numChannels == 1)
-    {
-        pv0 = results[0] / static_cast<double>(numCounts);
-    }
-    else if(numChannels == 2)
-    {
-        pv0 = results[0] / static_cast<double>(numCounts);
-        pv1 = results[1] / static_cast<double>(numCounts);
-    }
-    else if(numChannels == 3)
-    {
-        pv0 = results[0] / static_cast<double>(numCounts);
-        pv1 = results[1] / static_cast<double>(numCounts);
-        pv2 = results[2] / static_cast<double>(numCounts);
-    }
-    else if(numChannels == 4)
-    {
-        pv0 = results[0] / static_cast<double>(numCounts);
-        pv1 = results[1] / static_cast<double>(numCounts);
-        pv2 = results[2] / static_cast<double>(numCounts);
-        pv3 = results[3] / static_cast<double>(numCounts);
-    }
-    else
-    {
-        // do nothing
-    }
-}
-
-
-void AnalogInput::stop()
-{
-    // nothing to do here
-}
 
 } // namespace Xerxes
 

@@ -2,6 +2,7 @@
 #define __SENSOR_HPP
 
 #include <array>
+#include "Sensors/Peripheral.hpp"
 #include "hardware/gpio.h"
 #include "hardware/spi.h"
 #include "hardware/adc.h"
@@ -10,43 +11,23 @@
 namespace Xerxes
 {
     
-class Sensor
+class Sensor : public Peripheral
 {
 protected:
-    double pv0 = 0;    
-    double pv1 = 0;
-    double pv2 = 0;
-    double pv3 = 0;
+    float* pv0;    
+    float* pv1;
+    float* pv2;
+    float* pv3;
 public:
-    Sensor(/* args */);
-    ~Sensor();
+    using Peripheral::Peripheral;    
+    Sensor(float *pv0, float *pv1, float *pv2, float *pv3) :
+        pv0(pv0), pv1(pv1), pv2(pv2), pv3(pv3)
+    {};
+    Sensor() :
+        pv0(nullptr), pv1(nullptr), pv2(nullptr), pv3(nullptr)
+    {};
     
-    // pure virtual functions
-    virtual void init() = 0;
-    virtual void update() = 0;
-    virtual void stop() = 0;
-    
-    void read(std::array<float*, 4> pvs);
 };
-
-
-void Sensor::read(std::array<float*, 4> pvs)
-{
-    *pvs[0] = pv0;
-    *pvs[1] = pv1;
-    *pvs[2] = pv2;
-    *pvs[3] = pv3;
-}
-
-
-Sensor::Sensor(/* args */)
-{
-}
-
-
-Sensor::~Sensor()
-{
-}
 
 
 }   // namespace Xerxes

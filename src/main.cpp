@@ -19,11 +19,14 @@
 using namespace std;
 using namespace Xerxes;
 
-// static ABP sensor;           // pressure sensor 0-60mbar
-// static SCL3300 sensor;       // 3 axis inclinometer
-// static SCL3400 sensor;       // 3 axis inclinometer
-// static AnalogInput sensor;   // 4 channel analog input
-static AnalogInput sensor;  ///< 4 channel analog input
+/*
+static ABP sensor;           // pressure sensor 0-60mbar
+static SCL3300 sensor;       // 3 axis inclinometer
+static SCL3400 sensor;       // 3 axis inclinometer
+static DigitalInputOutput sensor;   // 4 channel digital input/output
+static AnalogInput sensor;   // 4 channel analog input
+*/
+static _4DI4DO sensor;        // 4 channel digital input/output
 
 
 /// @brief transmit FIFO queue for UART
@@ -88,7 +91,7 @@ int main(void)
         cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
         // set to free running mode
         config->bits.freeRun = 1;
-        config->bits.calcStat = 1;
+        // config->bits.calcStat = 1; // TODO: Uncomment this to enable statistics calculation
     }
     else
     {
@@ -96,13 +99,18 @@ int main(void)
         userInitUart();
     }
     
-    // init sensor, depending on type of sensor selected 
-    // sensor = Xerxes::ABP();
-    // sensor = Xerxes::SCL3400();
-    // sensor = Xerxes::SCL3300();
-    // sensor = Xerxes::AnalogInput(2, 3);
+    /* init sensor, depending on type of sensor selected 
+    sensor = Xerxes::ABP();
+    sensor = Xerxes::SCL3400();
+    sensor = Xerxes::SCL3300();
+    sensor = Xerxes::DigitalInputOutput(dv0, dv1, dv2, dv3);
+    sensor.init();
+    sensor = Xerxes::AnalogInput(pv0, pv1, pv2, pv3);
+    sensor.init(2, 3);
+    */
     watchdog_update();
-    sensor = Xerxes::AnalogInput(2, 3);  // 2 channels, 3 bit oversampling, approx 320us per update
+    *dv0 = UINT32_MAX;
+    sensor = Xerxes::_4DI4DO(dv0, dv1, dv2, dv3);
     sensor.init();
     watchdog_update();
 
@@ -130,6 +138,7 @@ int main(void)
 
         if(useUsb)
         {
+            /*
             // cout values of *pv0 to *pv3
             cout << *pv0 << ";" << *pv1 << ";" << *pv2 << ";" << *pv3 << ";";
             // cout values of *meanPv0 to *meanPv3
@@ -143,7 +152,11 @@ int main(void)
             // cout timestamp and net cycle time
             auto timestamp = time_us_64();
             cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;    
-
+            */
+                       
+            // cout digital values dv0-dv1 as bitsets
+            cout << "dv0: " << bitset<32>(*dv0) << "; dv1: " << bitset<32>(*dv1) << endl;
+            
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);
         }
@@ -243,9 +256,10 @@ void core1Entry()
 void pollSensor()
 {       
     // measure process value
+    *dv0 += 1;
     sensor.update();    
     // read process values from sensor
-    sensor.read(processValues);
+    // sensor.read(processValues);
 
     // for each process value and ring buffer
     for(int i=0; i<4; i++)

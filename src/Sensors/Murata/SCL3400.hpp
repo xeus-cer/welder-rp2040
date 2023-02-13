@@ -104,12 +104,12 @@ void SCL3400::update()
     longToPacket(ExchangeBlock(CMD::Read_Status_Summary), packetT);
 
     // convert data to angles
-    pv0 = static_cast<float>(getDegFromPacket(packetX));
-    pv1 = static_cast<float>(getDegFromPacket(packetY));
+    *pv0 = static_cast<float>(getDegFromPacket(packetX));
+    *pv1 = static_cast<float>(getDegFromPacket(packetY));
 
     // extract temperature from packet and convert to degrees
     uint16_t raw_temp = (uint16_t)(packetT->DATA_H << 8) + packetT->DATA_L;
-    pv3 = -273 + (static_cast<float>(raw_temp) / 18.9);
+    *pv3 = -273 + (static_cast<float>(raw_temp) / 18.9);
 }
 
 

@@ -84,8 +84,8 @@ void ABP::update()
     p_val = (uint16_t)(((data[0] & 0b00111111)<<8) + data[1]);
     t_val = (uint16_t)(((data[2]<<8) + (data[3] & 0b11100000))>>5);
     
-    pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
-    pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
+    *pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
+    *pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
 }
 
 
