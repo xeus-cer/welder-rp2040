@@ -16,11 +16,10 @@ private:
     Protocol *xp;
     std::unordered_map<msgid_t, std::function<void(const Message&)>> bindings;
     uint8_t address;
-    volatile uint8_t *mainReg;
 
 public:
     Slave();
-    Slave(Protocol *protocol, const uint8_t address, volatile uint8_t *mainRegister);
+    Slave(Protocol *protocol, const uint8_t address);
     ~Slave();
     void bind(const msgid_t msgId, std::function<void(const Message&)> _f);
     void call(const Message &msg);

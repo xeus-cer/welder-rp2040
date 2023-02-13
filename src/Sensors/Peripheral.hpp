@@ -2,23 +2,28 @@
 #define __PERIPHERAL_HPP
 
 #include <cstdint>
+#include "Core/DeviceIds.h"
+#include <ostream>
 
 namespace Xerxes
 {
 
 class Peripheral
 {
-private:
-
+private:    
+    devid_t _devid;
 public:
     Peripheral();
     ~Peripheral();
     
     // pure virtual functions
-    virtual void init() = 0;
-    virtual void update() = 0;
-    virtual void stop() = 0;
+    virtual void init();
+    virtual void update();
+    virtual void stop();
+
+    devid_t getDevid();
 };
+
 
 }   // namespace Xerxes
 

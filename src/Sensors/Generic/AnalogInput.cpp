@@ -38,11 +38,11 @@ void AnalogInput::init(uint8_t numChannels, uint8_t oversampleBits)
     adc_gpio_init(ADC3_PIN);
 
     // update sensor values
-    this->update();
+    this->update(false);
 }
 
 
-void AnalogInput::update()
+void AnalogInput::update(bool calcStats)
 {    
     // oversample and average over 4 channels, effectively increasing bit depth by 4 bits
     // https://www.silabs.com/documents/public/application-notes/an118.pdf
@@ -66,25 +66,25 @@ void AnalogInput::update()
     // optimization: use if-else instead of switch, since numChannels is known at compile time
     if(numChannels == 1)
     {
-        *pv0 = results[0] / static_cast<double>(numCounts);
+        *_reg->pv0 = results[0] / static_cast<double>(numCounts);
     }
     else if(numChannels == 2)
     {
-        *pv0 = results[0] / static_cast<double>(numCounts);
-        *pv1 = results[1] / static_cast<double>(numCounts);
+        *_reg->pv0 = results[0] / static_cast<double>(numCounts);
+        *_reg->pv1 = results[1] / static_cast<double>(numCounts);
     }
     else if(numChannels == 3)
     {
-        *pv0 = results[0] / static_cast<double>(numCounts);
-        *pv1 = results[1] / static_cast<double>(numCounts);
-        *pv2 = results[2] / static_cast<double>(numCounts);
+        *_reg->pv0 = results[0] / static_cast<double>(numCounts);
+        *_reg->pv1 = results[1] / static_cast<double>(numCounts);
+        *_reg->pv2 = results[2] / static_cast<double>(numCounts);
     }
     else if(numChannels == 4)
     {
-        *pv0 = results[0] / static_cast<double>(numCounts);
-        *pv1 = results[1] / static_cast<double>(numCounts);
-        *pv2 = results[2] / static_cast<double>(numCounts);
-        *pv3 = results[3] / static_cast<double>(numCounts);
+        *_reg->pv0 = results[0] / static_cast<double>(numCounts);
+        *_reg->pv1 = results[1] / static_cast<double>(numCounts);
+        *_reg->pv2 = results[2] / static_cast<double>(numCounts);
+        *_reg->pv3 = results[3] / static_cast<double>(numCounts);
     }
     else
     {

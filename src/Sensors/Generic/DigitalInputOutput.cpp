@@ -2,6 +2,7 @@
 #include "Hardware/xerxes_rp2040.h"
 
 #include "hardware/gpio.h"
+#include <bitset>
 
 
 namespace Xerxes
@@ -30,10 +31,10 @@ void DigitalInputOutput::init(uint32_t iomask, uint32_t direction)
 void DigitalInputOutput::update()
 {
     // Set GPIOs to whatever the values are in the pointer dv0
-    gpio_put_masked(this->used_iomask, *dv0);
+    gpio_put_masked(this->used_iomask, *_reg->dv0);
     auto state = gpio_get_all();
     auto gpio_pins = state & used_iomask;
-    *dv1 = gpio_pins;
+    *_reg->dv1 = gpio_pins;
 }
 
 
@@ -41,6 +42,13 @@ void DigitalInputOutput::stop()
 {
     // Set GPIOs to input
     gpio_set_dir_in_masked(SHIELD_MASK);
+}
+
+
+std::ostream& operator<<(std::ostream& os, const DigitalInputOutput& dt)
+{
+    os << "DO: " << std::bitset<32>(*dt._reg->dv0) << ", DI: " << std::bitset<32>(*dt._reg->dv1) << std::endl;
+    return os;
 }
 
 

@@ -6,6 +6,7 @@
 #include "Core/Errors.h"
 #include "UserFlash.hpp"
 #include "Core/Definitions.h"
+#include "Core/Register.hpp"
 
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
@@ -17,7 +18,7 @@
 #include "pico/util/queue.h"
 
 
-extern volatile uint8_t mainRegister[REGISTER_SIZE];
+extern Xerxes::Register _reg;
 extern queue_t txFifo, rxFifo;
 
 
@@ -40,8 +41,7 @@ void uart_interrupt_handler()
         if(!success)
         {
             // set cpu overload flag
-            uint64_t* error      = (uint64_t *)(mainRegister + ERROR_OFFSET);   // Error register, holds error codes
-            *error |= ERROR_MASK_CPU_OVERLOAD;
+            *_reg.error |= ERROR_MASK_CPU_OVERLOAD;
         }
     }
 
@@ -103,26 +103,17 @@ void userLoadDefaultValues()
 
     for(uint i=0; i<REGISTER_SIZE; i++)
     {
-        mainRegister[i] = 0;
+        _reg.memTable[i] = 0;
     }
 
-    float* gainPv0       = (float *)(mainRegister + GAIN_PV0_OFFSET);
-    float* gainPv1       = (float *)(mainRegister + GAIN_PV1_OFFSET);
-    float* gainPv2       = (float *)(mainRegister + GAIN_PV2_OFFSET);
-    float* gainPv3       = (float *)(mainRegister + GAIN_PV3_OFFSET);
+    *_reg.gainPv0    = 1;
+    *_reg.gainPv1    = 1;    
+    *_reg.gainPv1    = 1;
+    *_reg.gainPv1    = 1;
 
-    uint32_t *desiredCycleTimeUs     = (uint32_t *)(mainRegister + OFFSET_DESIRED_CYCLE_TIME);  ///< Desired cycle time of sensor loop in microseconds
-
-    ConfigBitsUnion *config          = (ConfigBitsUnion *)(mainRegister + OFFSET_CONFIG_BITS);  ///< Config bits of the device (1 byte)
-
-    *gainPv0    = 1;
-    *gainPv1    = 1;    
-    *gainPv1    = 1;
-    *gainPv1    = 1;
-
-    *desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
-    config->all = 0;
-    updateFlash((uint8_t *)mainRegister);
+    *_reg.desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
+    _reg.config->all = 0;
+    updateFlash((uint8_t *)_reg.memTable);
 }
 
 
@@ -138,7 +129,7 @@ void userInit()
     userInitQueue();
 
     // initialize the flash memory and load the default values
-    if(!userInitFlash((uint8_t *)mainRegister))
+    if(!userInitFlash((uint8_t *)_reg.memTable))
     {
         userLoadDefaultValues();
     }

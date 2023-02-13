@@ -9,9 +9,11 @@ Slave::Slave()
 {
 }
 
-Slave::Slave(Protocol *protocol, const uint8_t address, volatile uint8_t *mainRegister) : xp(protocol), address(address), mainReg(mainRegister)
+
+Slave::Slave(Protocol *protocol, const uint8_t address) : xp(protocol), address(address)
 {
 }
+
 
 Slave::~Slave()
 {

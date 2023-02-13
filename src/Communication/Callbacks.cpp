@@ -9,11 +9,13 @@
 #include "pico/multicore.h"
 #include "Core/Definitions.h"
 #include "Core/Slave.hpp"
+#include "Core/Register.hpp"
+#include "Sensors/Peripheral.hpp"
 
 
 extern Xerxes::Slave xs;
-extern void pollSensor();
-extern uint8_t mainRegister[REGISTER_SIZE];
+extern Xerxes::Register _reg;
+extern Xerxes::Peripheral sensor;
 
 
 namespace Xerxes
@@ -22,14 +24,15 @@ namespace Xerxes
 
 void pingCallback(const Xerxes::Message &msg)
 {
-    std::vector<uint8_t> payload {DEVID_PRESSURE_60MBAR, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
+    uint8_t _devid = sensor.getDevid();
+    std::vector<uint8_t> payload {_devid, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
     xs.send(msg.srcAddr, MSGID_PING_REPLY, payload);
 }
 
 
 void syncCallback(const Xerxes::Message &msg)
-{
-    pollSensor();
+{   
+    sensor.update();
 }
 
 
@@ -64,7 +67,7 @@ void writeRegCallback(const Xerxes::Message &msg)
     for(uint16_t i = 6; i < msg.size(); i++)
     {
         uint8_t byte = msg.at(i);
-        mainRegister[offset + i - 6] = byte;
+        _reg.memTable[offset + i - 6] = byte;
     }
 
     // restore interrupts
@@ -75,7 +78,7 @@ void writeRegCallback(const Xerxes::Message &msg)
     
     // update flash, takes ~50ms to complete hence the 2 watchdog updates
     watchdog_update();
-    updateFlash((uint8_t *)mainRegister);
+    updateFlash((uint8_t *)_reg.memTable);
     watchdog_update();
 
     // send ACK_OK
@@ -107,7 +110,7 @@ void readRegCallback(const Xerxes::Message &msg)
     // read data from memory into payload vector
     for(uint16_t i = offset; i < offset + len; i++)
     {
-        payload.emplace_back(mainRegister[i]);
+        payload.emplace_back(_reg.memTable[i]);
     }
 
     // send data to master device (MSGID_READ_VALUE + payload) 
@@ -141,10 +144,8 @@ void softResetCallback(const Xerxes::Message &msg)
 void factoryResetCallback(const Xerxes::Message &msg)
 {   
     /** @brief 0x55AA55AA = unlocked, anything else = locked */
-    uint32_t* memUnlocked   = (uint32_t *)(mainRegister + MEM_UNLOCKED_OFFSET);
-
     // check if memory is unlocked (factory reset is allowed only if memory is unlocked)
-    if(*memUnlocked == MEM_UNLOCKED_VAL)
+    if(*_reg.memUnlocked == MEM_UNLOCKED_VAL)
     {
         // reset memory
         userLoadDefaultValues();

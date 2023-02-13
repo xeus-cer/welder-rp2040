@@ -2,7 +2,9 @@
 #define __DIGITALINPUTOUTPUT_HPP
 
 #include "Sensors/Peripheral.hpp"
+#include "Core/Register.hpp"
 #include "Hardware/xerxes_rp2040.h"
+#include <ostream>
 
 
 namespace Xerxes
@@ -12,33 +14,27 @@ namespace Xerxes
 class DigitalInputOutput : public Peripheral
 {
 protected:
-    /** Digital values */
-    uint32_t* dv0;
-    uint32_t* dv1;
-    uint32_t* dv2;
-    uint32_t* dv3;
+    Register* _reg;
 
     uint32_t used_iomask = SHIELD_MASK;
 
 public:
-
     /**
      * @brief Construct a new Digital Input Output object
+     * 
+     * @param reg - pointer to the register to store the digital values and other data
      */
-    DigitalInputOutput() :
-        dv0(nullptr), dv1(nullptr), dv2(nullptr), dv3(nullptr)
+    DigitalInputOutput(Register *reg) : 
+        _reg(reg)
     {};
 
     /**
-     * @brief Construct a new Digital Input Output object, with pointers to the digital values
+     * @brief Construct a new Digital Input Output object
      * 
-     * @param dv0 - pointer to the digital value 0
-     * @param dv1 - pointer to the digital value 1
-     * @param dv2 - pointer to the digital value 2
-     * @param dv3 - pointer to the digital value 3
+     * @note This constructor should not be used, it is only here to allow the creation of an array of DigitalInputOutput objects
      */
-    DigitalInputOutput(uint32_t *dv0, uint32_t *dv1, uint32_t *dv2, uint32_t *dv3) :
-        dv0(dv0), dv1(dv1), dv2(dv2), dv3(dv3)
+    DigitalInputOutput() : 
+        _reg(nullptr)
     {};
     
     /**
@@ -68,6 +64,8 @@ public:
      * 
      */
     void stop();
+
+    friend std::ostream& operator<<(std::ostream& os, const DigitalInputOutput& dt);
 };
 
 

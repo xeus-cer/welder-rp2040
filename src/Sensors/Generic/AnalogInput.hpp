@@ -34,6 +34,10 @@ private:
     uint64_t numCounts              = 1 << effectiveBitDepth;           // number of counts, 2^16 = 65536
     uint8_t numChannels             = 4;                                // number of channels, default is 4
 
+protected:
+    // typedef Sensor as super class for easier access
+    typedef Sensor super;
+
 public:
     using Sensor::Sensor;
 
@@ -51,7 +55,7 @@ public:
      * @brief update sensor values, takes approx 1ms for 4 channels with 100 samples
      * 
      */
-    void update();
+    void update(bool calcStats);
 
     /**
      * @brief Not needed for 4xAI

@@ -3,6 +3,7 @@
 
 #include <functional>
 #include "Message.hpp"
+#include "Sensors/Sensor.hpp"
 
 
 namespace Xerxes

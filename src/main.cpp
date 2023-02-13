@@ -1,33 +1,35 @@
-#include "Hardware/xerxes_rp2040.h"
-#include "Hardware/ClockUtils.hpp"
-#include "Hardware/Memory.h"
-#include "Hardware/InitUtils.hpp"
-#include "Hardware/Sleep.hpp"
-#include "Core/Errors.h"
-#include "Core/BindWrapper.hpp"
-#include "Core/Slave.hpp"
-#include "Sensors/all.hpp"
-#include "Communication/Callbacks.hpp"
-
 #include <bitset>
 
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "hardware/watchdog.h"
 
+#include "Core/Errors.h"
+#include "Core/BindWrapper.hpp"
+#include "Core/Slave.hpp"
+#include "Core/Register.hpp"
+#include "Communication/Callbacks.hpp"
+#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/ClockUtils.hpp"
+#include "Hardware/InitUtils.hpp"
+#include "Hardware/Sleep.hpp"
+#include "Sensors/all.hpp"
+
 
 using namespace std;
 using namespace Xerxes;
 
 /*
-static ABP sensor;           // pressure sensor 0-60mbar
-static SCL3300 sensor;       // 3 axis inclinometer
-static SCL3400 sensor;       // 3 axis inclinometer
-static DigitalInputOutput sensor;   // 4 channel digital input/output
-static AnalogInput sensor;   // 4 channel analog input
+ABP sensor;           // pressure sensor 0-60mbar
+SCL3300 sensor;       // 3 axis inclinometer
+SCL3400 sensor;       // 3 axis inclinometer
+DigitalInputOutput sensor;   // 4 channel digital input/output
+AnalogInput sensor;   // 4 channel analog input
 */
-static _4DI4DO sensor;        // 4 channel digital input/output
+ABP sensor;
 
+
+Register _reg;  // main register
 
 /// @brief transmit FIFO queue for UART
 queue_t txFifo;
@@ -36,21 +38,17 @@ queue_t rxFifo;
 
 RS485 xn(&txFifo, &rxFifo);     // RS485 interface
 Protocol xp(&xn);               // Xerxes protocol implementation
-Slave xs(&xp, *devAddress, mainRegister);   ///< Xerxes slave implementation
+Slave xs(&xp, *_reg.devAddress);   ///< Xerxes slave implementation
 
-static bool usrSwitchOn;                // user switch state
-static volatile bool core1idle = true;  // core1 idle flag
-volatile static bool useUsb = false;    // use usb uart flag
+volatile bool usrSwitchOn;                // user switch state
+volatile bool core1idle = true;  // core1 idle flag
+volatile bool useUsb = false;    // use usb uart flag
+volatile bool awake = true;
 
 /**
  * @brief Core 1 entry point, runs in background
  */
 void core1Entry();  
-
-/**
- * @brief Poll sensor and update values
- */
-void pollSensor();
 
 
 int main(void)
@@ -62,11 +60,11 @@ int main(void)
     userInit();  // 374us
         
     // clear error register
-    *error = 0;
+    *_reg.error = 0;
     //determine reason for restart:
     if (watchdog_caused_reboot())
     {
-        *error |= ERROR_MASK_WATCHDOG_TIMEOUT;
+        *_reg.error |= ERROR_MASK_WATCHDOG_TIMEOUT;
     }
     
     // check if user switch is on, if so, use usb uart
@@ -84,14 +82,14 @@ int main(void)
         // wait for usb to be ready
         sleep_hp(2'000'000);
         // print out error register
-        cout << "error register: " << bitset<32>(*error) << endl;
+        cout << "error register: " << bitset<32>(*_reg.error) << endl;
         // cout sampling speed in Hz
-        cout << "sampling speed: " << (1000000.0f / (float)(*desiredCycleTimeUs)) << "Hz" << endl;
+        cout << "sampling speed: " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << "Hz" << endl;
         // cout labels of all values
         cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
         // set to free running mode
-        config->bits.freeRun = 1;
-        // config->bits.calcStat = 1; // TODO: Uncomment this to enable statistics calculation
+        _reg.config->bits.freeRun = 1;
+        _reg.config->bits.calcStat = 1;
     }
     else
     {
@@ -107,11 +105,14 @@ int main(void)
     sensor.init();
     sensor = Xerxes::AnalogInput(pv0, pv1, pv2, pv3);
     sensor.init(2, 3);
+    sensor = Xerxes::_4DI4DO(&_reg);
+    sensor.init();
     */
     watchdog_update();
-    sensor = Xerxes::_4DI4DO(dv0, dv1, dv2, dv3);
+    sensor = ABP(&_reg);
     sensor.init();
     watchdog_update();
+
 
     // bind callbacks, ~204us
     xs.bind(MSGID_PING,         unicast(    pingCallback));
@@ -137,6 +138,7 @@ int main(void)
 
         if(useUsb)
         {
+            /*
             // cout values of *pv0 to *pv3
             cout << *pv0 << ";" << *pv1 << ";" << *pv2 << ";" << *pv3 << ";";
             // cout values of *meanPv0 to *meanPv3
@@ -150,7 +152,8 @@ int main(void)
             // cout timestamp and net cycle time
             auto timestamp = time_us_64();
             cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;    
-            
+            */
+            cout << sensor;
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);
         }
@@ -180,7 +183,7 @@ int main(void)
             if(queue_is_full(&txFifo) || queue_is_full(&rxFifo))
             {
                 // rx fifo is full, set the cpu_overload error flag
-                *error |= ERROR_MASK_UART_OVERLOAD;
+                *_reg.error |= ERROR_MASK_UART_OVERLOAD;
             }
 
             // save power in release mode
@@ -215,16 +218,16 @@ void core1Entry()
         // turn on led for a short time to signal start of cycle
         gpio_put(USR_LED_PIN, 1);
 
-        if(config->bits.freeRun)
+        if(_reg.config->bits.freeRun)
         {
-            pollSensor();   
+            sensor.update(); 
         }
 
         // calculate how long it took to finish cycle
         endOfCycle = time_us_64();
         cycleDuration = endOfCycle - startOfCycle;
-        *netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
-        sleepFor = *desiredCycleTimeUs - cycleDuration;
+        *_reg.netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
+        sleepFor = *_reg.desiredCycleTimeUs - cycleDuration;
 
         // turn off led
         gpio_put(USR_LED_PIN, 0);
@@ -238,40 +241,10 @@ void core1Entry()
         }
         else
         {
-            *error |= ERROR_MASK_SENSOR_OVERLOAD;
+            *_reg.error |= ERROR_MASK_SENSOR_OVERLOAD;
         }
         
     }
     
     core1idle = true;
-}
-
-
-void pollSensor()
-{       
-    // measure process value
-    sensor.update();    
-    // read process values from sensor
-    // sensor.read(processValues);
-
-    // for each process value and ring buffer
-    for(int i=0; i<4; i++)
-    {
-        // insert process value into ring buffer
-        float pv = *processValues[i];
-        ringBuffers[i].insertOne(pv);
-
-        // if desired, calculate statistic values from ring buffer
-        if(config->bits.calcStat)
-        {
-            ringBuffers[i].updateStatistics();    
-            // update min, max stddev etc...
-            ringBuffers[i].getStatistics(
-                minimumValues[i],
-                maximumValues[i],
-                meanValues[i],
-                standardDeviations[i]
-            );
-        }
-    }
 }

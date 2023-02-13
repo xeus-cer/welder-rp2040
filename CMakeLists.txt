@@ -29,12 +29,17 @@ add_executable(
 	src/Communication/Protocol.cpp
 	src/Communication/RS485.cpp
 	src/Core/Slave.cpp
+	src/Core/Register.cpp
 	src/Communication/Network.cpp
 	src/Sensors/Peripheral.cpp
 	src/Sensors/Sensor.cpp
 	src/Sensors/Generic/AnalogInput.cpp
 	src/Sensors/Generic/DigitalInputOutput.cpp
 	src/Sensors/Generic/4DI4DO.cpp
+	src/Sensors/Murata/SCL3X00.cpp
+	src/Sensors/Murata/SCL3300.cpp
+	src/Sensors/Murata/SCL3400.cpp
+	src/Sensors/Honeywell/ABP.cpp
 
 	src/main.cpp
 )

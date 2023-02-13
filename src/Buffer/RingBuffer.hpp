@@ -63,7 +63,7 @@ RingBuffer<T>::RingBuffer(const uint32_t &maxSize) : maxSize(maxSize), currentPo
 template <class T>
 RingBuffer<T>::~RingBuffer()
 {
-    delete buffer;
+    // delete buffer; // TODO: uncomment this line !!!
 }
 
 
