@@ -20,8 +20,9 @@ private:
     double getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet);
 
 public:
+    using SCL3X00::SCL3X00;
     void init();
-    void update(bool calcStats);
+    void update();
 };
 
 

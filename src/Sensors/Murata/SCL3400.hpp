@@ -30,8 +30,9 @@ private:
     static constexpr uint16_t sensitivityModeA = 32768; // LSB/g
 
 public:
+    using SCL3X00::SCL3X00;
     void init();
-    void update(bool calcStats);
+    void update();
 };
 
 

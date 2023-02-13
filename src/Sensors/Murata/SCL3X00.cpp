@@ -123,4 +123,11 @@ uint8_t CRC8(uint8_t BitValue, uint8_t CRC)
     return CRC;
 }
 
+
+std::ostream& operator<<(std::ostream& os, const SCL3X00& scl)
+{
+    os << "X: " << *scl._reg->meanPv0 << "°, Y: " << *scl._reg->meanPv1 << "°, Temp: " << *scl._reg->meanPv3 << "°C" << std::endl;
+    return os;
+}
+
 }

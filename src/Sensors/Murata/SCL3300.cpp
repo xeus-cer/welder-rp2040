@@ -55,11 +55,11 @@ void SCL3300::init()
 
 
     // read out first sequence - usually rubbish anyway
-    this->update(false);
+    this->update();
 }
 
 
-void SCL3300::update(bool calcStats)
+void SCL3300::update()
 {    
     // pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
     // pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
@@ -85,8 +85,24 @@ void SCL3300::update(bool calcStats)
     uint16_t raw_temp = (uint16_t)(packetT->DATA_H << 8) + packetT->DATA_L;
     *_reg->pv3 = -273 + (static_cast<float>(raw_temp) / 18.9);
 
-    // calculate stats
-    super::update();
+    // if calcStat is true, update statistics
+    if(_reg->config->bits.calcStat)
+    {
+        // insert new values into ring buffer
+        rbpv0.insertOne(*_reg->pv0);
+        rbpv1.insertOne(*_reg->pv1);
+        rbpv3.insertOne(*_reg->pv3);
+
+        // update statistics
+        rbpv0.updateStatistics();
+        rbpv1.updateStatistics();
+        rbpv3.updateStatistics();
+
+        // update min, max stddev etc...
+        rbpv0.getStatistics(_reg->minPv0, _reg->maxPv0, _reg->meanPv0, _reg->stdDevPv0);
+        rbpv1.getStatistics(_reg->minPv1, _reg->maxPv1, _reg->meanPv1, _reg->stdDevPv1);
+        rbpv3.getStatistics(_reg->minPv3, _reg->maxPv3, _reg->meanPv3, _reg->stdDevPv3);
+    }
 }
 
 

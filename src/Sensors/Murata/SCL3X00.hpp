@@ -4,6 +4,7 @@
 #include <cstdint>
 #include "Sensors/Sensor.hpp"
 #include <memory>
+#include <ostream>
 
 
 namespace CMD
@@ -124,6 +125,9 @@ protected:
 public:
     using Sensor::Sensor;
     void stop();
+
+    // friend operator<< for easy printing
+    friend std::ostream& operator<<(std::ostream& os, const SCL3X00& scl);
 };
 
 

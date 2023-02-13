@@ -92,7 +92,7 @@ void ABP::update()
 
 std::ostream& operator<<(std::ostream& os, const ABP& abp)
 {
-    os << *abp._reg->meanPv0 << " Pa, " << *abp._reg->meanPv3 << " °C" << std::endl;
+    os << "Pressure: " << *abp._reg->meanPv0 << "Pa, temp: " << *abp._reg->meanPv3 << "°C" << std::endl;
     return os;
 }
 

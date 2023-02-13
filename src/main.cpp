@@ -26,7 +26,7 @@ SCL3400 sensor;       // 3 axis inclinometer
 DigitalInputOutput sensor;   // 4 channel digital input/output
 AnalogInput sensor;   // 4 channel analog input
 */
-ABP sensor;
+SCL3300 sensor;
 
 
 Register _reg;  // main register
@@ -109,7 +109,7 @@ int main(void)
     sensor.init();
     */
     watchdog_update();
-    sensor = ABP(&_reg);
+    sensor = SCL3300(&_reg);
     sensor.init();
     watchdog_update();
 
