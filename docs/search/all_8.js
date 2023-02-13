@@ -1,4 +1,19 @@
 var searchData=
 [
-  ['longtopacket_132',['longToPacket',['../classXerxes_1_1SCL3X00.html#a3fb60f563d8fceb629cd45a77ab9ba1f',1,'Xerxes::SCL3X00::longToPacket(const uint32_t data, SclPacket_t *packet)'],['../classXerxes_1_1SCL3X00.html#a3a327fe950cb99a62ab94217c7a14192',1,'Xerxes::SCL3X00::longToPacket(const uint32_t data, std::unique_ptr&lt; SclPacket_t &gt; &amp;packet)']]]
+  ['gain_5fpv0_5foffset_145',['GAIN_PV0_OFFSET',['../Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d',1,'Definitions.h']]],
+  ['gain_5fpv1_5foffset_146',['GAIN_PV1_OFFSET',['../Definitions_8h.html#a7cefdb9c40ac079711a14e964bc52c57',1,'Definitions.h']]],
+  ['gain_5fpv2_5foffset_147',['GAIN_PV2_OFFSET',['../Definitions_8h.html#aa5de2bb4f617035815e182fcb5e82c53',1,'Definitions.h']]],
+  ['gain_5fpv3_5foffset_148',['GAIN_PV3_OFFSET',['../Definitions_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f',1,'Definitions.h']]],
+  ['gainpv0_149',['gainPv0',['../classXerxes_1_1Register.html#acbe6a4312bcfcdc1d5d6c4910ad8c6b5',1,'Xerxes::Register']]],
+  ['gainpv1_150',['gainPv1',['../classXerxes_1_1Register.html#a4793b23d79b48517d304ef87806770e0',1,'Xerxes::Register']]],
+  ['gainpv2_151',['gainPv2',['../classXerxes_1_1Register.html#adb4eee309c90c7ab5d90a2df022172fe',1,'Xerxes::Register']]],
+  ['gainpv3_152',['gainPv3',['../classXerxes_1_1Register.html#a5e43e88c04cdcdf87fc249e7141ed970',1,'Xerxes::Register']]],
+  ['getdata_153',['getData',['../classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018',1,'Xerxes::Packet']]],
+  ['getdevid_154',['getDevid',['../classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55',1,'Xerxes::Peripheral']]],
+  ['getlast_155',['getLast',['../classXerxes_1_1RingBuffer.html#a03d821fdbd98db2ab264a39417e858ac',1,'Xerxes::RingBuffer']]],
+  ['getmax_156',['getMax',['../classXerxes_1_1StatisticBuffer.html#a9262dc26f4186f0871d5faaf13cab413',1,'Xerxes::StatisticBuffer']]],
+  ['getmean_157',['getMean',['../classXerxes_1_1StatisticBuffer.html#aa0f1efe5663934fce44983409dc8c914',1,'Xerxes::StatisticBuffer']]],
+  ['getmin_158',['getMin',['../classXerxes_1_1StatisticBuffer.html#a1fe9fb1829714fcc05574206f45cac3a',1,'Xerxes::StatisticBuffer']]],
+  ['getstatistics_159',['getStatistics',['../classXerxes_1_1StatisticBuffer.html#a00b4a9cd81641b15efd5bf228ef4871e',1,'Xerxes::StatisticBuffer']]],
+  ['getstddev_160',['getStdDev',['../classXerxes_1_1StatisticBuffer.html#a49c2fd58fc220b305e7d723d6be5aecb',1,'Xerxes::StatisticBuffer']]]
 ];

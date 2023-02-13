@@ -76,16 +76,15 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="UserFlash_8hpp.html#ac8291336aba92fa6f6baa517c0e0d90f">userInitFlash</a>(uint8_t *<a class="code" href="Callbacks_8cpp.html#a0e51aaa005958c013116bae2a8c8a706">mainRegister</a>);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="UserFlash_8hpp.html#a453b506b3146db6819ceea1db6ab5e0a">userInitFlash</a>(uint8_t *memTable);</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="UserFlash_8hpp.html#a687372260de592493b8057de0b1df106">updateFlash</a>(<span class="keyword">const</span> uint8_t *<a class="code" href="Callbacks_8cpp.html#a0e51aaa005958c013116bae2a8c8a706">mainRegister</a>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="UserFlash_8hpp.html#af1e13111c6bd9ba5a73656c35dd599a6">updateFlash</a>(<span class="keyword">const</span> uint8_t *memTable);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__USER_FLASH_HPP</span></div>
-<div class="ttc" id="aCallbacks_8cpp_html_a0e51aaa005958c013116bae2a8c8a706"><div class="ttname"><a href="Callbacks_8cpp.html#a0e51aaa005958c013116bae2a8c8a706">mainRegister</a></div><div class="ttdeci">uint8_t mainRegister[REGISTER_SIZE]</div><div class="ttdef"><b>Definition:</b> Memory.h:13</div></div>
-<div class="ttc" id="aUserFlash_8hpp_html_a687372260de592493b8057de0b1df106"><div class="ttname"><a href="UserFlash_8hpp.html#a687372260de592493b8057de0b1df106">updateFlash</a></div><div class="ttdeci">void updateFlash(const uint8_t *mainRegister)</div><div class="ttdoc">Update flash with current memory contents.</div><div class="ttdef"><b>Definition:</b> UserFlash.cpp:41</div></div>
-<div class="ttc" id="aUserFlash_8hpp_html_ac8291336aba92fa6f6baa517c0e0d90f"><div class="ttname"><a href="UserFlash_8hpp.html#ac8291336aba92fa6f6baa517c0e0d90f">userInitFlash</a></div><div class="ttdeci">bool userInitFlash(uint8_t *mainRegister)</div><div class="ttdoc">Read flash and copy to RAM.</div><div class="ttdef"><b>Definition:</b> UserFlash.cpp:10</div></div>
+<div class="ttc" id="aUserFlash_8hpp_html_a453b506b3146db6819ceea1db6ab5e0a"><div class="ttname"><a href="UserFlash_8hpp.html#a453b506b3146db6819ceea1db6ab5e0a">userInitFlash</a></div><div class="ttdeci">bool userInitFlash(uint8_t *memTable)</div><div class="ttdoc">Read flash and copy to RAM.</div><div class="ttdef"><b>Definition:</b> UserFlash.cpp:10</div></div>
+<div class="ttc" id="aUserFlash_8hpp_html_af1e13111c6bd9ba5a73656c35dd599a6"><div class="ttname"><a href="UserFlash_8hpp.html#af1e13111c6bd9ba5a73656c35dd599a6">updateFlash</a></div><div class="ttdeci">void updateFlash(const uint8_t *memTable)</div><div class="ttdoc">Update flash with current memory contents.</div><div class="ttdef"><b>Definition:</b> UserFlash.cpp:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

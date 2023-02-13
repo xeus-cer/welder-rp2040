@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['freerun_598',['freeRun',['../structConfigBits.html#a2d1787127c80a991c043582094be00a6',1,'ConfigBits']]]
+  ['enable_5fangle_690',['Enable_ANGLE',['../namespaceCMD.html#aae332fcfc7a8883a3702d7b015d5e0fb',1,'CMD']]],
+  ['error_691',['error',['../classXerxes_1_1Register.html#a56fea948cc78d3ecc3032f0330683ccf',1,'Xerxes::Register']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xerxes_5frp2040_2eh_477',['xerxes_rp2040.h',['../xerxes__rp2040_8h.html',1,'']]]
+  ['userflash_2ecpp_544',['UserFlash.cpp',['../UserFlash_8cpp.html',1,'']]],
+  ['userflash_2ehpp_545',['UserFlash.hpp',['../UserFlash_8hpp.html',1,'']]]
 ];

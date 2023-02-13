@@ -99,16 +99,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac8291336aba92fa6f6baa517c0e0d90f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#ac8291336aba92fa6f6baa517c0e0d90f">userInitFlash</a> (uint8_t *<a class="el" href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a>)</td></tr>
-<tr class="memdesc:ac8291336aba92fa6f6baa517c0e0d90f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read flash and copy to RAM.  <a href="UserFlash_8hpp.html#ac8291336aba92fa6f6baa517c0e0d90f">More...</a><br /></td></tr>
-<tr class="separator:ac8291336aba92fa6f6baa517c0e0d90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a687372260de592493b8057de0b1df106"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#a687372260de592493b8057de0b1df106">updateFlash</a> (const uint8_t *<a class="el" href="Memory_8h.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a>)</td></tr>
-<tr class="memdesc:a687372260de592493b8057de0b1df106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update flash with current memory contents.  <a href="UserFlash_8hpp.html#a687372260de592493b8057de0b1df106">More...</a><br /></td></tr>
-<tr class="separator:a687372260de592493b8057de0b1df106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a453b506b3146db6819ceea1db6ab5e0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#a453b506b3146db6819ceea1db6ab5e0a">userInitFlash</a> (uint8_t *memTable)</td></tr>
+<tr class="memdesc:a453b506b3146db6819ceea1db6ab5e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read flash and copy to RAM.  <a href="UserFlash_8hpp.html#a453b506b3146db6819ceea1db6ab5e0a">More...</a><br /></td></tr>
+<tr class="separator:a453b506b3146db6819ceea1db6ab5e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1e13111c6bd9ba5a73656c35dd599a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="UserFlash_8hpp.html#af1e13111c6bd9ba5a73656c35dd599a6">updateFlash</a> (const uint8_t *memTable)</td></tr>
+<tr class="memdesc:af1e13111c6bd9ba5a73656c35dd599a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update flash with current memory contents.  <a href="UserFlash_8hpp.html#af1e13111c6bd9ba5a73656c35dd599a6">More...</a><br /></td></tr>
+<tr class="separator:af1e13111c6bd9ba5a73656c35dd599a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a687372260de592493b8057de0b1df106"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a687372260de592493b8057de0b1df106">&#9670;&nbsp;</a></span>updateFlash()</h2>
+<a id="af1e13111c6bd9ba5a73656c35dd599a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1e13111c6bd9ba5a73656c35dd599a6">&#9670;&nbsp;</a></span>updateFlash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -117,7 +117,7 @@ Functions</h2></td></tr>
           <td class="memname">void updateFlash </td>
           <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>mainRegister</em></td><td>)</td>
+          <td class="paramname"><em>memTable</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -127,8 +127,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac8291336aba92fa6f6baa517c0e0d90f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8291336aba92fa6f6baa517c0e0d90f">&#9670;&nbsp;</a></span>userInitFlash()</h2>
+<a id="a453b506b3146db6819ceea1db6ab5e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a453b506b3146db6819ceea1db6ab5e0a">&#9670;&nbsp;</a></span>userInitFlash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,7 +137,7 @@ Functions</h2></td></tr>
           <td class="memname">bool userInitFlash </td>
           <td>(</td>
           <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>mainRegister</em></td><td>)</td>
+          <td class="paramname"><em>memTable</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

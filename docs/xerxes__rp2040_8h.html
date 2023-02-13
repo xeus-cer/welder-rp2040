@@ -78,16 +78,21 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="xerxes__rp2040_8h__dep__incl.png" border="0" usemap="#asrc_2Hardware_2xerxes__rp2040_8hdep" alt=""/></div>
 <map name="asrc_2Hardware_2xerxes__rp2040_8hdep" id="asrc_2Hardware_2xerxes__rp2040_8hdep">
-<area shape="rect" title=" " alt="" coords="396,5,552,47"/>
+<area shape="rect" title=" " alt="" coords="644,5,800,47"/>
 <area shape="rect" href="InitUtils_8cpp.html" title=" " alt="" coords="5,102,196,129"/>
 <area shape="rect" href="Sleep_8cpp.html" title=" " alt="" coords="220,102,395,129"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="528,348,633,375"/>
-<area shape="rect" href="AnalogInput_8hpp.html" title=" " alt="" coords="471,184,621,225"/>
-<area shape="rect" href="ABP_8hpp.html" title=" " alt="" coords="645,184,815,225"/>
-<area shape="rect" href="SCL3X00_8hpp.html" title=" " alt="" coords="839,95,986,136"/>
-<area shape="rect" href="all_8hpp.html" title=" " alt="" coords="658,273,802,300"/>
-<area shape="rect" href="SCL3300_8hpp.html" title=" " alt="" coords="839,184,986,225"/>
-<area shape="rect" href="SCL3400_8hpp.html" title=" " alt="" coords="1010,184,1157,225"/>
+<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="612,363,717,389"/>
+<area shape="rect" href="AnalogInput_8cpp.html" title=" " alt="" coords="471,95,621,136"/>
+<area shape="rect" href="DigitalInputOutput_8cpp.html" title=" " alt="" coords="542,184,715,225"/>
+<area shape="rect" href="DigitalInputOutput_8hpp.html" title=" " alt="" coords="697,95,872,136"/>
+<area shape="rect" href="ABP_8cpp.html" title=" " alt="" coords="896,95,1065,136"/>
+<area shape="rect" href="SCL3300_8cpp.html" title=" " alt="" coords="1090,95,1237,136"/>
+<area shape="rect" href="SCL3400_8hpp.html" title=" " alt="" coords="1261,95,1407,136"/>
+<area shape="rect" href="SCL3X00_8cpp.html" title=" " alt="" coords="1431,95,1578,136"/>
+<area shape="rect" href="all_8hpp.html" title=" " alt="" coords="857,281,1001,307"/>
+<area shape="rect" href="4DI4DO_8hpp.html" title=" " alt="" coords="740,184,891,225"/>
+<area shape="rect" href="4DI4DO_8cpp.html" title=" " alt="" coords="681,273,832,315"/>
+<area shape="rect" href="SCL3400_8cpp.html" title=" " alt="" coords="1261,184,1407,225"/>
 </map>
 </div>
 </div>
@@ -177,6 +182,9 @@ Macros</h2></td></tr>
 <tr class="separator:a8afdeda204e3b2f7f515c4b06045ea38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84d6f36ef31c0dd85a90b317fb05f7cc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a84d6f36ef31c0dd85a90b317fb05f7cc">CLK_GPOUT1_PIN</a>&#160;&#160;&#160;23</td></tr>
 <tr class="separator:a84d6f36ef31c0dd85a90b317fb05f7cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b4d947bc567b9ea3e1e0e8f3039001d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">SHIELD_MASK</a></td></tr>
+<tr class="memdesc:a3b4d947bc567b9ea3e1e0e8f3039001d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask of pins that are used by the shield and not used by the board, eq. 0x3fc0033f.  <a href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">More...</a><br /></td></tr>
+<tr class="separator:a3b4d947bc567b9ea3e1e0e8f3039001d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868e795ee21e547e10edf12a3aeafbc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a868e795ee21e547e10edf12a3aeafbc9">PICO_BOOT_STAGE2_CHOOSE_W25Q080</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a868e795ee21e547e10edf12a3aeafbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a090528628a511947179066f60c2aeb8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">PICO_FLASH_SPI_CLKDIV</a>&#160;&#160;&#160;2</td></tr>
@@ -648,6 +656,41 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b4d947bc567b9ea3e1e0e8f3039001d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b4d947bc567b9ea3e1e0e8f3039001d">&#9670;&nbsp;</a></span>SHIELD_MASK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SHIELD_MASK</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">                            1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a13ab5492a03325279d7be6d6fe16ee1a">SPI0_MISO_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#acc33f26bff933b7b34561e485b8b05e6">SPI0_CSN_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a1f506818fb07531f02109d004962e7f0">SPI0_CLK_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#afcc66eefc6a5b7144f59b35fbef9b0dc">SPI0_MOSI_PIN</a> | \</div>
+<div class="line">                            1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742">I2C0_SDA_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929">I2C0_SCL_PIN</a> | \</div>
+<div class="line">                            1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a37b225cce113e8cf383598b1529e4e46">UART1_TX_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#ab9130e621f608f1ee7c2c402571c88cd">UART1_RX_PIN</a> | \</div>
+<div class="line">                            1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a209539b6b0e7fe09559dc67b62acb94d">ADC0_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a3f7482ad6495b9f8f69d9bb916aae854">ADC1_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#afb2f4f2a136b1a0dd1f1926defbae195">ADC2_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a505837e2819dff70f176624930702756">ADC3_PIN</a> | \</div>
+<div class="line">                            1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a176a89f2f4c3418f39e886baac9610d5">TMP0_PIN</a> | 1 &lt;&lt; <a class="code" href="xerxes__rp2040_8h.html#a856f119358146dcc65b12320417d2507">TMP1_PIN</a></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a0a6c8b4ecca4f35aaa82d33f8a1d9742"><div class="ttname"><a href="xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742">I2C0_SDA_PIN</a></div><div class="ttdeci">#define I2C0_SDA_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:25</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a13ab5492a03325279d7be6d6fe16ee1a"><div class="ttname"><a href="xerxes__rp2040_8h.html#a13ab5492a03325279d7be6d6fe16ee1a">SPI0_MISO_PIN</a></div><div class="ttdeci">#define SPI0_MISO_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:20</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a176a89f2f4c3418f39e886baac9610d5"><div class="ttname"><a href="xerxes__rp2040_8h.html#a176a89f2f4c3418f39e886baac9610d5">TMP0_PIN</a></div><div class="ttdeci">#define TMP0_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:39</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a1e30c459b21b57de018d51644a767929"><div class="ttname"><a href="xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929">I2C0_SCL_PIN</a></div><div class="ttdeci">#define I2C0_SCL_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:26</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a1f506818fb07531f02109d004962e7f0"><div class="ttname"><a href="xerxes__rp2040_8h.html#a1f506818fb07531f02109d004962e7f0">SPI0_CLK_PIN</a></div><div class="ttdeci">#define SPI0_CLK_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:22</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a209539b6b0e7fe09559dc67b62acb94d"><div class="ttname"><a href="xerxes__rp2040_8h.html#a209539b6b0e7fe09559dc67b62acb94d">ADC0_PIN</a></div><div class="ttdeci">#define ADC0_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:34</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a37b225cce113e8cf383598b1529e4e46"><div class="ttname"><a href="xerxes__rp2040_8h.html#a37b225cce113e8cf383598b1529e4e46">UART1_TX_PIN</a></div><div class="ttdeci">#define UART1_TX_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:14</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a3f7482ad6495b9f8f69d9bb916aae854"><div class="ttname"><a href="xerxes__rp2040_8h.html#a3f7482ad6495b9f8f69d9bb916aae854">ADC1_PIN</a></div><div class="ttdeci">#define ADC1_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:35</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a505837e2819dff70f176624930702756"><div class="ttname"><a href="xerxes__rp2040_8h.html#a505837e2819dff70f176624930702756">ADC3_PIN</a></div><div class="ttdeci">#define ADC3_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:37</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_a856f119358146dcc65b12320417d2507"><div class="ttname"><a href="xerxes__rp2040_8h.html#a856f119358146dcc65b12320417d2507">TMP1_PIN</a></div><div class="ttdeci">#define TMP1_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:40</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_ab9130e621f608f1ee7c2c402571c88cd"><div class="ttname"><a href="xerxes__rp2040_8h.html#ab9130e621f608f1ee7c2c402571c88cd">UART1_RX_PIN</a></div><div class="ttdeci">#define UART1_RX_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:15</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_acc33f26bff933b7b34561e485b8b05e6"><div class="ttname"><a href="xerxes__rp2040_8h.html#acc33f26bff933b7b34561e485b8b05e6">SPI0_CSN_PIN</a></div><div class="ttdeci">#define SPI0_CSN_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:21</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_afb2f4f2a136b1a0dd1f1926defbae195"><div class="ttname"><a href="xerxes__rp2040_8h.html#afb2f4f2a136b1a0dd1f1926defbae195">ADC2_PIN</a></div><div class="ttdeci">#define ADC2_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:36</div></div>
+<div class="ttc" id="axerxes__rp2040_8h_html_afcc66eefc6a5b7144f59b35fbef9b0dc"><div class="ttname"><a href="xerxes__rp2040_8h.html#afcc66eefc6a5b7144f59b35fbef9b0dc">SPI0_MOSI_PIN</a></div><div class="ttdeci">#define SPI0_MOSI_PIN</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:23</div></div>
+</div><!-- fragment -->
+<p>Mask of pins that are used by the shield and not used by the board, eq. 0x3fc0033f. </p>
 
 </div>
 </div>

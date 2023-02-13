@@ -1,7 +1,10 @@
 <map id="src/Sensors/Murata/SCL3X00.hpp" name="src/Sensors/Murata/SCL3X00.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="91,5,237,47"/>
-<area shape="rect" id="node2" href="$SCL3300_8hpp.html" title=" " alt="" coords="5,95,152,136"/>
-<area shape="rect" id="node5" href="$SCL3400_8hpp.html" title=" " alt="" coords="176,95,323,136"/>
-<area shape="rect" id="node3" href="$all_8hpp.html" title=" " alt="" coords="92,184,236,211"/>
-<area shape="rect" id="node4" href="$main_8cpp.html" title=" " alt="" coords="111,259,217,285"/>
+<area shape="rect" id="node1" title=" " alt="" coords="260,5,407,47"/>
+<area shape="rect" id="node2" href="$SCL3300_8hpp.html" title=" " alt="" coords="89,95,236,136"/>
+<area shape="rect" id="node6" href="$SCL3400_8hpp.html" title=" " alt="" coords="260,95,407,136"/>
+<area shape="rect" id="node8" href="$SCL3X00_8cpp.html" title=" " alt="" coords="431,95,577,136"/>
+<area shape="rect" id="node3" href="$all_8hpp.html" title=" " alt="" coords="176,191,320,218"/>
+<area shape="rect" id="node5" href="$SCL3300_8cpp.html" title=" " alt="" coords="5,184,152,225"/>
+<area shape="rect" id="node4" href="$main_8cpp.html" title=" " alt="" coords="195,273,301,300"/>
+<area shape="rect" id="node7" href="$SCL3400_8cpp.html" title=" " alt="" coords="344,184,491,225"/>
 </map>

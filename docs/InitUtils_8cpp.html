@@ -80,6 +80,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="Errors_8h_source.html">Core/Errors.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="UserFlash_8hpp_source.html">UserFlash.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Definitions_8h_source.html">Core/Definitions.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Register_8hpp_source.html">Core/Register.hpp</a>&quot;</code><br />
 <code>#include &quot;pico/stdlib.h&quot;</code><br />
 <code>#include &quot;hardware/uart.h&quot;</code><br />
 <code>#include &quot;hardware/adc.h&quot;</code><br />
@@ -93,23 +94,24 @@ Include dependency graph for InitUtils.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="InitUtils_8cpp__incl.png" border="0" usemap="#asrc_2Hardware_2InitUtils_8cpp" alt=""/></div>
 <map name="asrc_2Hardware_2InitUtils_8cpp" id="asrc_2Hardware_2InitUtils_8cpp">
-<area shape="rect" title=" " alt="" coords="793,5,983,32"/>
+<area shape="rect" title=" " alt="" coords="827,5,1018,32"/>
 <area shape="rect" href="InitUtils_8hpp.html" title=" " alt="" coords="5,80,107,107"/>
 <area shape="rect" href="xerxes__rp2040_8h.html" title=" " alt="" coords="131,80,261,107"/>
 <area shape="rect" href="ClockUtils_8hpp.html" title=" " alt="" coords="286,80,402,107"/>
 <area shape="rect" href="Errors_8h.html" title=" " alt="" coords="427,80,533,107"/>
 <area shape="rect" href="UserFlash_8hpp.html" title=" " alt="" coords="557,80,672,107"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="747,80,885,107"/>
-<area shape="rect" title=" " alt="" coords="644,155,775,181"/>
-<area shape="rect" title=" " alt="" coords="909,80,1011,107"/>
-<area shape="rect" title=" " alt="" coords="1035,80,1160,107"/>
-<area shape="rect" title=" " alt="" coords="1184,80,1307,107"/>
-<area shape="rect" title=" " alt="" coords="1331,80,1458,107"/>
-<area shape="rect" title=" " alt="" coords="1482,80,1598,107"/>
-<area shape="rect" title=" " alt="" coords="1622,80,1738,107"/>
-<area shape="rect" title=" " alt="" coords="1763,80,1893,107"/>
+<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="720,155,859,181"/>
+<area shape="rect" title=" " alt="" coords="857,229,988,256"/>
+<area shape="rect" href="Register_8hpp.html" title=" " alt="" coords="747,80,885,107"/>
+<area shape="rect" title=" " alt="" coords="960,80,1061,107"/>
+<area shape="rect" title=" " alt="" coords="1085,80,1211,107"/>
+<area shape="rect" title=" " alt="" coords="1235,80,1357,107"/>
+<area shape="rect" title=" " alt="" coords="1382,80,1509,107"/>
+<area shape="rect" title=" " alt="" coords="1533,80,1649,107"/>
+<area shape="rect" title=" " alt="" coords="1673,80,1789,107"/>
+<area shape="rect" title=" " alt="" coords="1813,80,1944,107"/>
 <area shape="rect" title=" " alt="" coords="445,155,515,181"/>
-<area shape="rect" title=" " alt="" coords="799,155,939,181"/>
+<area shape="rect" title=" " alt="" coords="693,229,833,256"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -136,8 +138,8 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac1f5da2214189be4a9e36d3919099579"><td class="memItemLeft" align="right" valign="top">volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="InitUtils_8cpp.html#ac1f5da2214189be4a9e36d3919099579">mainRegister</a> [<a class="el" href="Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427">REGISTER_SIZE</a>]</td></tr>
-<tr class="separator:ac1f5da2214189be4a9e36d3919099579"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a638ff2e33edac265d363ba9983a7ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classXerxes_1_1Register.html">Xerxes::Register</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="InitUtils_8cpp.html#a9a638ff2e33edac265d363ba9983a7ca">_reg</a></td></tr>
+<tr class="separator:a9a638ff2e33edac265d363ba9983a7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f6d3f092b5cbeaa083a8db36c8a9e19"><td class="memItemLeft" align="right" valign="top">queue_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="InitUtils_8cpp.html#a5f6d3f092b5cbeaa083a8db36c8a9e19">txFifo</a></td></tr>
 <tr class="memdesc:a5f6d3f092b5cbeaa083a8db36c8a9e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">transmit FIFO queue for UART  <a href="InitUtils_8cpp.html#a5f6d3f092b5cbeaa083a8db36c8a9e19">More...</a><br /></td></tr>
 <tr class="separator:a5f6d3f092b5cbeaa083a8db36c8a9e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -261,14 +263,12 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Clear the flash and load default values a.k.a. FACTORY RESET. </p>
-<p>&lt; Desired cycle time of sensor loop in microseconds</p>
-<p>&lt; Config bits of the device (1 byte)</p>
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="ac1f5da2214189be4a9e36d3919099579"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1f5da2214189be4a9e36d3919099579">&#9670;&nbsp;</a></span>mainRegister</h2>
+<a id="a9a638ff2e33edac265d363ba9983a7ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a638ff2e33edac265d363ba9983a7ca">&#9670;&nbsp;</a></span>_reg</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,7 +277,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">volatile uint8_t mainRegister[<a class="el" href="Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427">REGISTER_SIZE</a>]</td>
+          <td class="memname"><a class="el" href="classXerxes_1_1Register.html">Xerxes::Register</a> _reg</td>
         </tr>
       </table>
   </td>

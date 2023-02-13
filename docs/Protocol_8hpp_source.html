@@ -88,8 +88,8 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Protocol</a>(<a class="code" href="classXerxes_1_1Network.html">Network</a> *network);</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">~Protocol</a>();</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">sendMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">readMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>, <span class="keyword">const</span> uint64_t timeoutUs);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">sendMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;message) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">readMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;message, <span class="keyword">const</span> uint64_t timeoutUs);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
@@ -97,7 +97,6 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PROTOCOL_HPP</span></div>
-<div class="ttc" id="aMemory_8h_html_a0b2e8c7f76df48129f994ecc46d5c66c"><div class="ttname"><a href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a></div><div class="ttdeci">char * message</div><div class="ttdoc">Message string, holds messages (debug, info, warning, error)</div><div class="ttdef"><b>Definition:</b> Memory.h:76</div></div>
 <div class="ttc" id="aMessage_8hpp_html"><div class="ttname"><a href="Message_8hpp.html">Message.hpp</a></div></div>
 <div class="ttc" id="aRS485_8hpp_html"><div class="ttname"><a href="RS485_8hpp.html">RS485.hpp</a></div></div>
 <div class="ttc" id="aclassXerxes_1_1Message_html"><div class="ttname"><a href="classXerxes_1_1Message.html">Xerxes::Message</a></div><div class="ttdef"><b>Definition:</b> Message.hpp:13</div></div>

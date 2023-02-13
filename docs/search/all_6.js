@@ -1,18 +1,17 @@
 var searchData=
 [
-  ['gain_5fpv0_5foffset_108',['GAIN_PV0_OFFSET',['../Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d',1,'Definitions.h']]],
-  ['gain_5fpv1_5foffset_109',['GAIN_PV1_OFFSET',['../Definitions_8h.html#a7cefdb9c40ac079711a14e964bc52c57',1,'Definitions.h']]],
-  ['gain_5fpv2_5foffset_110',['GAIN_PV2_OFFSET',['../Definitions_8h.html#aa5de2bb4f617035815e182fcb5e82c53',1,'Definitions.h']]],
-  ['gain_5fpv3_5foffset_111',['GAIN_PV3_OFFSET',['../Definitions_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f',1,'Definitions.h']]],
-  ['gainpv0_112',['gainPv0',['../Memory_8h.html#a4d7c469198f8bf0d8a40b801c84524d6',1,'Memory.h']]],
-  ['gainpv1_113',['gainPv1',['../Memory_8h.html#a47e79fff259793d140acff225e8b4f8a',1,'Memory.h']]],
-  ['gainpv2_114',['gainPv2',['../Memory_8h.html#a05b086d589b004128600c05535f2584d',1,'Memory.h']]],
-  ['gainpv3_115',['gainPv3',['../Memory_8h.html#a99878d296378cb4ca8d8b4bb374c06f3',1,'Memory.h']]],
-  ['getdata_116',['getData',['../classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018',1,'Xerxes::Packet']]],
-  ['getlast_117',['getLast',['../classXerxes_1_1RingBuffer.html#a03d821fdbd98db2ab264a39417e858ac',1,'Xerxes::RingBuffer']]],
-  ['getmax_118',['getMax',['../classXerxes_1_1StatisticBuffer.html#a9262dc26f4186f0871d5faaf13cab413',1,'Xerxes::StatisticBuffer']]],
-  ['getmean_119',['getMean',['../classXerxes_1_1StatisticBuffer.html#aa0f1efe5663934fce44983409dc8c914',1,'Xerxes::StatisticBuffer']]],
-  ['getmin_120',['getMin',['../classXerxes_1_1StatisticBuffer.html#a1fe9fb1829714fcc05574206f45cac3a',1,'Xerxes::StatisticBuffer']]],
-  ['getstatistics_121',['getStatistics',['../classXerxes_1_1StatisticBuffer.html#a00b4a9cd81641b15efd5bf228ef4871e',1,'Xerxes::StatisticBuffer']]],
-  ['getstddev_122',['getStdDev',['../classXerxes_1_1StatisticBuffer.html#a49c2fd58fc220b305e7d723d6be5aecb',1,'Xerxes::StatisticBuffer']]]
+  ['emptypacket_127',['EmptyPacket',['../classXerxes_1_1Packet.html#a912ffc041442d69ae63d2679b08cbeb1',1,'Xerxes::Packet']]],
+  ['enable_5fangle_128',['Enable_ANGLE',['../namespaceCMD.html#aae332fcfc7a8883a3702d7b015d5e0fb',1,'CMD']]],
+  ['end_129',['end',['../classXerxes_1_1Message.html#ae35f743ce2d5bde61eb696325e3997e8',1,'Xerxes::Message']]],
+  ['error_130',['error',['../classXerxes_1_1Register.html#a56fea948cc78d3ecc3032f0330683ccf',1,'Xerxes::Register']]],
+  ['error_131',['ERROR',['../namespaceXerxes.html#a0ea1ea83b2b2f3b4b2765b1d0090ae2fa1fc76e0e499cd17a31ec35d4ba4ad749',1,'Xerxes']]],
+  ['error_5fmask_5fbus_5fcollision_132',['ERROR_MASK_BUS_COLLISION',['../Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad1a5b633b9a40c6f84fd838f8dc7046f',1,'Errors.h']]],
+  ['error_5fmask_5fcpu_5foverload_133',['ERROR_MASK_CPU_OVERLOAD',['../Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a014300c503fddb156824be80c7e47d16',1,'Errors.h']]],
+  ['error_5fmask_5fsensor_5foverload_134',['ERROR_MASK_SENSOR_OVERLOAD',['../Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ae088bed3aa6202526753720df6ec2cdb',1,'Errors.h']]],
+  ['error_5fmask_5fuart_5foverload_135',['ERROR_MASK_UART_OVERLOAD',['../Errors_8h.html#a79996715055bacedc404a7b4324ab8a6a72b499eafeda2e9311647910f12f22ed',1,'Errors.h']]],
+  ['error_5fmask_5fwatchdog_5ftimeout_136',['ERROR_MASK_WATCHDOG_TIMEOUT',['../Errors_8h.html#a79996715055bacedc404a7b4324ab8a6ad270a88771efbbde4514ed5b86267f9c',1,'Errors.h']]],
+  ['error_5foffset_137',['ERROR_OFFSET',['../Definitions_8h.html#a34da2490156c0fde3a3a9e8b658e6639',1,'Definitions.h']]],
+  ['errors_2eh_138',['Errors.h',['../Errors_8h.html',1,'']]],
+  ['exchangeblock_139',['ExchangeBlock',['../classXerxes_1_1SCL3X00.html#a796aeede8ff6841a33151b4a42e5f5d7',1,'Xerxes::SCL3X00']]],
+  ['ext_5f3v3_5fen_5fpin_140',['EXT_3V3_EN_PIN',['../xerxes__rp2040_8h.html#ac1e5295cd3ca6fb08889d0d3f6d9f364',1,'xerxes_rp2040.h']]]
 ];

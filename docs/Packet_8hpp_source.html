@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">size_t</span> _size;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html#aaf47f823aa875f991b3c19fa8f93fe95">Packet</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html#aaf47f823aa875f991b3c19fa8f93fe95">Packet</a>(std::vector&lt;uint8_t&gt; &amp;<a class="code" href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a>);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html#aaf47f823aa875f991b3c19fa8f93fe95">Packet</a>(std::vector&lt;uint8_t&gt; &amp;message);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html#ae572f3b3de92242cec975491b9298dae">~Packet</a>();</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classXerxes_1_1Packet.html#a5269f562439267ab86ec7364f09b8502">size</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::vector&lt;uint8_t&gt; <a class="code" href="classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018">getData</a>() <span class="keyword">const</span>;</div>
@@ -106,7 +106,6 @@ $(function() {
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PACKET_HPP</span></div>
-<div class="ttc" id="aMemory_8h_html_a0b2e8c7f76df48129f994ecc46d5c66c"><div class="ttname"><a href="Memory_8h.html#a0b2e8c7f76df48129f994ecc46d5c66c">message</a></div><div class="ttdeci">char * message</div><div class="ttdoc">Message string, holds messages (debug, info, warning, error)</div><div class="ttdef"><b>Definition:</b> Memory.h:76</div></div>
 <div class="ttc" id="aclassXerxes_1_1Packet_html"><div class="ttname"><a href="classXerxes_1_1Packet.html">Xerxes::Packet</a></div><div class="ttdef"><b>Definition:</b> Packet.hpp:17</div></div>
 <div class="ttc" id="aclassXerxes_1_1Packet_html_a2bd7699d19c2c7cb1a4130f2129a9018"><div class="ttname"><a href="classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018">Xerxes::Packet::getData</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; getData() const</div><div class="ttdef"><b>Definition:</b> Packet.cpp:41</div></div>
 <div class="ttc" id="aclassXerxes_1_1Packet_html_a5269f562439267ab86ec7364f09b8502"><div class="ttname"><a href="classXerxes_1_1Packet.html#a5269f562439267ab86ec7364f09b8502">Xerxes::Packet::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdef"><b>Definition:</b> Packet.cpp:35</div></div>

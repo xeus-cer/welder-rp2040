@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['_7eanaloginput_559',['~AnalogInput',['../classXerxes_1_1AnalogInput.html#a2fc0f04b5da00d9c3fa498cc2c363de3',1,'Xerxes::AnalogInput']]],
-  ['_7emessage_560',['~Message',['../classXerxes_1_1Message.html#abdfae20ecb7dda5a605296363449b289',1,'Xerxes::Message']]],
-  ['_7enetwork_561',['~Network',['../classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232',1,'Xerxes::Network']]],
-  ['_7epacket_562',['~Packet',['../classXerxes_1_1Packet.html#ae572f3b3de92242cec975491b9298dae',1,'Xerxes::Packet']]],
-  ['_7eprotocol_563',['~Protocol',['../classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08',1,'Xerxes::Protocol']]],
-  ['_7eringbuffer_564',['~RingBuffer',['../classXerxes_1_1RingBuffer.html#a9c1f4e45dbab187c4870998818f3f42d',1,'Xerxes::RingBuffer']]],
-  ['_7ers485_565',['~RS485',['../classXerxes_1_1RS485.html#a24efae4b4bb1db9c2cd18dd2dd91e359',1,'Xerxes::RS485']]],
-  ['_7esensor_566',['~Sensor',['../classXerxes_1_1Sensor.html#ae8a4cbb03f4f967a1425c27e4af3d0e8',1,'Xerxes::Sensor']]],
-  ['_7eslave_567',['~Slave',['../classXerxes_1_1Slave.html#a0f1013efe044ed9324650de0f5fdb5c8',1,'Xerxes::Slave']]]
+  ['uart_5finterrupt_5fhandler_613',['uart_interrupt_handler',['../InitUtils_8cpp.html#ae85bc197cc15495ae57a5f91b80083d7',1,'uart_interrupt_handler():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#ae85bc197cc15495ae57a5f91b80083d7',1,'uart_interrupt_handler():&#160;InitUtils.cpp']]],
+  ['unicast_614',['unicast',['../namespaceXerxes.html#a699d6d1b9427522627f6af002e5c4f9d',1,'Xerxes']]],
+  ['update_615',['update',['../classXerxes_1_1__4DI4DO.html#a48540e72f7900a2a5dd014e1379c7563',1,'Xerxes::_4DI4DO::update()'],['../classXerxes_1_1AnalogInput.html#a86054319c5eef866ef1367a8983cb175',1,'Xerxes::AnalogInput::update()'],['../classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315',1,'Xerxes::DigitalInputOutput::update()'],['../classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a',1,'Xerxes::ABP::update()'],['../classXerxes_1_1SCL3300.html#ab64fe069ae4eef038722f817a804dee0',1,'Xerxes::SCL3300::update()'],['../classXerxes_1_1SCL3400.html#a78fa3dba0dcff6c79a1162d8a5c675f5',1,'Xerxes::SCL3400::update()'],['../classXerxes_1_1Peripheral.html#ae1e54f753b899cbf89eeab06a3e32752',1,'Xerxes::Peripheral::update()'],['../classXerxes_1_1Sensor.html#a848cc965bedd095f0fe421371ec54065',1,'Xerxes::Sensor::update()'],['../classXerxes_1_1Message.html#a3f678cc53d7d62349c1e813d2e8d15da',1,'Xerxes::Message::update()']]],
+  ['updateflash_616',['updateFlash',['../UserFlash_8hpp.html#af1e13111c6bd9ba5a73656c35dd599a6',1,'updateFlash(const uint8_t *memTable):&#160;UserFlash.cpp'],['../UserFlash_8cpp.html#af1e13111c6bd9ba5a73656c35dd599a6',1,'updateFlash(const uint8_t *memTable):&#160;UserFlash.cpp']]],
+  ['updatestatistics_617',['updateStatistics',['../classXerxes_1_1StatisticBuffer.html#a3a336f298d6fa641bbc3ebfada124031',1,'Xerxes::StatisticBuffer']]],
+  ['userinit_618',['userInit',['../InitUtils_8cpp.html#a0c5fe2b0843784b74406a16461353491',1,'userInit():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#a0c5fe2b0843784b74406a16461353491',1,'userInit():&#160;InitUtils.cpp']]],
+  ['userinitclocks_619',['userInitClocks',['../ClockUtils_8cpp.html#aaac50256c6a2daf48b776f440418f98d',1,'userInitClocks():&#160;ClockUtils.cpp'],['../ClockUtils_8hpp.html#aaac50256c6a2daf48b776f440418f98d',1,'userInitClocks():&#160;ClockUtils.cpp']]],
+  ['userinitflash_620',['userInitFlash',['../UserFlash_8cpp.html#a453b506b3146db6819ceea1db6ab5e0a',1,'userInitFlash(uint8_t *memTable):&#160;UserFlash.cpp'],['../UserFlash_8hpp.html#a453b506b3146db6819ceea1db6ab5e0a',1,'userInitFlash(uint8_t *memTable):&#160;UserFlash.cpp']]],
+  ['userinitgpio_621',['userInitGpio',['../InitUtils_8cpp.html#a9bc2bc4c88d302c40a8509c44624a523',1,'userInitGpio():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#a9bc2bc4c88d302c40a8509c44624a523',1,'userInitGpio():&#160;InitUtils.cpp']]],
+  ['userinitqueue_622',['userInitQueue',['../InitUtils_8cpp.html#aadddf399ff70b98e01bef68cb99cfc84',1,'userInitQueue():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#aadddf399ff70b98e01bef68cb99cfc84',1,'userInitQueue():&#160;InitUtils.cpp']]],
+  ['userinituart_623',['userInitUart',['../InitUtils_8cpp.html#afb503665786b60618573f6d83e30c183',1,'userInitUart():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#a03ef184239db9b30ac1485ceaa8a3889',1,'userInitUart(void):&#160;InitUtils.cpp']]],
+  ['userloaddefaultvalues_624',['userLoadDefaultValues',['../InitUtils_8cpp.html#af4217526dcf437c946ee43120a6ae3aa',1,'userLoadDefaultValues():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#af4217526dcf437c946ee43120a6ae3aa',1,'userLoadDefaultValues():&#160;InitUtils.cpp']]]
 ];

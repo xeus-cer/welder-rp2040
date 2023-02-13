@@ -74,68 +74,65 @@ $(function() {
 <a href="Sensor_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __SENSOR_HPP</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __SENSOR_HPP</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;hardware/gpio.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;hardware/spi.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;hardware/adc.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Sensor.html">Sensor</a></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Register_8hpp.html">Core/Register.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Peripheral_8hpp.html">Sensors/Peripheral.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="StatisticBuffer_8hpp.html">Buffer/StatisticBuffer.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Definitions_8h.html">Core/Definitions.h</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;hardware/gpio.h&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;hardware/spi.h&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;hardware/adc.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#ab227903b27a7ba7e7705670ae00ecaab">   16</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classXerxes_1_1Sensor.html#ab227903b27a7ba7e7705670ae00ecaab">pv0</a> = 0;    </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#adb25d77c5329853343d523242f3854f9">   17</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classXerxes_1_1Sensor.html#adb25d77c5329853343d523242f3854f9">pv1</a> = 0;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a5a17fa45844910837ce7d6f6d463d526">   18</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classXerxes_1_1Sensor.html#a5a17fa45844910837ce7d6f6d463d526">pv2</a> = 0;</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#aa2d6ef60f4b30577debe114b62b9888f">   19</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="classXerxes_1_1Sensor.html#aa2d6ef60f4b30577debe114b62b9888f">pv3</a> = 0;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classXerxes_1_1ABP.html#a02d12a78bb21f35825cee309bf0ebc50">   21</a></span>&#160;    <a class="code" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Sensor</a>(<span class="comment">/* args */</span>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="classXerxes_1_1Sensor.html#ae8a4cbb03f4f967a1425c27e4af3d0e8">~Sensor</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// pure virtual functions</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a1ebe3ca6829310e7ee745f895cf4f8ab">   25</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Sensor.html#a1ebe3ca6829310e7ee745f895cf4f8ab">init</a>() = 0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#aaf18f8bcd9a8736cdabc8938325f29c4">   26</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Sensor.html#aaf18f8bcd9a8736cdabc8938325f29c4">update</a>() = 0;</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a23620083674b2ae1a9fd2de647c67a11">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Sensor.html#a23620083674b2ae1a9fd2de647c67a11">stop</a>() = 0;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Sensor.html#aefc0533fc948e58db41e3491244a5ed9">read</a>(std::array&lt;float*, 4&gt; pvs);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#aefc0533fc948e58db41e3491244a5ed9">   33</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Sensor.html#aefc0533fc948e58db41e3491244a5ed9">Sensor::read</a>(std::array&lt;float*, 4&gt; pvs)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    *pvs[0] = <a class="code" href="classXerxes_1_1Sensor.html#ab227903b27a7ba7e7705670ae00ecaab">pv0</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    *pvs[1] = <a class="code" href="classXerxes_1_1Sensor.html#adb25d77c5329853343d523242f3854f9">pv1</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    *pvs[2] = <a class="code" href="classXerxes_1_1Sensor.html#a5a17fa45844910837ce7d6f6d463d526">pv2</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    *pvs[3] = <a class="code" href="classXerxes_1_1Sensor.html#aa2d6ef60f4b30577debe114b62b9888f">pv3</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Sensor.html">Sensor</a> : <span class="keyword">public</span> <a class="code" href="classXerxes_1_1Peripheral.html">Peripheral</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// typedef Peripheral as super class for easier access</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#ac3e8c5599bf6dc3f52415d064f467ccb">   20</a></span>&#160;    <span class="keyword">typedef</span> <a class="code" href="classXerxes_1_1Peripheral.html">Peripheral</a> <a class="code" href="classXerxes_1_1Sensor.html#ac3e8c5599bf6dc3f52415d064f467ccb">super</a>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a6124651ebab36dceb75cc5e75dcca2cb">   22</a></span>&#160;    <a class="code" href="classXerxes_1_1Register.html">Register</a>* <a class="code" href="classXerxes_1_1Sensor.html#a6124651ebab36dceb75cc5e75dcca2cb">_reg</a>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// define ringbuffer (circular buffer) for each process value</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#ae908d8217dd3f9b051e7056122490776">   25</a></span>&#160;    <a class="code" href="classXerxes_1_1StatisticBuffer.html">StatisticBuffer&lt;float&gt;</a> <a class="code" href="classXerxes_1_1Sensor.html#ae908d8217dd3f9b051e7056122490776">rbpv0</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a87acd07143c327038e89d167b743b7d9">   26</a></span>&#160;    <a class="code" href="classXerxes_1_1StatisticBuffer.html">StatisticBuffer&lt;float&gt;</a> <a class="code" href="classXerxes_1_1Sensor.html#a87acd07143c327038e89d167b743b7d9">rbpv1</a>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a45afcaeff7d6fc2af88e3497995568a2">   27</a></span>&#160;    <a class="code" href="classXerxes_1_1StatisticBuffer.html">StatisticBuffer&lt;float&gt;</a> <a class="code" href="classXerxes_1_1Sensor.html#a45afcaeff7d6fc2af88e3497995568a2">rbpv2</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a728140f325079168c196eabbf853788b">   28</a></span>&#160;    <a class="code" href="classXerxes_1_1StatisticBuffer.html">StatisticBuffer&lt;float&gt;</a> <a class="code" href="classXerxes_1_1Sensor.html#a728140f325079168c196eabbf853788b">rbpv3</a>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">using</span> <a class="code" href="classXerxes_1_1Peripheral.html#a8ea01b1358a21edeefb028436d62ca7b">Peripheral::Peripheral</a>;    </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Sensor</a>(<a class="code" href="classXerxes_1_1Register.html">Register</a>* reg);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">   34</a></span>&#160;    <a class="code" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Sensor</a>() : </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="classXerxes_1_1Sensor.html#a6124651ebab36dceb75cc5e75dcca2cb">_reg</a>(nullptr)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Sensor.html#a848cc965bedd095f0fe421371ec54065">update</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">   42</a></span>&#160;<a class="code" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Sensor::Sensor</a>(<span class="comment">/* args */</span>)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classXerxes_1_1Sensor.html#ae8a4cbb03f4f967a1425c27e4af3d0e8">   47</a></span>&#160;<a class="code" href="classXerxes_1_1Sensor.html#ae8a4cbb03f4f967a1425c27e4af3d0e8">Sensor::~Sensor</a>()</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}   <span class="comment">// namespace Xerxes</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__SENSOR_HPP</span></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html"><div class="ttname"><a href="classXerxes_1_1Sensor.html">Xerxes::Sensor</a></div><div class="ttdef"><b>Definition:</b> Sensor.hpp:14</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_a02d12a78bb21f35825cee309bf0ebc50"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Xerxes::Sensor::Sensor</a></div><div class="ttdeci">Sensor()</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:42</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_a1ebe3ca6829310e7ee745f895cf4f8ab"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a1ebe3ca6829310e7ee745f895cf4f8ab">Xerxes::Sensor::init</a></div><div class="ttdeci">virtual void init()=0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_a23620083674b2ae1a9fd2de647c67a11"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a23620083674b2ae1a9fd2de647c67a11">Xerxes::Sensor::stop</a></div><div class="ttdeci">virtual void stop()=0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_a5a17fa45844910837ce7d6f6d463d526"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a5a17fa45844910837ce7d6f6d463d526">Xerxes::Sensor::pv2</a></div><div class="ttdeci">double pv2</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:18</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_aa2d6ef60f4b30577debe114b62b9888f"><div class="ttname"><a href="classXerxes_1_1Sensor.html#aa2d6ef60f4b30577debe114b62b9888f">Xerxes::Sensor::pv3</a></div><div class="ttdeci">double pv3</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:19</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_aaf18f8bcd9a8736cdabc8938325f29c4"><div class="ttname"><a href="classXerxes_1_1Sensor.html#aaf18f8bcd9a8736cdabc8938325f29c4">Xerxes::Sensor::update</a></div><div class="ttdeci">virtual void update()=0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_ab227903b27a7ba7e7705670ae00ecaab"><div class="ttname"><a href="classXerxes_1_1Sensor.html#ab227903b27a7ba7e7705670ae00ecaab">Xerxes::Sensor::pv0</a></div><div class="ttdeci">double pv0</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:16</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_adb25d77c5329853343d523242f3854f9"><div class="ttname"><a href="classXerxes_1_1Sensor.html#adb25d77c5329853343d523242f3854f9">Xerxes::Sensor::pv1</a></div><div class="ttdeci">double pv1</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:17</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_ae8a4cbb03f4f967a1425c27e4af3d0e8"><div class="ttname"><a href="classXerxes_1_1Sensor.html#ae8a4cbb03f4f967a1425c27e4af3d0e8">Xerxes::Sensor::~Sensor</a></div><div class="ttdeci">~Sensor()</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:47</div></div>
-<div class="ttc" id="aclassXerxes_1_1Sensor_html_aefc0533fc948e58db41e3491244a5ed9"><div class="ttname"><a href="classXerxes_1_1Sensor.html#aefc0533fc948e58db41e3491244a5ed9">Xerxes::Sensor::read</a></div><div class="ttdeci">void read(std::array&lt; float *, 4 &gt; pvs)</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:33</div></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}   <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__SENSOR_HPP</span></div>
+<div class="ttc" id="aDefinitions_8h_html"><div class="ttname"><a href="Definitions_8h.html">Definitions.h</a></div></div>
+<div class="ttc" id="aPeripheral_8hpp_html"><div class="ttname"><a href="Peripheral_8hpp.html">Peripheral.hpp</a></div></div>
+<div class="ttc" id="aRegister_8hpp_html"><div class="ttname"><a href="Register_8hpp.html">Register.hpp</a></div></div>
+<div class="ttc" id="aStatisticBuffer_8hpp_html"><div class="ttname"><a href="StatisticBuffer_8hpp.html">StatisticBuffer.hpp</a></div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html"><div class="ttname"><a href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:12</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_a8ea01b1358a21edeefb028436d62ca7b"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a8ea01b1358a21edeefb028436d62ca7b">Xerxes::Peripheral::Peripheral</a></div><div class="ttdeci">Peripheral()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:7</div></div>
+<div class="ttc" id="aclassXerxes_1_1Register_html"><div class="ttname"><a href="classXerxes_1_1Register.html">Xerxes::Register</a></div><div class="ttdef"><b>Definition:</b> Register.hpp:13</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html"><div class="ttname"><a href="classXerxes_1_1Sensor.html">Xerxes::Sensor</a></div><div class="ttdef"><b>Definition:</b> Sensor.hpp:17</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a02d12a78bb21f35825cee309bf0ebc50"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Xerxes::Sensor::Sensor</a></div><div class="ttdeci">Sensor()</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:34</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a45afcaeff7d6fc2af88e3497995568a2"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a45afcaeff7d6fc2af88e3497995568a2">Xerxes::Sensor::rbpv2</a></div><div class="ttdeci">StatisticBuffer&lt; float &gt; rbpv2</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:27</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a6124651ebab36dceb75cc5e75dcca2cb"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a6124651ebab36dceb75cc5e75dcca2cb">Xerxes::Sensor::_reg</a></div><div class="ttdeci">Register * _reg</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:22</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a728140f325079168c196eabbf853788b"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a728140f325079168c196eabbf853788b">Xerxes::Sensor::rbpv3</a></div><div class="ttdeci">StatisticBuffer&lt; float &gt; rbpv3</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:28</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a848cc965bedd095f0fe421371ec54065"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a848cc965bedd095f0fe421371ec54065">Xerxes::Sensor::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> Sensor.cpp:18</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_a87acd07143c327038e89d167b743b7d9"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a87acd07143c327038e89d167b743b7d9">Xerxes::Sensor::rbpv1</a></div><div class="ttdeci">StatisticBuffer&lt; float &gt; rbpv1</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:26</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_ac3e8c5599bf6dc3f52415d064f467ccb"><div class="ttname"><a href="classXerxes_1_1Sensor.html#ac3e8c5599bf6dc3f52415d064f467ccb">Xerxes::Sensor::super</a></div><div class="ttdeci">Peripheral super</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:20</div></div>
+<div class="ttc" id="aclassXerxes_1_1Sensor_html_ae908d8217dd3f9b051e7056122490776"><div class="ttname"><a href="classXerxes_1_1Sensor.html#ae908d8217dd3f9b051e7056122490776">Xerxes::Sensor::rbpv0</a></div><div class="ttdeci">StatisticBuffer&lt; float &gt; rbpv0</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:25</div></div>
+<div class="ttc" id="aclassXerxes_1_1StatisticBuffer_html"><div class="ttname"><a href="classXerxes_1_1StatisticBuffer.html">Xerxes::StatisticBuffer&lt; float &gt;</a></div></div>
 <div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ringbuffer_428',['RingBuffer',['../classXerxes_1_1RingBuffer.html',1,'Xerxes']]],
-  ['rs485_429',['RS485',['../classXerxes_1_1RS485.html',1,'Xerxes']]]
+  ['network_478',['Network',['../classXerxes_1_1Network.html',1,'Xerxes']]]
 ];

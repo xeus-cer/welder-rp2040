@@ -1,15 +1,6 @@
 var searchData=
 [
-  ['bind_13',['bind',['../classXerxes_1_1Slave.html#ac5cce6695ed7252cb33e81885b1045de',1,'Xerxes::Slave']]],
-  ['bindwrapper_2ehpp_14',['BindWrapper.hpp',['../BindWrapper_8hpp.html',1,'']]],
-  ['bit2_15',['bit2',['../structConfigBits.html#add2d2b0bea6a9985d56c5836a015059e',1,'ConfigBits']]],
-  ['bit3_16',['bit3',['../structConfigBits.html#a170255d44bd921df32cc7e5e7ceba334',1,'ConfigBits']]],
-  ['bit4_17',['bit4',['../structConfigBits.html#a901094ba72605c856e95023325420ab9',1,'ConfigBits']]],
-  ['bit5_18',['bit5',['../structConfigBits.html#ac418aa995d32b1246a252112fea0e808',1,'ConfigBits']]],
-  ['bit6_19',['bit6',['../structConfigBits.html#aa6332a9018f1efa3010a717cddacf081',1,'ConfigBits']]],
-  ['bit7_20',['bit7',['../structConfigBits.html#a35a083210ca71460f85d815a3865fb4b',1,'ConfigBits']]],
-  ['bits_21',['bits',['../unionConfigBitsUnion.html#afe9eb983ca8102ba34d4a7869dc409b1',1,'ConfigBitsUnion']]],
-  ['broadcast_22',['broadcast',['../namespaceXerxes.html#a2f42f1b786d92d0443597b573909b84f',1,'Xerxes']]],
-  ['broadcast_5faddr_23',['BROADCAST_ADDR',['../namespaceXerxes.html#a3cc2e66a8a362160423ea21cbb83f768',1,'Xerxes']]],
-  ['buffer_24',['buffer',['../classXerxes_1_1RingBuffer.html#a7746f23bf35027c7470cc9695133b259',1,'Xerxes::RingBuffer']]]
+  ['_5f4di4do_2',['_4DI4DO',['../classXerxes_1_1__4DI4DO.html',1,'Xerxes']]],
+  ['_5f4io_5fshield_5fmask_3',['_4IO_SHIELD_MASK',['../namespaceXerxes.html#ab6482b24fb300bade6748dac09ba24c1',1,'Xerxes']]],
+  ['_5freg_4',['_reg',['../classXerxes_1_1DigitalInputOutput.html#abf4f7dd48e1f2740b7ff75d541be3d77',1,'Xerxes::DigitalInputOutput::_reg()'],['../classXerxes_1_1Sensor.html#a6124651ebab36dceb75cc5e75dcca2cb',1,'Xerxes::Sensor::_reg()'],['../Callbacks_8cpp.html#a9a638ff2e33edac265d363ba9983a7ca',1,'_reg():&#160;main.cpp'],['../BindWrapper_8hpp.html#a9a638ff2e33edac265d363ba9983a7ca',1,'_reg():&#160;main.cpp'],['../InitUtils_8cpp.html#a9a638ff2e33edac265d363ba9983a7ca',1,'_reg():&#160;main.cpp'],['../main_8cpp.html#a8fae0877b5f617a991847eb68beccf24',1,'_reg():&#160;main.cpp']]]
 ];

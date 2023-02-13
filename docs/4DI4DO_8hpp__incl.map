@@ -1,0 +1,13 @@
+<map id="src/Sensors/Generic/4DI4DO.hpp" name="src/Sensors/Generic/4DI4DO.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="269,5,419,47"/>
+<area shape="rect" id="node2" href="$DigitalInputOutput_8hpp.html" title=" " alt="" coords="241,95,447,136"/>
+<area shape="rect" id="node3" href="$Peripheral_8hpp.html" title=" " alt="" coords="80,184,251,211"/>
+<area shape="rect" id="node6" title=" " alt="" coords="253,259,329,285"/>
+<area shape="rect" id="node7" href="$Register_8hpp.html" title=" " alt="" coords="328,184,467,211"/>
+<area shape="rect" id="node11" href="$xerxes__rp2040_8h.html" title=" " alt="" coords="491,184,688,211"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,259,72,285"/>
+<area shape="rect" id="node5" href="$DeviceIds_8h.html" title=" " alt="" coords="97,259,229,285"/>
+<area shape="rect" id="node8" href="$Definitions_8h.html" title=" " alt="" coords="353,259,492,285"/>
+<area shape="rect" id="node9" title=" " alt="" coords="277,333,408,360"/>
+<area shape="rect" id="node10" title=" " alt="" coords="433,333,573,360"/>
+</map>

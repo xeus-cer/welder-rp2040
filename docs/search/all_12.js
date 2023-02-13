@@ -1,5 +1,29 @@
 var searchData=
 [
-  ['wake_5fup_5ffrom_5fpower_5fdown_5fmode_402',['Wake_up_from_power_down_mode',['../namespaceCMD.html#a8ed013ed66621e7af06f260e4257135f',1,'CMD']]],
-  ['writeregcallback_403',['writeRegCallback',['../namespaceXerxes.html#a94afd3fc3c8b1dfdb7175139bcee7362',1,'Xerxes']]]
+  ['uart0_5frx_5fpin_422',['UART0_RX_PIN',['../xerxes__rp2040_8h.html#af99e6777e3f2418cba487ab9c928f769',1,'xerxes_rp2040.h']]],
+  ['uart0_5ftx_5fpin_423',['UART0_TX_PIN',['../xerxes__rp2040_8h.html#af7018c3d4c500f40da605793cb4fcd6d',1,'xerxes_rp2040.h']]],
+  ['uart1_5frx_5fpin_424',['UART1_RX_PIN',['../xerxes__rp2040_8h.html#ab9130e621f608f1ee7c2c402571c88cd',1,'xerxes_rp2040.h']]],
+  ['uart1_5ftx_5fpin_425',['UART1_TX_PIN',['../xerxes__rp2040_8h.html#a37b225cce113e8cf383598b1529e4e46',1,'xerxes_rp2040.h']]],
+  ['uart_5finterrupt_5fhandler_426',['uart_interrupt_handler',['../InitUtils_8hpp.html#ae85bc197cc15495ae57a5f91b80083d7',1,'uart_interrupt_handler():&#160;InitUtils.cpp'],['../InitUtils_8cpp.html#ae85bc197cc15495ae57a5f91b80083d7',1,'uart_interrupt_handler():&#160;InitUtils.cpp']]],
+  ['uid_427',['uid',['../classXerxes_1_1Register.html#a1514f451e89db6d28e97d07345cdf80e',1,'Xerxes::Register']]],
+  ['uid_5foffset_428',['UID_OFFSET',['../Definitions_8h.html#a3c8c639a6072f8d27e9ac202c82ce0ff',1,'Definitions.h']]],
+  ['unicast_429',['unicast',['../namespaceXerxes.html#a699d6d1b9427522627f6af002e5c4f9d',1,'Xerxes']]],
+  ['update_430',['update',['../classXerxes_1_1Peripheral.html#ae1e54f753b899cbf89eeab06a3e32752',1,'Xerxes::Peripheral::update()'],['../classXerxes_1_1Sensor.html#a848cc965bedd095f0fe421371ec54065',1,'Xerxes::Sensor::update()'],['../classXerxes_1_1SCL3400.html#a78fa3dba0dcff6c79a1162d8a5c675f5',1,'Xerxes::SCL3400::update()'],['../classXerxes_1_1SCL3300.html#ab64fe069ae4eef038722f817a804dee0',1,'Xerxes::SCL3300::update()'],['../classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a',1,'Xerxes::ABP::update()'],['../classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315',1,'Xerxes::DigitalInputOutput::update()'],['../classXerxes_1_1AnalogInput.html#a86054319c5eef866ef1367a8983cb175',1,'Xerxes::AnalogInput::update()'],['../classXerxes_1_1__4DI4DO.html#a48540e72f7900a2a5dd014e1379c7563',1,'Xerxes::_4DI4DO::update()'],['../classXerxes_1_1Message.html#a3f678cc53d7d62349c1e813d2e8d15da',1,'Xerxes::Message::update()']]],
+  ['updateflash_431',['updateFlash',['../UserFlash_8cpp.html#af1e13111c6bd9ba5a73656c35dd599a6',1,'updateFlash(const uint8_t *memTable):&#160;UserFlash.cpp'],['../UserFlash_8hpp.html#af1e13111c6bd9ba5a73656c35dd599a6',1,'updateFlash(const uint8_t *memTable):&#160;UserFlash.cpp']]],
+  ['updatestatistics_432',['updateStatistics',['../classXerxes_1_1StatisticBuffer.html#a3a336f298d6fa641bbc3ebfada124031',1,'Xerxes::StatisticBuffer']]],
+  ['used_5fiomask_433',['used_iomask',['../classXerxes_1_1DigitalInputOutput.html#aee5c32e1dbd16a9d869290f022eb9e05',1,'Xerxes::DigitalInputOutput']]],
+  ['userflash_2ecpp_434',['UserFlash.cpp',['../UserFlash_8cpp.html',1,'']]],
+  ['userflash_2ehpp_435',['UserFlash.hpp',['../UserFlash_8hpp.html',1,'']]],
+  ['userinit_436',['userInit',['../InitUtils_8hpp.html#a0c5fe2b0843784b74406a16461353491',1,'userInit():&#160;InitUtils.cpp'],['../InitUtils_8cpp.html#a0c5fe2b0843784b74406a16461353491',1,'userInit():&#160;InitUtils.cpp']]],
+  ['userinitclocks_437',['userInitClocks',['../ClockUtils_8cpp.html#aaac50256c6a2daf48b776f440418f98d',1,'userInitClocks():&#160;ClockUtils.cpp'],['../ClockUtils_8hpp.html#aaac50256c6a2daf48b776f440418f98d',1,'userInitClocks():&#160;ClockUtils.cpp']]],
+  ['userinitflash_438',['userInitFlash',['../UserFlash_8cpp.html#a453b506b3146db6819ceea1db6ab5e0a',1,'userInitFlash(uint8_t *memTable):&#160;UserFlash.cpp'],['../UserFlash_8hpp.html#a453b506b3146db6819ceea1db6ab5e0a',1,'userInitFlash(uint8_t *memTable):&#160;UserFlash.cpp']]],
+  ['userinitgpio_439',['userInitGpio',['../InitUtils_8cpp.html#a9bc2bc4c88d302c40a8509c44624a523',1,'userInitGpio():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#a9bc2bc4c88d302c40a8509c44624a523',1,'userInitGpio():&#160;InitUtils.cpp']]],
+  ['userinitqueue_440',['userInitQueue',['../InitUtils_8hpp.html#aadddf399ff70b98e01bef68cb99cfc84',1,'userInitQueue():&#160;InitUtils.cpp'],['../InitUtils_8cpp.html#aadddf399ff70b98e01bef68cb99cfc84',1,'userInitQueue():&#160;InitUtils.cpp']]],
+  ['userinituart_441',['userInitUart',['../InitUtils_8cpp.html#afb503665786b60618573f6d83e30c183',1,'userInitUart():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#a03ef184239db9b30ac1485ceaa8a3889',1,'userInitUart(void):&#160;InitUtils.cpp']]],
+  ['userloaddefaultvalues_442',['userLoadDefaultValues',['../InitUtils_8cpp.html#af4217526dcf437c946ee43120a6ae3aa',1,'userLoadDefaultValues():&#160;InitUtils.cpp'],['../InitUtils_8hpp.html#af4217526dcf437c946ee43120a6ae3aa',1,'userLoadDefaultValues():&#160;InitUtils.cpp']]],
+  ['useusb_443',['useUsb',['../main_8cpp.html#a89b4873bea82438d52932da866b82224',1,'main.cpp']]],
+  ['usr_5fbtn_5fpin_444',['USR_BTN_PIN',['../xerxes__rp2040_8h.html#a6fc34b00bd5f1094655d55d8e0137235',1,'xerxes_rp2040.h']]],
+  ['usr_5fled_5fpin_445',['USR_LED_PIN',['../xerxes__rp2040_8h.html#a69c8ba05743df48933be84eb44c773b8',1,'xerxes_rp2040.h']]],
+  ['usr_5fsw_5fpin_446',['USR_SW_PIN',['../xerxes__rp2040_8h.html#af39b0c425d31a349255b3e10d93258e1',1,'xerxes_rp2040.h']]],
+  ['usrswitchon_447',['usrSwitchOn',['../main_8cpp.html#abf0c0c5ebb268e406fc60643cebc340e',1,'main.cpp']]]
 ];

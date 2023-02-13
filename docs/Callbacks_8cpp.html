@@ -84,36 +84,51 @@ $(function() {
 <code>#include &quot;pico/multicore.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="Definitions_8h_source.html">Core/Definitions.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Slave_8hpp_source.html">Core/Slave.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Register_8hpp_source.html">Core/Register.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Peripheral_8hpp_source.html">Sensors/Peripheral.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Callbacks.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="Callbacks_8cpp__incl.png" border="0" usemap="#asrc_2Communication_2Callbacks_8cpp" alt=""/></div>
 <map name="asrc_2Communication_2Callbacks_8cpp" id="asrc_2Communication_2Callbacks_8cpp">
-<area shape="rect" title=" " alt="" coords="393,5,635,32"/>
-<area shape="rect" href="Callbacks_8hpp.html" title=" " alt="" coords="936,80,1049,107"/>
-<area shape="rect" href="UserFlash_8hpp.html" title=" " alt="" coords="95,155,277,181"/>
-<area shape="rect" href="DeviceIds_8h.html" title=" " alt="" coords="247,80,379,107"/>
-<area shape="rect" href="Sleep_8hpp.html" title=" " alt="" coords="320,379,473,405"/>
-<area shape="rect" href="InitUtils_8hpp.html" title=" " alt="" coords="47,80,215,107"/>
-<area shape="rect" title=" " alt="" coords="598,80,761,107"/>
-<area shape="rect" title=" " alt="" coords="785,80,912,107"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="1078,80,1217,107"/>
-<area shape="rect" href="Slave_8hpp.html" title=" " alt="" coords="454,80,574,107"/>
-<area shape="rect" title=" " alt="" coords="920,155,1007,181"/>
-<area shape="rect" href="Message_8hpp.html" title=" " alt="" coords="875,304,983,331"/>
-<area shape="rect" title=" " alt="" coords="876,453,939,480"/>
-<area shape="rect" title=" " alt="" coords="762,453,829,480"/>
-<area shape="rect" href="Packet_8hpp.html" title=" " alt="" coords="749,379,842,405"/>
-<area shape="rect" title=" " alt="" coords="151,229,221,256"/>
-<area shape="rect" title=" " alt="" coords="1082,155,1213,181"/>
-<area shape="rect" title=" " alt="" coords="1237,155,1377,181"/>
-<area shape="rect" href="Protocol_8hpp.html" title=" " alt="" coords="685,155,895,181"/>
-<area shape="rect" title=" " alt="" coords="536,155,660,181"/>
-<area shape="rect" href="MessageId_8h.html" title=" " alt="" coords="302,155,513,181"/>
-<area shape="rect" href="RS485_8hpp.html" title=" " alt="" coords="707,229,798,256"/>
-<area shape="rect" href="Network_8hpp.html" title=" " alt="" coords="745,304,851,331"/>
-<area shape="rect" title=" " alt="" coords="427,304,558,331"/>
-<area shape="rect" title=" " alt="" coords="583,304,669,331"/>
+<area shape="rect" title=" " alt="" coords="526,5,769,32"/>
+<area shape="rect" href="Callbacks_8hpp.html" title=" " alt="" coords="591,80,704,107"/>
+<area shape="rect" href="Register_8hpp.html" title=" " alt="" coords="89,229,227,256"/>
+<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="86,304,225,331"/>
+<area shape="rect" href="Peripheral_8hpp.html" title=" " alt="" coords="353,229,523,256"/>
+<area shape="rect" href="DeviceIds_8h.html" title=" " alt="" coords="249,304,381,331"/>
+<area shape="rect" href="UserFlash_8hpp.html" title=" " alt="" coords="728,80,911,107"/>
+<area shape="rect" href="Sleep_8hpp.html" title=" " alt="" coords="476,155,629,181"/>
+<area shape="rect" href="InitUtils_8hpp.html" title=" " alt="" coords="935,80,1103,107"/>
+<area shape="rect" title=" " alt="" coords="1127,80,1290,107"/>
+<area shape="rect" title=" " alt="" coords="1315,80,1441,107"/>
+<area shape="rect" href="Slave_8hpp.html" title=" " alt="" coords="1466,80,1586,107"/>
+<area shape="rect" title=" " alt="" coords="1019,155,1105,181"/>
+<area shape="rect" href="Message_8hpp.html" title=" " alt="" coords="1236,304,1344,331"/>
+<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="654,155,803,181"/>
+<area shape="rect" title=" " alt="" coords="1323,453,1385,480"/>
+<area shape="rect" title=" " alt="" coords="930,453,997,480"/>
+<area shape="rect" href="Packet_8hpp.html" title=" " alt="" coords="1350,379,1443,405"/>
+<area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="1039,229,1226,256"/>
+<area shape="rect" title=" " alt="" coords="599,229,725,256"/>
+<area shape="rect" title=" " alt="" coords="749,229,868,256"/>
+<area shape="rect" title=" " alt="" coords="893,229,1015,256"/>
+<area shape="rect" title=" " alt="" coords="170,379,301,405"/>
+<area shape="rect" title=" " alt="" coords="5,379,145,405"/>
+<area shape="rect" title=" " alt="" coords="457,304,533,331"/>
+<area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="1045,304,1164,331"/>
+<area shape="rect" title=" " alt="" coords="1169,379,1225,405"/>
+<area shape="rect" title=" " alt="" coords="881,379,953,405"/>
+<area shape="rect" title=" " alt="" coords="977,379,1040,405"/>
+<area shape="rect" title=" " alt="" coords="1065,379,1145,405"/>
+<area shape="rect" title=" " alt="" coords="1301,229,1372,256"/>
+<area shape="rect" href="Protocol_8hpp.html" title=" " alt="" coords="1614,155,1825,181"/>
+<area shape="rect" title=" " alt="" coords="1465,155,1589,181"/>
+<area shape="rect" href="MessageId_8h.html" title=" " alt="" coords="1231,155,1442,181"/>
+<area shape="rect" href="RS485_8hpp.html" title=" " alt="" coords="1535,229,1626,256"/>
+<area shape="rect" href="Network_8hpp.html" title=" " alt="" coords="1368,304,1473,331"/>
+<area shape="rect" title=" " alt="" coords="1659,304,1790,331"/>
+<area shape="rect" title=" " alt="" coords="1497,304,1584,331"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -124,9 +139,6 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a411529857519620a108606b1d7124585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Callbacks_8cpp.html#a411529857519620a108606b1d7124585">pollSensor</a> ()</td></tr>
-<tr class="memdesc:a411529857519620a108606b1d7124585"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll sensor and update values.  <a href="Callbacks_8cpp.html#a411529857519620a108606b1d7124585">More...</a><br /></td></tr>
-<tr class="separator:a411529857519620a108606b1d7124585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f28411848f37bf66bc06ac3ed37af8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a0f28411848f37bf66bc06ac3ed37af8e">Xerxes::pingCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
 <tr class="memdesc:a0f28411848f37bf66bc06ac3ed37af8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ping callback.  <a href="namespaceXerxes.html#a0f28411848f37bf66bc06ac3ed37af8e">More...</a><br /></td></tr>
 <tr class="separator:a0f28411848f37bf66bc06ac3ed37af8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,32 +165,14 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a7b934a8fd9ec6c1d3cf56933c51a0019"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classXerxes_1_1Slave.html">Xerxes::Slave</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Callbacks_8cpp.html#a7b934a8fd9ec6c1d3cf56933c51a0019">xs</a></td></tr>
 <tr class="separator:a7b934a8fd9ec6c1d3cf56933c51a0019"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e51aaa005958c013116bae2a8c8a706"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Callbacks_8cpp.html#a0e51aaa005958c013116bae2a8c8a706">mainRegister</a> [<a class="el" href="Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427">REGISTER_SIZE</a>]</td></tr>
-<tr class="separator:a0e51aaa005958c013116bae2a8c8a706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a638ff2e33edac265d363ba9983a7ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classXerxes_1_1Register.html">Xerxes::Register</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Callbacks_8cpp.html#a9a638ff2e33edac265d363ba9983a7ca">_reg</a></td></tr>
+<tr class="separator:a9a638ff2e33edac265d363ba9983a7ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70dc013b8865f9e007e81e823efe4526"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Callbacks_8cpp.html#a70dc013b8865f9e007e81e823efe4526">sensor</a></td></tr>
+<tr class="separator:a70dc013b8865f9e007e81e823efe4526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a411529857519620a108606b1d7124585"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a411529857519620a108606b1d7124585">&#9670;&nbsp;</a></span>pollSensor()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void pollSensor </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Poll sensor and update values. </p>
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a0e51aaa005958c013116bae2a8c8a706"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e51aaa005958c013116bae2a8c8a706">&#9670;&nbsp;</a></span>mainRegister</h2>
+<a id="a9a638ff2e33edac265d363ba9983a7ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a638ff2e33edac265d363ba9983a7ca">&#9670;&nbsp;</a></span>_reg</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +181,29 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t mainRegister[<a class="el" href="Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427">REGISTER_SIZE</a>]</td>
+          <td class="memname"><a class="el" href="classXerxes_1_1Register.html">Xerxes::Register</a> _reg</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70dc013b8865f9e007e81e823efe4526"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70dc013b8865f9e007e81e823efe4526">&#9670;&nbsp;</a></span>sensor</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a> sensor</td>
         </tr>
       </table>
   </td>

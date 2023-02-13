@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writeregcallback_558',['writeRegCallback',['../namespaceXerxes.html#a94afd3fc3c8b1dfdb7175139bcee7362',1,'Xerxes']]]
+  ['topacket_612',['toPacket',['../classXerxes_1_1Message.html#a4d5af69b0da585623ba4c82d31a02e49',1,'Xerxes::Message']]]
 ];

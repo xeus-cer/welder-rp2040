@@ -133,31 +133,36 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a8afdeda204e3b2f7f515c4b06045ea38">   60</a></span>&#160;<span class="preprocessor">#define CLK_GPIN1_PIN       22  </span><span class="comment">// CLK_GPIN1 and TMP0 share the same pin</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a84d6f36ef31c0dd85a90b317fb05f7cc">   61</a></span>&#160;<span class="preprocessor">#define CLK_GPOUT1_PIN      23  </span><span class="comment">// CLK_GPOUT1 and TMP1 share the same pin</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">// --- FLASH ---</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a868e795ee21e547e10edf12a3aeafbc9">   66</a></span>&#160;<span class="preprocessor">#define PICO_BOOT_STAGE2_CHOOSE_W25Q080 1</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#undef PICO_FLASH_SPI_CLKDIV</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">   69</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SPI_CLKDIV 2</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">   64</a></span>&#160;<span class="preprocessor">#define SHIELD_MASK         1 &lt;&lt; SPI0_MISO_PIN | 1 &lt;&lt; SPI0_CSN_PIN | 1 &lt;&lt; SPI0_CLK_PIN | 1 &lt;&lt; SPI0_MOSI_PIN | \</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">                            1 &lt;&lt; I2C0_SDA_PIN | 1 &lt;&lt; I2C0_SCL_PIN | \</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">                            1 &lt;&lt; UART1_TX_PIN | 1 &lt;&lt; UART1_RX_PIN | \</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">                            1 &lt;&lt; ADC0_PIN | 1 &lt;&lt; ADC1_PIN | 1 &lt;&lt; ADC2_PIN | 1 &lt;&lt; ADC3_PIN | \</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">                            1 &lt;&lt; TMP0_PIN | 1 &lt;&lt; TMP1_PIN</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#undef PICO_XOSC_STARTUP_DELAY_MULTIPLIER</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#aafe78184edbb372dbd08feca4dae87cd">   72</a></span>&#160;<span class="preprocessor">#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 64</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">// --- FLASH ---</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a868e795ee21e547e10edf12a3aeafbc9">   72</a></span>&#160;<span class="preprocessor">#define PICO_BOOT_STAGE2_CHOOSE_W25Q080 1</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#undef PICO_FLASH_SIZE_BYTES</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">   75</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SIZE_BYTES (16 * 1024 * 1024)</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#undef PICO_FLASH_SPI_CLKDIV</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">   75</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SPI_CLKDIV 2</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">// All boards have B1 RP2040</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#ifndef PICO_RP2040_B0_SUPPORTED </span></div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a78554b289c077f9733b51c5b53c1d3b7">   79</a></span>&#160;<span class="preprocessor">#define PICO_RP2040_B0_SUPPORTED  0</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#undef PICO_XOSC_STARTUP_DELAY_MULTIPLIER</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#aafe78184edbb372dbd08feca4dae87cd">   78</a></span>&#160;<span class="preprocessor">#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 64</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#undef PICO_FLASH_SIZE_BYTES</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">   81</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SIZE_BYTES (16 * 1024 * 1024)</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __cplusplus</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// XERXES_RP2040_H</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">// All boards have B1 RP2040</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifndef PICO_RP2040_B0_SUPPORTED </span></div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a78554b289c077f9733b51c5b53c1d3b7">   85</a></span>&#160;<span class="preprocessor">#define PICO_RP2040_B0_SUPPORTED  0</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __cplusplus</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// XERXES_RP2040_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,5 +1,11 @@
 <map id="Xerxes::SCL3400" name="Xerxes::SCL3400">
-<area shape="rect" id="node1" title=" " alt="" coords="6,155,137,181"/>
-<area shape="rect" id="node2" href="$classXerxes_1_1SCL3X00.html" title=" " alt="" coords="5,80,137,107"/>
-<area shape="rect" id="node3" href="$classXerxes_1_1Sensor.html" title=" " alt="" coords="12,5,131,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="189,484,320,511"/>
+<area shape="rect" id="node2" href="$classXerxes_1_1SCL3X00.html" title=" " alt="" coords="189,408,321,435"/>
+<area shape="rect" id="node3" href="$classXerxes_1_1Sensor.html" title=" " alt="" coords="195,332,314,359"/>
+<area shape="rect" id="node4" href="$classXerxes_1_1Peripheral.html" title=" " alt="" coords="5,191,147,218"/>
+<area shape="rect" id="node5" href="$classXerxes_1_1StatisticBuffer.html" title=" " alt="" coords="171,184,339,225"/>
+<area shape="rect" id="node6" href="$classXerxes_1_1RingBuffer.html" title=" " alt="" coords="163,95,346,121"/>
+<area shape="rect" id="node7" href="$classXerxes_1_1Register.html" title=" " alt="" coords="366,191,495,218"/>
+<area shape="rect" id="node8" href="$unionConfigBitsUnion.html" title=" " alt="" coords="370,95,497,121"/>
+<area shape="rect" id="node9" href="$structConfigBits.html" title=" " alt="" coords="389,5,478,32"/>
 </map>
