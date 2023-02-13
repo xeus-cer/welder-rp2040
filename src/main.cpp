@@ -109,7 +109,6 @@ int main(void)
     sensor.init(2, 3);
     */
     watchdog_update();
-    *dv0 = UINT32_MAX;
     sensor = Xerxes::_4DI4DO(dv0, dv1, dv2, dv3);
     sensor.init();
     watchdog_update();
@@ -138,7 +137,6 @@ int main(void)
 
         if(useUsb)
         {
-            /*
             // cout values of *pv0 to *pv3
             cout << *pv0 << ";" << *pv1 << ";" << *pv2 << ";" << *pv3 << ";";
             // cout values of *meanPv0 to *meanPv3
@@ -152,10 +150,6 @@ int main(void)
             // cout timestamp and net cycle time
             auto timestamp = time_us_64();
             cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;    
-            */
-                       
-            // cout digital values dv0-dv1 as bitsets
-            cout << "dv0: " << bitset<32>(*dv0) << "; dv1: " << bitset<32>(*dv1) << endl;
             
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);
@@ -256,7 +250,6 @@ void core1Entry()
 void pollSensor()
 {       
     // measure process value
-    *dv0 += 1;
     sensor.update();    
     // read process values from sensor
     // sensor.read(processValues);
