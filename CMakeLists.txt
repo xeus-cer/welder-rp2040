@@ -6,6 +6,11 @@ include(pico_extras_import.cmake)
 
 set(PROJECT_NAME sensor-rp2040)
 
+# this is the board we are using, we need to set this to use the correct board header and bootloader
+# the board file is: src/Hardware/Board/xerxes_rp2040.h
+set(PICO_BOARD "xerxes_rp2040")
+set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
+
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 
@@ -59,7 +64,7 @@ target_link_libraries(
 	hardware_spi
 )
 
-	
+# enable usb output, disable uart output
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
 pico_enable_stdio_uart(${PROJECT_NAME} 0)
 # pico_enable_stdio_uart(${PROJECT_NAME} 1)
