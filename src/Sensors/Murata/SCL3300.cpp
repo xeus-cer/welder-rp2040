@@ -1,6 +1,6 @@
 #include "Sensors/Murata/SCL3300.hpp"
 
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 #include "pico/time.h"
 #include "hardware/spi.h"
 

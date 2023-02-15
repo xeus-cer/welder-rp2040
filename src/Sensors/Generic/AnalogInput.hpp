@@ -55,13 +55,17 @@ public:
      * @brief update sensor values, takes approx 1ms for 4 channels with 100 samples
      * 
      */
-    void update(bool calcStats);
+    void update();
 
     /**
      * @brief Not needed for 4xAI
      * 
      */
     void stop();
+
+
+    // friend operator<< for easy printing
+    friend std::ostream& operator<<(std::ostream& os, const AnalogInput& ai);
 };
 
 

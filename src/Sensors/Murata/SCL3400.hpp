@@ -4,7 +4,7 @@
 
 #include "SCL3X00.hpp"
 #include <cmath>
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 
 
 namespace Xerxes

@@ -2,7 +2,7 @@
 
 #include "hardware/spi.h"
 #include "hardware/clocks.h"
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 #include "pico/time.h"
 
 

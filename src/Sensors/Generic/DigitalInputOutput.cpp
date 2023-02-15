@@ -1,5 +1,5 @@
 #include "Sensors/Generic/DigitalInputOutput.hpp"
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 
 #include "hardware/gpio.h"
 #include <bitset>

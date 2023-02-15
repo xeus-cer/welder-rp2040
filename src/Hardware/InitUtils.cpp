@@ -1,7 +1,7 @@
 #include "InitUtils.hpp"
 
 
-#include "xerxes_rp2040.h"
+#include "Board/xerxes_rp2040.h"
 #include "ClockUtils.hpp"
 #include "Core/Errors.h"
 #include "UserFlash.hpp"

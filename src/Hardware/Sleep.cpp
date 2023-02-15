@@ -1,7 +1,7 @@
 #include "Sleep.hpp"
 
 
-#include "xerxes_rp2040.h"
+#include "Board/xerxes_rp2040.h"
 #include "ClockUtils.hpp"
 #include "Core/Definitions.h"
 #include "hardware/watchdog.h"

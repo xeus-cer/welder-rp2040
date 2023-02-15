@@ -1,6 +1,6 @@
 #include "AnalogInput.hpp"
 
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 #include "hardware/adc.h"
 
 
@@ -38,11 +38,11 @@ void AnalogInput::init(uint8_t numChannels, uint8_t oversampleBits)
     adc_gpio_init(ADC3_PIN);
 
     // update sensor values
-    this->update(false);
+    this->update();
 }
 
 
-void AnalogInput::update(bool calcStats)
+void AnalogInput::update()
 {    
     // oversample and average over 4 channels, effectively increasing bit depth by 4 bits
     // https://www.silabs.com/documents/public/application-notes/an118.pdf
@@ -90,12 +90,57 @@ void AnalogInput::update(bool calcStats)
     {
         // do nothing
     }
+
+
+    // if calcStat is true, update statistics
+    if(_reg->config->bits.calcStat)
+    {
+        // insert new values into ring buffer
+        rbpv0.insertOne(*_reg->pv0);
+
+        // update statistics
+        rbpv0.updateStatistics();
+
+        // update min, max stddev etc...
+        rbpv0.getStatistics(_reg->minPv0, _reg->maxPv0, _reg->meanPv0, _reg->stdDevPv0);
+    }
+
+    // if calcStat is true and numChannels > 1, update statistics for pv1
+    if(_reg->config->bits.calcStat && numChannels > 1)
+    {
+        rbpv1.insertOne(*_reg->pv1);
+        rbpv1.updateStatistics();
+        rbpv1.getStatistics(_reg->minPv1, _reg->maxPv1, _reg->meanPv1, _reg->stdDevPv1);
+    }
+
+    // if calcStat is true and numChannels > 2, update statistics for pv2
+    if(_reg->config->bits.calcStat && numChannels > 2)
+    {
+        rbpv2.insertOne(*_reg->pv2);
+        rbpv2.updateStatistics();
+        rbpv2.getStatistics(_reg->minPv2, _reg->maxPv2, _reg->meanPv2, _reg->stdDevPv2);
+    }
+
+    // if calcStat is true and numChannels > 3, update statistics for pv3
+    if(_reg->config->bits.calcStat && numChannels > 3)
+    {
+        rbpv3.insertOne(*_reg->pv3);
+        rbpv3.updateStatistics();
+        rbpv3.getStatistics(_reg->minPv3, _reg->maxPv3, _reg->meanPv3, _reg->stdDevPv3);
+    }
 }
 
 
 void AnalogInput::stop()
 {
     // nothing to do here
+}
+
+
+std::ostream& operator<<(std::ostream& os, const AnalogInput& ai)
+{
+    os << "AI0: " << *ai._reg->meanPv0 << ", AI1: " << *ai._reg->meanPv1 << ", AI2: " << *ai._reg->meanPv2 << ", AI3: " << *ai._reg->meanPv3 << std::endl;
+    return os;
 }
 
 

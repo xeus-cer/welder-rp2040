@@ -9,7 +9,7 @@
 #include "Core/Slave.hpp"
 #include "Core/Register.hpp"
 #include "Communication/Callbacks.hpp"
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 #include "Hardware/ClockUtils.hpp"
 #include "Hardware/InitUtils.hpp"
 #include "Hardware/Sleep.hpp"
@@ -26,7 +26,7 @@ SCL3400 sensor;       // 3 axis inclinometer
 DigitalInputOutput sensor;   // 4 channel digital input/output
 AnalogInput sensor;   // 4 channel analog input
 */
-SCL3300 sensor;
+AnalogInput sensor;
 
 
 Register _reg;  // main register
@@ -58,6 +58,11 @@ int main(void)
     
     // init system
     userInit();  // 374us
+
+    // blink led for 1 ms - we are alive
+    gpio_put(USR_LED_PIN, 1);
+    sleep_ms(1);
+    gpio_put(USR_LED_PIN, 0);
         
     // clear error register
     *_reg.error = 0;
@@ -85,9 +90,8 @@ int main(void)
         cout << "error register: " << bitset<32>(*_reg.error) << endl;
         // cout sampling speed in Hz
         cout << "sampling speed: " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << "Hz" << endl;
-        // cout labels of all values
-        cout << "PV0;PV1;PV2;PV3;meanPv0;meanPv1;meanPv2;meanPv3;minPv0;minPv1;minPv2;minPv3;maxPv0;maxPv1;maxPv2;maxPv3;stdDevPv0;stdDevPv1;stdDevPv2;stdDevPv3;timestamp;netCycleTime" << endl;
-        // set to free running mode
+        
+        // set to free running mode and calculate statistics for usb uart mode so we can see the values
         _reg.config->bits.freeRun = 1;
         _reg.config->bits.calcStat = 1;
     }
@@ -109,8 +113,8 @@ int main(void)
     sensor.init();
     */
     watchdog_update();
-    sensor = SCL3300(&_reg);
-    sensor.init();
+    sensor = AnalogInput(&_reg);
+    sensor.init(2, 3);
     watchdog_update();
 
 
@@ -138,21 +142,11 @@ int main(void)
 
         if(useUsb)
         {
-            /*
-            // cout values of *pv0 to *pv3
-            cout << *pv0 << ";" << *pv1 << ";" << *pv2 << ";" << *pv3 << ";";
-            // cout values of *meanPv0 to *meanPv3
-            cout << *meanPv0 << ";" << *meanPv1 << ";" << *meanPv2 << ";" << *meanPv3 << ";";
-            // cout values of *minPv0 to *minPv3
-            cout << *minPv0 << ";" << *minPv1 << ";" << *minPv2 << ";" << *minPv3 << ";";
-            // cout values of *maxPv0 to *maxPv3
-            cout << *maxPv0 << ";" << *maxPv1 << ";" << *maxPv2 << ";" << *maxPv3 << ";";
-            // cout values of *stdDevPv0 to *stdDevPv3
-            cout << *stdDevPv0 << ";" << *stdDevPv1 << ";" << *stdDevPv2 << ";" << *stdDevPv3 << ";";
             // cout timestamp and net cycle time
             auto timestamp = time_us_64();
-            cout << timestamp << ";" << *netCycleTimeUs << ";" << endl;    
-            */
+            cout << timestamp << ";" << *_reg.netCycleTimeUs << ";" << endl;    
+            
+            // cout sensor values
             cout << sensor;
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);

@@ -3,7 +3,7 @@
 
 #include "Sensors/Peripheral.hpp"
 #include "Core/Register.hpp"
-#include "Hardware/xerxes_rp2040.h"
+#include "Hardware/Board/xerxes_rp2040.h"
 #include <ostream>
 
 
