@@ -26,7 +26,8 @@ SCL3400 sensor;       // 3 axis inclinometer
 DigitalInputOutput sensor;   // 4 channel digital input/output
 AnalogInput sensor;   // 4 channel analog input
 */
-AnalogInput sensor;
+
+SENSOR_CLASS sensor;
 
 
 Register _reg;  // main register
@@ -113,8 +114,13 @@ int main(void)
     sensor.init();
     */
     watchdog_update();
-    sensor = AnalogInput(&_reg);
+    sensor = SENSOR_CLASS(&_reg);
+
+    #ifdef SHIELD_AI
     sensor.init(2, 3);
+    #else
+    sensor.init();
+    #endif // !SHIELD_AI
     watchdog_update();
 
 

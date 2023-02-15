@@ -11,6 +11,34 @@ set(PROJECT_NAME sensor-rp2040)
 set(PICO_BOARD "xerxes_rp2040")
 set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
 
+# check if ${SENSOR_TYPE} is set
+if(NOT DEFINED SENSOR_TYPE)
+	message(FATAL_ERROR "SENSOR_TYPE not set, use -DSENSOR_TYPE=...\n\
+	Possible options for SENSOR_TYPE: SCL3300, SCL3400, AI, 4DI4DO, ABP")
+endif()
+
+# this is the sensor type we are using, we need to set this to use the correct sensor header
+if(${SENSOR_TYPE} STREQUAL "SCL3300")
+	add_compile_definitions(SHIELD_SCL3300)
+	add_compile_definitions(SENSOR_CLASS=SCL3300)
+elseif(${SENSOR_TYPE} STREQUAL "SCL3400")
+	add_compile_definitions(SHIELD_SCL3400)
+	add_compile_definitions(SENSOR_CLASS=SCL3400)
+elseif(${SENSOR_TYPE} STREQUAL "AI")
+	add_compile_definitions(SHIELD_AI)
+	add_compile_definitions(SENSOR_CLASS=AnalogInput)
+elseif(${SENSOR_TYPE} STREQUAL "4DI4DO")
+	add_compile_definitions(SHIELD_4DI4DO)
+	add_compile_definitions(SENSOR_CLASS=_4DI4DO)
+elseif(${SENSOR_TYPE} STREQUAL "ABP")
+	add_compile_definitions(SHIELD_ABP)
+	add_compile_definitions(SENSOR_CLASS=ABP)
+else()
+	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE}"' is incorrect, use -DSENSOR_TYPE=...\n\
+	Possible options for SENSOR_TYPE: SCL3300, SCL3400, AI, 4DI4DO, ABP")
+endif()
+
+
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 
