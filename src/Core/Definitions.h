@@ -15,8 +15,8 @@
 #define RX_TX_QUEUE_SIZE            256 ///< 256 bytes
 #define FIFO_DEPTH                  32  ///< 32 bytes
 
-/** @brief The beginning of user data stored in flash */
-#define FLASH_TARGET_OFFSET         2 * 1024 * 1024 - FLASH_SECTOR_SIZE // end of the 2MiB flash: 2MiB - 4KB
+/// @brief Use last sector of flash for storing data
+#define FLASH_TARGET_OFFSET         PICO_FLASH_SIZE_BYTES - FLASH_SECTOR_SIZE
 
 // how many samples are rotated in ring buffer
 #ifndef RING_BUFFER_LEN
