@@ -44,15 +44,7 @@ const msgid_t MSGID_SLEEP                         = 0x0004;
 
 
 /**
- * @brief Unlock the device - allow writing to the secured registers
- * 
- */
-const msgid_t MSGID_UNLOCK                        = 0x00F0;
-
-
-/**
  * @brief Request for hard reset of the device - return to factory settings 
- * Must be followed after MSGID_UNLOCK
  */
 const msgid_t MSGID_RESET_HARD                    = 0x00fe;
 
@@ -68,7 +60,7 @@ const msgid_t MSGID_RESET_SOFT                    = 0x00ff;
  */
 const msgid_t MSGID_FETCH_MEASUREMENT             = 0x0100;
     
-/** Synchronisaton message - sync one/all devices */
+/** Synchronisation message - sync one/all devices */
 const msgid_t MSGID_SYNC                          = 0x0101;
 
     

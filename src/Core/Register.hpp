@@ -67,10 +67,10 @@ public:
     uint32_t* dv2       = (uint32_t *)(memTable + DV2_OFFSET);  ///< Pointer to digital value 2
     uint32_t* dv3       = (uint32_t *)(memTable + DV3_OFFSET);  ///< Pointer to digital value 3
 
-    /* ### READ ONLY VALUES ### */
     /** @brief 0x55AA55AA = unlocked, anything else = locked */
     uint32_t* memUnlocked   = (uint32_t *)(memTable + MEM_UNLOCKED_OFFSET);
 
+    /* ### READ ONLY VALUES ### */
     uint64_t* error      = (uint64_t *)(memTable + ERROR_OFFSET);   ///< Error register, holds error codes
     uint64_t* status     = (uint64_t *)(memTable + STATUS_OFFSET);  ///< Status register, holds status codes
     uint64_t* uid        = (uint64_t *)(memTable + UID_OFFSET);     ///< Unique ID of the device

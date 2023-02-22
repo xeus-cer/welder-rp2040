@@ -2,3 +2,4 @@ build/
 .history/
 docs/latex
 build-*/
+**__pycache__**

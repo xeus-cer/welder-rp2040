@@ -1,10 +1,3 @@
-/* 
- * File:   devids.h
- * Author: srubi
- *
- * Created on March 7, 2022, 1:15 AM
- */
-
 #ifndef DEVIDS_H
 #define	DEVIDS_H
 
