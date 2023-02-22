@@ -76,10 +76,14 @@ void writeRegCallback(const Xerxes::Message &msg)
     // unlock core1, wait 10ms for core1 to unlock
     multicore_lockout_end_timeout_us(10'000);
     
-    // update flash, takes ~50ms to complete hence the 2 watchdog updates
-    watchdog_update();
-    updateFlash((uint8_t *)_reg.memTable);
-    watchdog_update();
+    // if memory written is in non-volatile range, update flash
+    if(offset < VOLATILE_OFFSET)
+    {
+        // update flash, takes ~50ms to complete hence the 2 watchdog updates
+        watchdog_update();
+        updateFlash((uint8_t *)_reg.memTable);
+        watchdog_update();
+    }
 
     // send ACK_OK
     xs.send(msg.srcAddr, MSGID_ACK_OK);
