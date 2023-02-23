@@ -10,6 +10,14 @@ namespace Xerxes
 {
 
 
+/**
+ * @brief Ring buffer class 
+ * 
+ * This class implements a ring buffer. It is used to store the last n elements
+ * of a stream of data. The buffer is implemented as a circular buffer.
+ * 
+ * @tparam T - type of the elements to be stored in the buffer
+ */
 template <class T>
 class RingBuffer
 {

@@ -8,6 +8,10 @@
 extern "C" {
 #endif
 
+/**
+ * @brief Error codes for the error register
+ * 
+ */
 enum : uint64_t
 {
     ERROR_MASK_UART_OVERLOAD     = 1 << 0,  // 1

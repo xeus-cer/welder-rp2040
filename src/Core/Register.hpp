@@ -9,6 +9,16 @@ namespace Xerxes
 {
     
 
+/**
+ * @brief Register class for storing all data in memory mapped registers
+ * 
+ * The register class is used to store all data in memory mapped registers. 
+ * It is used to store the process values, the gain and offset values, 
+ * the config bits and the address of the device. With the help of the
+ * memory mapped registers, the data can be accessed directly through the
+ * communication interface.
+ * 
+ */
 class Register
 {
 private:

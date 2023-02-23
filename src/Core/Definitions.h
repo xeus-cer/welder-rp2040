@@ -162,6 +162,10 @@ constexpr uint32_t MEM_UNLOCKED_VAL = 0x55AA55AA;
 #define PROTOCOL_VERSION_MIN        4
 
 
+/**
+ * @brief The configuration bits of the device
+ * 
+ */
 typedef struct {
     bool freeRun :    1; // enable free run of sensor
     bool calcStat :   1; // enable calculation of statistics
@@ -174,6 +178,10 @@ typedef struct {
 } ConfigBits;
 
 
+/**
+ * @brief Union to access the configuration bits as a byte
+ * 
+ */
 union ConfigBitsUnion{
     ConfigBits bits;
     uint8_t all;

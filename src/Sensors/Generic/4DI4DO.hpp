@@ -46,6 +46,7 @@ constexpr uint32_t IO_DIR = DO_DIR_MASK | DI_DIR_MASK;
 class _4DI4DO : public DigitalInputOutput
 {
 private:
+    /// @brief convenience typedef
     typedef DigitalInputOutput super;
 
 public:

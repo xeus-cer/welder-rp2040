@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 
-//msgid structure:    
+/// @brief Message id type for access as 2 bytes
 struct msgid_8_s
 {
     uint8_t msgid_l;
@@ -17,6 +17,7 @@ struct msgid_8_s
 
 typedef uint16_t msgid_t;
 
+/// @brief Message id type for access as 2 bytes or 1 word
 union msgid_u
 {
     struct msgid_8_s msgid_8 ;

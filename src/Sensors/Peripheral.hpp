@@ -8,6 +8,11 @@
 namespace Xerxes
 {
 
+
+/**
+ * @brief Peripheral base class with pure virtual functions - init, update, stop
+ * 
+ */
 class Peripheral
 {
 private:    
@@ -24,6 +29,11 @@ public:
     virtual void update() = 0;
     virtual void stop() = 0;
 
+    /**
+     * @brief Get the Devid object
+     * 
+     * @return devid_t device id of the peripheral - based on the device type
+     */
     devid_t getDevid();
 };
 

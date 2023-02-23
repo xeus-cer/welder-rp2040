@@ -7,6 +7,11 @@ extern "C" {
 
 typedef uint8_t devid_t;
 
+
+/**
+ * @brief Device IDs for the different sensors
+ * 
+ */
 enum DeviceId : devid_t
 {
 /** pressure sensor range 0-600mbar, output in Pa, 2 external temperature sensors -50/150°C output: mK */
