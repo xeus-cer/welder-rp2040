@@ -1,0 +1,215 @@
+2023-02-23 16:13:34 [   DEBUG] (conftest.py:49) Using XerxesNetwork(port=Serial(port='/dev/ttyUSB0',baudrate=115200, timeout=0.01))
+2023-02-23 16:13:34 [   DEBUG] (conftest.py:64) Using XerxesRoot(my_addr=Addr(0x1e), network=XerxesNetwork(port=Serial(port='/dev/ttyUSB0',baudrate=115200, timeout=0.01)))
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:34 [   DEBUG] (conftest.py:82) Leaf ping: XerxesPingReply(dev_id=DevId(0x22), v_maj=1, v_min=4, latency=0.003213092997611966)
+2023-02-23 16:13:34 [    INFO] (leaf.py:306) Resetting leaf...
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:ff:00:db
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 
+2023-02-23 16:13:34 [   DEBUG] (debug_serial.py:47) Read: 
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:35 [   DEBUG] (conftest.py:49) Using XerxesNetwork(port=Serial(port='/dev/ttyUSB0',baudrate=115200, timeout=0.01))
+2023-02-23 16:13:35 [   DEBUG] (conftest.py:64) Using XerxesRoot(my_addr=Addr(0x1e), network=XerxesNetwork(port=Serial(port='/dev/ttyUSB0',baudrate=115200, timeout=0.01)))
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:314) Unlocking memory for hard reset
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:189) Writing memory element memory_lock at address:384,type:I, value:1437226410.
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:0d:1e:00:00:02:80:01:aa:55:aa:55:53
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 02:00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: d8
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:296) Write successful.
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:316) Memory unlocked, resetting leaf to factory settings.
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:fe:00:dc
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:35 [   DEBUG] (conftest.py:112) Leaf ping: XerxesPingReply(dev_id=DevId(0x22), v_maj=1, v_min=4, latency=0.007482025997887831)
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:189) Writing memory element gain_pv2 at address:8,type:f, value:3.14.
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:0d:1e:00:00:02:08:00:c3:f5:48:40:8a
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 02:00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: d8
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:296) Write successful.
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:162) Reading memory element gain_pv2 at address:8, type:f.
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:0a:1e:00:01:02:08:00:04:c8
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 0b
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 02:02
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: c3
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: f5
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 48
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 40
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 92
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:171) Read value: 3.140000104904175
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:314) Unlocking memory for hard reset
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:189) Writing memory element memory_lock at address:384,type:I, value:1437226410.
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:0d:1e:00:00:02:80:01:aa:55:aa:55:53
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 02:00
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: d8
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:296) Write successful.
+2023-02-23 16:13:35 [   DEBUG] (leaf.py:316) Memory unlocked, resetting leaf to factory settings.
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:fe:00:dc
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 
+2023-02-23 16:13:35 [   DEBUG] (debug_serial.py:47) Read: 
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:162) Reading memory element gain_pv2 at address:8, type:f.
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:0a:1e:00:01:02:08:00:04:c8
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 0b
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 02:02
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 80
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 3f
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 13
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:171) Read value: 1.0
+2023-02-23 16:13:36 [   DEBUG] (conftest.py:49) Using XerxesNetwork(port=Serial(port='/dev/ttyUSB0',baudrate=115200, timeout=0.01))
+2023-02-23 16:13:36 [   DEBUG] (conftest.py:64) Using XerxesRoot(my_addr=Addr(0x1e), network=XerxesNetwork(port=Serial(port='/dev/ttyUSB0',baudrate=115200, timeout=0.01)))
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:314) Unlocking memory for hard reset
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:189) Writing memory element memory_lock at address:384,type:I, value:1437226410.
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:0d:1e:00:00:02:80:01:aa:55:aa:55:53
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 02:00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: d8
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:296) Write successful.
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:316) Memory unlocked, resetting leaf to factory settings.
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:fe:00:dc
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:36 [   DEBUG] (conftest.py:112) Leaf ping: XerxesPingReply(dev_id=DevId(0x22), v_maj=1, v_min=4, latency=0.007431435999023961)
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:189) Writing memory element offset_pv2 at address:24,type:f, value:3.14.
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:0d:1e:00:00:02:18:00:c3:f5:48:40:7a
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 02:00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: d8
+2023-02-23 16:13:36 [   DEBUG] (leaf.py:296) Write successful.
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:0d:1e:00:00:02:80:01:55:aa:55:aa:53
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: 02:00
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:47) Read: d8
+2023-02-23 16:13:36 [   DEBUG] (debug_serial.py:33) Write: 01:0a:1e:00:01:02:80:01:04:4f
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 0b
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 02:02
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 55
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: aa
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 55
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: aa
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: d4
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:fe:00:dc
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 07
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 03:00
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: d7
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:33) Write: 01:07:1e:00:00:00:da
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 0a
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 01:00
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 22
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 04
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: af
+2023-02-23 16:13:37 [   DEBUG] (leaf.py:162) Reading memory element offset_pv2 at address:24, type:f.
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:33) Write: 01:0a:1e:00:01:02:18:00:04:b8
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 01
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 0b
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 00
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 1e
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 02:02
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: c3
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: f5
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 48
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 40
+2023-02-23 16:13:37 [   DEBUG] (debug_serial.py:47) Read: 92
+2023-02-23 16:13:37 [   DEBUG] (leaf.py:171) Read value: 3.140000104904175

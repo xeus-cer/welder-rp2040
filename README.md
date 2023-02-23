@@ -21,3 +21,9 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug -DSENSOR_TYPE=AI # or release, change AI for o
 # build and upload firmware
 make -j 16 install
 ```
+
+## Other remarks
+### low latency USB Serial
+```bash
+echo 1 | sudo tee /sys/bus/usb-serial/devices/ttyUSB0/latency_timer  # change ttyUSB0 for your device
+```

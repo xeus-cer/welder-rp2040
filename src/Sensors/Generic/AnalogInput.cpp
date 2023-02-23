@@ -22,6 +22,8 @@ void AnalogInput::init()
 
 void AnalogInput::init(uint8_t numChannels, uint8_t oversampleBits)
 {
+    _devid = DEVID_IO_4AI;  // device id
+    
     this->oversampleExtraBits = oversampleBits;
     this->numChannels = numChannels;
     this->overSample = 1 << (2 * oversampleBits);

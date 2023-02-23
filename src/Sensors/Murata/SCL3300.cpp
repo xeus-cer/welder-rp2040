@@ -10,6 +10,8 @@ namespace Xerxes
 
 void SCL3300::init()
 {    
+    _devid = DEVID_ANGLE_XY_90;
+
     constexpr uint spi_freq = 2 * MHZ;
     // init spi with freq , return actual frequency
     uint baudrate = spi_init(spi0, spi_freq);

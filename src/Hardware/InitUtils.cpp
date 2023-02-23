@@ -108,8 +108,8 @@ void userLoadDefaultValues()
 
     *_reg.gainPv0    = 1;
     *_reg.gainPv1    = 1;    
-    *_reg.gainPv1    = 1;
-    *_reg.gainPv1    = 1;
+    *_reg.gainPv2    = 1;
+    *_reg.gainPv3    = 1;
 
     *_reg.desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
     _reg.config->all = 0;

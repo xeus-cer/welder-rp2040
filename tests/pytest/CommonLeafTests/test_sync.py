@@ -1,64 +1,17 @@
 from xerxes_protocol import (
-    PROTOCOL_VERSION_MAJOR,
-    PROTOCOL_VERSION_MINOR,
-    XerxesRoot,
     Leaf,
-    MsgId,
-    Addr,
-    MAGIC_UNLOCK
+    XerxesMemoryMap,
+    LeafConfig
 )
 import struct
-import pytest
 import time
 
 
-@pytest.fixture
-def leaf(XR: XerxesRoot):
-    l = Leaf(Addr(0), XR)
-
-    # check if leaf is connected to the network first
-    ping = l.ping()
-    assert ping is not None
-    assert ping.v_maj == PROTOCOL_VERSION_MAJOR
-    assert ping.v_min == PROTOCOL_VERSION_MINOR
-
-    # reset the leaf to a factory state
-    
-    # unlock the memory of the leaf by writing the magic bytes to the memory lock register
-    mem_lock_offset = 384
-    magic_bytes = struct.pack("I", MAGIC_UNLOCK)
-    l.write_reg(mem_lock_offset, magic_bytes)
-
-    #  create a message id for the reset command
-    msgid_reset = MsgId.RESET_HARD
-
-    # send a message to the leaf, which resets it
-    try:
-        reply = l.exchange(bytes(msgid_reset))
-        # should not return anything
-        assert False
-    except TimeoutError:
-        pass  
-        
-    # wait for the leaf to reset and send a ping reply
-    time.sleep(.2)
-
-    ping = l.ping()
-    assert ping is not None
-    assert ping.v_maj == PROTOCOL_VERSION_MAJOR
-    assert ping.v_min == PROTOCOL_VERSION_MINOR
-
-    # assert config is 0
-    config_offset = 40
-    # read 1 byte
-    reply = l.read_reg(config_offset, 1)
-    assert reply is not None
-    assert reply.payload == int(0).to_bytes(1, "little")
-
-    return l
+__author__ = "theMladyPan"
+__date__ = "2023-02-22"
 
 
-def test_sync(XR: XerxesRoot, leaf: Leaf):
+def test_sync_no_stats(cleanLeaf: Leaf):
     """
     Tests the sync method of the leaf
 
@@ -66,22 +19,86 @@ def test_sync(XR: XerxesRoot, leaf: Leaf):
         XR (XerxesRoot): The root of the network
         leaf (Leaf): The leaf to test
     """
-    # last values should be 0
-    pv_offset = 256
-    # read 4 floats
-    vals_raw = leaf.read_reg(pv_offset, 4*4)
+
+    cleanLeaf.device_config = LeafConfig.clean    
+    # check that the leaf is not in free run mode
+    assert cleanLeaf.device_config & LeafConfig.freeRun == 0
+    # check that the leaf is not in calc stat mode
+    assert cleanLeaf.device_config & LeafConfig.calcStat == 0
+
+    # clean the process value since they are updated during sensor init
+    cleanLeaf.pv0 = 0
+    cleanLeaf.pv1 = 0
+    cleanLeaf.pv2 = 0
+    cleanLeaf.pv3 = 0
+
+    # last values should be 0 so do standard deviations
+    # read 16 bytes from pv0-pv3
+    vals_raw = cleanLeaf.read_reg(XerxesMemoryMap.pv0.elem_addr, 4 * 4)
+    std_devs_raw = cleanLeaf.read_reg(XerxesMemoryMap.std_dev_pv0.elem_addr, 4 * 4)
     # convert to floats
     vals = struct.unpack("ffff", vals_raw.payload)[:4]
-    assert not any(vals)
+    std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
 
-    XR.sync()
+    # check that all values are 0
+    assert not any(vals), "Values were not 0 - device is still in free run mode"
+    assert not any(std_devs), "Standard deviations were not 0 - device is still in calc stat mode"
+    
+    cleanLeaf.root.sync()
     # wait for sensor to update
     time.sleep(.2)
 
-    # last values should not be 0
-    vals_raw = leaf.read_reg(pv_offset, 4*4)
+    # read 16 bytes from pv0-pv3
+    vals_raw = cleanLeaf.read_reg(XerxesMemoryMap.pv0.elem_addr, 4 * 4)
+    std_devs_raw = cleanLeaf.read_reg(XerxesMemoryMap.std_dev_pv0.elem_addr, 4 * 4)
     # convert to floats
     vals = struct.unpack("ffff", vals_raw.payload)[:4]
+    std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
 
     # check that at least one value is not 0
-    assert any(vals)
+    assert any(vals), "No values were updated"
+    assert not any(std_devs)
+    
+
+def test_sync_with_stats(cleanLeaf: Leaf):
+
+    cleanLeaf.device_config = LeafConfig.calcStat
+    # check that the leaf is not in free run mode
+    assert cleanLeaf.device_config & LeafConfig.freeRun == 0
+    # check that the leaf is in calc stat mode
+    assert cleanLeaf.device_config & LeafConfig.calcStat == LeafConfig.calcStat
+    
+    cleanLeaf.pv0 = 0
+    cleanLeaf.pv1 = 0
+    cleanLeaf.pv2 = 0
+    cleanLeaf.pv3 = 0
+
+    # last values should be 0 so do standard deviations
+    # read 16 bytes from pv0-pv3
+    vals_raw = cleanLeaf.read_reg(XerxesMemoryMap.pv0.elem_addr, 4 * 4)
+    std_devs_raw = cleanLeaf.read_reg(XerxesMemoryMap.std_dev_pv0.elem_addr, 4 * 4)
+    # convert to floats
+    vals = struct.unpack("ffff", vals_raw.payload)[:4]
+    std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
+
+    # check that all values are 0
+    assert not any(vals), "Values were not 0 - device is still in free run mode"
+    assert not any(std_devs), "Standard deviations were not 0 - device is still in calc stat mode"
+
+    # sync twice to gather data for standard deviations
+    cleanLeaf.root.sync()
+    time.sleep(.1)
+    cleanLeaf.root.sync()
+    # wait for sensor to update
+    time.sleep(.1)
+
+    # read 16 bytes from pv0-pv3
+    vals_raw = cleanLeaf.read_reg(XerxesMemoryMap.pv0.elem_addr, 4 * 4)
+    std_devs_raw = cleanLeaf.read_reg(XerxesMemoryMap.std_dev_pv0.elem_addr, 4 * 4)
+    # convert to floats
+    vals = struct.unpack("ffff", vals_raw.payload)[:4]
+    std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
+
+    # check that at least one value is not 0
+    assert any(vals), "No values were updated"
+    assert any(std_devs)

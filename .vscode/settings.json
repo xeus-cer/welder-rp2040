@@ -73,9 +73,7 @@
         "tuple": "cpp"
     },
     "python.testing.pytestArgs": [
-        "tests/pytest",
-        "-v",
-        "-s"
+        "tests/pytest"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,

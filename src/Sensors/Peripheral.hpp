@@ -11,15 +11,18 @@ namespace Xerxes
 class Peripheral
 {
 private:    
-    devid_t _devid;
+
+protected:
+    devid_t _devid{0};
+    
 public:
     Peripheral();
     ~Peripheral();
     
     // pure virtual functions
-    virtual void init();
-    virtual void update();
-    virtual void stop();
+    virtual void init() = 0;
+    virtual void update() = 0;
+    virtual void stop() = 0;
 
     devid_t getDevid();
 };

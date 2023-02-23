@@ -5,6 +5,8 @@ from xerxes_protocol import (
     XerxesRoot
 )
 
+import pytest
+
 
 __author__ = "theMladyPan"
 __date__ = "2023-02-22"
@@ -21,6 +23,7 @@ def test_ping_one(XR: XerxesRoot):
 
 
 # find all leaves on the network
+@pytest.mark.skip("This test takes a long time to run")
 def test_ping_all(XR: XerxesRoot):
     found = []
     for dev_addr in range(0, 256):

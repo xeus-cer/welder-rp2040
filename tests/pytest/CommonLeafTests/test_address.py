@@ -2,18 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from xerxes_protocol import (
-    Addr,
-    Leaf,
-    XerxesRoot
-)
+from xerxes_protocol import Leaf
+import time
+import logging
+_log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
 __date__ = "2023-02-22"
 
 
-def test_change_address(cleanLeaf: Leaf, XR: XerxesRoot):
+def test_change_address(cleanLeaf: Leaf):
+
+    start_t = time.perf_counter_ns()
     test_addr = 0x55
 
     # change address, effective immediately
@@ -24,7 +25,7 @@ def test_change_address(cleanLeaf: Leaf, XR: XerxesRoot):
         cleanLeaf.ping()
 
     # create new leaf with new address
-    leaf = Leaf(Addr(test_addr), XR)
+    leaf = Leaf(test_addr, cleanLeaf.root)
     
     # test if new address is correct, read address from the device
     new_addr = leaf.device_address
@@ -37,4 +38,5 @@ def test_change_address(cleanLeaf: Leaf, XR: XerxesRoot):
     # device should be reachable at new address because we used "address" property which 
     # handles the address change internally
 
-    assert XR.isPingLatest(leaf.ping())
+    assert leaf.root.isPingLatest(leaf.ping())
+    _log.info(f"Address change test passed in: {(time.perf_counter_ns() - start_t) / 1e9:.2f}s")

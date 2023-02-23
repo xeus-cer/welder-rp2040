@@ -5,6 +5,8 @@ namespace Xerxes
     
 void _4DI4DO::init()
 {
+    _devid = DEVID_IO_4DI_4DO;
+
     // Initialize the DIO pins for the 4DI4DO shield (GPIO0-5 | GPIO8-9)
     super::init(_4IO_SHIELD_MASK, IO_DIR);
 }

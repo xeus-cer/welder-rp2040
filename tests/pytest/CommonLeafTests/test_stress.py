@@ -1,120 +1,107 @@
 from xerxes_protocol import (
-    XerxesRoot, 
     Leaf, 
-    Addr, 
-    XerxesMessage,
-    MsgIdMixin,
     MsgId,
-    PROTOCOL_VERSION_MAJOR,
-    PROTOCOL_VERSION_MINOR
+    LeafConfig,
+    MemoryVolatile
 )
-import time, struct
+import time
+import struct
 import random
-import pytest
 
 
-@pytest.fixture
-def leaf(XR: XerxesRoot):
-    leaf = Leaf(Addr(0), XR)
-
-    # check if leaf is connected to the network first
-    ping = leaf.ping()
-    assert ping is not None
-    assert ping.v_maj == PROTOCOL_VERSION_MAJOR
-    assert ping.v_min == PROTOCOL_VERSION_MINOR
-    return leaf 
+__author__ = "theMladyPan"
+__date__ = "2023-02-23"
 
 
 # stress test for reading registers 0-1024
-def test_read_stress(XR: XerxesRoot):
+def test_read_stress(cleanLeaf: Leaf):
     """Reads 1024 registers and prints them in fixed width format
 
     Args:
         XR (XerxesRoot): XerxesRoot instance
     """
 
-    l = Leaf(Addr(0), XR)
-    print("")
     # read 1024 registers in chunk of 4 bytes, 1024/4 = 256
     for i in range(0, 256):
         # read 4 bytes from register i
-        xm = l.read_reg(i*4, 4)
+        xm = cleanLeaf.read_reg(i * 4, 4)
+
         # check if message id is correct
         assert xm.message_id == MsgId.READ_REPLY
         assert len(xm.payload) == 4
 
         # unpack float
-        vf = struct.unpack("f", xm.payload)[0]
+        val_f = struct.unpack("f", xm.payload)[0]
 
         # alteratively unpack unsigned int
-        vi = struct.unpack("I", xm.payload)[0]
+        val_i = struct.unpack("I", xm.payload)[0]
 
         # print both in fixed width
-        print(f"Reg# {i*4:3d}: {vf:10.3f} {vi:10d}")
+        print(f"Reg# {i*4:3d}: {val_f:10.3f} {val_i:10d}")
 
 
-def test_read_speed(XR: XerxesRoot):
-    l = Leaf(Addr(0), XR)
+def test_read_speed(cleanLeaf: Leaf):
+    """Reads 1024 registers in a burst and calculates the speed in bytes per second"""
 
     start = time.perf_counter_ns()
 
     chunk = 196
-    # read 1024 registers in chunk of 128 bytes, 1024/128 = 8
-    for i in range(0, int(1024/chunk)):
-        xm = l.read_reg(i*chunk, chunk)
-        assert xm.message_id == MsgId.READ_REPLY
-        assert len(xm.payload) == chunk
+    # read 1024 registers in chunk of 196 bytes, 1024/196 ~ 6
+    for i in range(0, int(1024 / chunk)):
+        xm = cleanLeaf.read_reg(i * chunk, chunk)
+        assert xm.message_id == MsgId.READ_REPLY  # check if message id is correct
+        assert len(xm.payload) == chunk  # check if payload is correct length
 
     end = time.perf_counter_ns()
 
-    # calculate speed in bytes per second, 256 registers * 4 bytes per register = 1024 bytes, 1024 bytes / time in seconds
-    speed = 1024 / ((end-start)/1e9) # bytes per second
+    # calculate speed in bytes per second, 256 registers * 4 bytes per register = 1024 bytes
+    # 1024 bytes / time in seconds
+    speed = 1024 / ((end - start) / 1e9)  # bytes per second
     
     # print speed in kiB/s
     print(f"Read speed: {speed/1024:.2f} kiB/s")
 
-    assert speed > 1024 # 1 kiB/s
+    # check if speed is greater than 1 kiB/s, oh my god it's fast
+    assert speed > 1024  # 1 kiB/s
 
 
-def test_write_stress_cycle_time(XR: XerxesRoot):
-    """Writes 10 random cycle times to register 32"""
-    l = Leaf(Addr(0), XR)
+def test_write_stress_cycle_time(cleanLeaf: Leaf):
+    """Writes 25 random cycle times to desired_cycle_time_us and checks if they were set correctly"""
     
-    # write 10 random intervals from 100ms to 500ms to register 32
     for i in range(0, 25):
         # create a random interval in microseconds
-        cycle_time = random.randint(100000, 500000)
-        # create a 4 byte duration value
-        cycle_time_bytes = struct.pack("I", cycle_time)
-        # send a message to the leaf, which sets the desired cycle time
-        rply: XerxesMessage = l.write_reg(32, cycle_time_bytes)
+        cycle_time_us = random.randint(100000, 300000)
+        
+        # write cycle time to register leaf
+        cleanLeaf.desired_cycle_time_us = cycle_time_us
 
-        # check if message id is correct
-        assert rply.message_id == MsgId.ACK_OK
-        # check if payload is empty
-        assert rply.payload == b""
         # check if the cycle time was set correctly
-        assert l.read_reg(32, 4).payload == cycle_time_bytes
+        assert cleanLeaf.desired_cycle_time_us == cycle_time_us
 
         # wait for 100ms
         time.sleep(.2)
 
 
-def test_read_mean_burst(XR: XerxesRoot, leaf: Leaf):
-    """Reads 1000 registers in a burst and calculates the mean value of the first 4 bytes
+def test_read_mean_burst(cleanLeaf: Leaf):
+    """Reads 4 registers in a burst and calculates the mean value of the first 4 bytes
 
     Args:
-        XR (XerxesRoot): XerxesRoot instance
-        leaf (Leaf): Leaf instance
+        cleanLeaf (Leaf): Leaf instance
+    
+    Asserts:
+        mean (list): mean value of at least one register is greater than 0
     """
 
+    cleanLeaf.device_config = LeafConfig.freeRun | LeafConfig.calcStat
+    
     burst = 100
-    # read 4 floats from register 272 in burst mode 
     mean = [0, 0, 0, 0]
+
     for i in range(0, burst):
-        xm = leaf.read_reg(272, 16)
-        assert xm.message_id == MsgId.READ_REPLY
-        vals = struct.unpack("ffff", xm.payload)[:4]
+        # read 4 floats from register mean_pv0
+        xm = cleanLeaf.read_reg(MemoryVolatile.mean_pv0.elem_addr, 16)
+        assert xm.message_id == MsgId.READ_REPLY  # check if message id is correct
+        vals = struct.unpack("ffff", xm.payload)[:4]  # unpack 4 floats
 
         # add each value to the mean
         for i in range(0, 4):
@@ -128,4 +115,4 @@ def test_read_mean_burst(XR: XerxesRoot, leaf: Leaf):
     print(f"Mean values: {mean[0]:.3f} {mean[1]:.3f} {mean[2]:.3f} {mean[3]:.3f}")
     
     # check if at least one value is not zero
-    
+    assert any(mean)

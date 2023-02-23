@@ -24,6 +24,9 @@ enum DeviceId : devid_t
 /** I/O device, 4DI/4DO (4xDigital Input, 4xDigital 0utput) */
     DEVID_IO_4DI_4DO                = 0x21,
 
+/** I/O device, 4AI (4xAnalog Input) */
+    DEVID_IO_4AI                    = 0x22,
+
 /** Encoder reader */
     DEVID_ENC_1000PPR               = 0x2A,
 

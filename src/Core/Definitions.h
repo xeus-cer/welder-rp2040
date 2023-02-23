@@ -144,7 +144,7 @@
 #define DEFAULT_SYS_CLOCK_FREQ      DEFAULT_SYS_PLL_FREQ / DEFAULT_SYS_PLL_POST_1 / DEFAULT_SYS_PLL_POST_2  // 756MHz / 6 / 1 = 126MHz
 #define DEFAULT_SYS_CLOCK_FREQ_LP   DEFAULT_XOSC_CLOCK_FREQ
 #define DEFAULT_SYS_VOLTAGE         VREG_VOLTAGE_DEFAULT // 1.1V
-#define DEFAULT_SYS_VOLTAGE_LP      VREG_VOLTAGE_0_90    // 0.90V
+#define DEFAULT_SYS_VOLTAGE_LP      VREG_VOLTAGE_1_00    // 1V (for low power mode), less is not stable
 
 /**
  * @brief Magic value to unlock the device memory

@@ -3,7 +3,6 @@ import pytest
 from serial import Serial, SerialException
 import os
 import time
-import struct
 from xerxes_protocol import (
     Leaf,
     XerxesRoot,
@@ -11,6 +10,8 @@ from xerxes_protocol import (
     Addr,
     DebugSerial
 )
+import logging
+_log = logging.getLogger(__name__)
 
 
 def get_serial_com() -> Serial:
@@ -21,6 +22,7 @@ def get_serial_com() -> Serial:
     else:
         # on linux machine:
         com = DebugSerial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.02)
+        _log.info(f"Using DebugSerial {com.port} on Linux machine")
 
     try:
         com.open()
@@ -44,6 +46,7 @@ def XN() -> XerxesNetwork:
     com = pytest.com
     XN = XerxesNetwork(com)
     XN.init(timeout=0.01)
+    _log.debug(f"Using {XN}")
     return XN
 
 
@@ -58,6 +61,7 @@ def XR(XN: XerxesNetwork) -> XerxesRoot:
         XerxesRoot: Xerxes root to test with.
     """
     XR = XerxesRoot(0x1E, XN)
+    _log.debug(f"Using {XR}")
     return XR
 
 
@@ -74,8 +78,10 @@ def leaf(XR: XerxesRoot) -> Leaf:
     leaf = Leaf(Addr(0), XR)
 
     # check if leaf is connected to the network first
-    XR.isPingLatest(leaf.ping())
-
+    _l_ping = leaf.ping()
+    _log.debug(f"Leaf ping: {_l_ping}")
+    leaf.root.isPingLatest(pingPacket=_l_ping)
+    
     return leaf
 
 
@@ -92,7 +98,7 @@ def cleanLeaf(XR: XerxesRoot) -> Leaf:
     leaf = Leaf(Addr(0), XR)
 
     # check if leaf is connected to the network first
-    assert XR.isPingLatest(leaf.ping())
+    assert leaf.root.isPingLatest(leaf.ping())
 
     # clean the leaf - reset it to factory default state    
 
@@ -102,6 +108,8 @@ def cleanLeaf(XR: XerxesRoot) -> Leaf:
     time.sleep(.5)
 
     # send a ping to the leaf
-    assert XR.isPingLatest(leaf.ping())
+    _l_ping = leaf.ping()
+    _log.debug(f"Leaf ping: {_l_ping}")
+    assert leaf.root.isPingLatest(_l_ping)
 
     return leaf

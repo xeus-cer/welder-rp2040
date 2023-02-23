@@ -24,7 +24,6 @@ private:
      * @return double  - angle in degrees 
      */
     double getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet);
-
      
     // sensor specific variables
     static constexpr uint16_t sensitivityModeA = 32768; // LSB/g

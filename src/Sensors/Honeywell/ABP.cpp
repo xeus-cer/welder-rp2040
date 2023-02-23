@@ -22,6 +22,8 @@ void ABP::stop()
 
 void ABP::init()
 {    
+    _devid = DEVID_PRESSURE_60MBAR;
+
     // init spi with freq 800kHz, return actual frequency
     uint baudrate = spi_init(spi0, 800'000);
 

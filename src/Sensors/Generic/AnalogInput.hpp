@@ -33,7 +33,7 @@ private:
     uint8_t effectiveBitDepth       = rpBitDepth + defaultOversampleBits;   // effective bit depth, 12 + 4 = 16
     uint64_t numCounts              = 1 << effectiveBitDepth;           // number of counts, 2^16 = 65536
     uint8_t numChannels             = 4;                                // number of channels, default is 4
-
+    
 protected:
     // typedef Sensor as super class for easier access
     typedef Sensor super;

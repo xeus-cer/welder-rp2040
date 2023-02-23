@@ -10,12 +10,12 @@
 #include "Core/Definitions.h"
 #include "Core/Slave.hpp"
 #include "Core/Register.hpp"
-#include "Sensors/Peripheral.hpp"
+#include "Sensors/all.hpp"
 
 
 extern Xerxes::Slave xs;
 extern Xerxes::Register _reg;
-extern Xerxes::Peripheral sensor;
+extern Xerxes::__SENSOR_CLASS sensor;
 
 
 namespace Xerxes

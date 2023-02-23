@@ -27,7 +27,8 @@ DigitalInputOutput sensor;   // 4 channel digital input/output
 AnalogInput sensor;   // 4 channel analog input
 */
 
-SENSOR_CLASS sensor;
+// forward declaration
+__SENSOR_CLASS sensor;
 
 
 Register _reg;  // main register
@@ -114,7 +115,7 @@ int main(void)
     sensor.init();
     */
     watchdog_update();
-    sensor = SENSOR_CLASS(&_reg);
+    sensor = __SENSOR_CLASS(&_reg);
 
     #ifdef SHIELD_AI
     sensor.init(2, 3);
@@ -190,9 +191,9 @@ int main(void)
             #ifdef NDEBUG
                 if(core1idle)
                 {
-                    setClocksLP();
+                    // setClocksLP();
                     sleep_us(100);
-                    setClocksHP();
+                    // setClocksHP();
                 }
             #endif // NDEBUG
         }
