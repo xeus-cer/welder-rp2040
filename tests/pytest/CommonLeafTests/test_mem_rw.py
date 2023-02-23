@@ -26,7 +26,7 @@ def test_try_write_non_volatile_mem(cleanLeaf: Leaf):
     cleanLeaf.reset_soft()
 
     # wait for the reset to finish
-    time.sleep(.5)
+    time.sleep(.8)
 
     # check if the values were written correctly with a tolerance of 1e-6
     assert cleanLeaf.gain_pv0 == pytest.approx(math.pi, 1e-6)
@@ -50,7 +50,7 @@ def test_try_write_volatile_mem(cleanLeaf: Leaf):
 
     # reset to see if the values voided
     cleanLeaf.reset_soft()
-    time.sleep(.5)
+    time.sleep(.8)
 
     # check if the values were reset
     assert cleanLeaf.dv0 != 0x12345678

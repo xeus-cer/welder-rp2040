@@ -22,14 +22,16 @@ def test_low_cycle_time_overload(cleanLeaf: Leaf):
         cleanLeaf (Leaf): The leaf to test
     """
 
-    # put sensor to free run mode
-    cleanLeaf.device_config |= LeafConfig.freeRun
+    # put sensor to free run mode and enable statistics calculation 
+    cleanLeaf.device_config |= LeafConfig.freeRun | LeafConfig.calcStat
 
     # check that the leaf is in free run mode
-    assert cleanLeaf.device_config & LeafConfig.freeRun
+    assert (
+        cleanLeaf.device_config & LeafConfig.freeRun | LeafConfig.calcStat == LeafConfig.freeRun | LeafConfig.calcStat
+    ), "Leaf is not in free run mode"
 
     # wait for sensor to update
-    time.sleep(.1)
+    time.sleep(1)
 
     # read cycle time
     cycle_time_us = cleanLeaf.net_cycle_time_us

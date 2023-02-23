@@ -45,7 +45,7 @@ def XN() -> XerxesNetwork:
     com: Serial
     com = pytest.com
     XN = XerxesNetwork(com)
-    XN.init(timeout=0.01)
+    XN.init(timeout=0.02)
     _log.debug(f"Using {XN}")
     return XN
 

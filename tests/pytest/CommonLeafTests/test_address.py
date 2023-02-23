@@ -22,7 +22,7 @@ def test_change_address(cleanLeaf: Leaf):
     
     # device should not be reachable at old address
     with pytest.raises(TimeoutError):
-        cleanLeaf.ping()
+        cleanLeaf.ping(1)
 
     # create new leaf with new address
     leaf = Leaf(test_addr, cleanLeaf.root)

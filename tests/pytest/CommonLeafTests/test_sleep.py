@@ -13,10 +13,10 @@ __date__ = "2023-02-23"
 
 
 def test_sleep_callback(leaf: Leaf):
-    """Put the leaf to sleep for .5s and test the callback"""
+    """Put the leaf to sleep for 1s and test the callback"""
 
     # duration in microseconds
-    duration_us = 500_000  # .5s
+    duration_us = 1_000_000  # 1s
     
     # put the leaf to sleep
     leaf.sleep(duration_us)
