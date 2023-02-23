@@ -22,6 +22,17 @@ cmake .. -DCMAKE_BUILD_TYPE=Debug -DSENSOR_TYPE=AI # or release, change AI for o
 make -j 16 install
 ```
 
+### Sensor types
+
+| Sensor type | Description                                                  |
+|-------------|--------------------------------------------------------------|
+| SCL3300     | 2 axis inclinometer, range +- 90°                            |
+| SCL3400     | 2 axis inclinometer, range +- 30°                            |
+| AI          | Analog input - 4 analog inputs                               |
+| AnalogInput | Same as "AI")                                                |
+| 4DI4DO      | 4 digital inputs and 4 digital outputs                       |
+| ABP         | pressure sensor, range 0-60 mbar = 0-6 kPa (differential)    |
+
 ## Other remarks
 ### low latency USB Serial
 ```bash
