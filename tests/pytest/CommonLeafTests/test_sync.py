@@ -95,10 +95,11 @@ def test_sync_with_stats(cleanLeaf: Leaf):
 
     # sync twice to gather data for standard deviations
     cleanLeaf.root.sync()
-    time.sleep(.1)
+    time.sleep(.5)
     cleanLeaf.root.sync()
     # wait for sensor to update
-    time.sleep(.1)
+    time.sleep(.5)
+    cleanLeaf.root.sync()
 
     # read 16 bytes from pv0-pv3
     vals_raw = cleanLeaf.read_reg(XerxesMemoryMap.pv0.elem_addr, 4 * 4)
