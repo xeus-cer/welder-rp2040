@@ -80,31 +80,33 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classXerxes_1_1Protocol.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Protocol.html">Protocol</a></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classXerxes_1_1Network.html">Network</a> *xn;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Protocol</a>(<a class="code" href="classXerxes_1_1Network.html">Network</a> *network);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">~Protocol</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">sendMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;message) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">readMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;message, <span class="keyword">const</span> uint64_t timeoutUs);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PROTOCOL_HPP</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classXerxes_1_1Protocol.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Protocol.html">Protocol</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classXerxes_1_1Network.html">Network</a> *xn;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Protocol</a>(<a class="code" href="classXerxes_1_1Network.html">Network</a> *network);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">~Protocol</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">sendMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;message) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">readMessage</a>(<a class="code" href="classXerxes_1_1Message.html">Message</a> &amp;message, <span class="keyword">const</span> uint64_t timeoutUs);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PROTOCOL_HPP</span></div>
 <div class="ttc" id="aMessage_8hpp_html"><div class="ttname"><a href="Message_8hpp.html">Message.hpp</a></div></div>
 <div class="ttc" id="aRS485_8hpp_html"><div class="ttname"><a href="RS485_8hpp.html">RS485.hpp</a></div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html"><div class="ttname"><a href="classXerxes_1_1Message.html">Xerxes::Message</a></div><div class="ttdef"><b>Definition:</b> Message.hpp:13</div></div>
-<div class="ttc" id="aclassXerxes_1_1Network_html"><div class="ttname"><a href="classXerxes_1_1Network.html">Xerxes::Network</a></div><div class="ttdef"><b>Definition:</b> Network.hpp:15</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html"><div class="ttname"><a href="classXerxes_1_1Protocol.html">Xerxes::Protocol</a></div><div class="ttdef"><b>Definition:</b> Protocol.hpp:11</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html"><div class="ttname"><a href="classXerxes_1_1Message.html">Xerxes::Message</a></div><div class="ttdoc">Message container class.</div><div class="ttdef"><b>Definition:</b> Message.hpp:17</div></div>
+<div class="ttc" id="aclassXerxes_1_1Network_html"><div class="ttname"><a href="classXerxes_1_1Network.html">Xerxes::Network</a></div><div class="ttdoc">Network interface class.</div><div class="ttdef"><b>Definition:</b> Network.hpp:20</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html"><div class="ttname"><a href="classXerxes_1_1Protocol.html">Xerxes::Protocol</a></div><div class="ttdoc">Protocol class.</div><div class="ttdef"><b>Definition:</b> Protocol.hpp:17</div></div>
 <div class="ttc" id="aclassXerxes_1_1Protocol_html_a62f2e0ff7577578cb2a0ab3931487a08"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">Xerxes::Protocol::~Protocol</a></div><div class="ttdeci">~Protocol()</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:11</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html_a701a852a70d4c6999009c7f29f8b909e"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">Xerxes::Protocol::sendMessage</a></div><div class="ttdeci">bool sendMessage(Message &amp;message) const</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:15</div></div>
-<div class="ttc" id="aclassXerxes_1_1Protocol_html_a95d50cbd9d68fc4c8805909e085649ce"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">Xerxes::Protocol::readMessage</a></div><div class="ttdeci">bool readMessage(Message &amp;message, const uint64_t timeoutUs)</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:21</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html_a701a852a70d4c6999009c7f29f8b909e"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">Xerxes::Protocol::sendMessage</a></div><div class="ttdeci">bool sendMessage(Message &amp;message) const</div><div class="ttdoc">Send a message over the network.</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:15</div></div>
+<div class="ttc" id="aclassXerxes_1_1Protocol_html_a95d50cbd9d68fc4c8805909e085649ce"><div class="ttname"><a href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">Xerxes::Protocol::readMessage</a></div><div class="ttdeci">bool readMessage(Message &amp;message, const uint64_t timeoutUs)</div><div class="ttdoc">Read a message from the network interface.</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:21</div></div>
 <div class="ttc" id="aclassXerxes_1_1Protocol_html_aa0ec1a47598a80053dc5e4c8765d3ee8"><div class="ttname"><a href="classXerxes_1_1Protocol.html#aa0ec1a47598a80053dc5e4c8765d3ee8">Xerxes::Protocol::Protocol</a></div><div class="ttdeci">Protocol(Network *network)</div><div class="ttdef"><b>Definition:</b> Protocol.cpp:7</div></div>
 <div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->

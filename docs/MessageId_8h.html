@@ -90,12 +90,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="MessageId_8h__dep__incl.png" border="0" usemap="#asrc_2Communication_2MessageId_8hdep" alt=""/></div>
 <map name="asrc_2Communication_2MessageId_8hdep" id="asrc_2Communication_2MessageId_8hdep">
-<area shape="rect" title=" " alt="" coords="120,5,355,32"/>
+<area shape="rect" title=" " alt="" coords="227,5,461,32"/>
 <area shape="rect" href="Message_8cpp.html" title=" " alt="" coords="12,80,249,107"/>
 <area shape="rect" href="Slave_8hpp.html" title=" " alt="" coords="273,80,415,107"/>
+<area shape="rect" href="testMessage_8cpp.html" title=" " alt="" coords="440,80,645,107"/>
 <area shape="rect" href="Callbacks_8cpp.html" title=" " alt="" coords="5,155,248,181"/>
 <area shape="rect" href="Slave_8cpp.html" title=" " alt="" coords="273,155,415,181"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="439,155,545,181"/>
+<area shape="rect" href="src_2main_8cpp.html" title=" " alt="" coords="439,155,545,181"/>
 </map>
 </div>
 </div>
@@ -104,8 +105,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmsgid__8__s.html">msgid_8_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message id type for access as 2 bytes.  <a href="structmsgid__8__s.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unionmsgid__u.html">msgid_u</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message id type for access as 2 bytes or 1 word.  <a href="unionmsgid__u.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -125,11 +128,8 @@ Variables</h2></td></tr>
 <tr class="separator:a7352ddc633ec39e0907350faa2f343c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e63d342c94aa44b1865036b2393b0b6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#a3e63d342c94aa44b1865036b2393b0b6">MSGID_SLEEP</a> = 0x0004</td></tr>
 <tr class="separator:a3e63d342c94aa44b1865036b2393b0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a62da8f83065e3f4857ca05c40f0940"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#a2a62da8f83065e3f4857ca05c40f0940">MSGID_UNLOCK</a> = 0x00F0</td></tr>
-<tr class="memdesc:a2a62da8f83065e3f4857ca05c40f0940"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlock the device - allow writing to the secured registers.  <a href="MessageId_8h.html#a2a62da8f83065e3f4857ca05c40f0940">More...</a><br /></td></tr>
-<tr class="separator:a2a62da8f83065e3f4857ca05c40f0940"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa220b26e362cfc03ab1ab2ab885c6253"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#aa220b26e362cfc03ab1ab2ab885c6253">MSGID_RESET_HARD</a> = 0x00fe</td></tr>
-<tr class="memdesc:aa220b26e362cfc03ab1ab2ab885c6253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request for hard reset of the device - return to factory settings Must be followed after MSGID_UNLOCK.  <a href="MessageId_8h.html#aa220b26e362cfc03ab1ab2ab885c6253">More...</a><br /></td></tr>
+<tr class="memdesc:aa220b26e362cfc03ab1ab2ab885c6253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request for hard reset of the device - return to factory settings.  <a href="MessageId_8h.html#aa220b26e362cfc03ab1ab2ab885c6253">More...</a><br /></td></tr>
 <tr class="separator:aa220b26e362cfc03ab1ab2ab885c6253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ecae36dbc38456c7c1fa50d5a302165"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#a1ecae36dbc38456c7c1fa50d5a302165">MSGID_RESET_SOFT</a> = 0x00ff</td></tr>
 <tr class="memdesc:a1ecae36dbc38456c7c1fa50d5a302165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request for soft reset of the device.  <a href="MessageId_8h.html#a1ecae36dbc38456c7c1fa50d5a302165">More...</a><br /></td></tr>
@@ -366,7 +366,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Request for hard reset of the device - return to factory settings Must be followed after MSGID_UNLOCK. </p>
+<p>Request for hard reset of the device - return to factory settings. </p>
 
 </div>
 </div>
@@ -428,23 +428,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Synchronisaton message - sync one/all devices </p>
-
-</div>
-</div>
-<a id="a2a62da8f83065e3f4857ca05c40f0940"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a62da8f83065e3f4857ca05c40f0940">&#9670;&nbsp;</a></span>MSGID_UNLOCK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a> MSGID_UNLOCK = 0x00F0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Unlock the device - allow writing to the secured registers. </p>
+<p>Synchronisation message - sync one/all devices </p>
 
 </div>
 </div>

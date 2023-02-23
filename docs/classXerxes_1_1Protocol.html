@@ -75,6 +75,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="classXerxes_1_1Protocol.html" title="Protocol class.">Protocol</a> class.  
+ <a href="classXerxes_1_1Protocol.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Protocol_8hpp_source.html">Protocol.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -84,11 +87,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a62f2e0ff7577578cb2a0ab3931487a08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Protocol.html#a62f2e0ff7577578cb2a0ab3931487a08">~Protocol</a> ()</td></tr>
 <tr class="separator:a62f2e0ff7577578cb2a0ab3931487a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a701a852a70d4c6999009c7f29f8b909e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">sendMessage</a> (<a class="el" href="classXerxes_1_1Message.html">Message</a> &amp;message) const</td></tr>
+<tr class="memdesc:a701a852a70d4c6999009c7f29f8b909e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a message over the network.  <a href="classXerxes_1_1Protocol.html#a701a852a70d4c6999009c7f29f8b909e">More...</a><br /></td></tr>
 <tr class="separator:a701a852a70d4c6999009c7f29f8b909e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95d50cbd9d68fc4c8805909e085649ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">readMessage</a> (<a class="el" href="classXerxes_1_1Message.html">Message</a> &amp;message, const uint64_t timeoutUs)</td></tr>
+<tr class="memdesc:a95d50cbd9d68fc4c8805909e085649ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a message from the network interface.  <a href="classXerxes_1_1Protocol.html#a95d50cbd9d68fc4c8805909e085649ce">More...</a><br /></td></tr>
 <tr class="separator:a95d50cbd9d68fc4c8805909e085649ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classXerxes_1_1Protocol.html" title="Protocol class.">Protocol</a> class. </p>
+<p>This class is used to implement the protocol. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa0ec1a47598a80053dc5e4c8765d3ee8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa0ec1a47598a80053dc5e4c8765d3ee8">&#9670;&nbsp;</a></span>Protocol()</h2>
 
@@ -151,6 +159,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read a message from the network interface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>message to read into </td></tr>
+    <tr><td class="paramname">timeoutUs</td><td>timeout in microseconds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if a message was read successfully </dd>
+<dd>
+false if a message was not read successfully </dd></dl>
+
 </div>
 </div>
 <a id="a701a852a70d4c6999009c7f29f8b909e"></a>
@@ -168,6 +188,17 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Send a message over the network. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>message to send </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the message was sent successfully </dd>
+<dd>
+false if the message was not sent successfully </dd></dl>
 
 </div>
 </div>

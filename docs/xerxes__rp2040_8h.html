@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: src/Hardware/xerxes_rp2040.h File Reference</title>
+<title>Sensor RP2040: src/Hardware/Board/xerxes_rp2040.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_392e5fed41b2de721750e308647dcb9c.html">Hardware</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_392e5fed41b2de721750e308647dcb9c.html">Hardware</a></li><li class="navelem"><a class="el" href="dir_3d8377d852eec6a119710548292074ee.html">Board</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -76,12 +76,12 @@ $(function() {
 <div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="xerxes__rp2040_8h__dep__incl.png" border="0" usemap="#asrc_2Hardware_2xerxes__rp2040_8hdep" alt=""/></div>
-<map name="asrc_2Hardware_2xerxes__rp2040_8hdep" id="asrc_2Hardware_2xerxes__rp2040_8hdep">
-<area shape="rect" title=" " alt="" coords="644,5,800,47"/>
+<div class="center"><img src="xerxes__rp2040_8h__dep__incl.png" border="0" usemap="#asrc_2Hardware_2Board_2xerxes__rp2040_8hdep" alt=""/></div>
+<map name="asrc_2Hardware_2Board_2xerxes__rp2040_8hdep" id="asrc_2Hardware_2Board_2xerxes__rp2040_8hdep">
+<area shape="rect" title=" " alt="" coords="647,5,797,47"/>
 <area shape="rect" href="InitUtils_8cpp.html" title=" " alt="" coords="5,102,196,129"/>
 <area shape="rect" href="Sleep_8cpp.html" title=" " alt="" coords="220,102,395,129"/>
-<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="612,363,717,389"/>
+<area shape="rect" href="src_2main_8cpp.html" title=" " alt="" coords="544,363,649,389"/>
 <area shape="rect" href="AnalogInput_8cpp.html" title=" " alt="" coords="471,95,621,136"/>
 <area shape="rect" href="DigitalInputOutput_8cpp.html" title=" " alt="" coords="542,184,715,225"/>
 <area shape="rect" href="DigitalInputOutput_8hpp.html" title=" " alt="" coords="697,95,872,136"/>
@@ -91,6 +91,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="rect" href="SCL3X00_8cpp.html" title=" " alt="" coords="1431,95,1578,136"/>
 <area shape="rect" href="all_8hpp.html" title=" " alt="" coords="857,281,1001,307"/>
 <area shape="rect" href="4DI4DO_8hpp.html" title=" " alt="" coords="740,184,891,225"/>
+<area shape="rect" href="Callbacks_8cpp.html" title=" " alt="" coords="807,363,1050,389"/>
 <area shape="rect" href="4DI4DO_8cpp.html" title=" " alt="" coords="681,273,832,315"/>
 <area shape="rect" href="SCL3400_8cpp.html" title=" " alt="" coords="1261,184,1407,225"/>
 </map>
@@ -185,13 +186,41 @@ Macros</h2></td></tr>
 <tr class="memitem:a3b4d947bc567b9ea3e1e0e8f3039001d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">SHIELD_MASK</a></td></tr>
 <tr class="memdesc:a3b4d947bc567b9ea3e1e0e8f3039001d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mask of pins that are used by the shield and not used by the board, eq. 0x3fc0033f.  <a href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">More...</a><br /></td></tr>
 <tr class="separator:a3b4d947bc567b9ea3e1e0e8f3039001d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b92b2c8083414b85cfc23163ac45607"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a5b92b2c8083414b85cfc23163ac45607">XERXES_RP2040</a></td></tr>
+<tr class="separator:a5b92b2c8083414b85cfc23163ac45607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6468dfeffb42ab797be2e0b3d886428"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#ac6468dfeffb42ab797be2e0b3d886428">PICO_DEFAULT_UART</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ac6468dfeffb42ab797be2e0b3d886428"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a596b6d76c33b68f0cab100a6360a0784"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a596b6d76c33b68f0cab100a6360a0784">PICO_DEFAULT_UART_TX_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#af7018c3d4c500f40da605793cb4fcd6d">UART0_TX_PIN</a></td></tr>
+<tr class="separator:a596b6d76c33b68f0cab100a6360a0784"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ba1da2ef162698e5fc3fe54896103e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a14ba1da2ef162698e5fc3fe54896103e">PICO_DEFAULT_UART_RX_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#af99e6777e3f2418cba487ab9c928f769">UART0_RX_PIN</a></td></tr>
+<tr class="separator:a14ba1da2ef162698e5fc3fe54896103e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a29698db5ef031543df84d51da3e16a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a4a29698db5ef031543df84d51da3e16a">PICO_DEFAULT_LED_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a69c8ba05743df48933be84eb44c773b8">USR_LED_PIN</a></td></tr>
+<tr class="separator:a4a29698db5ef031543df84d51da3e16a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa97a6c55314d1b099ced2860a6b3dcc7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#aa97a6c55314d1b099ced2860a6b3dcc7">PICO_DEFAULT_I2C</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:aa97a6c55314d1b099ced2860a6b3dcc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc0792454cd382ae0cf50dffadfaa02e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#abc0792454cd382ae0cf50dffadfaa02e">PICO_DEFAULT_I2C_SDA_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742">I2C0_SDA_PIN</a></td></tr>
+<tr class="separator:abc0792454cd382ae0cf50dffadfaa02e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b06cc6391b2a8f7d6da3f027381611d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a8b06cc6391b2a8f7d6da3f027381611d">PICO_DEFAULT_I2C_SCL_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929">I2C0_SCL_PIN</a></td></tr>
+<tr class="separator:a8b06cc6391b2a8f7d6da3f027381611d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4e23302c26c165c8f4519ccc664e992"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#ae4e23302c26c165c8f4519ccc664e992">PICO_DEFAULT_SPI</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ae4e23302c26c165c8f4519ccc664e992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad46d9962adcf584b003bb52ef8e33e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#adad46d9962adcf584b003bb52ef8e33e">PICO_DEFAULT_SPI_SCK_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a1f506818fb07531f02109d004962e7f0">SPI0_CLK_PIN</a></td></tr>
+<tr class="separator:adad46d9962adcf584b003bb52ef8e33e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd12af431f3d8c3752815d58f998c0ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#acd12af431f3d8c3752815d58f998c0ac">PICO_DEFAULT_SPI_TX_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#afcc66eefc6a5b7144f59b35fbef9b0dc">SPI0_MOSI_PIN</a></td></tr>
+<tr class="separator:acd12af431f3d8c3752815d58f998c0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7eaa7dddacd975821969189da644cdb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#ab7eaa7dddacd975821969189da644cdb">PICO_DEFAULT_SPI_RX_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a13ab5492a03325279d7be6d6fe16ee1a">SPI0_MISO_PIN</a></td></tr>
+<tr class="separator:ab7eaa7dddacd975821969189da644cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f76bedc8bb59acb457e1943dda8431d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a1f76bedc8bb59acb457e1943dda8431d">PICO_DEFAULT_SPI_CSN_PIN</a>&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#acc33f26bff933b7b34561e485b8b05e6">SPI0_CSN_PIN</a></td></tr>
+<tr class="separator:a1f76bedc8bb59acb457e1943dda8431d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868e795ee21e547e10edf12a3aeafbc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a868e795ee21e547e10edf12a3aeafbc9">PICO_BOOT_STAGE2_CHOOSE_W25Q080</a>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a868e795ee21e547e10edf12a3aeafbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a090528628a511947179066f60c2aeb8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">PICO_FLASH_SPI_CLKDIV</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:a090528628a511947179066f60c2aeb8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">PICO_FLASH_SPI_CLKDIV</a>&#160;&#160;&#160;32</td></tr>
+<tr class="memdesc:a090528628a511947179066f60c2aeb8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is critical for some flash chips, and can be set to 4 for some, but needs to be at least 32 for others.  <a href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">More...</a><br /></td></tr>
 <tr class="separator:a090528628a511947179066f60c2aeb8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafe78184edbb372dbd08feca4dae87cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#aafe78184edbb372dbd08feca4dae87cd">PICO_XOSC_STARTUP_DELAY_MULTIPLIER</a>&#160;&#160;&#160;64</td></tr>
+<tr class="memitem:aafe78184edbb372dbd08feca4dae87cd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#aafe78184edbb372dbd08feca4dae87cd">PICO_XOSC_STARTUP_DELAY_MULTIPLIER</a>&#160;&#160;&#160;16</td></tr>
 <tr class="separator:aafe78184edbb372dbd08feca4dae87cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ad5a8273ffcd10db868c3c3e03d5bf0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">PICO_FLASH_SIZE_BYTES</a>&#160;&#160;&#160;(16 * 1024 * 1024)</td></tr>
+<tr class="memdesc:a7ad5a8273ffcd10db868c3c3e03d5bf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">16MiB, Flash size in bytes  <a href="xerxes__rp2040_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">More...</a><br /></td></tr>
 <tr class="separator:a7ad5a8273ffcd10db868c3c3e03d5bf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78554b289c077f9733b51c5b53c1d3b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="xerxes__rp2040_8h.html#a78554b289c077f9733b51c5b53c1d3b7">PICO_RP2040_B0_SUPPORTED</a>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:a78554b289c077f9733b51c5b53c1d3b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -365,6 +394,174 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="aa97a6c55314d1b099ced2860a6b3dcc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa97a6c55314d1b099ced2860a6b3dcc7">&#9670;&nbsp;</a></span>PICO_DEFAULT_I2C</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_I2C&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b06cc6391b2a8f7d6da3f027381611d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b06cc6391b2a8f7d6da3f027381611d">&#9670;&nbsp;</a></span>PICO_DEFAULT_I2C_SCL_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_I2C_SCL_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929">I2C0_SCL_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc0792454cd382ae0cf50dffadfaa02e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc0792454cd382ae0cf50dffadfaa02e">&#9670;&nbsp;</a></span>PICO_DEFAULT_I2C_SDA_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_I2C_SDA_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742">I2C0_SDA_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a29698db5ef031543df84d51da3e16a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a29698db5ef031543df84d51da3e16a">&#9670;&nbsp;</a></span>PICO_DEFAULT_LED_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_LED_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a69c8ba05743df48933be84eb44c773b8">USR_LED_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4e23302c26c165c8f4519ccc664e992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4e23302c26c165c8f4519ccc664e992">&#9670;&nbsp;</a></span>PICO_DEFAULT_SPI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_SPI&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f76bedc8bb59acb457e1943dda8431d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f76bedc8bb59acb457e1943dda8431d">&#9670;&nbsp;</a></span>PICO_DEFAULT_SPI_CSN_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_SPI_CSN_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#acc33f26bff933b7b34561e485b8b05e6">SPI0_CSN_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7eaa7dddacd975821969189da644cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7eaa7dddacd975821969189da644cdb">&#9670;&nbsp;</a></span>PICO_DEFAULT_SPI_RX_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_SPI_RX_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a13ab5492a03325279d7be6d6fe16ee1a">SPI0_MISO_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adad46d9962adcf584b003bb52ef8e33e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad46d9962adcf584b003bb52ef8e33e">&#9670;&nbsp;</a></span>PICO_DEFAULT_SPI_SCK_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_SPI_SCK_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#a1f506818fb07531f02109d004962e7f0">SPI0_CLK_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd12af431f3d8c3752815d58f998c0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd12af431f3d8c3752815d58f998c0ac">&#9670;&nbsp;</a></span>PICO_DEFAULT_SPI_TX_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_SPI_TX_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#afcc66eefc6a5b7144f59b35fbef9b0dc">SPI0_MOSI_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6468dfeffb42ab797be2e0b3d886428"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6468dfeffb42ab797be2e0b3d886428">&#9670;&nbsp;</a></span>PICO_DEFAULT_UART</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_UART&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14ba1da2ef162698e5fc3fe54896103e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ba1da2ef162698e5fc3fe54896103e">&#9670;&nbsp;</a></span>PICO_DEFAULT_UART_RX_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_UART_RX_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#af99e6777e3f2418cba487ab9c928f769">UART0_RX_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a596b6d76c33b68f0cab100a6360a0784"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a596b6d76c33b68f0cab100a6360a0784">&#9670;&nbsp;</a></span>PICO_DEFAULT_UART_TX_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PICO_DEFAULT_UART_TX_PIN&#160;&#160;&#160;<a class="el" href="xerxes__rp2040_8h.html#af7018c3d4c500f40da605793cb4fcd6d">UART0_TX_PIN</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7ad5a8273ffcd10db868c3c3e03d5bf0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ad5a8273ffcd10db868c3c3e03d5bf0">&#9670;&nbsp;</a></span>PICO_FLASH_SIZE_BYTES</h2>
 
@@ -377,6 +574,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>16MiB, Flash size in bytes </p>
+<p>This is the size of the flash chip on the board, not the size of the flash chip that is used for the bootloader. </p>
+
 </div>
 </div>
 <a id="a090528628a511947179066f60c2aeb8a"></a>
@@ -386,10 +586,13 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PICO_FLASH_SPI_CLKDIV&#160;&#160;&#160;2</td>
+          <td class="memname">#define PICO_FLASH_SPI_CLKDIV&#160;&#160;&#160;32</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This is critical for some flash chips, and can be set to 4 for some, but needs to be at least 32 for others. </p>
+<dl class="section note"><dt>Note</dt><dd>Increasing this value will help with BOOTLOOPs, but will slow down the flash chip. </dd></dl>
 
 </div>
 </div>
@@ -414,7 +617,7 @@ Macros</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER&#160;&#160;&#160;64</td>
+          <td class="memname">#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER&#160;&#160;&#160;16</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -870,6 +1073,20 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define USR_SW_PIN&#160;&#160;&#160;18</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b92b2c8083414b85cfc23163ac45607"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b92b2c8083414b85cfc23163ac45607">&#9670;&nbsp;</a></span>XERXES_RP2040</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define XERXES_RP2040</td>
         </tr>
       </table>
 </div><div class="memdoc">

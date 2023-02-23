@@ -81,35 +81,40 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classXerxes_1_1Peripheral.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Peripheral.html">Peripheral</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">private</span>:    </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a> _devid;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classXerxes_1_1Peripheral.html#a8ea01b1358a21edeefb028436d62ca7b">Peripheral</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="classXerxes_1_1Peripheral.html#a33fba9d396ec375ace04a3a1b4b693f9">~Peripheral</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// pure virtual functions</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#ae8a5e27a4acc08b41ba36078c32dffee">init</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#ae1e54f753b899cbf89eeab06a3e32752">update</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#addd77fb1c4f60f826b4398fa1ad4555f">stop</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a> <a class="code" href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">getDevid</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}   <span class="comment">// namespace Xerxes</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PERIPHERAL_HPP</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classXerxes_1_1Peripheral.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1Peripheral.html">Peripheral</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">private</span>:    </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classXerxes_1_1Peripheral.html#a2185d22bbe15d320b8a7c009c63524a5">   21</a></span>&#160;    <a class="code" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a> <a class="code" href="classXerxes_1_1Peripheral.html#a2185d22bbe15d320b8a7c009c63524a5">_devid</a>{0};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="classXerxes_1_1Peripheral.html#a8ea01b1358a21edeefb028436d62ca7b">Peripheral</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classXerxes_1_1Peripheral.html#a33fba9d396ec375ace04a3a1b4b693f9">~Peripheral</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// pure virtual functions</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">   28</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">init</a>() = 0;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classXerxes_1_1Peripheral.html#a84267e4e77a6845bf4057194b19d14ab">   29</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#a84267e4e77a6845bf4057194b19d14ab">update</a>() = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classXerxes_1_1Peripheral.html#a8c409c23a53fe41704d85b98eaadcce5">   30</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#a8c409c23a53fe41704d85b98eaadcce5">stop</a>() = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a> <a class="code" href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">getDevid</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}   <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__PERIPHERAL_HPP</span></div>
 <div class="ttc" id="aDeviceIds_8h_html"><div class="ttname"><a href="DeviceIds_8h.html">DeviceIds.h</a></div></div>
-<div class="ttc" id="aDeviceIds_8h_html_a1f078037203242d887b8060b3a6df511"><div class="ttname"><a href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a></div><div class="ttdeci">uint8_t devid_t</div><div class="ttdef"><b>Definition:</b> DeviceIds.h:15</div></div>
-<div class="ttc" id="aclassXerxes_1_1Peripheral_html"><div class="ttname"><a href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:12</div></div>
+<div class="ttc" id="aDeviceIds_8h_html_a1f078037203242d887b8060b3a6df511"><div class="ttname"><a href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a></div><div class="ttdeci">uint8_t devid_t</div><div class="ttdef"><b>Definition:</b> DeviceIds.h:8</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html"><div class="ttname"><a href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></div><div class="ttdoc">Peripheral base class with pure virtual functions - init, update, stop.</div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:17</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_a2185d22bbe15d320b8a7c009c63524a5"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a2185d22bbe15d320b8a7c009c63524a5">Xerxes::Peripheral::_devid</a></div><div class="ttdeci">devid_t _devid</div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:21</div></div>
 <div class="ttc" id="aclassXerxes_1_1Peripheral_html_a33fba9d396ec375ace04a3a1b4b693f9"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a33fba9d396ec375ace04a3a1b4b693f9">Xerxes::Peripheral::~Peripheral</a></div><div class="ttdeci">~Peripheral()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:12</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_a84267e4e77a6845bf4057194b19d14ab"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a84267e4e77a6845bf4057194b19d14ab">Xerxes::Peripheral::update</a></div><div class="ttdeci">virtual void update()=0</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_a8c409c23a53fe41704d85b98eaadcce5"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a8c409c23a53fe41704d85b98eaadcce5">Xerxes::Peripheral::stop</a></div><div class="ttdeci">virtual void stop()=0</div></div>
 <div class="ttc" id="aclassXerxes_1_1Peripheral_html_a8ea01b1358a21edeefb028436d62ca7b"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a8ea01b1358a21edeefb028436d62ca7b">Xerxes::Peripheral::Peripheral</a></div><div class="ttdeci">Peripheral()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:7</div></div>
-<div class="ttc" id="aclassXerxes_1_1Peripheral_html_addd77fb1c4f60f826b4398fa1ad4555f"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#addd77fb1c4f60f826b4398fa1ad4555f">Xerxes::Peripheral::stop</a></div><div class="ttdeci">virtual void stop()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:27</div></div>
-<div class="ttc" id="aclassXerxes_1_1Peripheral_html_ae1e54f753b899cbf89eeab06a3e32752"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#ae1e54f753b899cbf89eeab06a3e32752">Xerxes::Peripheral::update</a></div><div class="ttdeci">virtual void update()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:22</div></div>
-<div class="ttc" id="aclassXerxes_1_1Peripheral_html_ae8a5e27a4acc08b41ba36078c32dffee"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#ae8a5e27a4acc08b41ba36078c32dffee">Xerxes::Peripheral::init</a></div><div class="ttdeci">virtual void init()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:17</div></div>
-<div class="ttc" id="aclassXerxes_1_1Peripheral_html_afda1ec989b48cf1002b20f115e388a55"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">Xerxes::Peripheral::getDevid</a></div><div class="ttdeci">devid_t getDevid()</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:32</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_a9eb6ccb588446e6bbad898b961bc1168"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">Xerxes::Peripheral::init</a></div><div class="ttdeci">virtual void init()=0</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_afda1ec989b48cf1002b20f115e388a55"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">Xerxes::Peripheral::getDevid</a></div><div class="ttdeci">devid_t getDevid()</div><div class="ttdoc">Get the Devid object.</div><div class="ttdef"><b>Definition:</b> Peripheral.cpp:17</div></div>
 <div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classXerxes_1_1Peripheral.html" title=" " alt="" coords="5,56,147,83"/>
+<area shape="rect" id="node1" href="$classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="5,56,147,83"/>
 <area shape="rect" id="node2" href="$classXerxes_1_1DigitalInputOutput.html" title=" " alt="" coords="195,19,389,45"/>
-<area shape="rect" id="node4" href="$classXerxes_1_1Sensor.html" title=" " alt="" coords="233,81,351,108"/>
+<area shape="rect" id="node4" href="$classXerxes_1_1Sensor.html" title="Sensor class." alt="" coords="233,81,351,108"/>
 <area shape="rect" id="node3" href="$classXerxes_1_1__4DI4DO.html" title=" " alt="" coords="448,5,580,32"/>
 <area shape="rect" id="node5" href="$classXerxes_1_1ABP.html" title=" " alt="" coords="463,56,565,83"/>
 <area shape="rect" id="node6" href="$classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="437,107,591,133"/>

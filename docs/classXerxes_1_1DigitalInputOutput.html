@@ -85,7 +85,7 @@ Inheritance diagram for Xerxes::DigitalInputOutput:</div>
 <map name="aXerxes_1_1DigitalInputOutput_inherit__map" id="aXerxes_1_1DigitalInputOutput_inherit__map">
 <area shape="rect" title=" " alt="" coords="5,80,200,107"/>
 <area shape="rect" href="classXerxes_1_1__4DI4DO.html" title=" " alt="" coords="37,155,169,181"/>
-<area shape="rect" href="classXerxes_1_1Peripheral.html" title=" " alt="" coords="32,5,173,32"/>
+<area shape="rect" href="classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="32,5,173,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -94,10 +94,10 @@ Collaboration diagram for Xerxes::DigitalInputOutput:</div>
 <div class="center"><img src="classXerxes_1_1DigitalInputOutput__coll__graph.png" border="0" usemap="#aXerxes_1_1DigitalInputOutput_coll__map" alt="Collaboration graph"/></div>
 <map name="aXerxes_1_1DigitalInputOutput_coll__map" id="aXerxes_1_1DigitalInputOutput_coll__map">
 <area shape="rect" title=" " alt="" coords="5,273,200,300"/>
-<area shape="rect" href="classXerxes_1_1Peripheral.html" title=" " alt="" coords="11,184,152,211"/>
-<area shape="rect" href="classXerxes_1_1Register.html" title=" " alt="" coords="177,184,306,211"/>
-<area shape="rect" href="unionConfigBitsUnion.html" title=" " alt="" coords="178,95,305,121"/>
-<area shape="rect" href="structConfigBits.html" title=" " alt="" coords="197,5,286,32"/>
+<area shape="rect" href="classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="11,184,152,211"/>
+<area shape="rect" href="classXerxes_1_1Register.html" title="Register class for storing all data in memory mapped registers." alt="" coords="177,184,306,211"/>
+<area shape="rect" href="unionConfigBitsUnion.html" title="Union to access the configuration bits as a byte." alt="" coords="178,95,305,121"/>
+<area shape="rect" href="structConfigBits.html" title="The configuration bits of the device." alt="" coords="197,5,286,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -126,9 +126,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8ea01b1358a21edeefb028436d62ca7b inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33fba9d396ec375ace04a3a1b4b693f9 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a33fba9d396ec375ace04a3a1b4b693f9">~Peripheral</a> ()</td></tr>
 <tr class="separator:a33fba9d396ec375ace04a3a1b4b693f9 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8a5e27a4acc08b41ba36078c32dffee inherit pub_methods_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#ae8a5e27a4acc08b41ba36078c32dffee">init</a> ()</td></tr>
-<tr class="separator:ae8a5e27a4acc08b41ba36078c32dffee inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eb6ccb588446e6bbad898b961bc1168 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">init</a> ()=0</td></tr>
+<tr class="separator:a9eb6ccb588446e6bbad898b961bc1168 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afda1ec989b48cf1002b20f115e388a55 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">getDevid</a> ()</td></tr>
+<tr class="memdesc:afda1ec989b48cf1002b20f115e388a55 inherit pub_methods_classXerxes_1_1Peripheral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Devid object.  <a href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">More...</a><br /></td></tr>
 <tr class="separator:afda1ec989b48cf1002b20f115e388a55 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -137,6 +138,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abf4f7dd48e1f2740b7ff75d541be3d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee5c32e1dbd16a9d869290f022eb9e05"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1DigitalInputOutput.html#aee5c32e1dbd16a9d869290f022eb9e05">used_iomask</a> = <a class="el" href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">SHIELD_MASK</a></td></tr>
 <tr class="separator:aee5c32e1dbd16a9d869290f022eb9e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_classXerxes_1_1Peripheral"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classXerxes_1_1Peripheral')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></td></tr>
+<tr class="memitem:a2185d22bbe15d320b8a7c009c63524a5 inherit pro_attribs_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a2185d22bbe15d320b8a7c009c63524a5">_devid</a> {0}</td></tr>
+<tr class="separator:a2185d22bbe15d320b8a7c009c63524a5 inherit pro_attribs_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -288,7 +292,7 @@ Friends</h2></td></tr>
 
 <p>Stop the DIO. </p>
 
-<p>Reimplemented from <a class="el" href="classXerxes_1_1Peripheral.html#addd77fb1c4f60f826b4398fa1ad4555f">Xerxes::Peripheral</a>.</p>
+<p>Implements <a class="el" href="classXerxes_1_1Peripheral.html#a8c409c23a53fe41704d85b98eaadcce5">Xerxes::Peripheral</a>.</p>
 
 </div>
 </div>
@@ -317,7 +321,7 @@ Friends</h2></td></tr>
 
 <p>Update the DIO. </p>
 
-<p>Reimplemented from <a class="el" href="classXerxes_1_1Peripheral.html#ae1e54f753b899cbf89eeab06a3e32752">Xerxes::Peripheral</a>.</p>
+<p>Implements <a class="el" href="classXerxes_1_1Peripheral.html#a84267e4e77a6845bf4057194b19d14ab">Xerxes::Peripheral</a>.</p>
 
 </div>
 </div>

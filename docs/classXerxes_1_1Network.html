@@ -75,29 +75,38 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p><a class="el" href="classXerxes_1_1Network.html" title="Network interface class.">Network</a> interface class.  
+ <a href="classXerxes_1_1Network.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Network_8hpp_source.html">Network.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Xerxes::Network:</div>
 <div class="dyncontent">
 <div class="center"><img src="classXerxes_1_1Network__inherit__graph.png" border="0" usemap="#aXerxes_1_1Network_inherit__map" alt="Inheritance graph"/></div>
 <map name="aXerxes_1_1Network_inherit__map" id="aXerxes_1_1Network_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,5,136,32"/>
-<area shape="rect" href="classXerxes_1_1RS485.html" title=" " alt="" coords="13,80,129,107"/>
+<area shape="rect" title="Network interface class." alt="" coords="5,5,136,32"/>
+<area shape="rect" href="classXerxes_1_1RS485.html" title="RS485 class for communication over RS485." alt="" coords="13,80,129,107"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa9e0bdc6ffd6310fb680fca877741cbc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">Network</a> ()</td></tr>
+<tr class="memdesc:aa9e0bdc6ffd6310fb680fca877741cbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classXerxes_1_1Network.html" title="Network interface class.">Network</a> object.  <a href="classXerxes_1_1Network.html#aa9e0bdc6ffd6310fb680fca877741cbc">More...</a><br /></td></tr>
 <tr class="separator:aa9e0bdc6ffd6310fb680fca877741cbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad22e6703219370ef2965da737a014232"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Network.html#ad22e6703219370ef2965da737a014232">~Network</a> ()</td></tr>
 <tr class="separator:ad22e6703219370ef2965da737a014232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1e108dadcc1de0aac8220c2d6719727"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">sendData</a> (const <a class="el" href="classXerxes_1_1Packet.html">Packet</a> &amp;toSend) const =0</td></tr>
+<tr class="memdesc:ab1e108dadcc1de0aac8220c2d6719727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data to the network - overload this function to implement the network interface.  <a href="classXerxes_1_1Network.html#ab1e108dadcc1de0aac8220c2d6719727">More...</a><br /></td></tr>
 <tr class="separator:ab1e108dadcc1de0aac8220c2d6719727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a704b203ed48e3f44b63888aba53cc65b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">readData</a> (const uint64_t timeoutUs, <a class="el" href="classXerxes_1_1Packet.html">Packet</a> &amp;packet)=0</td></tr>
+<tr class="memdesc:a704b203ed48e3f44b63888aba53cc65b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from the network - overload this function to implement the network interface.  <a href="classXerxes_1_1Network.html#a704b203ed48e3f44b63888aba53cc65b">More...</a><br /></td></tr>
 <tr class="separator:a704b203ed48e3f44b63888aba53cc65b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classXerxes_1_1Network.html" title="Network interface class.">Network</a> interface class. </p>
+<p>This class is used to implement the network interface. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa9e0bdc6ffd6310fb680fca877741cbc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9e0bdc6ffd6310fb680fca877741cbc">&#9670;&nbsp;</a></span>Network()</h2>
 
@@ -112,6 +121,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classXerxes_1_1Network.html" title="Network interface class.">Network</a> object. </p>
 
 </div>
 </div>
@@ -167,6 +178,18 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Read data from the network - overload this function to implement the network interface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeoutUs</td><td>timeout in microseconds </td></tr>
+    <tr><td class="paramname">packet</td><td>packet to read the data to </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the packet was read successfully </dd>
+<dd>
+false if the packet was not read successfully </dd></dl>
+
 <p>Implemented in <a class="el" href="classXerxes_1_1RS485.html#afd29f9ccdaed1b61bb6373c4810f1113">Xerxes::RS485</a>.</p>
 
 </div>
@@ -194,6 +217,17 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Send data to the network - overload this function to implement the network interface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toSend</td><td>packet to send </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the packet was sent successfully </dd>
+<dd>
+false if the packet was not sent successfully </dd></dl>
 
 <p>Implemented in <a class="el" href="classXerxes_1_1RS485.html#af9c1a2d70e74fc314678b6be20355b20">Xerxes::RS485</a>.</p>
 

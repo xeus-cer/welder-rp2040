@@ -1,7 +1,7 @@
 <map id="Xerxes::Peripheral" name="Xerxes::Peripheral">
-<area shape="rect" id="node1" title=" " alt="" coords="147,5,289,32"/>
+<area shape="rect" id="node1" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="147,5,289,32"/>
 <area shape="rect" id="node2" href="$classXerxes_1_1DigitalInputOutput.html" title=" " alt="" coords="30,80,225,107"/>
-<area shape="rect" id="node4" href="$classXerxes_1_1Sensor.html" title=" " alt="" coords="277,80,396,107"/>
+<area shape="rect" id="node4" href="$classXerxes_1_1Sensor.html" title="Sensor class." alt="" coords="277,80,396,107"/>
 <area shape="rect" id="node3" href="$classXerxes_1_1__4DI4DO.html" title=" " alt="" coords="5,155,137,181"/>
 <area shape="rect" id="node5" href="$classXerxes_1_1ABP.html" title=" " alt="" coords="162,155,263,181"/>
 <area shape="rect" id="node6" href="$classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="288,155,441,181"/>

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['i2c0_5fscl_5fpin_867',['I2C0_SCL_PIN',['../xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929',1,'xerxes_rp2040.h']]],
-  ['i2c0_5fsda_5fpin_868',['I2C0_SDA_PIN',['../xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742',1,'xerxes_rp2040.h']]],
-  ['i2c1_5fscl_5fpin_869',['I2C1_SCL_PIN',['../xerxes__rp2040_8h.html#add009e081e638094ee54b280661d862e',1,'xerxes_rp2040.h']]],
-  ['i2c1_5fsda_5fpin_870',['I2C1_SDA_PIN',['../xerxes__rp2040_8h.html#a68697a8aca56f616b38aa23f82edecd5',1,'xerxes_rp2040.h']]]
+  ['gain_5fpv0_5foffset_1039',['GAIN_PV0_OFFSET',['../Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d',1,'Definitions.h']]],
+  ['gain_5fpv1_5foffset_1040',['GAIN_PV1_OFFSET',['../Definitions_8h.html#a7cefdb9c40ac079711a14e964bc52c57',1,'Definitions.h']]],
+  ['gain_5fpv2_5foffset_1041',['GAIN_PV2_OFFSET',['../Definitions_8h.html#aa5de2bb4f617035815e182fcb5e82c53',1,'Definitions.h']]],
+  ['gain_5fpv3_5foffset_1042',['GAIN_PV3_OFFSET',['../Definitions_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f',1,'Definitions.h']]]
 ];

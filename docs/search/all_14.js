@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['wake_5fup_5ffrom_5fpower_5fdown_5fmode_451',['Wake_up_from_power_down_mode',['../namespaceCMD.html#a8ed013ed66621e7af06f260e4257135f',1,'CMD']]],
-  ['writeregcallback_452',['writeRegCallback',['../namespaceXerxes.html#a94afd3fc3c8b1dfdb7175139bcee7362',1,'Xerxes']]]
+  ['valmax_543',['VALmax',['../namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e',1,'Xerxes']]],
+  ['valmin_544',['VALmin',['../namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb',1,'Xerxes']]],
+  ['volatile_5foffset_545',['VOLATILE_OFFSET',['../Definitions_8h.html#a658fa7720bccc96fe614fa4e9f8fab47',1,'Definitions.h']]]
 ];
