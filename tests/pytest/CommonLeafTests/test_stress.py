@@ -39,7 +39,7 @@ def test_read_stress(cleanLeaf: Leaf):
         val_i = struct.unpack("I", xm.payload)[0]
 
         # print both in fixed width
-        _log.info(f"Reg# {i*4:3d}: {val_f:10.3f} {val_i:10d}")
+        _log.debug(f"Reg# {i*4:3d}: {val_f:10.3f} {val_i:10d}")
 
 
 def test_read_speed(cleanLeaf: Leaf):
