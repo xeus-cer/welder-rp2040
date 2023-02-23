@@ -21,7 +21,7 @@ def get_serial_com() -> Serial:
 
     else:
         # on linux machine:
-        com = DebugSerial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.02)
+        com = Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.02)
         _log.info(f"Using DebugSerial {com.port} on Linux machine")
 
     try:

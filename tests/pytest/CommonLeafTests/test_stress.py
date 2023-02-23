@@ -7,6 +7,8 @@ from xerxes_protocol import (
 import time
 import struct
 import random
+import logging
+_log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
@@ -37,13 +39,14 @@ def test_read_stress(cleanLeaf: Leaf):
         val_i = struct.unpack("I", xm.payload)[0]
 
         # print both in fixed width
-        print(f"Reg# {i*4:3d}: {val_f:10.3f} {val_i:10d}")
+        _log.info(f"Reg# {i*4:3d}: {val_f:10.3f} {val_i:10d}")
 
 
 def test_read_speed(cleanLeaf: Leaf):
     """Reads 1024 registers in a burst and calculates the speed in bytes per second"""
 
     start = time.perf_counter_ns()
+    cleanLeaf.root.network.timeout = 0.1  # set timeout to 100ms
 
     chunk = 196
     # read 1024 registers in chunk of 196 bytes, 1024/196 ~ 6
@@ -59,7 +62,7 @@ def test_read_speed(cleanLeaf: Leaf):
     speed = 1024 / ((end - start) / 1e9)  # bytes per second
     
     # print speed in kiB/s
-    print(f"Read speed: {speed/1024:.2f} kiB/s")
+    _log.info(f"Read speed: {speed/1024:.2f} kiB/s")
 
     # check if speed is greater than 1 kiB/s, oh my god it's fast
     assert speed > 1024  # 1 kiB/s
@@ -112,7 +115,7 @@ def test_read_mean_burst(cleanLeaf: Leaf):
         mean[i] = mean[i] / burst
     
     # print mean values
-    print(f"Mean values: {mean[0]:.3f} {mean[1]:.3f} {mean[2]:.3f} {mean[3]:.3f}")
+    _log.info(f"Mean values: {mean[0]:.3f} {mean[1]:.3f} {mean[2]:.3f} {mean[3]:.3f}")
     
     # check if at least one value is not zero
     assert any(mean)

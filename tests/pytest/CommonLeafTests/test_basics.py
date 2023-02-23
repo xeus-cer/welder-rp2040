@@ -6,6 +6,8 @@ from xerxes_protocol import (
 )
 
 import pytest
+import logging
+_log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
@@ -16,7 +18,7 @@ def test_ping_one(XR: XerxesRoot):
     leaf = Leaf(Addr(0), XR)
     rply: XerxesPingReply = leaf.ping() 
 
-    print(rply)
+    _log.info(rply)
     
     assert XR.isPingLatest(rply)
     assert rply.latency > 0 and rply.latency < 0.1  # should be less than 100ms
@@ -41,4 +43,4 @@ def test_ping_all(XR: XerxesRoot):
     
     # print all found leaves
     for leaf in found:
-        print(leaf)
+        _log.info(leaf)

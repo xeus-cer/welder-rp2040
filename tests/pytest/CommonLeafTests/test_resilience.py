@@ -2,12 +2,15 @@ from xerxes_protocol import (
     Leaf,
     XerxesNetwork,
     MsgId,
-    checksum
+    checksum,
+    Addr
 )
 import time
 import struct
 import pytest
 import random
+import logging
+_log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
@@ -19,25 +22,27 @@ def test_resilience_ping(XN: XerxesNetwork, leaf: Leaf):
     """Tests resilience against network errors
 
     Args:
-        XN (XerxesNetwork): The network on which the leaf is connected
-        XR (XerxesRoot): The root of the network
+        XN (XerxesNetwork): The network on which the leaf is connected 
+        leaf (Leaf): The leaf to test
     """
 
     assert leaf.root.isPingLatest(leaf.ping())
 
     # craft a ping message with wrong checksum from scratch
     payload = bytes(MsgId.PING)
-    source = 0x1e
-    destination = 0x00
+    source = Addr(0x1e)
+    destination = Addr(0x00)
     chks = b"\x55"  # checksum (wrong on purpose)
 
     # send a message to the leaf, which will ignore it
     msg = b"\x01"  # SOH
-    msg += (len(payload) + 5).to_bytes(1, "little")  # LEN
+    msg += (len(payload) + 5).to_bytes(1, "little")  # LEN - 5 bytes for the header and checksum
     msg += bytes(source)  # FROM
     msg += bytes(destination)  # DST
     msg += payload
     msg += chks  # payload checksum (wrong on purpose)
+
+    _log.info(f"Sending message: {msg.hex()} with wrong checksum")
 
     # send the message over the network
     XN._s.write(msg)
@@ -58,8 +63,9 @@ def test_resilience_msg_length(XN: XerxesNetwork, leaf: Leaf):
 
     # craft a ping message
     payload = bytes(MsgId.PING)
-    source = 0x1e
-    destination = 0x00
+    
+    source = Addr(0x1e)
+    destination = Addr(0x00)
     
     # send a message to the leaf, which resets it
     msg = b"\x01"  # SOH
@@ -69,6 +75,7 @@ def test_resilience_msg_length(XN: XerxesNetwork, leaf: Leaf):
     msg += payload
     msg += checksum(msg)  # message checksum
 
+    _log.info(f"Sending message: {msg.hex()} with wrong length")
     XN._s.write(msg)
     
     # wait for the leaf to process the message and read reply, which should fail
@@ -90,17 +97,25 @@ def test_resilience_network_overload(XN: XerxesNetwork, leaf: Leaf):
         leaf (Leaf):        The leaf to test
     """
     
-    # send > 100kiB of random data
-    num_bytes = 100 * 1024
-    for i in range(num_bytes):
-        # send a random byte
-        XN._s.write(struct.pack("B", int(random.random() * 1000 % 256)))
-        if i % 100 == 0:
-            # from time to time send a SOH so the leaf can start processing the invalid message
-            XN._s.write(b"\x01")  # SOH
+    # send 128kiB of random data
+    num_bytes = 128 * 1024
+    for i in range(int(num_bytes / 128)):
+        # send a random chunk
+        chunk_b = b"\x01"  # Start with SOH
+        for j in range(128 - 1):
+            chunk_b += struct.pack("B", int(random.random() * 1000 % 256))
+
+        # send the chunk
+        _log.info(f"Sending chunk {i+1} of {int(num_bytes / 128)}...")
+        XN._s.write(chunk_b)
+
+        # let the leaf process the message
+        time.sleep(.02)
+
+        # wait for the leaf to process the message and check if it is still connected
+        assert leaf.root.isPingLatest(leaf.ping())
 
     # wait for the watchdog to kick in
     time.sleep(.1)
 
     # test if the leaf is still connected to the network
-    leaf.root.isPingLatest(leaf.ping())

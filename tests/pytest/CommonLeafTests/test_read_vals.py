@@ -6,6 +6,8 @@ from xerxes_protocol import (
     LeafConfig
 )
 import time
+import logging
+_log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
@@ -115,6 +117,6 @@ def test_read_msg_buf(cleanLeaf: Leaf):
 
     xm = cleanLeaf.read_reg(512 + 256, NUM_BYTES)
     # print payload as chars
-    print(xm.payload.decode("utf-8"))
+    _log.info(xm.payload.decode("utf-8"))
 
     assert len(xm.payload) == NUM_BYTES

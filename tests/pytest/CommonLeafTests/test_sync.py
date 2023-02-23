@@ -5,6 +5,8 @@ from xerxes_protocol import (
 )
 import struct
 import time
+import logging
+_log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
@@ -39,6 +41,8 @@ def test_sync_no_stats(cleanLeaf: Leaf):
     # convert to floats
     vals = struct.unpack("ffff", vals_raw.payload)[:4]
     std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
+    _log.debug(f"vals: {vals}")
+    _log.debug(f"std_devs: {std_devs}")
 
     # check that all values are 0
     assert not any(vals), "Values were not 0 - device is still in free run mode"
@@ -54,6 +58,8 @@ def test_sync_no_stats(cleanLeaf: Leaf):
     # convert to floats
     vals = struct.unpack("ffff", vals_raw.payload)[:4]
     std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
+    _log.debug(f"vals: {vals}")
+    _log.debug(f"std_devs: {std_devs}")
 
     # check that at least one value is not 0
     assert any(vals), "No values were updated"
@@ -80,6 +86,8 @@ def test_sync_with_stats(cleanLeaf: Leaf):
     # convert to floats
     vals = struct.unpack("ffff", vals_raw.payload)[:4]
     std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
+    _log.debug(f"vals: {vals}")
+    _log.debug(f"std_devs: {std_devs}")
 
     # check that all values are 0
     assert not any(vals), "Values were not 0 - device is still in free run mode"
@@ -98,6 +106,8 @@ def test_sync_with_stats(cleanLeaf: Leaf):
     # convert to floats
     vals = struct.unpack("ffff", vals_raw.payload)[:4]
     std_devs = struct.unpack("ffff", std_devs_raw.payload)[:4]
+    _log.debug(f"vals: {vals}")
+    _log.debug(f"std_devs: {std_devs}")
 
     # check that at least one value is not 0
     assert any(vals), "No values were updated"
