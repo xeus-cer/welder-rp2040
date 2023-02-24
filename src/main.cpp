@@ -86,6 +86,8 @@ int main(void)
     {
         // init usb uart
         stdio_usb_init();
+        userInitUartDisabled();
+        
         // wait for usb to be ready
         sleep_hp(2'000'000);
         // print out error register
@@ -192,7 +194,7 @@ int main(void)
                 if(core1idle)
                 {
                     // setClocksLP();
-                    sleep_us(100);
+                    sleep_us(10);
                     // setClocksHP();
                 }
             #endif // NDEBUG

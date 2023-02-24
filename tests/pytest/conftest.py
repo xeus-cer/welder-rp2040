@@ -21,7 +21,7 @@ def get_serial_com() -> Serial:
 
     else:
         # on linux machine:
-        com = Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.02)
+        com = Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.01)
         _log.info(f"Using DebugSerial {com.port} on Linux machine")
 
     try:
@@ -45,7 +45,7 @@ def XN() -> XerxesNetwork:
     com: Serial
     com = pytest.com
     XN = XerxesNetwork(com)
-    XN.init(timeout=0.02)
+    XN.init(timeout=0.01)
     _log.debug(f"Using {XN}")
     return XN
 

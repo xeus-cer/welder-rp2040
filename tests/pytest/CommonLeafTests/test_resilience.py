@@ -106,7 +106,9 @@ def test_resilience_network_overload(XN: XerxesNetwork, leaf: Leaf):
             chunk_b += struct.pack("B", int(random.random() * 1000 % 256))
 
         # send the chunk
-        _log.info(f"Sending chunk {i+1} of {int(num_bytes / 128)}...")
+        _log.debug(f"Sending chunk {i+1} of {int(num_bytes / 128)}...")
+        if i % 100 == 0:
+            _log.info(f"Sending chunk {i+1} of {int(num_bytes / 128)}...")
         XN._s.write(chunk_b)
 
         # let the leaf process the message

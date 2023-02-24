@@ -94,7 +94,7 @@ void setClocksLP()
 
     clock_stop(clk_usb);
 
-    setClockSysLP();    
+    // setClockSysLP();    
 
     // do not deinit PLL_USB as it is used by the USB, UART and SPI
     // pll_deinit(pll_usb);
@@ -110,7 +110,7 @@ void setClocksHP()
     vreg_set_voltage(DEFAULT_SYS_VOLTAGE);
     
     // change clock source back to PLL sys
-    setClockSysDefault();
+    // setClockSysDefault();
 
     // restart USB clock
     setClockUsbDefault();

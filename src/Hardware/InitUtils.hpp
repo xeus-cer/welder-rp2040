@@ -27,6 +27,14 @@ void userInitUart(void);
 
 
 /**
+ * @brief Disable the UART
+ * 
+ * This function disables the UART and the RS485 transceiver
+ */
+void userInitUartDisabled(void);
+
+
+/**
  * @brief Initialize the GPIO pins
  * 
  * This function initializes the GPIO pins for the user LED, Button and Switch

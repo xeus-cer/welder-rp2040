@@ -18,7 +18,7 @@ __date__ = "2023-02-23"
 def test_reset_soft(leaf: Leaf):
     leaf.reset_soft()
     with pytest.raises(TimeoutError):
-        leaf.ping()
+        leaf.ping(1)
     
     # wait for the leaf to reboot
     time.sleep(.5)

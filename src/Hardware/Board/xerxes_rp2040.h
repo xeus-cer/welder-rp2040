@@ -126,7 +126,7 @@ extern "C"
  * This is critical for some flash chips, and can be set to 4 for some, but needs to be at least 32 for others.
  * @note Increasing this value will help with BOOTLOOPs, but will slow down the flash chip.
  */
-#define PICO_FLASH_SPI_CLKDIV 32
+#define PICO_FLASH_SPI_CLKDIV 2
 #endif // !PICO_FLASH_SPI_CLKDIV
 
 #ifndef PICO_XOSC_STARTUP_DELAY_MULTIPLIER

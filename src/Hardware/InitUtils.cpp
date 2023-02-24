@@ -134,3 +134,17 @@ void userInit()
         userLoadDefaultValues();
     }
 }
+
+
+void userInitUartDisabled(void)
+{
+    // pull RX pin high so rx led is off
+    gpio_init(RS_RX_PIN);
+    gpio_init(RS_TX_PIN);
+
+    gpio_set_dir(RS_RX_PIN, GPIO_IN);
+    gpio_set_dir(RS_TX_PIN, GPIO_IN);
+
+    gpio_pull_up(RS_RX_PIN);
+    gpio_pull_up(RS_TX_PIN);
+}
