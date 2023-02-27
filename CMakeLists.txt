@@ -19,13 +19,16 @@ set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
 # check if ${SENSOR_TYPE} is set
 if(NOT DEFINED SENSOR_TYPE)
 	message(FATAL_ERROR "SENSOR_TYPE not set, use -DSENSOR_TYPE=...\n\
-	Possible options for SENSOR_TYPE: SCL3300, SCL3400, AI, 4DI4DO, ABP")
+	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
 endif()
 
 # this is the sensor type we are using, we need to set this to use the correct sensor header
 if(${SENSOR_TYPE} STREQUAL "SCL3300")
 	add_compile_definitions(__SHIELD_SCL3300)
 	add_compile_definitions(__SENSOR_CLASS=SCL3300)
+elseif(${SENSOR_TYPE} STREQUAL "SCL3300a")
+	add_compile_definitions(__SHIELD_SCL3300)
+	add_compile_definitions(__SENSOR_CLASS=SCL3300a)
 elseif(${SENSOR_TYPE} STREQUAL "SCL3400")
 	add_compile_definitions(__SHIELD_SCL3400)
 	add_compile_definitions(__SENSOR_CLASS=SCL3400)
@@ -43,7 +46,7 @@ elseif(${SENSOR_TYPE} STREQUAL "ABP")
 	add_compile_definitions(__SENSOR_CLASS=ABP)
 else()
 	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
-	Possible options for SENSOR_TYPE: SCL3300, SCL3400, AI, 4DI4DO, ABP")
+	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
 endif()
  
 # find xerxes-protocol library
@@ -74,6 +77,7 @@ add_executable(
 	src/Sensors/Generic/4DI4DO.cpp
 	src/Sensors/Murata/SCL3X00.cpp
 	src/Sensors/Murata/SCL3300.cpp
+	src/Sensors/Murata/SCL3300a.cpp
 	src/Sensors/Murata/SCL3400.cpp
 	src/Sensors/Honeywell/ABP.cpp
 

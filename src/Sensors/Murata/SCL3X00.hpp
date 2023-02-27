@@ -5,7 +5,9 @@
 #include "Sensors/Sensor.hpp"
 #include <memory>
 #include <ostream>
+#include <xerxes-protocol/DeviceIds.h>
 
+typedef uint32_t cmd_t;
 
 namespace CMD
 {
@@ -129,8 +131,6 @@ public:
     // friend operator<< for easy printing
     friend std::ostream& operator<<(std::ostream& os, const SCL3X00& scl);
 };
-
-
 
 
 } // namespace Xerxes

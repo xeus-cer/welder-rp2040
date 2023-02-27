@@ -82,7 +82,17 @@ int main(void)
     
     // if user button is pressed, load default values a.k.a. FACTORY RESET
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
+    
 
+    watchdog_update();
+    sensor = __SENSOR_CLASS(&_reg);
+
+    #ifdef SHIELD_AI
+    sensor.init(2, 3);
+    #else
+    sensor.init();
+    #endif // !SHIELD_AI
+    watchdog_update();
     
     if(useUsb)
     {
@@ -106,27 +116,6 @@ int main(void)
         // init uart over RS485
         userInitUart();
     }
-    
-    /* init sensor, depending on type of sensor selected 
-    sensor = Xerxes::ABP();
-    sensor = Xerxes::SCL3400();
-    sensor = Xerxes::SCL3300();
-    sensor = Xerxes::DigitalInputOutput(dv0, dv1, dv2, dv3);
-    sensor.init();
-    sensor = Xerxes::AnalogInput(pv0, pv1, pv2, pv3);
-    sensor.init(2, 3);
-    sensor = Xerxes::_4DI4DO(&_reg);
-    sensor.init();
-    */
-    watchdog_update();
-    sensor = __SENSOR_CLASS(&_reg);
-
-    #ifdef SHIELD_AI
-    sensor.init(2, 3);
-    #else
-    sensor.init();
-    #endif // !SHIELD_AI
-    watchdog_update();
 
 
     // bind callbacks, ~204us
@@ -153,12 +142,16 @@ int main(void)
 
         if(useUsb)
         {
-            // cout timestamp and net cycle time
+            // cout timestamp and net cycle time in json format
             auto timestamp = time_us_64();
-            cout << timestamp << ";" << *_reg.netCycleTimeUs << ";" << endl;    
-            
-            // cout sensor values
-            cout << sensor;
+            cout << "{" << endl;
+            cout << "\"timestamp\":" << timestamp << "," << endl;
+            cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
+                        
+            // cout sensor values in json format
+            cout << "\"sensor\":" << sensor << endl;
+            cout << "}" << endl;
+
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(1'000'000);
         }

@@ -4,6 +4,7 @@
 
 #include "Sensor.hpp"
 #include "Murata/SCL3300.hpp"
+#include "Murata/SCL3300a.hpp"
 #include "Murata/SCL3400.hpp"
 #include "Honeywell/ABP.hpp"
 #include "Generic/AnalogInput.hpp"

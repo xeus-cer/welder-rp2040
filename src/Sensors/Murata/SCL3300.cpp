@@ -110,10 +110,11 @@ void SCL3300::update()
 
 double SCL3300::getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet)
 {
-    uint16_t raw = (uint16_t)(packet->DATA_H << 8) + packet->DATA_L;
-    raw = raw ^ 0x8000;
+    // convert to signed int from 2's complement representation
+    int16_t raw = (int16_t)(packet->DATA_H << 8) + (int16_t)packet->DATA_L;
+    
     double degrees = (double)raw * 180 / (1 << 15);
-    return degrees - 180;
+    return degrees;
 }
 
 } // namespace Xerxes
