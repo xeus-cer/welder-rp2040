@@ -3,6 +3,7 @@
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
 #include "hardware/watchdog.h"
+#include "pico/util/queue.h"
 
 #include "Core/Errors.h"
 #include "Core/BindWrapper.hpp"
@@ -14,6 +15,7 @@
 #include "Hardware/InitUtils.hpp"
 #include "Hardware/Sleep.hpp"
 #include "Sensors/all.hpp"
+#include "Communication/RS485.hpp"
 
 
 using namespace std;

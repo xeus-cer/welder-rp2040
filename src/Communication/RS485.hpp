@@ -2,10 +2,10 @@
 #define __RS485_HPP
 
 
-#include "Network.hpp"
+#include <xerxes-protocol/Network.hpp>
 #include "pico/util/queue.h"
-#include "Packet.hpp"
-#include "Message.hpp"
+#include <xerxes-protocol/Packet.hpp>
+#include <xerxes-protocol/Message.hpp>
 
 #include <stdexcept>
 

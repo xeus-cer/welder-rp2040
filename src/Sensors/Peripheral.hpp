@@ -2,7 +2,7 @@
 #define __PERIPHERAL_HPP
 
 #include <cstdint>
-#include "Core/DeviceIds.h"
+#include <xerxes-protocol/DeviceIds.h>
 #include <ostream>
 
 namespace Xerxes

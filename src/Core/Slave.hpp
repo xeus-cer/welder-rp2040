@@ -1,10 +1,10 @@
 #ifndef __SLAVE_HPP
 #define __SLAVE_HPP
 
-#include "Communication/Protocol.hpp"
+#include <xerxes-protocol/Protocol.hpp>
 #include <unordered_map>
 #include <functional>
-#include "Communication/MessageId.h"
+#include <xerxes-protocol/MessageId.h>
 
 namespace Xerxes
 {

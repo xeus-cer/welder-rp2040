@@ -1,10 +1,15 @@
 cmake_minimum_required(VERSION 3.22)
 
+set(PROJECT_NAME sensor-rp2040)
+project(${PROJECT_NAME} C CXX ASM)
+set(CMAKE_CXX_STANDARD 23)
+
 include(pico_sdk_import.cmake)
 # We also need PICO EXTRAS
 include(pico_extras_import.cmake)
 
-set(PROJECT_NAME sensor-rp2040)
+pico_sdk_init()
+
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
@@ -37,36 +42,31 @@ elseif(${SENSOR_TYPE} STREQUAL "ABP")
 	add_compile_definitions(__SHIELD_ABP)
 	add_compile_definitions(__SENSOR_CLASS=ABP)
 else()
-	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE}"' is incorrect, use -DSENSOR_TYPE=...\n\
+	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
 	Possible options for SENSOR_TYPE: SCL3300, SCL3400, AI, 4DI4DO, ABP")
 endif()
+ 
+# find xerxes-protocol library
+set(xerxes-protocol_DIR "lib/xerxes-protocol-cpp")
+find_package(xerxes-protocol REQUIRED)
+add_library(xerxes-protocol STATIC ${xerxes-protocol_SOURCES})
 
-
-project(${PROJECT_NAME} C CXX ASM)
-set(CMAKE_CXX_STANDARD 23)
-
-pico_sdk_init()
 	
 include_directories(
 	"src"
+	${xerxes-protocol_DIR}
 )
-
 
 add_executable(
 	${PROJECT_NAME}
-
 	src/Communication/Callbacks.cpp
 	src/Hardware/ClockUtils.cpp
 	src/Hardware/Sleep.cpp
 	src/Hardware/InitUtils.cpp
 	src/Hardware/UserFlash.cpp
-	src/Communication/Message.cpp
-	src/Communication/Packet.cpp
-	src/Communication/Protocol.cpp
 	src/Communication/RS485.cpp
 	src/Core/Slave.cpp
 	src/Core/Register.cpp
-	src/Communication/Network.cpp
 	src/Sensors/Peripheral.cpp
 	src/Sensors/Sensor.cpp
 	src/Sensors/Generic/AnalogInput.cpp
@@ -93,6 +93,7 @@ target_link_libraries(
 	hardware_flash
 	hardware_sync
 	hardware_spi
+	xerxes-protocol
 )
 
 # enable usb output, disable uart output

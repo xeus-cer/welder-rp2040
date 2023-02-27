@@ -2,7 +2,7 @@
 
 
 #include "Hardware/UserFlash.hpp"
-#include "Core/DeviceIds.h"
+#include <xerxes-protocol/DeviceIds.h>
 #include "Hardware/Sleep.hpp"
 #include "Hardware/InitUtils.hpp"
 #include "hardware/watchdog.h"
