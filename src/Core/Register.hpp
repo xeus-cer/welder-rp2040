@@ -77,6 +77,11 @@ public:
     uint32_t* dv2       = (uint32_t *)(memTable + DV2_OFFSET);  ///< Pointer to digital value 2
     uint32_t* dv3       = (uint32_t *)(memTable + DV3_OFFSET);  ///< Pointer to digital value 3
 
+    float* av0          = (float *)(memTable + AV0_OFFSET);    ///< Pointer to analog value 0
+    float* av1          = (float *)(memTable + AV1_OFFSET);    ///< Pointer to analog value 1
+    float* av2          = (float *)(memTable + AV2_OFFSET);    ///< Pointer to analog value 2
+    float* av3          = (float *)(memTable + AV3_OFFSET);    ///< Pointer to analog value 3
+
     /** @brief 0x55AA55AA = unlocked, anything else = locked */
     uint32_t* memUnlocked   = (uint32_t *)(memTable + MEM_UNLOCKED_OFFSET);
 

@@ -4,15 +4,21 @@
 #include "pico/time.h"
 #include "hardware/spi.h"
 
-
 namespace Xerxes
 {
 
+
 void SCL3300a::init()
 {    
+    constexpr uint sensor_freq_hz = 70;  // 70Hz
     _devid = DEVID_ACCEL_XYZ;
     // set cycle frequency to 70Hz
-    *_reg->desiredCycleTimeUs = 1000000 / 70;  // 70Hz
+    *_reg->desiredCycleTimeUs = 1000000 / sensor_freq_hz;  // 70Hz
+
+    rbpv0 = StatisticBuffer<float>(sensor_freq_hz);
+    rbpv1 = StatisticBuffer<float>(sensor_freq_hz);
+    rbpv2 = StatisticBuffer<float>(sensor_freq_hz);
+    rbpv3 = StatisticBuffer<float>(sensor_freq_hz);
 
     constexpr uint spi_freq = 2 * MHZ;
     // init spi with freq , return actual frequency
@@ -101,6 +107,14 @@ void SCL3300a::update()
         rbpv1.getStatistics(_reg->minPv1, _reg->maxPv1, _reg->meanPv1, _reg->stdDevPv1);
         rbpv2.getStatistics(_reg->minPv2, _reg->maxPv2, _reg->meanPv2, _reg->stdDevPv2);
         rbpv3.getStatistics(_reg->minPv3, _reg->maxPv3, _reg->meanPv3, _reg->stdDevPv3);
+        
+        *_reg->av0 = *_reg->stdDevPv0 * SQRT2;
+        *_reg->av1 = *_reg->stdDevPv1 * SQRT2;
+        *_reg->av2 = *_reg->stdDevPv2 * SQRT2;
+        
+        // calculate normal vector from 3 axis std dev
+        double normal_stdev = sqrt(pow(*_reg->stdDevPv0, 2) + pow(*_reg->stdDevPv1, 2) + pow(*_reg->stdDevPv2, 2));
+        *_reg->av3 = normal_stdev * SQRT2;
     }
 }
 
@@ -141,8 +155,6 @@ double SCL3300a::getAccFromPacket(const std::unique_ptr<SclPacket_t>& packet, co
 
 std::ostream& operator<<(std::ostream& os, const SCL3300a& scl)
 {
-    // os << "X: " << *scl._reg->meanPv0 << "g, Y: " << *scl._reg->meanPv1 << "g, Z: " << *scl._reg->meanPv2 << "g, Temp: " << *scl._reg->meanPv3 << "°C" << std::endl;
-
     // output pv values as json
     os << "{" << std::endl;
     os << "\"X\":" << *scl._reg->meanPv0 << "," << std::endl;
@@ -160,7 +172,14 @@ std::ostream& operator<<(std::ostream& os, const SCL3300a& scl)
 
     os << "\"StdDevX\":" << *scl._reg->stdDevPv0 << "," << std::endl;
     os << "\"StdDevY\":" << *scl._reg->stdDevPv1 << "," << std::endl;
-    os << "\"StdDevZ\":" << *scl._reg->stdDevPv2 << std::endl;
+    os << "\"StdDevZ\":" << *scl._reg->stdDevPv2 << "," << std::endl;
+
+    os << "\"AmplitudeX\":" << *scl._reg->av0 << "," << std::endl;
+    os << "\"AmplitudeY\":" << *scl._reg->av1 << "," << std::endl;
+    os << "\"AmplitudeZ\":" << *scl._reg->av2 << "," << std::endl;
+    os << "\"Amplitude\":" << *scl._reg->av3 << "," << std::endl;
+
+    os << "\"Units\":\"[m.s^-2], [°C]\"" << std::endl;
 
     os << "}";    
 

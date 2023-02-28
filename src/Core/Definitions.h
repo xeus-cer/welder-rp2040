@@ -88,6 +88,11 @@
 #define DV2_OFFSET                  VOLATILE_OFFSET + 88      // 344
 #define DV3_OFFSET                  VOLATILE_OFFSET + 92      // 348
 
+// memory offset of the additional values
+#define AV0_OFFSET                  VOLATILE_OFFSET + 96      // 352
+#define AV1_OFFSET                  VOLATILE_OFFSET + 100     // 356
+#define AV2_OFFSET                  VOLATILE_OFFSET + 104     // 360
+#define AV3_OFFSET                  VOLATILE_OFFSET + 108     // 364
 
 // memory offset for the safety lock of the device memory (1 byte)
 #define MEM_UNLOCKED_OFFSET         VOLATILE_OFFSET + 128     // 384
