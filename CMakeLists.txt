@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.22)
 
+# this must be first to set the correct toolchain
+include(pico_sdk_import.cmake)
+# We also need PICO EXTRAS
+include(pico_extras_import.cmake)
+
 set(PROJECT_NAME sensor-rp2040)
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
@@ -10,21 +15,6 @@ if(NOT DEFINED CLKDIV)
 	set(CLKDIV 4)
 endif()
 add_compile_definitions(__CLKDIV=${CLKDIV})
-message(WARNING "CLKDIV set to ${CLKDIV}, increase this "
-	"value if device is not responding after reboot.")
-
-
-include(pico_sdk_import.cmake)
-# We also need PICO EXTRAS
-include(pico_extras_import.cmake)
-
-pico_sdk_init()
-
-
-# this is the board we are using, we need to set this to use the correct board header and bootloader
-# the board file is: src/Hardware/Board/xerxes_rp2040.h
-set(PICO_BOARD "xerxes_rp2040")
-set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
 
 # check if ${SENSOR_TYPE} is set
 if(NOT DEFINED SENSOR_TYPE)
@@ -57,7 +47,19 @@ else()
 	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
 	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
 endif()
-message(WARNING "SENSOR_TYPE set to ${SENSOR_TYPE}")
+message(WARNING "\nSENSOR_TYPE set to ${SENSOR_TYPE}."
+	"\nCLKDIV set to ${CLKDIV}, increase this "
+	"value if device is not responding after reboot.")
+
+
+pico_sdk_init()
+
+
+# this is the board we are using, we need to set this to use the correct board header and bootloader
+# the board file is: src/Hardware/Board/xerxes_rp2040.h
+set(PICO_BOARD "xerxes_rp2040")
+set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
+
  
 # find xerxes-protocol library
 set(xerxes-protocol_DIR "lib/xerxes-protocol-cpp")
