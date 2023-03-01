@@ -3,6 +3,7 @@
 
 #include "hardware/gpio.h"
 #include <bitset>
+#include <sstream>
 
 
 namespace Xerxes
@@ -24,7 +25,11 @@ void DigitalInputOutput::init(uint32_t iomask, uint32_t direction)
     gpio_set_dir_masked(iomask, direction);
     this->used_iomask = iomask;
     
-    // TODO: Set pull-down resistors on inputs
+    // never use calcStat in this sensor
+    _reg->config->bits.calcStat = 0;
+    
+    // Set the update rate
+    *_reg->desiredCycleTimeUs = _updateRateUs;
 }
 
 
@@ -45,12 +50,18 @@ void DigitalInputOutput::stop()
 }
 
 
-std::ostream& operator<<(std::ostream& os, const DigitalInputOutput& dt)
+std::string DigitalInputOutput::getJson()
 {
-    os << "DO: " << std::bitset<32>(*dt._reg->dv0) << ", DI: " << std::bitset<32>(*dt._reg->dv1) << std::endl;
-    return os;
-}
+    using namespace std;
+    stringstream ss;
 
+    ss << "{" << endl;
+    ss << "\t\"DO\": " << *_reg->dv0 << "," << endl;
+    ss << "\t\"DI\": " << *_reg->dv1 << endl;
+    ss << "}" << endl;
+
+    return ss.str();
+}
 
 }   // namespace Xerxes
 

@@ -4,7 +4,7 @@
 #include "Sensors/Peripheral.hpp"
 #include "Core/Register.hpp"
 #include "Hardware/Board/xerxes_rp2040.h"
-#include <ostream>
+#include <string>
 
 
 namespace Xerxes
@@ -17,6 +17,10 @@ protected:
     Register* _reg;
 
     uint32_t used_iomask = SHIELD_MASK;
+
+    constexpr static uint32_t _usInS = 1000000;  // microseconds in a second
+    constexpr static uint32_t _updateRateHz = 10000;  // update frequency in Hz
+    constexpr static uint32_t _updateRateUs = _usInS / _updateRateHz;  // update rate in microseconds
 
 public:
     /**
@@ -65,7 +69,13 @@ public:
      */
     void stop();
 
-    friend std::ostream& operator<<(std::ostream& os, const DigitalInputOutput& dt);
+
+    /**
+     * @brief Get the Json object - returns sensor data as json string
+     * 
+     * @return std::string
+     */
+    std::string getJson();
 };
 
 

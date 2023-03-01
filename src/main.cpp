@@ -208,6 +208,7 @@ void core1Entry()
     
     // let core0 lockout core1
     multicore_lockout_victim_init ();
+    
 
     // core1 mainloop
     while(true)
@@ -223,14 +224,18 @@ void core1Entry()
             sensor.update(); 
         }
 
+        // turn off led
+        gpio_put(USR_LED_PIN, 0);
+
         // calculate how long it took to finish cycle
         endOfCycle = time_us_64();
         cycleDuration = endOfCycle - startOfCycle;
-        *_reg.netCycleTimeUs = static_cast<uint32_t>(0.9 * *_reg.netCycleTimeUs) + static_cast<uint32_t>(0.1 * static_cast<uint32_t>(cycleDuration));
-        sleepFor = *_reg.desiredCycleTimeUs - cycleDuration;
 
-        // turn off led
-        gpio_put(USR_LED_PIN, 0);
+        // calculate net cycle time as moving average
+        *_reg.netCycleTimeUs = static_cast<uint32_t>(0.9 * *_reg.netCycleTimeUs) + static_cast<uint32_t>(0.1 * static_cast<uint32_t>(cycleDuration));
+
+        // calculate remaining sleep time
+        sleepFor = *_reg.desiredCycleTimeUs - cycleDuration;
         
         // sleep for the remaining time
         if(sleepFor > 0)
