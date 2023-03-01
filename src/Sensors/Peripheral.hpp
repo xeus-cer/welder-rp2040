@@ -31,6 +31,8 @@ private:
 
 protected:
     devid_t _devid{0};
+
+    constexpr static uint32_t _usInS = 1000000;  // microseconds in a second
     
 public:
     Peripheral();

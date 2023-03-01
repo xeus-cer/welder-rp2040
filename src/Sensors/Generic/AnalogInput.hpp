@@ -2,6 +2,7 @@
 #define __ANALOG_INPUT
 
 #include "Sensors/Sensor.hpp"
+#include <string>
 
 
 namespace Xerxes
@@ -33,6 +34,9 @@ private:
     uint8_t effectiveBitDepth       = rpBitDepth + defaultOversampleBits;   // effective bit depth, 12 + 4 = 16
     uint64_t numCounts              = 1 << effectiveBitDepth;           // number of counts, 2^16 = 65536
     uint8_t numChannels             = 4;                                // number of channels, default is 4
+
+    constexpr static uint32_t _updateRateHz = 100;  // update frequency in Hz
+    constexpr static uint32_t _updateRateUs = _usInS / _updateRateHz;  // update rate in microseconds
     
 protected:
     // typedef Sensor as super class for easier access
@@ -62,10 +66,20 @@ public:
      * 
      */
     void stop();
+    
+    /**
+     * @brief Get the Json object representing the sensor values
+     * 
+     * @return std::string 
+     */
+    std::string getJson();
 
-
-    // friend operator<< for easy printing
-    friend std::ostream& operator<<(std::ostream& os, const AnalogInput& ai);
+    std::string getJson(uint8_t channel);
+    std::string getJsonLast();
+    std::string getJsonMin();
+    std::string getJsonMax();
+    std::string getJsonMean();
+    std::string getJsonStdDev();
 };
 
 

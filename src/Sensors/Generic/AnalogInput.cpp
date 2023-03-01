@@ -2,6 +2,8 @@
 
 #include "Hardware/Board/xerxes_rp2040.h"
 #include "hardware/adc.h"
+#include <string>
+#include <sstream>
 
 
 namespace Xerxes
@@ -38,6 +40,9 @@ void AnalogInput::init(uint8_t numChannels, uint8_t oversampleBits)
     adc_gpio_init(ADC1_PIN);
     adc_gpio_init(ADC2_PIN);
     adc_gpio_init(ADC3_PIN);
+
+    // set update rate
+    *_reg->desiredCycleTimeUs = _updateRateUs;
 
     // update sensor values
     this->update();
@@ -139,10 +144,101 @@ void AnalogInput::stop()
 }
 
 
-std::ostream& operator<<(std::ostream& os, const AnalogInput& ai)
+std::string AnalogInput::getJsonLast()
 {
-    os << "AI0: " << *ai._reg->meanPv0 << ", AI1: " << *ai._reg->meanPv1 << ", AI2: " << *ai._reg->meanPv2 << ", AI3: " << *ai._reg->meanPv3 << std::endl;
-    return os;
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"AI0\": " << *this->_reg->pv0 << "," << endl;
+    ss << "    \"AI1\": " << *this->_reg->pv1 << "," << endl;
+    ss << "    \"AI2\": " << *this->_reg->pv2 << "," << endl;
+    ss << "    \"AI3\": " << *this->_reg->pv3 << endl;    
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string AnalogInput::getJsonMin()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"Min(AI0)\": " << *this->_reg->minPv0 << "," << endl;
+    ss << "    \"Min(AI1)\": " << *this->_reg->minPv1 << "," << endl;
+    ss << "    \"Min(AI2)\": " << *this->_reg->minPv2 << "," << endl;
+    ss << "    \"Min(AI3)\": " << *this->_reg->minPv3 << endl;    
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string AnalogInput::getJsonMax()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"Max(AI0)\": " << *this->_reg->maxPv0 << "," << endl;
+    ss << "    \"Max(AI1)\": " << *this->_reg->maxPv1 << "," << endl;
+    ss << "    \"Max(AI2)\": " << *this->_reg->maxPv2 << "," << endl;
+    ss << "    \"Max(AI3)\": " << *this->_reg->maxPv3 << endl;    
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string AnalogInput::getJsonMean()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"Mean(AI0)\": " << *this->_reg->meanPv0 << "," << endl;
+    ss << "    \"Mean(AI1)\": " << *this->_reg->meanPv1 << "," << endl;
+    ss << "    \"Mean(AI2)\": " << *this->_reg->meanPv2 << "," << endl;
+    ss << "    \"Mean(AI3)\": " << *this->_reg->meanPv3 << endl;    
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string AnalogInput::getJsonStdDev()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"StdDev(AI0)\": " << *this->_reg->stdDevPv0 << "," << endl;
+    ss << "    \"StdDev(AI1)\": " << *this->_reg->stdDevPv1 << "," << endl;
+    ss << "    \"StdDev(AI2)\": " << *this->_reg->stdDevPv2 << "," << endl;
+    ss << "    \"StdDev(AI3)\": " << *this->_reg->stdDevPv3 << endl;
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string AnalogInput::getJson()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "{" << endl;
+    ss << "  \"Last\":" << getJsonLast() << "," << endl;
+    ss << "  \"Min\":" << getJsonMin() << "," << endl;
+    ss << "  \"Max\":" << getJsonMax() << "," << endl;
+    ss << "  \"Mean\":" << getJsonMean() << "," << endl;
+    ss << "  \"StdDev\":" << getJsonStdDev() << endl;
+    
+    ss << "}";
+
+    return ss.str();
 }
 
 
