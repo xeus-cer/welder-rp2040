@@ -143,6 +143,7 @@ int main(void)
             auto timestamp = time_us_64();
             cout << "{" << endl;
             cout << "\"timestamp\":" << timestamp << "," << endl;
+            cout << "\"samplingSpeedHz\":" << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
             cout << "\"errors\":" << (*_reg.error) << "," << endl;
                         
@@ -208,7 +209,7 @@ void core1Entry()
     
     // let core0 lockout core1
     multicore_lockout_victim_init ();
-    
+
 
     // core1 mainloop
     while(true)
