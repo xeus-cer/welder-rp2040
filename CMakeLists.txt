@@ -4,6 +4,15 @@ set(PROJECT_NAME sensor-rp2040)
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 
+
+# check if ${CLKDIV} is set and set it to 4 if not - necessary for some boards
+if(NOT DEFINED CLKDIV)
+	set(CLKDIV 4)
+endif()
+add_compile_definitions(__CLKDIV=${CLKDIV})
+message(WARNING "CLKDIV set to ${CLKDIV}")
+
+
 include(pico_sdk_import.cmake)
 # We also need PICO EXTRAS
 include(pico_extras_import.cmake)
@@ -21,7 +30,6 @@ if(NOT DEFINED SENSOR_TYPE)
 	message(FATAL_ERROR "SENSOR_TYPE not set, use -DSENSOR_TYPE=...\n\
 	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
 endif()
-
 # this is the sensor type we are using, we need to set this to use the correct sensor header
 if(${SENSOR_TYPE} STREQUAL "SCL3300")
 	add_compile_definitions(__SHIELD_SCL3300)
@@ -48,6 +56,7 @@ else()
 	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
 	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
 endif()
+message(WARNING "SENSOR_TYPE set to ${SENSOR_TYPE}")
  
 # find xerxes-protocol library
 set(xerxes-protocol_DIR "lib/xerxes-protocol-cpp")

@@ -121,13 +121,15 @@ extern "C"
 
 #ifndef PICO_FLASH_SPI_CLKDIV
 /**
- * @brief 
+ * @brief divisor for SPI clock (default 4), must be divisible by 2
  * 
- * This is critical for some flash chips, and can be set to 4 for some, but needs to be at least 32 for others.
+ * This is critical for some flash chips, and can be set to 4 for some, 
+ * but needs to be at least 32 for others. Set using -DCLKDIV=<N*2> in cmake.
  * @note Increasing this value will help with BOOTLOOPs, but will slow down the flash chip.
  */
-#define PICO_FLASH_SPI_CLKDIV 2
+#define PICO_FLASH_SPI_CLKDIV __CLKDIV
 #endif // !PICO_FLASH_SPI_CLKDIV
+
 
 #ifndef PICO_XOSC_STARTUP_DELAY_MULTIPLIER
 #define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 16

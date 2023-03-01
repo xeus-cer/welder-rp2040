@@ -23,10 +23,34 @@ protected:
 
 public:
     using Sensor::Sensor;
+
+    /**
+     * @brief Init the sensor
+     * 
+     * Activate 3V3 power supply for the sensor, 
+     * initialize SPI communication and read out first sequence
+     */
     void init();
+
+    /**
+     * @brief Update the sensor
+     * 
+     * Read out sensor data and update register values in shared memory
+     */
     void update();
+
+    /**
+     * @brief Stop the sensor
+     * 
+     * Disable sensor 3V3 therefore disabling the sensor
+     */
     void stop();
 
+    /**
+     * @brief Get the Json object - returns sensor data as json string
+     * 
+     * @return std::string
+     */
     std::string getJson();
 };
 

@@ -3,9 +3,39 @@
 #include "Hardware/Board/xerxes_rp2040.h"
 #include "pico/time.h"
 #include "hardware/spi.h"
+#include <sstream>
+#include "Core/Errors.h"
 
 namespace Xerxes
 {
+
+
+void SCL3300::initSequence()
+{
+    // chip init sequence    
+    volatile uint32_t received_packet;
+
+    sleep_ms(1);
+    ExchangeBlock(CMD::Switch_to_bank_0);
+    sleep_ms(3);
+
+    ExchangeBlock(CMD::SW_Reset);
+    sleep_ms(3);
+
+    ExchangeBlock(CMD::Change_to_mode_4);
+    sleep_ms(1);
+    ExchangeBlock(CMD::Enable_ANGLE);
+    sleep_ms(100);
+
+    ExchangeBlock(CMD::Read_Status_Summary);
+    ExchangeBlock(CMD::Read_Status_Summary);
+    ExchangeBlock(CMD::Read_Status_Summary);
+    sleep_ms(1);
+    ExchangeBlock(CMD::Read_WHOAMI);
+    ExchangeBlock(CMD::Read_WHOAMI);
+
+    needInit = false;
+}
 
 
 void SCL3300::init()
@@ -32,48 +62,34 @@ void SCL3300::init()
     gpio_init(SPI0_CSN_PIN);
     gpio_set_dir(SPI0_CSN_PIN, GPIO_OUT);
 
-
-    // chip init sequence    
-    volatile uint32_t received_packet;
+    // call init sequence
+    initSequence();
     
-    sleep_ms(1);
-    ExchangeBlock(CMD::Switch_to_bank_0);
-    sleep_ms(3);
+    // change sample rate to 10Hz
+    *_reg->desiredCycleTimeUs = 100000;
 
-    ExchangeBlock(CMD::SW_Reset);
-    sleep_ms(3);
-
-    ExchangeBlock(CMD::Change_to_mode_4);
-    sleep_ms(1);
-    ExchangeBlock(CMD::Enable_ANGLE);
-    sleep_ms(100);
-
-    ExchangeBlock(CMD::Read_Status_Summary);
-    ExchangeBlock(CMD::Read_Status_Summary);
-    ExchangeBlock(CMD::Read_Status_Summary);
-    sleep_ms(1);
-    ExchangeBlock(CMD::Read_WHOAMI);
-    ExchangeBlock(CMD::Read_WHOAMI);
-
-
-    // read out first sequence - usually rubbish anyway
     this->update();
 }
 
 
 void SCL3300::update()
 {    
-    // pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
-    // pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
+    // check if init sequence is needed
+    if (needInit)
+    {
+        initSequence();
+    }
+
     // declare packet variables
     auto packetX = std::make_unique<SclPacket_t>();
     auto packetY = std::make_unique<SclPacket_t>();
-    auto packetZ = std::make_unique<SclPacket_t>();
+    // auto packetZ = std::make_unique<SclPacket_t>();  // not used anymore
     auto packetT = std::make_unique<SclPacket_t>();
-    // pointer above is assigned to wrong memory location - <irq set enabled>
     
-    ExchangeBlock(CMD::Read_ANG_X);
+    // read sensor data from sensor twice because of communication shift
+    ExchangeBlock(CMD::Read_ANG_X);  // this will read the last value from the previous update
     longToPacket(ExchangeBlock(CMD::Read_ANG_Y), packetX);
+
     // longToPacket(ExchangeBlock(CMD::Read_ANG_Z), packetY);
     longToPacket(ExchangeBlock(CMD::Read_Temperature), packetY);
     longToPacket(ExchangeBlock(CMD::Read_Status_Summary), packetT);
@@ -82,6 +98,15 @@ void SCL3300::update()
     *_reg->pv0 = static_cast<float>(getDegFromPacket(packetX));
     *_reg->pv1 = static_cast<float>(getDegFromPacket(packetY));
     // pv2 = static_cast<float>(getDegFromPacket(packetZ));
+
+    if (!packetX->DATA_H && \
+        !packetX->DATA_L && \
+        !packetY->DATA_H && \
+        !packetY->DATA_L)
+    {
+        // sensor is working but not giving any data - reinit
+        this->needInit = true;
+    }    
 
     // extract temperature from packet and convert to degrees
     uint16_t raw_temp = (uint16_t)(packetT->DATA_H << 8) + packetT->DATA_L;
@@ -115,6 +140,28 @@ double SCL3300::getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet)
     
     double degrees = (double)raw * 180 / (1 << 15);
     return degrees;
+}
+
+
+std::string SCL3300::getJson()
+{
+    using namespace std;
+
+    stringstream ss;
+
+    // return values as JSON
+    ss << "{" << endl;
+    ss << "\t\"X\":" << *_reg->pv0 << "," << endl;
+    ss << "\t\"Y\":" << *_reg->pv1 << "," << endl;
+    ss << "\t\"Avg(X)\":" << *_reg->meanPv0 << "," << endl;
+    ss << "\t\"Avg(Y)\":" << *_reg->meanPv1 << "," << endl;
+    ss << "\t\"StdDev(X)\":" << *_reg->stdDevPv0 << "," << endl;
+    ss << "\t\"StdDev(Y)\":" << *_reg->stdDevPv1 << "," << endl;
+    ss << "\t\"Avg(t)\":" << *_reg->meanPv3 << "," << endl;
+
+    ss << "}";
+
+    return ss.str();
 }
 
 } // namespace Xerxes

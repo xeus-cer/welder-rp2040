@@ -21,13 +21,6 @@
 using namespace std;
 using namespace Xerxes;
 
-/*
-ABP sensor;           // pressure sensor 0-60mbar
-SCL3300 sensor;       // 3 axis inclinometer
-SCL3400 sensor;       // 3 axis inclinometer
-DigitalInputOutput sensor;   // 4 channel digital input/output
-AnalogInput sensor;   // 4 channel analog input
-*/
 
 // forward declaration
 __SENSOR_CLASS sensor;
@@ -69,11 +62,12 @@ int main(void)
     gpio_put(USR_LED_PIN, 0);
         
     // clear error register
-    *_reg.error = 0;
+    _reg.errorClear(0xFFFFFFFF);
+
     //determine reason for restart:
     if (watchdog_caused_reboot())
     {
-        *_reg.error |= ERROR_MASK_WATCHDOG_TIMEOUT;
+        _reg.errorSet(ERROR_MASK_WATCHDOG_TIMEOUT);
     }
     
     // check if user switch is on, if so, use usb uart
@@ -157,7 +151,8 @@ int main(void)
             cout << "}" << endl << endl;
 
             auto end = time_us_64();
-            auto remainingSleepTime = printIntervalUs - (end - timestamp);
+            // calculate remaining sleep time in us - 10us for calculation overhead
+            auto remainingSleepTime = printIntervalUs - (end - timestamp) - 10;
 
             // sleep in high speed mode for 1 second, watchdog friendly
             sleep_hp(remainingSleepTime);
@@ -188,7 +183,7 @@ int main(void)
             if(queue_is_full(&txFifo) || queue_is_full(&rxFifo))
             {
                 // rx fifo is full, set the cpu_overload error flag
-                *_reg.error |= ERROR_MASK_UART_OVERLOAD;
+                _reg.errorSet(ERROR_MASK_UART_OVERLOAD);
             }
 
             // save power in release mode
@@ -231,7 +226,7 @@ void core1Entry()
         // calculate how long it took to finish cycle
         endOfCycle = time_us_64();
         cycleDuration = endOfCycle - startOfCycle;
-        *_reg.netCycleTimeUs = static_cast<uint32_t>(cycleDuration);
+        *_reg.netCycleTimeUs = static_cast<uint32_t>(0.9 * *_reg.netCycleTimeUs) + static_cast<uint32_t>(0.1 * static_cast<uint32_t>(cycleDuration));
         sleepFor = *_reg.desiredCycleTimeUs - cycleDuration;
 
         // turn off led
@@ -243,10 +238,11 @@ void core1Entry()
             core1idle = true;
             sleep_us(sleepFor);
             core1idle = false;
+            _reg.errorClear(ERROR_MASK_SENSOR_OVERLOAD);
         }
         else
         {
-            *_reg.error |= ERROR_MASK_SENSOR_OVERLOAD;
+            _reg.errorSet(ERROR_MASK_SENSOR_OVERLOAD);
         }
         
     }

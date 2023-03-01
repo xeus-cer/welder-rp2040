@@ -7,6 +7,95 @@
 
 namespace Xerxes
 {
+
+    
+/**
+ * @brief Sets the bits of a register to 1
+ * 
+ * @tparam T 
+ * @param reg 
+ * @param mask 
+ */
+template <class T>
+void bitSet(T& reg, const T& mask)
+{
+    reg |= mask;
+}
+
+
+/**
+ * @brief Sets the n-th bit of a register to 1
+ * 
+ * @tparam T 
+ * @param reg 
+ * @param n 
+ * @param value 
+ */
+template <class T>
+void bitSet(T& reg, const uint8_t n)
+{
+    reg |= (1 << n);
+}
+
+
+/**
+ * @brief Sets the bits of a register to 0
+ * 
+ * @tparam T 
+ * @param reg 
+ * @param mask 
+ */
+template <class T>
+void bitClear(T& reg, const T& mask)
+{
+    reg &= ~mask;
+}
+
+
+/**
+ * @brief Clears the n-th bit of a register
+ * 
+ * @tparam T 
+ * @param reg 
+ * @param n 
+ */
+template <class T>
+void bitClear(T& reg, const uint8_t n)
+{
+    reg &= ~(1 << n);
+}
+
+
+/**
+ * @brief Checks if the bits of a register are set to 1
+ * 
+ * @tparam T 
+ * @param reg 
+ * @param mask 
+ * @return true if bits are set to 1
+ * @return false if bits are set to 0
+ */
+template <class T>
+bool bitCheck(T& reg, const T& mask)
+{
+    return reg & mask;
+}
+
+
+/**
+ * @brief Checks if the n-th bit of a register is set to 1
+ * 
+ * @tparam T 
+ * @param reg 
+ * @param n 
+ * @return true if bit is set to 1
+ * @return false if bit is set to 0
+ */
+template <class T>
+bool bitCheck(T& reg, const uint8_t n)
+{
+    return reg & (1 << n);
+}
     
 
 /**
@@ -22,7 +111,8 @@ namespace Xerxes
 class Register
 {
 private:
-    /* data */
+
+
 public:
     Register(/* args */);
     ~Register();
@@ -92,6 +182,21 @@ public:
 
     /* ### MESSAGE STRING MEMORY ### */
     char* message    = (char *)(memTable + MESSAGE_OFFSET); ///< Message string, holds messages (debug, info, warning, error)
+
+
+    /// @brief Set the error bit
+    /// @param errorBit 
+    void errorSet(const uint64_t& errorBit);
+
+    /// @brief Clear the error bit
+    /// @param errorBit 
+    void errorClear(const uint64_t& errorBit);
+
+    /// @brief Check if the error bit is set
+    /// @param errorBit 
+    /// @return true if the error bit is set
+    /// @return false if the error bit is not set
+    bool errorCheck(const uint64_t& errorBit);
 };
 
 

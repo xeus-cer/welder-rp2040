@@ -4,6 +4,8 @@
 #include "hardware/clocks.h"
 #include "Hardware/Board/xerxes_rp2040.h"
 #include "pico/time.h"
+#include "Core/Errors.h"
+#include "Core/Register.hpp"
 
 
 namespace Xerxes
@@ -26,6 +28,22 @@ uint32_t SCL3X00::ExchangeBlock(const uint32_t &block)
     gpio_put(SPI0_CSN_PIN, 1);
 
     rcvd = __builtin_bswap32(rcvd);
+
+    // check if the rcvd data is all zeroes or all 1 - communication error
+    if (rcvd == 0xFFFFFFFF || rcvd == 0x00000000)
+    {
+        // set error flag - sensor is not connected
+        _reg->errorSet(ERROR_MASK_SENSOR_CONNECTION);
+
+        // set error flag - sensor was not connnected in past
+        _reg->errorSet(ERROR_MASK_SENSOR_CONNECTION_MEM);  // set error flag
+    }
+    else
+    {
+        // clear error flag - sensor is connected now
+        _reg->errorClear(ERROR_MASK_SENSOR_CONNECTION);
+    }
+
     sleep_us(5);
     
     return rcvd;
@@ -123,11 +141,5 @@ uint8_t CRC8(uint8_t BitValue, uint8_t CRC)
     return CRC;
 }
 
-
-std::ostream& operator<<(std::ostream& os, const SCL3X00& scl)
-{
-    os << "X: " << *scl._reg->meanPv0 << "°, Y: " << *scl._reg->meanPv1 << "°, Temp: " << *scl._reg->meanPv3 << "°C" << std::endl;
-    return os;
-}
 
 }

@@ -71,7 +71,15 @@ void ABP::update()
     // check if data is ok (no spi error) and set error bit if not
     if(!isSpiDataOk(data, sizeof(data)))
     {
-        *_reg->error |= ERROR_MASK_SENSOR_CONNECTION;
+        // set error bit in error register - sensor is not connected
+        _reg->errorCheck(ERROR_MASK_SENSOR_CONNECTION);
+        // set error bit in error register - sensor was not connected in past
+        _reg->errorCheck(ERROR_MASK_SENSOR_CONNECTION_MEM);  // set error flag
+    }
+    else
+    {
+        // clear error bit in error register - sensor is connected now
+        _reg->errorClear(ERROR_MASK_SENSOR_CONNECTION);
     }
 
     // convert data, see datasheet
