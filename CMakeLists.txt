@@ -10,7 +10,8 @@ if(NOT DEFINED CLKDIV)
 	set(CLKDIV 4)
 endif()
 add_compile_definitions(__CLKDIV=${CLKDIV})
-message(WARNING "CLKDIV set to ${CLKDIV}")
+message(WARNING "CLKDIV set to ${CLKDIV}, increase this "
+	"value if device is not responding after reboot.")
 
 
 include(pico_sdk_import.cmake)
@@ -109,6 +110,8 @@ target_link_libraries(
 	xerxes-protocol
 )
 
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${SENSOR_TYPE})
+
 # enable usb output, disable uart output
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
 pico_enable_stdio_uart(${PROJECT_NAME} 0)
@@ -119,6 +122,6 @@ pico_add_extra_outputs(${PROJECT_NAME})
 # copy .UF2 binary to the RP2040
 install(
 	FILES
-	${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.uf2
-	DESTINATION /media/$ENV{USER}/RPI-RP2/${PROJECT_NAME}.uf2
+	${CMAKE_CURRENT_BINARY_DIR}/${SENSOR_TYPE}.uf2
+	DESTINATION /media/$ENV{USER}/RPI-RP2/${SENSOR_TYPE}.uf2
 )

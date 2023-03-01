@@ -3,15 +3,45 @@
 #include "Hardware/Board/xerxes_rp2040.h"
 #include "pico/time.h"
 #include "hardware/spi.h"
+#include <sstream>
 
 namespace Xerxes
 {
+
+
+void SCL3300a::initSequence()
+{
+    // chip init sequence    
+    volatile uint32_t received_packet;
+    
+    sleep_ms(1);
+    ExchangeBlock(CMD::Switch_to_bank_0);
+    sleep_ms(3);
+
+    ExchangeBlock(CMD::SW_Reset);
+    sleep_ms(3);
+
+    ExchangeBlock(CMD::Change_to_mode_2);
+    // sleep_ms(1);
+    // ExchangeBlock(CMD::Enable_ANGLE);
+    sleep_ms(15);
+
+    ExchangeBlock(CMD::Read_Status_Summary);
+    ExchangeBlock(CMD::Read_Status_Summary);
+    ExchangeBlock(CMD::Read_Status_Summary);
+    sleep_ms(1);
+    ExchangeBlock(CMD::Read_WHOAMI);
+    ExchangeBlock(CMD::Read_WHOAMI);
+
+    needInit = false;
+}
 
 
 void SCL3300a::init()
 {    
     constexpr uint sensor_freq_hz = 70;  // 70Hz
     _devid = DEVID_ACCEL_XYZ;
+
     // set cycle frequency to 70Hz
     *_reg->desiredCycleTimeUs = 1000000 / sensor_freq_hz;  // 70Hz
 
@@ -40,33 +70,18 @@ void SCL3300a::init()
     gpio_init(SPI0_CSN_PIN);
     gpio_set_dir(SPI0_CSN_PIN, GPIO_OUT);
 
-    // chip init sequence    
-    volatile uint32_t received_packet;
-    
-    sleep_ms(1);
-    ExchangeBlock(CMD::Switch_to_bank_0);
-    sleep_ms(3);
-
-    ExchangeBlock(CMD::SW_Reset);
-    sleep_ms(3);
-
-    ExchangeBlock(CMD::Change_to_mode_2);
-    sleep_ms(1);
-    // ExchangeBlock(CMD::Enable_ANGLE);
-    sleep_ms(15);
-
-    ExchangeBlock(CMD::Read_Status_Summary);
-    ExchangeBlock(CMD::Read_Status_Summary);
-    ExchangeBlock(CMD::Read_Status_Summary);
-    sleep_ms(1);
-    ExchangeBlock(CMD::Read_WHOAMI);
-    ExchangeBlock(CMD::Read_WHOAMI);
+    initSequence();
 
     this->update();
 }
 
 void SCL3300a::update()
 {
+    // check if init sequence is needed
+    if (needInit)
+    {
+        initSequence();
+    }
     
     auto packetX = std::make_unique<SclPacket_t>();
     auto packetY = std::make_unique<SclPacket_t>();
@@ -78,6 +93,15 @@ void SCL3300a::update()
     longToPacket(ExchangeBlock(CMD::Read_ACC_Z), packetY);
     longToPacket(ExchangeBlock(CMD::Read_Temperature), packetZ);
     longToPacket(ExchangeBlock(CMD::Read_Status_Summary), packetT);
+
+    if (!packetX->DATA_H && \
+        !packetX->DATA_L && \
+        !packetY->DATA_H && \
+        !packetY->DATA_L)
+    {
+        // sensor is working but not giving any data - reinit
+        this->needInit = true;
+    }   
 
     *_reg->pv0 = getAccFromPacket(packetX, CMD::Change_to_mode_2);
     *_reg->pv1 = getAccFromPacket(packetY, CMD::Change_to_mode_2);
@@ -153,37 +177,116 @@ double SCL3300a::getAccFromPacket(const std::unique_ptr<SclPacket_t>& packet, co
 }
 
 
-std::ostream& operator<<(std::ostream& os, const SCL3300a& scl)
+std::string SCL3300a::getJsonAmplitude()
 {
-    // output pv values as json
-    os << "{" << std::endl;
-    os << "\"X\":" << *scl._reg->meanPv0 << "," << std::endl;
-    os << "\"Y\":" << *scl._reg->meanPv1 << "," << std::endl;
-    os << "\"Z\":" << *scl._reg->meanPv2 << "," << std::endl;
-    os << "\"Temp\":" << *scl._reg->meanPv3 << "," << std::endl;
+    using namespace std;
+    stringstream ss;
 
-    os << "\"MinX\":" << *scl._reg->minPv0 << "," << std::endl;
-    os << "\"MinY\":" << *scl._reg->minPv1 << "," << std::endl;
-    os << "\"MinZ\":" << *scl._reg->minPv2 << "," << std::endl;
+    ss << endl << "  {" << endl;
+    ss << "    \"Amplitude(X)\": " << *this->_reg->av0 << "," << endl;
+    ss << "    \"Amplitude(Y)\": " << *this->_reg->av1 << "," << endl;
+    ss << "    \"Amplitude(Z)\": " << *this->_reg->av2 << "," << endl;
+    ss << "    \"Amplitude\": " << *this->_reg->av3 << endl;    
+    ss << "  }";
 
-    os << "\"MaxX\":" << *scl._reg->maxPv0 << "," << std::endl;
-    os << "\"MaxY\":" << *scl._reg->maxPv1 << "," << std::endl;
-    os << "\"MaxZ\":" << *scl._reg->maxPv2 << "," << std::endl;
-
-    os << "\"StdDevX\":" << *scl._reg->stdDevPv0 << "," << std::endl;
-    os << "\"StdDevY\":" << *scl._reg->stdDevPv1 << "," << std::endl;
-    os << "\"StdDevZ\":" << *scl._reg->stdDevPv2 << "," << std::endl;
-
-    os << "\"AmplitudeX\":" << *scl._reg->av0 << "," << std::endl;
-    os << "\"AmplitudeY\":" << *scl._reg->av1 << "," << std::endl;
-    os << "\"AmplitudeZ\":" << *scl._reg->av2 << "," << std::endl;
-    os << "\"Amplitude\":" << *scl._reg->av3 << "," << std::endl;
-
-    os << "\"Units\":\"[m.s^-2], [°C]\"" << std::endl;
-
-    os << "}";    
-
-    return os;
+    return ss.str();
 }
+
+
+std::string SCL3300a::getJsonLast()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"X\": " << *this->_reg->pv0 << "," << endl;
+    ss << "    \"Y\": " << *this->_reg->pv1 << "," << endl;
+    ss << "    \"Z\": " << *this->_reg->pv2 << "," << endl;
+    ss << "    \"t\": " << *this->_reg->pv3 << endl;    
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string SCL3300a::getJsonMin()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"Min(X)\": " << *this->_reg->minPv0 << "," << endl;
+    ss << "    \"Min(Y)\": " << *this->_reg->minPv1 << "," << endl;
+    ss << "    \"Min(Z)\": " << *this->_reg->minPv2 << endl; 
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string SCL3300a::getJsonMax()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"Max(X)\": " << *this->_reg->maxPv0 << "," << endl;
+    ss << "    \"Max(Y)\": " << *this->_reg->maxPv1 << "," << endl;
+    ss << "    \"Max(Z)\": " << *this->_reg->maxPv2 << endl;
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string SCL3300a::getJsonMean()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"Mean(X)\": " << *this->_reg->meanPv0 << "," << endl;
+    ss << "    \"Mean(Y)\": " << *this->_reg->meanPv1 << "," << endl;
+    ss << "    \"Mean(Z)\": " << *this->_reg->meanPv2 << endl;
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string SCL3300a::getJsonStdDev()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "  {" << endl;
+    ss << "    \"StdDev(X)\": " << *this->_reg->stdDevPv0 << "," << endl;
+    ss << "    \"StdDev(Y)\": " << *this->_reg->stdDevPv1 << "," << endl;
+    ss << "    \"StdDev(Z)\": " << *this->_reg->stdDevPv2 << endl;
+    ss << "  }";
+
+    return ss.str();
+}
+
+
+std::string SCL3300a::getJson()
+{
+    using namespace std;
+    stringstream ss;
+
+    ss << endl << "{" << endl;
+    ss << "  \"Last\":" << getJsonLast() << "," << endl;
+    ss << "  \"Min\":" << getJsonMin() << "," << endl;
+    ss << "  \"Max\":" << getJsonMax() << "," << endl;
+    ss << "  \"Mean\":" << getJsonMean() << "," << endl;
+    ss << "  \"StdDev\":" << getJsonStdDev() << endl;
+    ss << "  \"Amplitude\":" << getJsonAmplitude() << endl;
+    ss << "  \"Units\": \"[m.s^-2], [°C]\"" << endl;
+    
+    ss << "}";
+
+    return ss.str();
+}
+
 
 } // namespace Xerxes

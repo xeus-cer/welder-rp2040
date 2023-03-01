@@ -7,6 +7,7 @@
 #include <cmath>
 #include <math.h>
 #include <iterator>
+#include <string>
 
 namespace Xerxes
 {
@@ -28,20 +29,31 @@ private:
      */
     double getAccFromPacket(const std::unique_ptr<SclPacket_t>& packet, const cmd_t mode = CMD::Change_to_mode_1);
 
+
+    /**
+     * @brief Initialize the sensor for the first time after power up
+     * 
+     * Set sensor to Mode A - 10Hz, -10/+10 deg
+     */
+    void initSequence();
+
+
+    /// Flag to indicate if sensor needs to be initialized
+    bool needInit = true;
+
 public:
     using SCL3X00::SCL3X00;
     void init();
     void update();
 
 
-    /**
-     * @brief Get the AccelX, AccelY, AccelZ in
-     * 
-     * @param os output stream
-     * @param scl sensor
-     * @return std::ostream& 
-     */
-    friend std::ostream& operator<<(std::ostream& os, const SCL3300a& scl);
+    std::string getJson();
+    std::string getJsonAmplitude();
+    std::string getJsonLast();
+    std::string getJsonMin();
+    std::string getJsonMax();
+    std::string getJsonMean();
+    std::string getJsonStdDev(); 
 };
 
 } //namespace Xerxes    
