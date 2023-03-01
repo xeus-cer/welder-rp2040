@@ -22,12 +22,16 @@ private:
     /**
      * @brief Initialize the sensor for the first time after power up
      * 
-     * Set sensor to Mode 4 - 10Hz, -10/+10 deg
+     * Set sensor to Mode A - 10Hz, -10/+10 deg
      */
     void initSequence();
 
     /// Flag to indicate if sensor needs to be initialized
     bool needInit = true;
+
+    constexpr static uint32_t _usInS = 1000000;  // microseconds in a second
+    constexpr static uint32_t _sensorFreqHz = 10;  // sensor update frequency in Hz
+    constexpr static uint32_t _sensorUpdateRateUs = _usInS / _sensorFreqHz;  // sensor update rate in microseconds
 
 public:
     using SCL3X00::SCL3X00;

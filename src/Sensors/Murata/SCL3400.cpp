@@ -58,16 +58,13 @@ void SCL3400::init()
     // TODO: find out why this is not working, should return RS = NORMAL, but returns RS = ERROR instead
     // assert(status->RS == NORMAL);
 
-    // read out first sequence - usually rubbish anyway
-    sleep_ms(10);
-    this->update();
+    // change sample rate to 10Hz
+    *_reg->desiredCycleTimeUs = 100000;    
 }
 
 
 void SCL3400::update()
 {    
-    // pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
-    // pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
     // declare packet variables
     auto packetX = std::make_unique<SclPacket_t>();
     auto packetY = std::make_unique<SclPacket_t>();
@@ -118,12 +115,34 @@ double SCL3400::getDegFromPacket(const std::unique_ptr<SclPacket_t>& packet)
     value.data[1] = packet->DATA_H;
 
     // calculate acceleration in g
-    double acceleration = static_cast<double>(value.acc) / sensitivityModeA;
+    double acceleration = static_cast<double>(value.acc) / _sensitivityModeA;
     
     // convert to degrees using arcsin
     double degrees = asin(acceleration) * 180.0 / M_PI;
     
     return degrees;
+}
+
+
+std::string SCL3400::getJson()
+{
+    using namespace std;
+
+    stringstream ss;
+
+    // return values as JSON
+    ss << "{" << endl;
+    ss << "\t\"X\":" << *_reg->pv0 << "," << endl;
+    ss << "\t\"Y\":" << *_reg->pv1 << "," << endl;
+    ss << "\t\"Avg(X)\":" << *_reg->meanPv0 << "," << endl;
+    ss << "\t\"Avg(Y)\":" << *_reg->meanPv1 << "," << endl;
+    ss << "\t\"StdDev(X)\":" << *_reg->stdDevPv0 << "," << endl;
+    ss << "\t\"StdDev(Y)\":" << *_reg->stdDevPv1 << "," << endl;
+    ss << "\t\"Avg(t)\":" << *_reg->meanPv3 << "," << endl;
+
+    ss << "}";
+
+    return ss.str();
 }
 
 } //namespace Xerxes

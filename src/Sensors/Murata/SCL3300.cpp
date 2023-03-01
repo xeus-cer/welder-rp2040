@@ -66,7 +66,7 @@ void SCL3300::init()
     initSequence();
     
     // change sample rate to 10Hz
-    *_reg->desiredCycleTimeUs = 100000;
+    *_reg->desiredCycleTimeUs = _sensorUpdateRateUs;
 
     this->update();
 }
