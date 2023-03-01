@@ -4,9 +4,21 @@
 #include <cstdint>
 #include <xerxes-protocol/DeviceIds.h>
 #include <ostream>
+#include <string>
 
 namespace Xerxes
 {
+
+
+/**
+ * @brief Check if the data received from the spi bus is valid
+ * 
+ * @param data array of data bytes
+ * @param len length of the data array
+ * @return true if data is valid
+ * @return false if data is invalid - all bits set to 1 or 0
+ */
+bool isSpiDataOk(uint8_t* data, uint8_t len);
 
 
 /**
@@ -35,6 +47,8 @@ public:
      * @return devid_t device id of the peripheral - based on the device type
      */
     devid_t getDevid();
+
+    virtual std::string getJson() = 0;
 };
 
 

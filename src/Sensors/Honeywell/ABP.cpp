@@ -1,9 +1,12 @@
 #include "Sensors/Honeywell/ABP.hpp"
 
 #include "Hardware/Board/xerxes_rp2040.h"
+#include "Core/Errors.h"
 #include "hardware/spi.h"
 #include "pico/time.h"
 #include <array>
+#include <sstream>
+#include <iostream>
 
 
 namespace Xerxes
@@ -65,6 +68,12 @@ void ABP::update()
     sleep_us(3);
     gpio_put(SPI0_CSN_PIN, 1);
 
+    // check if data is ok (no spi error) and set error bit if not
+    if(!isSpiDataOk(data, sizeof(data)))
+    {
+        *_reg->error |= ERROR_MASK_SENSOR_ERROR;
+    }
+
     // convert data, see datasheet
     status = data[0] >> 6;
     p_val = (uint16_t)(((data[0] & 0b00111111)<<8) + data[1]);
@@ -92,10 +101,22 @@ void ABP::update()
 }
 
 
-std::ostream& operator<<(std::ostream& os, const ABP& abp)
+std::string ABP::getJson()
 {
-    os << "Pressure: " << *abp._reg->meanPv0 << "Pa, temp: " << *abp._reg->meanPv3 << "°C" << std::endl;
-    return os;
+    std::stringstream ss;
+
+    // return values as JSON
+    ss << "{" << std::endl;
+    ss << "\t\"p\": " << *_reg->pv0 << "," << std::endl;
+    ss << "\t\"Avg(t)\": " << *_reg->meanPv3 << "," << std::endl;
+    ss << "\t\"Avg(p)\": " << *_reg->meanPv0 << "," << std::endl;
+    ss << "\t\"StdDev(p)\": " << *_reg->stdDevPv0 << "," << std::endl;
+    ss << "\t\"Min(p)\": " << *_reg->minPv0 << "," << std::endl;
+    ss << "\t\"Max(p)\": " << *_reg->maxPv0 << std::endl;
+    ss << "}";
+
+    return ss.str();
 }
+
 
 } // namespace Xerxes

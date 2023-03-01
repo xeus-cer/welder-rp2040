@@ -4,6 +4,7 @@
 
 #include "Sensors/Sensor.hpp"
 #include <ostream>
+#include <string>
 
 namespace Xerxes
 {
@@ -26,8 +27,7 @@ public:
     void update();
     void stop();
 
-    // friend operator<< for easy printing
-    friend std::ostream& operator<<(std::ostream& os, const ABP& abp);
+    std::string getJson();
 };
 
 

@@ -12,7 +12,7 @@
 
 namespace Xerxes
 {
-    
+
 
 /**
  * @brief Sensor class

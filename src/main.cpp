@@ -142,18 +142,25 @@ int main(void)
 
         if(useUsb)
         {
+            constexpr uint32_t printFrequencyHz = 10;
+            constexpr uint64_t printIntervalUs = 1000000 / printFrequencyHz;
+
             // cout timestamp and net cycle time in json format
             auto timestamp = time_us_64();
             cout << "{" << endl;
             cout << "\"timestamp\":" << timestamp << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
+            cout << "\"errors\":" << (*_reg.error) << "," << endl;
                         
             // cout sensor values in json format
-            cout << "\"sensor\":" << sensor << endl;
-            cout << "}" << endl;
+            cout << "\"sensor\":" << sensor.getJson() << endl;
+            cout << "}" << endl << endl;
+
+            auto end = time_us_64();
+            auto remainingSleepTime = printIntervalUs - (end - timestamp);
 
             // sleep in high speed mode for 1 second, watchdog friendly
-            sleep_hp(1'000'000);
+            sleep_hp(remainingSleepTime);
         }
         else
         {

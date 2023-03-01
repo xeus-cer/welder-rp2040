@@ -18,7 +18,8 @@ enum : uint64_t
     ERROR_MASK_CPU_OVERLOAD      = 1 << 1,  // 2
     ERROR_MASK_BUS_COLLISION     = 1 << 2,  // 4
     ERROR_MASK_WATCHDOG_TIMEOUT  = 1 << 3,  // 8
-    ERROR_MASK_SENSOR_OVERLOAD   = 1 << 4   // 16
+    ERROR_MASK_SENSOR_OVERLOAD   = 1 << 4,  // 16
+    ERROR_MASK_SENSOR_ERROR      = 1 << 5   // 32
 };
 
 #ifdef	__cplusplus
