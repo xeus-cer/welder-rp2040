@@ -71,7 +71,7 @@ void ABP::update()
     // check if data is ok (no spi error) and set error bit if not
     if(!isSpiDataOk(data, sizeof(data)))
     {
-        *_reg->error |= ERROR_MASK_SENSOR_ERROR;
+        *_reg->error |= ERROR_MASK_SENSOR_CONNECTION;
     }
 
     // convert data, see datasheet
