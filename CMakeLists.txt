@@ -43,6 +43,9 @@ elseif(${SENSOR_TYPE} STREQUAL "4DI4DO")
 elseif(${SENSOR_TYPE} STREQUAL "ABP")
 	add_compile_definitions(__SHIELD_ABP)
 	add_compile_definitions(__SENSOR_CLASS=ABP)
+elseif(${SENSOR_TYPE} STREQUAL "hx711")
+	add_compile_definitions(__SHIELD_HX711)
+	add_compile_definitions(__SENSOR_CLASS=HX711)
 else()
 	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
 	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
@@ -92,6 +95,7 @@ add_executable(
 	src/Sensors/Murata/SCL3300a.cpp
 	src/Sensors/Murata/SCL3400.cpp
 	src/Sensors/Honeywell/ABP.cpp
+	src/Sensors/Generic/hx711.cpp
 
 	src/main.cpp
 )
