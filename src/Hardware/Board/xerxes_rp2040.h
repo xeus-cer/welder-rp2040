@@ -60,7 +60,8 @@ extern "C"
 #define CLK_GPIN1_PIN       22  // CLK_GPIN1 and TMP0 share the same pin
 #define CLK_GPOUT1_PIN      23  // CLK_GPOUT1 and TMP1 share the same pin
 
-/// @brief Mask of pins that are used by the shield and not used by the board, eq. 0x3fc0033f
+/// @brief Mask of pins that are used by the shield and not used by the board,
+/// eq. 0x3fc0033f = 0b00111111110000000000001100111111
 #define SHIELD_MASK         1 << SPI0_MISO_PIN | 1 << SPI0_CSN_PIN | 1 << SPI0_CLK_PIN | 1 << SPI0_MOSI_PIN | \
                             1 << I2C0_SDA_PIN | 1 << I2C0_SCL_PIN | \
                             1 << UART1_TX_PIN | 1 << UART1_RX_PIN | \
