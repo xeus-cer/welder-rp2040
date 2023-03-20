@@ -2,7 +2,7 @@
 
 
 #include <functional>
-#include <xerxes-protocol/Message.hpp>
+#include <Message.hpp>
 #include "Sensors/Sensor.hpp"
 
 

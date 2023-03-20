@@ -65,7 +65,6 @@ message(WARNING "\nSENSOR_TYPE set to ${SENSOR_TYPE}."
 
 pico_sdk_init()
 
-
  
 # find xerxes-protocol library
 set(xerxes-protocol_DIR "lib/xerxes-protocol-cpp")
@@ -75,7 +74,7 @@ add_library(xerxes-protocol STATIC ${xerxes-protocol_SOURCES})
 	
 include_directories(
 	"src"
-	${xerxes-protocol_DIR}
+	${xerxes-protocol_INCLUDE_DIRS}
 )
 
 add_executable(
@@ -100,6 +99,7 @@ add_executable(
 	src/Sensors/Honeywell/ABP.cpp
 	src/Sensors/Generic/hx711.cpp
     src/Sensors/Generic/Encoder.cpp
+    src/Sensors/Generic/Cutter.cpp
 
 	src/main.cpp
 )

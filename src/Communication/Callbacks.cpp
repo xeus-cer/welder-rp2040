@@ -2,7 +2,7 @@
 
 
 #include "Hardware/UserFlash.hpp"
-#include <xerxes-protocol/DeviceIds.h>
+#include <DeviceIds.h>
 #include "Hardware/Sleep.hpp"
 #include "Hardware/InitUtils.hpp"
 #include "hardware/watchdog.h"
@@ -11,6 +11,7 @@
 #include "Core/Slave.hpp"
 #include "Core/Register.hpp"
 #include "Sensors/all.hpp"
+#include "Version.h"
 
 
 extern Xerxes::Slave xs;

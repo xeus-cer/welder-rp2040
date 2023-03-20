@@ -5,7 +5,7 @@
 #include "Sensors/Sensor.hpp"
 #include <memory>
 #include <ostream>
-#include <xerxes-protocol/DeviceIds.h>
+#include <DeviceIds.h>
 
 typedef uint32_t cmd_t;
 

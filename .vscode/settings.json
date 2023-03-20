@@ -28,7 +28,8 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "build": false
+        "build": false,
+        ".history": true
     },
     "explorerExclude.backup": {},
     

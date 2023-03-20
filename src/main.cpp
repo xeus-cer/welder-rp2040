@@ -49,18 +49,17 @@ void core1Entry();
 
 
 int main(void)
-{
-    // enable watchdog for 200ms, pause on debug = true
+{    // enable watchdog for 200ms, pause on debug = true
     watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
     
     // init system
     userInit();  // 374us
-
+        
     // blink led for 1 ms - we are alive
     gpio_put(USR_LED_PIN, 1);
-    sleep_ms(1);
+    sleep_ms(5);
     gpio_put(USR_LED_PIN, 0);
-        
+    
     // clear error register
     _reg.errorClear(0xFFFFFFFF);
 
