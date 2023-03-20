@@ -23,7 +23,7 @@ using namespace Xerxes;
 
 
 // forward declaration
-__SENSOR_CLASS device;
+__DEVICE_CLASS device;
 
 
 Register _reg;  // main register
@@ -78,7 +78,7 @@ int main(void)
     
 
     watchdog_update();
-    device = __SENSOR_CLASS(&_reg);
+    device = __DEVICE_CLASS(&_reg);
 
     device.init();
 

@@ -9,7 +9,7 @@ set(PROJECT_NAME sensor-rp2040)
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 
-set(SENSOR_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP, hx711, encoder, cutter")
+set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter")
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
@@ -22,59 +22,59 @@ if(NOT DEFINED CLKDIV)
 endif()
 add_compile_definitions(__CLKDIV=${CLKDIV})
 
-# check if ${SENSOR_TYPE} is set
-if(NOT DEFINED SENSOR_TYPE)
-	message(FATAL_ERROR "SENSOR_TYPE not set, use -DSENSOR_TYPE=...\n" ${SENSOR_TYPE_HINT})
+# check if ${DEVICE_TYPE} is set
+if(NOT DEFINED DEVICE_TYPE)
+	message(FATAL_ERROR "DEVICE_TYPE not set, use -DSENSOR_TYPE=...\n${DEVICE_TYPE_HINT}")
 endif()
+
 # this is the sensor type we are using, we need to set this to use the correct sensor header
-if(${SENSOR_TYPE} STREQUAL "SCL3300")
+if(${DEVICE_TYPE} STREQUAL "SCL3300")
 	add_compile_definitions(__SHIELD_SCL3300)
-	add_compile_definitions(__SENSOR_CLASS=SCL3300)
-elseif(${SENSOR_TYPE} STREQUAL "SCL3300a")
+	add_compile_definitions(__DEVICE_CLASS=SCL3300)
+elseif(${DEVICE_TYPE} STREQUAL "SCL3300a")
 	add_compile_definitions(__SHIELD_SCL3300)
-	add_compile_definitions(__SENSOR_CLASS=SCL3300a)
-elseif(${SENSOR_TYPE} STREQUAL "SCL3400")
+	add_compile_definitions(__DEVICE_CLASS=SCL3300a)
+elseif(${DEVICE_TYPE} STREQUAL "SCL3400")
 	add_compile_definitions(__SHIELD_SCL3400)
-	add_compile_definitions(__SENSOR_CLASS=SCL3400)
-elseif(${SENSOR_TYPE} STREQUAL "AI")
+	add_compile_definitions(__DEVICE_CLASS=SCL3400)
+elseif(${DEVICE_TYPE} STREQUAL "AI")
 	add_compile_definitions(__SHIELD_AI)
-	add_compile_definitions(__SENSOR_CLASS=AnalogInput)
-elseif(${SENSOR_TYPE} STREQUAL "AnalogInput")
+	add_compile_definitions(__DEVICE_CLASS=AnalogInput)
+elseif(${DEVICE_TYPE} STREQUAL "AnalogInput")
 	add_compile_definitions(__SHIELD_AI)
-	add_compile_definitions(__SENSOR_CLASS=AnalogInput)
-elseif(${SENSOR_TYPE} STREQUAL "4DI4DO")
+	add_compile_definitions(__DEVICE_CLASS=AnalogInput)
+elseif(${DEVICE_TYPE} STREQUAL "4DI4DO")
 	add_compile_definitions(__SHIELD_4DI4DO)
-	add_compile_definitions(__SENSOR_CLASS=_4DI4DO)
-elseif(${SENSOR_TYPE} STREQUAL "ABP")
+	add_compile_definitions(__DEVICE_CLASS=_4DI4DO)
+elseif(${DEVICE_TYPE} STREQUAL "ABP")
 	add_compile_definitions(__SHIELD_ABP)
-	add_compile_definitions(__SENSOR_CLASS=ABP)
-elseif(${SENSOR_TYPE} STREQUAL "hx711")
+	add_compile_definitions(__DEVICE_CLASS=ABP)
+elseif(${DEVICE_TYPE} STREQUAL "hx711")
 	add_compile_definitions(__SHIELD_HX711)
-	add_compile_definitions(__SENSOR_CLASS=HX711)
-elseif(${SENSOR_TYPE} STREQUAL "encoder")
+	add_compile_definitions(__DEVICE_CLASS=HX711)
+elseif(${DEVICE_TYPE} STREQUAL "Encoder")
     add_compile_definitions(__SHIELD_ENCODER)
-    add_compile_definitions(__SENSOR_CLASS=Encoder)
-elseif(${SENSOR_TYPE} STREQUAL "cutter")
+    add_compile_definitions(__DEVICE_CLASS=Encoder)
+elseif(${DEVICE_TYPE} STREQUAL "Cutter")
     add_compile_definitions(__SHIELD_CUTTER)
     add_compile_definitions(__TIGHTLOOP)
-    add_compile_definitions(__SENSOR_CLASS=Cutter)
+    add_compile_definitions(__DEVICE_CLASS=Cutter)
 else()
-	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n" ${SENSOR_TYPE_HINT})
+	message(FATAL_ERROR "DEVICE_TYPE '${DEVICE_TYPE}' is incorrect, use -DDEVICE_TYPE=...\n${DEVICE_TYPE_HINT}")
 endif()
-message(WARNING "\nSENSOR_TYPE set to ${SENSOR_TYPE}."
+
+# print warning to clearly show which device type is used and which CLKDIV is set
+message(WARNING "DEVICE_TYPE set to '${DEVICE_TYPE}'."
 	"\nCLKDIV set to ${CLKDIV}, increase this "
 	"value if device is not responding after reboot.")
 
-
 pico_sdk_init()
-
  
 # find xerxes-protocol library
 set(xerxes-protocol_DIR "lib/xerxes-protocol-cpp")
 find_package(xerxes-protocol REQUIRED)
 add_library(xerxes-protocol STATIC ${xerxes-protocol_SOURCES})
 
-	
 include_directories(
 	"src"
 	${xerxes-protocol_INCLUDE_DIRS}
@@ -123,7 +123,7 @@ target_link_libraries(
 	xerxes-protocol
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${SENSOR_TYPE})
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${DEVICE_TYPE})
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
@@ -135,6 +135,6 @@ pico_add_extra_outputs(${PROJECT_NAME})
 # copy .UF2 binary to the RP2040
 install(
 	FILES
-	${CMAKE_CURRENT_BINARY_DIR}/${SENSOR_TYPE}.uf2
-	DESTINATION /media/$ENV{USER}/RPI-RP2/${SENSOR_TYPE}.uf2
+	${CMAKE_CURRENT_BINARY_DIR}/${DEVICE_TYPE}.uf2
+	DESTINATION /media/$ENV{USER}/RPI-RP2/${DEVICE_TYPE}.uf2
 )
