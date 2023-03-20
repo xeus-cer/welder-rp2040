@@ -14,6 +14,8 @@ constexpr uint32_t MOTOR_PIN_CUT = DO2_PIN;  // 1 = cut, 0 = release
 constexpr uint32_t DEFAULT_MOTOR_RAMP_UP = 1000;  // 1000 pulses
 constexpr uint32_t DEFAULT_MOTOR_RAMP_DOWN = 1000;  // 1000 pulses
 
+constexpr uint32_t DEFAULT_MOTOR_STOP_TIME = 1'000'000;  // 1s
+constexpr uint32_t DEFAULT_MOTOR_CUT_TIME = 1'000'000;  // 1s
 
 class Cutter: public Encoder
 {
@@ -25,6 +27,9 @@ private:
 
     uint32_t* rampUpPulses; // _reg->config_val0;
     uint32_t* rampDownPulses; // _reg->config_val1;
+    uint64_t* status; // _reg->status;
+
+    uint64_t timestampUs;
     
 public:
     using Encoder::Encoder;

@@ -23,7 +23,7 @@ using namespace Xerxes;
 
 
 // forward declaration
-__SENSOR_CLASS sensor;
+__SENSOR_CLASS device;
 
 
 Register _reg;  // main register
@@ -55,9 +55,9 @@ int main(void)
     // init system
     userInit();  // 374us
         
-    // blink led for 1 ms - we are alive
+    // blink led for 10 ms - we are alive
     gpio_put(USR_LED_PIN, 1);
-    sleep_ms(5);
+    sleep_ms(10);
     gpio_put(USR_LED_PIN, 0);
 
     // clear error register
@@ -78,23 +78,9 @@ int main(void)
     
 
     watchdog_update();
-    sensor = __SENSOR_CLASS(&_reg);
+    device = __SENSOR_CLASS(&_reg);
 
-    sensor.init();
-
-    #ifdef __SHIELD_ENCODER
-    irq_set_priority(IO_IRQ_BANK0, 0);
-    gpio_set_irq_enabled_with_callback(
-        Xerxes::ENCODER_PIN_A, 
-        GPIO_IRQ_EDGE_RISE, 
-        true, 
-        [](uint gpio, uint32_t)
-        {
-            sensor.encoderIrqHandler(gpio);
-        }
-    );
-    # endif // __SHIELD_ENCODER
-
+    device.init();
 
     watchdog_update();
     
@@ -137,8 +123,9 @@ int main(void)
     while(!queue_is_empty(&txFifo)) queue_remove_blocking(&txFifo, NULL);
     while(!queue_is_empty(&rxFifo)) queue_remove_blocking(&rxFifo, NULL);
 
-    // start core1
+    // start core1 for device operation
     multicore_launch_core1(core1Entry);
+    
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
@@ -159,8 +146,8 @@ int main(void)
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
             cout << "\"errors\":" << (*_reg.error) << "," << endl;
                         
-            // cout sensor values in json format
-            cout << "\"sensor\":" << sensor.getJson() << endl;
+            // cout device values in json format
+            cout << "\"device\":" << device.getJson() << endl;
             cout << "}" << endl << endl;
 
             auto end = time_us_64();
@@ -213,15 +200,6 @@ int main(void)
 }
 
 
-void tightLoop()
-{
-    while(true)
-    {
-        sensor.update();
-    }
-}
-
-
 void core1Entry()
 {
     uint64_t endOfCycle = 0;
@@ -231,7 +209,31 @@ void core1Entry()
     // let core0 lockout core1
     multicore_lockout_victim_init ();
 
+    // enable gpio interrupts for core1 e.g. for actors or encoders
+    #if defined(__SHIELD_ENCODER) || defined(__SHIELD_CUTTER)
+    // top priority to catch encoder events
+    irq_set_priority(IO_IRQ_BANK0, 0);
 
+    // enable gpio interrupts for encoder using lambda function and set callback simultaneously
+    gpio_set_irq_enabled_with_callback(
+        Xerxes::ENCODER_PIN_A, 
+        GPIO_IRQ_EDGE_RISE, 
+        true, 
+        [](uint gpio, uint32_t)
+        {
+            device.encoderIrqHandler(gpio);
+        }
+    );
+    # endif // __SHIELD_ENCODER
+
+    #if defined(__TIGHTLOOP)
+    // set core1 to free run mode, process device data as fast as possible
+    while(true)
+    {
+        device.update();
+    }
+
+    #else // __TIGHTLOOP
     // core1 mainloop
     while(true)
     {
@@ -243,7 +245,7 @@ void core1Entry()
 
         if(_reg.config->bits.freeRun)
         {
-            sensor.update(); 
+            device.update(); 
         }
 
         // turn off led
@@ -271,8 +273,8 @@ void core1Entry()
         {
             _reg.errorSet(ERROR_MASK_SENSOR_OVERLOAD);
         }
-        
     }
+    #endif // __TIGHTLOOP
     
     core1idle = true;
 }

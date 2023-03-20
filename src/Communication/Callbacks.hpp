@@ -27,7 +27,7 @@ void pingCallback(const Xerxes::Message &msg);
  * 
  * @param msg incoming message
  * 
- * @note This function does not return an answer, it only polls the sensor
+ * @note This function does not return an answer, it only polls the device
  */
 void syncCallback(const Xerxes::Message &msg);
 

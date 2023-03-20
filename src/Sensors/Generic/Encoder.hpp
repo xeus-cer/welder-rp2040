@@ -16,6 +16,8 @@ class Encoder : public _4DI4DO
 private:
     /// @brief convenience typedef
     typedef _4DI4DO super;
+
+protected:
     int32_t* encoderVal;
 
 public:

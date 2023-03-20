@@ -9,6 +9,7 @@ set(PROJECT_NAME sensor-rp2040)
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 
+set(SENSOR_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP, hx711, encoder, cutter")
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
@@ -23,8 +24,7 @@ add_compile_definitions(__CLKDIV=${CLKDIV})
 
 # check if ${SENSOR_TYPE} is set
 if(NOT DEFINED SENSOR_TYPE)
-	message(FATAL_ERROR "SENSOR_TYPE not set, use -DSENSOR_TYPE=...\n\
-	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
+	message(FATAL_ERROR "SENSOR_TYPE not set, use -DSENSOR_TYPE=...\n" ${SENSOR_TYPE_HINT})
 endif()
 # this is the sensor type we are using, we need to set this to use the correct sensor header
 if(${SENSOR_TYPE} STREQUAL "SCL3300")
@@ -54,9 +54,12 @@ elseif(${SENSOR_TYPE} STREQUAL "hx711")
 elseif(${SENSOR_TYPE} STREQUAL "encoder")
     add_compile_definitions(__SHIELD_ENCODER)
     add_compile_definitions(__SENSOR_CLASS=Encoder)
+elseif(${SENSOR_TYPE} STREQUAL "cutter")
+    add_compile_definitions(__SHIELD_CUTTER)
+    add_compile_definitions(__TIGHTLOOP)
+    add_compile_definitions(__SENSOR_CLASS=Cutter)
 else()
-	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
-	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
+	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n" ${SENSOR_TYPE_HINT})
 endif()
 message(WARNING "\nSENSOR_TYPE set to ${SENSOR_TYPE}."
 	"\nCLKDIV set to ${CLKDIV}, increase this "

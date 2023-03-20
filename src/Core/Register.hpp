@@ -130,7 +130,7 @@ public:
     float* offsetPv2     = (float *)(memTable + OFFSET_PV2_OFFSET);
     float* offsetPv3     = (float *)(memTable + OFFSET_PV3_OFFSET);
 
-    uint32_t *desiredCycleTimeUs     = (uint32_t *)(memTable + OFFSET_DESIRED_CYCLE_TIME);  ///< Desired cycle time of sensor loop in microseconds
+    uint32_t *desiredCycleTimeUs     = (uint32_t *)(memTable + OFFSET_DESIRED_CYCLE_TIME);  ///< Desired cycle time of device loop in microseconds
     uint8_t *devAddress              = (uint8_t *)(memTable + OFFSET_ADDRESS);  ///< Address of the device (1 byte)
     ConfigBitsUnion *config          = (ConfigBitsUnion *)(memTable + OFFSET_CONFIG_BITS);  ///< Config bits of the device (1 byte)
     uint32_t *netCycleTimeUs         = (uint32_t *)(memTable + OFFSET_NET_CYCLE_TIME);  ///< Actual cycle time of measurement loop in microseconds
