@@ -20,8 +20,8 @@ class Cutter: public Encoder
 private:
     /// @brief convenience typedef
     typedef Encoder super;
-    uint32_t* pLength = _reg->dv0;
-    uint32_t* pOffset = _reg->dv1;
+    uint32_t* pLength;  // = _reg->dv0;
+    uint32_t* pOffset;  // = _reg->dv1;
 
     uint32_t* rampUpPulses; // _reg->config_val0;
     uint32_t* rampDownPulses; // _reg->config_val1;

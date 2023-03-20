@@ -18,7 +18,7 @@ void Encoder::init()
     *_reg->sv1 = 0;
     *_reg->sv2 = 0;
     *_reg->sv3 = 0;
-
+    encoderVal = _reg->sv0;
 
     _devid = DEVID_ENC_1000PPR;
 }

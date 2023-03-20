@@ -16,7 +16,7 @@ class Encoder : public _4DI4DO
 private:
     /// @brief convenience typedef
     typedef _4DI4DO super;
-    int32_t* encoderVal = _reg->sv0;
+    int32_t* encoderVal;
 
 public:
     using _4DI4DO::_4DI4DO;

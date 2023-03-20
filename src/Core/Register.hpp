@@ -135,6 +135,10 @@ public:
     ConfigBitsUnion *config          = (ConfigBitsUnion *)(memTable + OFFSET_CONFIG_BITS);  ///< Config bits of the device (1 byte)
     uint32_t *netCycleTimeUs         = (uint32_t *)(memTable + OFFSET_NET_CYCLE_TIME);  ///< Actual cycle time of measurement loop in microseconds
 
+    uint32_t *config_val0            = (uint32_t *)(memTable + CONFIG_VAL0_OFFSET);  ///< Config bits of the device (1 byte)
+    uint32_t *config_val1            = (uint32_t *)(memTable + CONFIG_VAL1_OFFSET);  ///< Config bits of the device (1 byte)
+    uint32_t *config_val2            = (uint32_t *)(memTable + CONFIG_VAL2_OFFSET);  ///< Config bits of the device (1 byte)
+    uint32_t *config_val3            = (uint32_t *)(memTable + CONFIG_VAL3_OFFSET);  ///< Config bits of the device (1 byte)
 
     /* ### VOLATILE - PROCESS VALUES ### */
     float* pv0           = (float *)(memTable + PV0_OFFSET);    ///< Pointer to process value 0

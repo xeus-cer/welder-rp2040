@@ -59,7 +59,7 @@ int main(void)
     gpio_put(USR_LED_PIN, 1);
     sleep_ms(5);
     gpio_put(USR_LED_PIN, 0);
-    
+
     // clear error register
     _reg.errorClear(0xFFFFFFFF);
 
@@ -104,8 +104,10 @@ int main(void)
         stdio_usb_init();
         userInitUartDisabled();
         
-        // wait for usb to be ready
-        sleep_hp(2'000'000);
+        while (!stdio_usb_connected())
+        {
+            watchdog_update();
+        }
         // print out error register
         cout << "error register: " << bitset<32>(*_reg.error) << endl;
         // cout sampling speed in Hz
