@@ -94,6 +94,12 @@
 #define AV2_OFFSET                  VOLATILE_OFFSET + 104     // 360
 #define AV3_OFFSET                  VOLATILE_OFFSET + 108     // 364
 
+// signed values
+#define SV0_OFFSET                  VOLATILE_OFFSET + 112     // 368
+#define SV1_OFFSET                  VOLATILE_OFFSET + 116     // 372
+#define SV2_OFFSET                  VOLATILE_OFFSET + 120     // 376
+#define SV3_OFFSET                  VOLATILE_OFFSET + 124     // 380
+
 // memory offset for the safety lock of the device memory (1 byte)
 #define MEM_UNLOCKED_OFFSET         VOLATILE_OFFSET + 128     // 384
 

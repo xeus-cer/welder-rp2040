@@ -11,6 +11,7 @@
 #include "Generic/DigitalInputOutput.hpp"
 #include "Generic/4DI4DO.hpp"
 #include "Generic/hx711.hpp"
+#include "Generic/Encoder.hpp"
 
 
 #endif // !__ALL_HPP

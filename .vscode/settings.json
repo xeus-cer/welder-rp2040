@@ -70,7 +70,23 @@
         "numeric": "cpp",
         "optional": "cpp",
         "ranges": "cpp",
-        "tuple": "cpp"
+        "tuple": "cpp",
+        "atomic": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "map": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "sstream": "cpp",
+        "cinttypes": "cpp"
     },
     "python.testing.pytestArgs": [
         "tests/pytest"

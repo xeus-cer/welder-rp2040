@@ -172,6 +172,11 @@ public:
     float* av2          = (float *)(memTable + AV2_OFFSET);    ///< Pointer to analog value 2
     float* av3          = (float *)(memTable + AV3_OFFSET);    ///< Pointer to analog value 3
 
+    int32_t* sv0        = (int32_t *)(memTable + SV0_OFFSET);  ///< Pointer to set value 0
+    int32_t* sv1        = (int32_t *)(memTable + SV1_OFFSET);  ///< Pointer to set value 1
+    int32_t* sv2        = (int32_t *)(memTable + SV2_OFFSET);  ///< Pointer to set value 2
+    int32_t* sv3        = (int32_t *)(memTable + SV3_OFFSET);  ///< Pointer to set value 3
+
     /** @brief 0x55AA55AA = unlocked, anything else = locked */
     uint32_t* memUnlocked   = (uint32_t *)(memTable + MEM_UNLOCKED_OFFSET);
 

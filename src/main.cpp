@@ -45,7 +45,7 @@ volatile bool awake = true;
 /**
  * @brief Core 1 entry point, runs in background
  */
-void core1Entry();  
+void core1Entry();
 
 
 int main(void)
@@ -81,11 +81,22 @@ int main(void)
     watchdog_update();
     sensor = __SENSOR_CLASS(&_reg);
 
-    #ifdef SHIELD_AI
-    sensor.init(2, 3);
-    #else
     sensor.init();
-    #endif // !SHIELD_AI
+
+    #ifdef __SHIELD_ENCODER
+    irq_set_priority(IO_IRQ_BANK0, 0);
+    gpio_set_irq_enabled_with_callback(
+        Xerxes::ENCODER_PIN_A, 
+        GPIO_IRQ_EDGE_RISE, 
+        true, 
+        [](uint gpio, uint32_t)
+        {
+            sensor.encoderIrqHandler(gpio);
+        }
+    );
+    # endif // __SHIELD_ENCODER
+
+
     watchdog_update();
     
     if(useUsb)
@@ -197,6 +208,15 @@ int main(void)
                 }
             #endif // NDEBUG
         }
+    }
+}
+
+
+void tightLoop()
+{
+    while(true)
+    {
+        sensor.update();
     }
 }
 

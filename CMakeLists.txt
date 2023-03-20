@@ -10,6 +10,11 @@ project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 
 
+# this is the board we are using, we need to set this to use the correct board header and bootloader
+# the board file is: src/Hardware/Board/xerxes_rp2040.h
+set(PICO_BOARD "xerxes_rp2040")
+set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
+
 # check if ${CLKDIV} is set and set it to 4 if not - necessary for some boards
 if(NOT DEFINED CLKDIV)
 	set(CLKDIV 4)
@@ -46,6 +51,9 @@ elseif(${SENSOR_TYPE} STREQUAL "ABP")
 elseif(${SENSOR_TYPE} STREQUAL "hx711")
 	add_compile_definitions(__SHIELD_HX711)
 	add_compile_definitions(__SENSOR_CLASS=HX711)
+elseif(${SENSOR_TYPE} STREQUAL "encoder")
+    add_compile_definitions(__SHIELD_ENCODER)
+    add_compile_definitions(__SENSOR_CLASS=Encoder)
 else()
 	message(FATAL_ERROR "SENSOR_TYPE '" ${SENSOR_TYPE} "' is incorrect, use -DSENSOR_TYPE=...\n\
 	Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP")
@@ -57,11 +65,6 @@ message(WARNING "\nSENSOR_TYPE set to ${SENSOR_TYPE}."
 
 pico_sdk_init()
 
-
-# this is the board we are using, we need to set this to use the correct board header and bootloader
-# the board file is: src/Hardware/Board/xerxes_rp2040.h
-set(PICO_BOARD "xerxes_rp2040")
-set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
 
  
 # find xerxes-protocol library
@@ -96,6 +99,7 @@ add_executable(
 	src/Sensors/Murata/SCL3400.cpp
 	src/Sensors/Honeywell/ABP.cpp
 	src/Sensors/Generic/hx711.cpp
+    src/Sensors/Generic/Encoder.cpp
 
 	src/main.cpp
 )
