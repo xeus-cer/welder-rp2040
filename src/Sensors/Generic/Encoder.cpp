@@ -19,6 +19,7 @@ void Encoder::init()
     *_reg->sv2 = 0;
     *_reg->sv3 = 0;
 
+
     _devid = DEVID_ENC_1000PPR;
 }
 
@@ -37,28 +38,28 @@ void Encoder::encoderIrqHandler(uint gpio)
         if(pinB)
         {
             // increment the encoder count
-            (*_reg->sv0) ++;
+            (*encoderVal) ++;
 
         }
         else
         {
             // decrement the encoder count
-            (*_reg->sv0) --;
+            (*encoderVal) --;
         } 
     }
     if(pinZ)
     {
         int8_t _add = 0;
-        if((*_reg->sv0) % 1000 >= 500 && (*_reg->sv0) > 0) 
+        if((*encoderVal) % 1000 >= 500 && (*encoderVal) > 0) 
         {
             _add = 1;
         }
-        if((*_reg->sv0) % 1000 < -500 && (*_reg->sv0) < 0)
+        if((*encoderVal) % 1000 < -500 && (*encoderVal) < 0)
         {
             _add = -1;
         }
         {
-            (*_reg->sv0) = (_add + int((*_reg->sv0) / 1000)) * 1000;
+            (*encoderVal) = (_add + int((*encoderVal) / 1000)) * 1000;
         }
     }
 }
@@ -70,7 +71,7 @@ std::string Encoder::getJson()
     stringstream ss;
 
     ss << "{" << endl;
-    ss << "\t\"counter\": " << (*_reg->sv0) << endl;
+    ss << "\t\"counter\": " << (*encoderVal) << endl;
     ss << "}" << endl;
 
     return ss.str();
@@ -81,6 +82,7 @@ std::string Encoder::getJson()
 
 void Encoder::update()
 {
+    // do nothing
 }
 
 } // namespace Xerxes
