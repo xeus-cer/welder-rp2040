@@ -44,6 +44,10 @@ void AnalogInput::init(uint8_t numChannels, uint8_t oversampleBits)
     // set update rate
     *_reg->desiredCycleTimeUs = _updateRateUs;
 
+    // enable power supply to sensor
+    gpio_init(EXT_3V3_EN_PIN);
+    gpio_set_dir(EXT_3V3_EN_PIN, GPIO_OUT);
+
     // update sensor values
     this->update();
 }
@@ -51,6 +55,11 @@ void AnalogInput::init(uint8_t numChannels, uint8_t oversampleBits)
 
 void AnalogInput::update()
 {    
+
+    // enable sensor 3V3
+    gpio_put(EXT_3V3_EN_PIN, true);
+    sleep_us(1000); // wait for sensor to power up
+    
     // oversample and average over 4 channels, effectively increasing bit depth by 4 bits
     // https://www.silabs.com/documents/public/application-notes/an118.pdf
     for(uint8_t channel = 0; channel < numChannels; channel++)
@@ -66,8 +75,13 @@ void AnalogInput::update()
         }
 
         // right shift by oversampleExtraBits to decimate oversampled bits
+    // nothing to do here
+
         results[channel] >>= oversampleExtraBits;
     }
+
+    // disable sensor 3V3 effectively saving 3mA of current per sensor (1kOhm)
+    gpio_put(EXT_3V3_EN_PIN, false);
     
     // convert to value on scale <0, 1)
     // optimization: use if-else instead of switch, since numChannels is known at compile time
@@ -140,7 +154,8 @@ void AnalogInput::update()
 
 void AnalogInput::stop()
 {
-    // nothing to do here
+    // disable sensor 3V3
+    gpio_put(EXT_3V3_EN_PIN, false);
 }
 
 
