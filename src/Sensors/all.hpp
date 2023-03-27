@@ -13,6 +13,7 @@
 #include "Generic/hx711.hpp"
 #include "Generic/Encoder.hpp"
 #include "Generic/Cutter.hpp"
+#include "Generic/ds18b20/ds18b20.hpp"
 
 
 #endif // !__ALL_HPP

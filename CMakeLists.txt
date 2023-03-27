@@ -59,6 +59,9 @@ elseif(${DEVICE_TYPE} STREQUAL "Cutter")
     add_compile_definitions(__SHIELD_CUTTER)
     add_compile_definitions(__TIGHTLOOP)
     add_compile_definitions(__DEVICE_CLASS=Cutter)
+elseif(${DEVICE_TYPE} STREQUAL "temp")
+    add_compile_definitions(__SHIELD_TEMP)
+    add_compile_definitions(__DEVICE_CLASS=DS18B20)
 else()
 	message(FATAL_ERROR "DEVICE_TYPE '${DEVICE_TYPE}' is incorrect, use -DDEVICE_TYPE=...\n${DEVICE_TYPE_HINT}")
 endif()
@@ -103,6 +106,7 @@ add_executable(
 	src/Sensors/Generic/hx711.cpp
     src/Sensors/Generic/Encoder.cpp
     src/Sensors/Generic/Cutter.cpp
+    src/Sensors/Generic/ds18b20/ds18b20.cpp
 
 	src/main.cpp
 )
