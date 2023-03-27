@@ -22,6 +22,22 @@ if(NOT DEFINED CLKDIV)
 endif()
 add_compile_definitions(__CLKDIV=${CLKDIV})
 
+if(NOT DEFINED LOG_LEVEL)
+	set(LOG_LEVEL 1)
+endif()
+add_compile_definitions(_LOG_LEVEL=${LOG_LEVEL})
+if(${LOG_LEVEL} EQUAL 1)
+    message("LOG_LEVEL set to ${LOG_LEVEL} = ERROR")
+elseif(${LOG_LEVEL} EQUAL 2)
+    message("LOG_LEVEL set to ${LOG_LEVEL} = WARNING")
+elseif(${LOG_LEVEL} EQUAL 3)
+    message("LOG_LEVEL set to ${LOG_LEVEL} = INFO")
+elseif(${LOG_LEVEL} EQUAL 4)
+    message("LOG_LEVEL set to ${LOG_LEVEL} = DEBUG")
+elseif(${LOG_LEVEL} EQUAL 5)
+    message("LOG_LEVEL set to ${LOG_LEVEL} = TRACE")
+endif()
+
 # check if ${DEVICE_TYPE} is set
 if(NOT DEFINED DEVICE_TYPE)
 	message(FATAL_ERROR "DEVICE_TYPE not set, use -DSENSOR_TYPE=...\n${DEVICE_TYPE_HINT}")
@@ -107,6 +123,7 @@ add_executable(
     src/Sensors/Generic/Encoder.cpp
     src/Sensors/Generic/Cutter.cpp
     src/Sensors/Generic/ds18b20/ds18b20.cpp
+    src/Utils/Log.cpp
 
 	src/main.cpp
 )

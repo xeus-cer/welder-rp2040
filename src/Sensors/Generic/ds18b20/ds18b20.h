@@ -10,6 +10,8 @@
 
 
 #include "onewire.h"
+#include "Utils/Log.hpp"
+#include <sstream>
 
 #ifdef	__cplusplus
 extern "C" {
@@ -58,9 +60,13 @@ double readJustOneTemp(uint pin)
 {
     // write to all sensors 0xBE, must be just one connected.
     _writeAll(pin, 0xBE);
-    
+    std::stringstream ss;
+
     char tempL = OWReadByte(pin);
     char tempH = OWReadByte(pin);
+    // log values as decimal
+    ss << "tempL: " << (int)tempL << " tempH: " << (int)tempH;
+    xerxes_log_debug(ss.str());
     // convert low and high bytes to int16
     int16_t raw_temp = (tempH << 8) | tempL;
     

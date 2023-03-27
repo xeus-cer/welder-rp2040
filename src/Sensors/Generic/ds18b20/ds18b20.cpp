@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include "ds18b20.h"
+#include "Utils/Log.hpp"
 
 
 namespace Xerxes
@@ -31,7 +32,6 @@ void DS18B20::init(int _numChannels)
     // enable sensor 3V3
     gpio_put(EXT_3V3_EN_PIN, true);
     sleep_us(1000); // wait for sensor to power up
-    
 
     startAll(temp_channel_0);
     if (numChannels > 1)
