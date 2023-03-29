@@ -18,6 +18,14 @@
 // macro to strip file path from __FILE__
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
+#define _CLR_BOLD "\033[1m"
+#define _CLR_B_RED "\033[1;31m"
+#define _CLR_B_YLW "\033[1;33m"
+#define _CLR_B_GREY "\033[1;2m"
+#define _CLR_RED "\033[31m"
+#define _CLR_YLW "\033[33m"
+#define _CLR_GREY "\033[2m"
+#define _CLR_RST "\033[0m"
 
 #ifdef NDEBUG
 // do not log in release mode
@@ -30,7 +38,7 @@
 // wrong order, enough for 200 bytes with baudrate 1500000
 #define xlog(level, msg) do { \
     float timestamp = time_us_64() / 1000000.0f; \
-    std::cout << "[" << timestamp << "][" << level << "] — [" << __FILENAME__ << ":" << __LINE__ << " " << __func__ << "()] — " << msg << std::endl; \
+    std::cout << _CLR_GREY << "[" << timestamp << "][" << _CLR_RST << level << _CLR_GREY << "] — [" << __FILENAME__ << ":" << __LINE__ << " " << __func__ << "()] — " << _CLR_RST << msg << std::endl; \
     sleep_ms(1); \
 } while (0)
 #endif // NDEBUG
@@ -38,7 +46,7 @@
 
 // always log errors
 #define xlog_error(msg) do { \
-    xlog("ERROR", msg); \
+    xlog(_CLR_B_RED << "ERROR" << _CLR_RST, _CLR_RED << msg << _CLR_RST); \
 } while (0)
 
 // convenience macros
@@ -48,7 +56,7 @@
 // log warnings if log level is warning or higher
 #if (_LOG_LEVEL >= 2)
 #define xlog_warning(msg) do { \
-    xlog("WARNING", msg); \
+    xlog(_CLR_B_YLW << "WARNING" << _CLR_RST, _CLR_YLW << msg << _CLR_RST); \
 } while (0)
 #else
 #define xlog_warning(msg) do { } while (0)
@@ -61,7 +69,7 @@
 
 #if (_LOG_LEVEL >= 3)
 #define xlog_info(msg) do { \
-    xlog("INFO", msg); \
+    xlog(_CLR_BOLD << "INFO" << _CLR_RST, msg); \
 } while (0)
 #else
 #define xlog_info(msg) do { } while (0)
@@ -73,7 +81,7 @@
 // log debug messages if log level is debug
 #if (_LOG_LEVEL >= 4)
 #define xlog_debug(msg) do { \
-    xlog("DEBUG", msg); \
+    xlog(_CLR_B_GREY << "DEBUG" << _CLR_RST, _CLR_GREY << msg << _CLR_RST); \
 } while (0)
 #else
 #define xlog_debug(msg) do { } while (0)
