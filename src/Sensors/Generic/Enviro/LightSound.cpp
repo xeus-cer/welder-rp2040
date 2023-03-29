@@ -33,16 +33,16 @@ void LightSound::update()
 
     this->readLight();
 
-    // do not update buffers. Min max0 values are calculated in the specific
-    // routine
-    // super::update();
+    super::update();
 }
 
 void LightSound::readLight()
 {
     uint64_t light2_buf = 0;
     uint64_t light3_buf = 0;
-
+    // Using PT17-21C/L41/TR8  (datasheet:
+    // https://datasheet.lcsc.com/lcsc/1810010213_Everlight-Elec-PT17-21C-L41-TR8_C100090.pdf)
+    
 
     // if debug level is high enough, start timer
     #if (_LOG_LEVEL >= 4)
@@ -69,13 +69,22 @@ void LightSound::readLight()
     xlog_debug("Light captured in " << (end - start) << " us");
     #endif // _LOG_LEVEL
 
-    // right shift by oversampleExtraBits to decimate oversampled bits
+    // right shift by oversampleBits to decimate oversampled bits
     xlog_debug("light2_buf: " << light2_buf);
     xlog_debug("light3_buf: " << light3_buf);
     light2_buf >>= oversampleBits;
     light3_buf >>= oversampleBits;
-    *(_reg->pv2) = 20*log10(light2_buf) - 40 + *(_reg->offsetPv2);
-    *(_reg->pv3) = 20*log10(light3_buf) - 40 + *(_reg->offsetPv3);
+    
+    constexpr double Vref = 3.3;  // reference voltage
+    constexpr double Vce = 0.4;  // voltage drop across LED
+    constexpr double Vpt = Vref - Vce;  // output voltage
+    constexpr double Iceo = 0.1e-6;  // current through dark LED
+    double milliAmpLight2 = (light2_buf * Vpt / 4096) - Iceo;
+    double milliAmpLight3 = (light3_buf * Vpt / 4096) - Iceo;
+    
+    // 1mA corresponds to irradiance of 1mW/cm^2 according to datasheet
+    *(_reg->pv2) = milliAmpLight2;
+    *(_reg->pv3) = milliAmpLight3;
 }
 
 
@@ -98,7 +107,7 @@ double LightSound::micV2dB(double Voltage)
 void LightSound::readMic()
 {
 
-    constexpr uint16_t numSamples = 50;
+    constexpr uint16_t numSamples = 100;
     uint64_t mic0_buf[numSamples] = {0};
     uint64_t mic1_buf[numSamples] = {0};
 
@@ -226,17 +235,9 @@ void LightSound::readMic()
     double Vmic = (max0 - min0) * 3.3 / 4096;
 
     *(_reg->pv0) = micV2dB(Vmic);
-    *(_reg->meanPv0) = mean0 * 3.3 / 4096;
-    *(_reg->stdDevPv0) = stdDev0 * 3.3 / 4096;
-    *(_reg->minPv0) = min0 * 3.3 / 4096;
-    *(_reg->maxPv0) = max0 * 3.3 / 4096;
 
     Vmic = (max1 - min1) * 3.3 / 4096;
     *(_reg->pv1) = micV2dB(Vmic);
-    *(_reg->meanPv1) = mean1 * 3.3 / 4096;
-    *(_reg->stdDevPv1) = stdDev1 * 3.3 / 4096;
-    *(_reg->minPv1) = min1 * 3.3 / 4096;
-    *(_reg->maxPv1) = max1 * 3.3 / 4096;
 }
 
 
@@ -246,8 +247,8 @@ std::string LightSound::getJson()
     ss << "\n\t{";
     ss << "\n\t\"mic0\":" << *(_reg->pv0) << "dB" << ",";
     ss << "\n\t\"mic1\":" << *(_reg->pv1) << "dB" << ",";
-    ss << "\n\t\"light2\":" << *(_reg->pv2) << "dB" << ",";
-    ss << "\n\t\"light3\":" << *(_reg->pv3) << "dB";
+    ss << "\n\t\"light2\":" << *(_reg->pv2) << "mW/cm^2" << ",";
+    ss << "\n\t\"light3\":" << *(_reg->pv3) << "mW/cm^2";
     ss << "\n\t}";
     return ss.str();
 }

@@ -80,9 +80,7 @@ int main(void)
 
     watchdog_update();
     device = __DEVICE_CLASS(&_reg);
-
     device.init();
-
     watchdog_update();
     
     if(useUsb)
@@ -95,7 +93,14 @@ int main(void)
         {
             watchdog_update();
         }
-        xlog_info("USB Connected");
+
+        cout << "Printing:" << endl;
+        xlog_debug("debug logs");
+        xlog_info("info logs");
+        xlog_warn("warn logs");
+        xlog_error("error logs");        
+
+        
         // print out error register
         cout << "error register: " << bitset<32>(*_reg.error) << endl;
         // cout sampling speed in Hz
@@ -127,7 +132,8 @@ int main(void)
 
     // start core1 for device operation
     multicore_launch_core1(core1Entry);
-    
+    // preventively update the device to read rubbish if present
+    device.update();
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
