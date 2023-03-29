@@ -1,4 +1,4 @@
-#include "Sensors/Generic/4DI4DO.hpp"
+#include "Sensors/Generic/DIO/4DI4DO.hpp"
 
 namespace Xerxes
 {

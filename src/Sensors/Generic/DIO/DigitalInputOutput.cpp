@@ -1,4 +1,4 @@
-#include "Sensors/Generic/DigitalInputOutput.hpp"
+#include "Sensors/Generic/DIO/DigitalInputOutput.hpp"
 #include "Hardware/Board/xerxes_rp2040.h"
 
 #include "hardware/gpio.h"

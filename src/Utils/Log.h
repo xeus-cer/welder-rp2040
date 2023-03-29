@@ -26,9 +26,12 @@
 // define xerxes_log(level, msg) to printf as a macro in format
 // [Time][Log level] — [File]:[Line] [Function] — [Text]
 // e.g. [0.000000][INFO] — [src/main.cpp:123 main] — Hello World!
+// sleep_ms(1) is used to prevent the log messages from being printed in the
+// wrong order, enough for 200 bytes with baudrate 1500000
 #define xlog(level, msg) do { \
     float timestamp = time_us_64() / 1000000.0f; \
     std::cout << "[" << timestamp << "][" << level << "] — [" << __FILENAME__ << ":" << __LINE__ << " " << __func__ << "()] — " << msg << std::endl; \
+    sleep_ms(1); \
 } while (0)
 #endif // NDEBUG
 
@@ -73,7 +76,7 @@
     xlog("DEBUG", msg); \
 } while (0)
 #else
-#define xerxes_log_debug(msg) do { } while (0)
+#define xlog_debug(msg) do { } while (0)
 #endif // _LOG_LEVEL
 
 // convenience macros

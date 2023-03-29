@@ -11,7 +11,8 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_STANDARD 11)
 
 
-set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter")
+set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, "
+"SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS")
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
@@ -80,12 +81,15 @@ elseif(${DEVICE_TYPE} STREQUAL "Cutter")
 elseif(${DEVICE_TYPE} STREQUAL "temp")
     add_compile_definitions(__SHIELD_TEMP)
     add_compile_definitions(__DEVICE_CLASS=DS18B20)
+elseif(${DEVICE_TYPE} STREQUAL "EnviroLS")
+    add_compile_definitions(__SHIELD_ENVIROLS)
+    add_compile_definitions(__DEVICE_CLASS=LightSound)
 else()
 	message(FATAL_ERROR "DEVICE_TYPE '${DEVICE_TYPE}' is incorrect, use -DDEVICE_TYPE=...\n${DEVICE_TYPE_HINT}")
 endif()
 
 # print warning to clearly show which device type is used and which CLKDIV is set
-message(WARNING "DEVICE_TYPE set to '${DEVICE_TYPE}'."
+message(WARNING "\nDEVICE_TYPE set to '${DEVICE_TYPE}'."
 	"\nCLKDIV set to ${CLKDIV}, increase this "
 	"value if device is not responding after reboot.")
 
@@ -114,17 +118,18 @@ add_executable(
 	src/Sensors/Peripheral.cpp
 	src/Sensors/Sensor.cpp
 	src/Sensors/Generic/AnalogInput.cpp
-	src/Sensors/Generic/DigitalInputOutput.cpp
-	src/Sensors/Generic/4DI4DO.cpp
+	src/Sensors/Generic/DIO/DigitalInputOutput.cpp
+	src/Sensors/Generic/DIO/4DI4DO.cpp
 	src/Sensors/Murata/SCL3X00.cpp
 	src/Sensors/Murata/SCL3300.cpp
 	src/Sensors/Murata/SCL3300a.cpp
 	src/Sensors/Murata/SCL3400.cpp
 	src/Sensors/Honeywell/ABP.cpp
 	src/Sensors/Generic/hx711.cpp
-    src/Sensors/Generic/Encoder.cpp
-    src/Sensors/Generic/Cutter.cpp
+    src/Sensors/Generic/DIO/Encoder.cpp
+    src/Sensors/Generic/DIO/Cutter.cpp
     src/Sensors/Generic/ds18b20/ds18b20.cpp
+    src/Sensors/Generic/Enviro/LightSound.cpp
 
 	src/main.cpp
 )

@@ -60,13 +60,11 @@ double readJustOneTemp(uint pin)
 {
     // write to all sensors 0xBE, must be just one connected.
     _writeAll(pin, 0xBE);
-    std::stringstream ss;
 
     char tempL = OWReadByte(pin);
     char tempH = OWReadByte(pin);
     // log values as decimal
-    ss << "tempL: " << (int)tempL << " tempH: " << (int)tempH;
-    xlog_debug(ss.str());
+    xlog_debug("tempL: " << (int)tempL << " tempH: " << (int)tempH);
     // convert low and high bytes to int16
     int16_t raw_temp = (tempH << 8) | tempL;
     

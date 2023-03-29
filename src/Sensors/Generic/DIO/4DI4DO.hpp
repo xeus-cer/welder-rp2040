@@ -1,7 +1,7 @@
 #ifndef __4DI4DO_HPP
 #define __4DI4DO_HPP
 
-#include "Sensors/Generic/DigitalInputOutput.hpp"
+#include "Sensors/Generic/DIO/DigitalInputOutput.hpp"
 
 namespace Xerxes
 {
