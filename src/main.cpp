@@ -16,7 +16,7 @@
 #include "Hardware/Sleep.hpp"
 #include "Sensors/all.hpp"
 #include "Communication/RS485.hpp"
-#include "Utils/Log.hpp"
+#include "Utils/Log.h"
 
 
 using namespace std;
@@ -95,7 +95,7 @@ int main(void)
         {
             watchdog_update();
         }
-        xerxes_log_info("USB Connected");
+        xlog_info("USB Connected");
         // print out error register
         cout << "error register: " << bitset<32>(*_reg.error) << endl;
         // cout sampling speed in Hz
