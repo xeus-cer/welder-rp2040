@@ -8,6 +8,8 @@ include(pico_extras_import.cmake)
 set(PROJECT_NAME sensor-rp2040)
 project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_C_STANDARD 11)
+
 
 set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter")
 
@@ -123,7 +125,6 @@ add_executable(
     src/Sensors/Generic/Encoder.cpp
     src/Sensors/Generic/Cutter.cpp
     src/Sensors/Generic/ds18b20/ds18b20.cpp
-    src/Utils/Log.cpp
 
 	src/main.cpp
 )

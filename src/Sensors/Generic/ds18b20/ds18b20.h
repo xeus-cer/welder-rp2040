@@ -10,7 +10,7 @@
 
 
 #include "onewire.h"
-#include "Utils/Log.hpp"
+#include "Utils/Log.h"
 #include <sstream>
 
 #ifdef	__cplusplus
@@ -66,7 +66,7 @@ double readJustOneTemp(uint pin)
     char tempH = OWReadByte(pin);
     // log values as decimal
     ss << "tempL: " << (int)tempL << " tempH: " << (int)tempH;
-    xerxes_log_debug(ss.str());
+    xlog_debug(ss.str());
     // convert low and high bytes to int16
     int16_t raw_temp = (tempH << 8) | tempL;
     

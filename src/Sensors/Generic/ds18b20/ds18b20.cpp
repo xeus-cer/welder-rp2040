@@ -5,7 +5,6 @@
 #include <string>
 #include <sstream>
 #include "ds18b20.h"
-#include "Utils/Log.hpp"
 
 
 namespace Xerxes
