@@ -92,13 +92,7 @@ int main(void)
         while (!stdio_usb_connected())
         {
             watchdog_update();
-        }
-
-        cout << "Printing:" << endl;
-        xlog_debug("debug logs");
-        xlog_info("info logs");
-        xlog_warn("warn logs");
-        xlog_error("error logs");        
+        } 
 
         
         // print out error register
@@ -148,15 +142,15 @@ int main(void)
 
             // cout timestamp and net cycle time in json format
             auto timestamp = time_us_64();
-            cout << "{" << endl;
-            cout << "\"timestamp\":" << timestamp << "," << endl;
-            cout << "\"samplingSpeedHz\":" << (1e6f / (float)(*_reg.desiredCycleTimeUs)) << "," << endl;
-            cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
-            cout << "\"errors\":" << (*_reg.error) << "," << endl;
+            cout << "{\n";
+            cout << "\"timestamp\":" << timestamp << ",\n";
+            cout << "\"samplingSpeedHz\":" << (1e6f / (float)(*_reg.desiredCycleTimeUs)) << ",\n";
+            cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << ",\n";
+            cout << "\"errors\":" << (*_reg.error) << ",\n";
                         
             // cout device values in json format
-            cout << "\"device\":" << device.getJson() << endl;
-            cout << "}" << endl << endl;
+            cout << "\"device\":" << device.getJson() << "\n";
+            cout << "}\n" << endl;
 
             auto end = time_us_64();
             // calculate remaining sleep time in us - 10us for calculation overhead

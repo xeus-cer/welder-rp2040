@@ -68,3 +68,7 @@ public:
     void stop();
     std::string getJson();
 };
+
+} // namespace Xerxes
+
+#endif // __LIS2_HPP

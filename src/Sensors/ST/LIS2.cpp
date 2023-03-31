@@ -15,7 +15,7 @@ void LIS2::init()
 
     // init spi with freq 10MHz, return actual frequency
     uint baudrate = spi_init(spi0, 10'000'000);
-    xlog_debug("SPI0 baudrate: " << baudrate)
+    xlog_debug("SPI0 baudrate: " << baudrate);
 
     // Set the GPIO pin mux to the SPI
     gpio_set_function(SPI0_MISO_PIN, GPIO_FUNC_SPI);
@@ -44,7 +44,7 @@ void LIS2::update()
     gpio_put(SPI0_CSN_PIN, false);
 
     // send read command
-    spi_write_blocking(spi0, (uint8_t[]){0x80 | 0x28}, 1);
+    //spi_write_blocking(spi0, (uint8_t[]){0x80 | 0x28}, 1);
 
     // read 6 bytes
     uint8_t data[6];
@@ -59,7 +59,9 @@ void LIS2::update()
     int16_t z = (data[5] << 8) | data[4];
 
     // convert to m/s^2
-    _x = x * 0.000061f;
-    _y = y * 0.000061f;
-    _z = z * 0.000061f;
+    x = x * 0.000061f;
+    y = y * 0.000061f;
+    z = z * 0.000061f;
 }
+
+} // namespace Xerxes
