@@ -15,6 +15,7 @@
 #include "Generic/DIO/Cutter.hpp"
 #include "Generic/ds18b20/ds18b20.hpp"
 #include "Generic/Enviro/LightSound.hpp"
+#include "ST/LIS2.hpp"
 
 
 #endif // !__ALL_HPP

@@ -12,7 +12,7 @@ set(CMAKE_C_STANDARD 11)
 
 
 set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, "
-"SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS")
+"SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS, LIS2")
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
@@ -84,6 +84,9 @@ elseif(${DEVICE_TYPE} STREQUAL "temp")
 elseif(${DEVICE_TYPE} STREQUAL "EnviroLS")
     add_compile_definitions(__SHIELD_ENVIROLS)
     add_compile_definitions(__DEVICE_CLASS=LightSound)
+elseif(${DEVICE_TYPE} STREQUAL "LIS2")
+    add_compile_definitions(__SHIELD_LIS2)
+    add_compile_definitions(__DEVICE_CLASS=LIS2)
 else()
 	message(FATAL_ERROR "DEVICE_TYPE '${DEVICE_TYPE}' is incorrect, use -DDEVICE_TYPE=...\n${DEVICE_TYPE_HINT}")
 endif()
@@ -130,6 +133,7 @@ add_executable(
     src/Sensors/Generic/DIO/Cutter.cpp
     src/Sensors/Generic/ds18b20/ds18b20.cpp
     src/Sensors/Generic/Enviro/LightSound.cpp
+    src/Sensors/ST/LIS2.cpp
 
 	src/main.cpp
 )
