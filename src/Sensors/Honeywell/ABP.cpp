@@ -7,6 +7,7 @@
 #include <array>
 #include <sstream>
 #include <iostream>
+#include "Utils/Log.h"
 
 
 namespace Xerxes
@@ -72,9 +73,9 @@ void ABP::update()
     if(!isSpiDataOk(data, sizeof(data)))
     {
         // set error bit in error register - sensor is not connected
-        _reg->errorCheck(ERROR_MASK_SENSOR_CONNECTION);
+        _reg->errorSet(ERROR_MASK_SENSOR_CONNECTION);
         // set error bit in error register - sensor was not connected in past
-        _reg->errorCheck(ERROR_MASK_SENSOR_CONNECTION_MEM);  // set error flag
+        _reg->errorSet(ERROR_MASK_SENSOR_CONNECTION_MEM);  // set error flag
     }
     else
     {
@@ -87,9 +88,13 @@ void ABP::update()
     p_val = (uint16_t)(((data[0] & 0b00111111)<<8) + data[1]);
     t_val = (uint16_t)(((data[2]<<8) + (data[3] & 0b11100000))>>5);
     
-    *_reg->pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
-    *_reg->pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
+    float pressure = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
+    float temperature = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
 
+    *_reg->pv0 = pressure;
+    *_reg->pv3 = temperature;
+
+    std::cout << "ABP: p: " << pressure << " t: " << temperature << std::ľendl;
 
     // if calcStat is true, update statistics
     if(_reg->config->bits.calcStat)
