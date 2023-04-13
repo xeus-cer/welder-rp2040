@@ -12,8 +12,54 @@ namespace Xerxes
 // sensor specific variables
 constexpr float VALmin  = 1638.0;   // counts = 10% 2^14
 constexpr float VALmax  = 14745.0;  // counts = 90% 2^14
-constexpr float Pmin    = 0.0;      // mbar    
-constexpr float Pmax    = 60.0;    // mbar, or: 611.8298 mm
+constexpr float Pmin    = 0.0;      // Pa
+constexpr float Pmax    = 6000.0;    // Pa
+
+/**
+ * @brief Honeywell ABP sensor
+ * 
+ * @details Density of used monopropylene glycol is -1,09010989[kg/m³/°C]*temp[°C] + 1045,824176[kg/m³]
+ * 
+ * +------------+------------+
+ * | Temperature|   Density  |
+ * |    (°C)    |  (kg/m³)   |
+ * +------------+------------+
+ * |    -20     |    1067    |
+ * +------------+------------+
+ * |    -15     |    1062    |
+ * +------------+------------+
+ * |    -10     |    1057    |
+ * +------------+------------+
+ * |    -5      |    1051    |
+ * +------------+------------+
+ * |     0      |    1046    |
+ * +------------+------------+
+ * |     5      |    1041    |
+ * +------------+------------+
+ * |     10     |    1035    |
+ * +------------+------------+
+ * |     15     |    1030    |
+ * +------------+------------+
+ * |     20     |    1024    |
+ * +------------+------------+
+ * |     25     |    1019    |
+ * +------------+------------+
+ * |     30     |    1013    |
+ * +------------+------------+
+ * |     35     |    1007    |
+ * +------------+------------+
+ * |     40     |    1002    |
+ * +------------+------------+
+ * 
+ * 
+ * @note 
+ * 
+ * @see 
+ * 
+ * @ingroup Sensors
+ */
+
+//TODO: temperature compensation for density of monopropylene glycol (MPG)
 
 class ABP : public Sensor
 {

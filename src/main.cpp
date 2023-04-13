@@ -80,9 +80,9 @@ int main(void)
 
     watchdog_update();
     device = __DEVICE_CLASS(&_reg);
-
     device.init();
-
+    watchdog_update();
+    device.update();
     watchdog_update();
     
     if(useUsb)
