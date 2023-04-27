@@ -105,9 +105,9 @@ int main(void)
         // (float)(*_reg.desiredCycleTimeUs)) << "Hz" << "\n";
         cout << "\t\"samplingSpeedHz\": " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << ",\n";
         // print out device identification
-        cout << "\t\"deviceUID\": 0x" << hex << uint64_t(*_reg.uid) << dec << ",\n";
+        cout << "\t\"deviceUID\": " << uint64_t(*_reg.uid) << ",\n";
         // print out device address
-        cout << "\t\"deviceAddress\": " << int(*_reg.devAddress) << ",\n";
+        cout << "\t\"deviceAddress\": " << int(*_reg.devAddress) << "\n";
         
         cout << "}\n";
 
