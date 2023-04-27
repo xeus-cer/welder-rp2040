@@ -18,6 +18,8 @@
 #include "Communication/RS485.hpp"
 #include "Utils/Log.h"
 
+// preprocess token into string
+#define _quote(x) #x
 
 using namespace std;
 using namespace Xerxes;
@@ -96,10 +98,19 @@ int main(void)
             watchdog_update();
         }
         xlog_info("USB Connected");
-        // print out error register
-        cout << "error register: " << bitset<32>(*_reg.error) << endl;
+        cout << "{\n";
+        cout << "\t\"version\": \"" << __VERSION << "\",\n";
         // cout sampling speed in Hz
-        cout << "sampling speed: " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << "Hz" << endl;
+        // cout << "sampling speed: " << (1000000.0f /
+        // (float)(*_reg.desiredCycleTimeUs)) << "Hz" << "\n";
+        cout << "\t\"samplingSpeedHz\": " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << ",\n";
+        // print out device identification
+        cout << "\t\"deviceUID\": 0x" << hex << uint64_t(*_reg.uid) << dec << ",\n";
+        // print out device address
+        cout << "\t\"deviceAddress\": " << int(*_reg.devAddress) << ",\n";
+        
+        cout << "}\n";
+
         
         // set to free running mode and calculate statistics for usb uart mode so we can see the values
         _reg.config->bits.freeRun = 1;
@@ -144,9 +155,8 @@ int main(void)
             auto timestamp = time_us_64();
             cout << "{" << endl;
             cout << "\"timestamp\":" << timestamp << "," << endl;
-            cout << "\"samplingSpeedHz\":" << (1e6f / (float)(*_reg.desiredCycleTimeUs)) << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
-            cout << "\"errors\":" << (*_reg.error) << "," << endl;
+            cout << "\"errors\": 0b" << bitset<32>(*_reg.error) << ",\n";
                         
             // cout device values in json format
             cout << "\"device\":" << device.getJson() << endl;

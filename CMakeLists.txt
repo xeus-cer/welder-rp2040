@@ -19,6 +19,15 @@ set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, "
 set(PICO_BOARD "xerxes_rp2040")
 set(PICO_BOARD_HEADER_DIRS "${CMAKE_CURRENT_LIST_DIR}/src/Hardware/Board")
 
+# parse version and build number from git
+execute_process(
+    COMMAND git describe --long
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+add_compile_definitions(__VERSION="${VERSION}")
+
 # check if ${CLKDIV} is set and set it to 4 if not - necessary for some boards
 if(NOT DEFINED CLKDIV)
 	set(CLKDIV 4)
