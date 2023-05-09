@@ -100,19 +100,22 @@ void userInitGpio()
 
 void userLoadDefaultValues()
 {
-
+    // set default values for the registers
     for(uint i=0; i<REGISTER_SIZE; i++)
     {
         _reg.memTable[i] = 0;
     }
 
+    // set default values for the gains, unit gains 
     *_reg.gainPv0    = 1;
     *_reg.gainPv1    = 1;    
     *_reg.gainPv2    = 1;
     *_reg.gainPv3    = 1;
 
     *_reg.desiredCycleTimeUs = DEFAULT_CYCLE_TIME_US; 
-    _reg.config->all = 0;
+    _reg.config->bits.calcStat = 1;
+    _reg.config->bits.freeRun = 1;
+    *_reg.devAddress = __DEVICE_ADDRESS;
     updateFlash((uint8_t *)_reg.memTable);
 }
 

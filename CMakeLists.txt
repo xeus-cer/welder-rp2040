@@ -28,6 +28,13 @@ execute_process(
 )
 add_compile_definitions(__VERSION="${VERSION}")
 
+if(NOT DEFINED DEVICE_ADDRESS)
+    set(DEVICE_ADDRESS 0)
+endif()
+
+message("DEVICE_ADDRESS set to ${DEVICE_ADDRESS}")
+add_compile_definitions(__DEVICE_ADDRESS=${DEVICE_ADDRESS})
+
 # check if ${CLKDIV} is set and set it to 4 if not - necessary for some boards
 if(NOT DEFINED CLKDIV)
 	set(CLKDIV 4)
