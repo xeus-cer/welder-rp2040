@@ -80,13 +80,6 @@ int main(void)
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
 
-    watchdog_update();
-    device = __DEVICE_CLASS(&_reg);
-    device.init();
-    watchdog_update();
-    device.update();
-    watchdog_update();
-    
     if(useUsb)
     {
         // init usb uart
@@ -122,6 +115,14 @@ int main(void)
         userInitUart();
     }
 
+
+    watchdog_update();
+    device = __DEVICE_CLASS(&_reg);
+    device.init();
+    watchdog_update();
+    device.update();
+    watchdog_update();
+    
 
     // bind callbacks, ~204us
     xs.bind(MSGID_PING,         unicast(    pingCallback));
