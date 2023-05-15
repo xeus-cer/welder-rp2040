@@ -4,6 +4,7 @@
 #include "hardware/adc.h"
 #include <string>
 #include <sstream>
+#include "pico/time.h"
 
 
 namespace Xerxes
