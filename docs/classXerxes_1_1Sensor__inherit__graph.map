@@ -1,9 +1,13 @@
 <map id="Xerxes::Sensor" name="Xerxes::Sensor">
-<area shape="rect" id="node1" title="Sensor class." alt="" coords="149,80,267,107"/>
-<area shape="rect" id="node3" href="$classXerxes_1_1ABP.html" title=" " alt="" coords="5,155,107,181"/>
-<area shape="rect" id="node4" href="$classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="131,155,285,181"/>
-<area shape="rect" id="node5" href="$classXerxes_1_1SCL3X00.html" title=" " alt="" coords="309,155,441,181"/>
-<area shape="rect" id="node2" href="$classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="137,5,279,32"/>
-<area shape="rect" id="node6" href="$classXerxes_1_1SCL3300.html" title=" " alt="" coords="232,229,363,256"/>
-<area shape="rect" id="node7" href="$classXerxes_1_1SCL3400.html" title=" " alt="" coords="387,229,517,256"/>
+<area shape="rect" id="node1" title="Sensor class." alt="" coords="195,132,313,159"/>
+<area shape="rect" id="node3" href="$classXerxes_1_1ABP.html" title="Honeywell ABP sensor." alt="" coords="387,5,489,32"/>
+<area shape="rect" id="node4" href="$classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="361,56,515,83"/>
+<area shape="rect" id="node5" href="$classXerxes_1_1DS18B20.html" title=" " alt="" coords="371,107,505,133"/>
+<area shape="rect" id="node6" href="$classXerxes_1_1HX711.html" title="HX711 ADC." alt="" coords="379,157,497,184"/>
+<area shape="rect" id="node7" href="$classXerxes_1_1LightSound.html" title=" " alt="" coords="365,208,511,235"/>
+<area shape="rect" id="node8" href="$classXerxes_1_1SCL3X00.html" title=" " alt="" coords="372,259,504,285"/>
+<area shape="rect" id="node2" href="$classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="5,132,147,159"/>
+<area shape="rect" id="node9" href="$classXerxes_1_1SCL3300.html" title=" " alt="" coords="567,208,697,235"/>
+<area shape="rect" id="node10" href="$classXerxes_1_1SCL3300a.html" title=" " alt="" coords="563,259,701,285"/>
+<area shape="rect" id="node11" href="$classXerxes_1_1SCL3400.html" title=" " alt="" coords="567,309,697,336"/>
 </map>

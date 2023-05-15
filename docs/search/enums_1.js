@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['scl_5fstatus_5ft_975',['scl_status_t',['../namespaceXerxes.html#a0ea1ea83b2b2f3b4b2765b1d0090ae2f',1,'Xerxes']]]
+  ['error_5fnum_1331',['ERROR_NUM',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06b',1,'Errors.h']]]
 ];

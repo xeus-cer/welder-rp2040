@@ -77,50 +77,55 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Sensor_8hpp.html">Sensors/Sensor.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// sensor specific variables</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb">   12</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb">VALmin</a>  = 1638.0;   <span class="comment">// counts = 10% 2^14</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e">   13</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e">VALmax</a>  = 14745.0;  <span class="comment">// counts = 90% 2^14</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#ad5fa020590422fc04a71f016646bc7b4">   14</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#ad5fa020590422fc04a71f016646bc7b4">Pmin</a>    = 0.0;      <span class="comment">// mbar    </span></div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a37892881dc2ff7a76e6933fb5d68c1d0">   15</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#a37892881dc2ff7a76e6933fb5d68c1d0">Pmax</a>    = 60.0;    <span class="comment">// mbar, or: 611.8298 mm</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classXerxes_1_1ABP.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1ABP.html">ABP</a> : <span class="keyword">public</span> <a class="code" href="classXerxes_1_1Sensor.html">Sensor</a></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// typedef Sensor as super class for easier access</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classXerxes_1_1ABP.html#a4384312f6331fc4ff5f3a824e33e0162">   21</a></span>&#160;    <span class="keyword">typedef</span> <a class="code" href="classXerxes_1_1Sensor.html">Sensor</a> <a class="code" href="classXerxes_1_1ABP.html#a4384312f6331fc4ff5f3a824e33e0162">super</a>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">using</span> <a class="code" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Sensor::Sensor</a>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75">init</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a">update</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148">stop</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// friend operator&lt;&lt; for easy printing</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; <a class="code" href="classXerxes_1_1ABP.html#aa624a0a044e090a0fdc945a236f4f489">operator&lt;&lt;</a>(std::ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classXerxes_1_1ABP.html">ABP</a>&amp; abp);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <span class="comment">//namespace Xerxes</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__ABP_HPP</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// sensor specific variables</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb">   13</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb">VALmin</a>  = 1638.0;   <span class="comment">// counts = 10% 2^14</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e">   14</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e">VALmax</a>  = 14745.0;  <span class="comment">// counts = 90% 2^14</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#ad5fa020590422fc04a71f016646bc7b4">   15</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#ad5fa020590422fc04a71f016646bc7b4">Pmin</a>    = 0.0;      <span class="comment">// Pa</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="namespaceXerxes.html#a37892881dc2ff7a76e6933fb5d68c1d0">   16</a></span>&#160;constexpr <span class="keywordtype">float</span> <a class="code" href="namespaceXerxes.html#a37892881dc2ff7a76e6933fb5d68c1d0">Pmax</a>    = 6000.0;    <span class="comment">// Pa</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">//TODO: temperature compensation for density of monopropylene glycol (MPG)</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classXerxes_1_1ABP.html">   64</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXerxes_1_1ABP.html">ABP</a> : <span class="keyword">public</span> <a class="code" href="classXerxes_1_1Sensor.html">Sensor</a></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// typedef Sensor as super class for easier access</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classXerxes_1_1ABP.html#a4384312f6331fc4ff5f3a824e33e0162">   68</a></span>&#160;    <span class="keyword">typedef</span> <a class="code" href="classXerxes_1_1Sensor.html">Sensor</a> <a class="code" href="classXerxes_1_1ABP.html#a4384312f6331fc4ff5f3a824e33e0162">super</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> <a class="code" href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Sensor::Sensor</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75">init</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a">update</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148">stop</a>();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    std::string <a class="code" href="classXerxes_1_1ABP.html#a1d33d1aff84e8234147f64eca02ef9de">getJson</a>();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;} <span class="comment">//namespace Xerxes</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__ABP_HPP</span></div>
 <div class="ttc" id="aSensor_8hpp_html"><div class="ttname"><a href="Sensor_8hpp.html">Sensor.hpp</a></div></div>
-<div class="ttc" id="aclassXerxes_1_1ABP_html"><div class="ttname"><a href="classXerxes_1_1ABP.html">Xerxes::ABP</a></div><div class="ttdef"><b>Definition:</b> ABP.hpp:18</div></div>
-<div class="ttc" id="aclassXerxes_1_1ABP_html_a4384312f6331fc4ff5f3a824e33e0162"><div class="ttname"><a href="classXerxes_1_1ABP.html#a4384312f6331fc4ff5f3a824e33e0162">Xerxes::ABP::super</a></div><div class="ttdeci">Sensor super</div><div class="ttdef"><b>Definition:</b> ABP.hpp:21</div></div>
-<div class="ttc" id="aclassXerxes_1_1ABP_html_aa624a0a044e090a0fdc945a236f4f489"><div class="ttname"><a href="classXerxes_1_1ABP.html#aa624a0a044e090a0fdc945a236f4f489">Xerxes::ABP::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const ABP &amp;abp)</div><div class="ttdef"><b>Definition:</b> ABP.cpp:95</div></div>
-<div class="ttc" id="aclassXerxes_1_1ABP_html_ac13095f3edff5ec4c0f6160ff9ea9f75"><div class="ttname"><a href="classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75">Xerxes::ABP::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition:</b> ABP.cpp:23</div></div>
-<div class="ttc" id="aclassXerxes_1_1ABP_html_ac5432252805da4edc9d0842affa92b9a"><div class="ttname"><a href="classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a">Xerxes::ABP::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> ABP.cpp:51</div></div>
-<div class="ttc" id="aclassXerxes_1_1ABP_html_af33fa6b75b6aa8ee2a2fd7ef957c8148"><div class="ttname"><a href="classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148">Xerxes::ABP::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdef"><b>Definition:</b> ABP.cpp:13</div></div>
+<div class="ttc" id="aclassXerxes_1_1ABP_html"><div class="ttname"><a href="classXerxes_1_1ABP.html">Xerxes::ABP</a></div><div class="ttdoc">Honeywell ABP sensor.</div><div class="ttdef"><b>Definition:</b> ABP.hpp:65</div></div>
+<div class="ttc" id="aclassXerxes_1_1ABP_html_a1d33d1aff84e8234147f64eca02ef9de"><div class="ttname"><a href="classXerxes_1_1ABP.html#a1d33d1aff84e8234147f64eca02ef9de">Xerxes::ABP::getJson</a></div><div class="ttdeci">std::string getJson()</div><div class="ttdoc">Get the Json object - returns sensor data as json string.</div><div class="ttdef"><b>Definition:</b> ABP.cpp:128</div></div>
+<div class="ttc" id="aclassXerxes_1_1ABP_html_a4384312f6331fc4ff5f3a824e33e0162"><div class="ttname"><a href="classXerxes_1_1ABP.html#a4384312f6331fc4ff5f3a824e33e0162">Xerxes::ABP::super</a></div><div class="ttdeci">Sensor super</div><div class="ttdef"><b>Definition:</b> ABP.hpp:68</div></div>
+<div class="ttc" id="aclassXerxes_1_1ABP_html_ac13095f3edff5ec4c0f6160ff9ea9f75"><div class="ttname"><a href="classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75">Xerxes::ABP::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">Init the sensor.</div><div class="ttdef"><b>Definition:</b> ABP.cpp:27</div></div>
+<div class="ttc" id="aclassXerxes_1_1ABP_html_ac5432252805da4edc9d0842affa92b9a"><div class="ttname"><a href="classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a">Xerxes::ABP::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update the sensor.</div><div class="ttdef"><b>Definition:</b> ABP.cpp:56</div></div>
+<div class="ttc" id="aclassXerxes_1_1ABP_html_af33fa6b75b6aa8ee2a2fd7ef957c8148"><div class="ttname"><a href="classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148">Xerxes::ABP::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stop the sensor.</div><div class="ttdef"><b>Definition:</b> ABP.cpp:17</div></div>
 <div class="ttc" id="aclassXerxes_1_1Sensor_html"><div class="ttname"><a href="classXerxes_1_1Sensor.html">Xerxes::Sensor</a></div><div class="ttdoc">Sensor class.</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:22</div></div>
 <div class="ttc" id="aclassXerxes_1_1Sensor_html_a02d12a78bb21f35825cee309bf0ebc50"><div class="ttname"><a href="classXerxes_1_1Sensor.html#a02d12a78bb21f35825cee309bf0ebc50">Xerxes::Sensor::Sensor</a></div><div class="ttdeci">Sensor()</div><div class="ttdoc">Construct a new Sensor object without register for declaration.</div><div class="ttdef"><b>Definition:</b> Sensor.hpp:54</div></div>
-<div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
-<div class="ttc" id="anamespaceXerxes_html_a21c6373e8b61dfb956fe1f6296c7343e"><div class="ttname"><a href="namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e">Xerxes::VALmax</a></div><div class="ttdeci">constexpr float VALmax</div><div class="ttdef"><b>Definition:</b> ABP.hpp:13</div></div>
-<div class="ttc" id="anamespaceXerxes_html_a3746d63f68de2b558e0169959c01eecb"><div class="ttname"><a href="namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb">Xerxes::VALmin</a></div><div class="ttdeci">constexpr float VALmin</div><div class="ttdef"><b>Definition:</b> ABP.hpp:12</div></div>
-<div class="ttc" id="anamespaceXerxes_html_a37892881dc2ff7a76e6933fb5d68c1d0"><div class="ttname"><a href="namespaceXerxes.html#a37892881dc2ff7a76e6933fb5d68c1d0">Xerxes::Pmax</a></div><div class="ttdeci">constexpr float Pmax</div><div class="ttdef"><b>Definition:</b> ABP.hpp:15</div></div>
-<div class="ttc" id="anamespaceXerxes_html_ad5fa020590422fc04a71f016646bc7b4"><div class="ttname"><a href="namespaceXerxes.html#ad5fa020590422fc04a71f016646bc7b4">Xerxes::Pmin</a></div><div class="ttdeci">constexpr float Pmin</div><div class="ttdef"><b>Definition:</b> ABP.hpp:14</div></div>
+<div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> EspUart.hpp:12</div></div>
+<div class="ttc" id="anamespaceXerxes_html_a21c6373e8b61dfb956fe1f6296c7343e"><div class="ttname"><a href="namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e">Xerxes::VALmax</a></div><div class="ttdeci">constexpr float VALmax</div><div class="ttdef"><b>Definition:</b> ABP.hpp:14</div></div>
+<div class="ttc" id="anamespaceXerxes_html_a3746d63f68de2b558e0169959c01eecb"><div class="ttname"><a href="namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb">Xerxes::VALmin</a></div><div class="ttdeci">constexpr float VALmin</div><div class="ttdef"><b>Definition:</b> ABP.hpp:13</div></div>
+<div class="ttc" id="anamespaceXerxes_html_a37892881dc2ff7a76e6933fb5d68c1d0"><div class="ttname"><a href="namespaceXerxes.html#a37892881dc2ff7a76e6933fb5d68c1d0">Xerxes::Pmax</a></div><div class="ttdeci">constexpr float Pmax</div><div class="ttdef"><b>Definition:</b> ABP.hpp:16</div></div>
+<div class="ttc" id="anamespaceXerxes_html_ad5fa020590422fc04a71f016646bc7b4"><div class="ttname"><a href="namespaceXerxes.html#ad5fa020590422fc04a71f016646bc7b4">Xerxes::Pmin</a></div><div class="ttdeci">constexpr float Pmin</div><div class="ttdef"><b>Definition:</b> ABP.hpp:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

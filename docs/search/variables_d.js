@@ -1,27 +1,7 @@
 var searchData=
 [
-  ['rbpv0_922',['rbpv0',['../classXerxes_1_1Sensor.html#ae908d8217dd3f9b051e7056122490776',1,'Xerxes::Sensor']]],
-  ['rbpv1_923',['rbpv1',['../classXerxes_1_1Sensor.html#a87acd07143c327038e89d167b743b7d9',1,'Xerxes::Sensor']]],
-  ['rbpv2_924',['rbpv2',['../classXerxes_1_1Sensor.html#a45afcaeff7d6fc2af88e3497995568a2',1,'Xerxes::Sensor']]],
-  ['rbpv3_925',['rbpv3',['../classXerxes_1_1Sensor.html#a728140f325079168c196eabbf853788b',1,'Xerxes::Sensor']]],
-  ['read_5facc_5fx_926',['Read_ACC_X',['../namespaceCMD.html#acfb92fa297a2f46e8ab92f1b90393b66',1,'CMD']]],
-  ['read_5facc_5fy_927',['Read_ACC_Y',['../namespaceCMD.html#a2c4ce6188866c23e0262d9976b64dc75',1,'CMD']]],
-  ['read_5facc_5fz_928',['Read_ACC_Z',['../namespaceCMD.html#abe34bd30bd9599a314075f57c5338264',1,'CMD']]],
-  ['read_5fang_5fx_929',['Read_ANG_X',['../namespaceCMD.html#a448d6a18c029663297ab2f039c27b0b2',1,'CMD']]],
-  ['read_5fang_5fy_930',['Read_ANG_Y',['../namespaceCMD.html#a9be97fd46db78063974c51f30c33629d',1,'CMD']]],
-  ['read_5fang_5fz_931',['Read_ANG_Z',['../namespaceCMD.html#a29525cac4cc71d4aa810325c894eac04',1,'CMD']]],
-  ['read_5fcmd_932',['Read_CMD',['../namespaceCMD.html#a37520f64945aa06c2c6db611fbf3f65f',1,'CMD']]],
-  ['read_5fcurrent_5fbank_933',['Read_current_bank',['../namespaceCMD.html#a12f0519d4a7441f58a96feb55ded9507',1,'CMD']]],
-  ['read_5ferr_5fflag1_934',['Read_ERR_FLAG1',['../namespaceCMD.html#ae7ac93550020b2a327e7536617294cdf',1,'CMD']]],
-  ['read_5ferr_5fflag2_935',['Read_ERR_FLAG2',['../namespaceCMD.html#a3aec2054aed9cf2647f63517e728bb67',1,'CMD']]],
-  ['read_5fserial1_936',['Read_SERIAL1',['../namespaceCMD.html#a63f05dff9560bc31a01d4560db20ea6e',1,'CMD']]],
-  ['read_5fserial2_937',['Read_SERIAL2',['../namespaceCMD.html#a5602c52724874e029efd6650c6e876de',1,'CMD']]],
-  ['read_5fstatus_5fsummary_938',['Read_Status_Summary',['../namespaceCMD.html#a3161ed0680086c6bde34e0c360226572',1,'CMD']]],
-  ['read_5fsto_939',['Read_STO',['../namespaceCMD.html#af1675c07056237c9e37b580594612583',1,'CMD']]],
-  ['read_5ftemperature_940',['Read_Temperature',['../namespaceCMD.html#afb78827f2d060d6c3d3758babf36bf87',1,'CMD']]],
-  ['read_5fwhoami_941',['Read_WHOAMI',['../namespaceCMD.html#a498a381e1a4e652659af3d535980392a',1,'CMD']]],
-  ['rpbitdepth_942',['rpBitDepth',['../namespaceXerxes.html#aec0f1a0bb769b819d6d11851e83f26cb',1,'Xerxes']]],
-  ['rs_943',['RS',['../structXerxes_1_1SclPacket__t.html#aec086c7453c7c3fcece36f8f43b3898d',1,'Xerxes::SclPacket_t']]],
-  ['rw_944',['RW',['../structXerxes_1_1SclPacket__t.html#a8460d8d88e5475e49afa95b42e61039e',1,'Xerxes::SclPacket_t']]],
-  ['rxfifo_945',['rxFifo',['../InitUtils_8cpp.html#a305edaaaf817bb97719a802e039eb868',1,'rxFifo():&#160;InitUtils.cpp'],['../src_2main_8cpp.html#a305edaaaf817bb97719a802e039eb868',1,'rxFifo():&#160;main.cpp']]]
+  ['offsetpv0_1253',['offsetPv0',['../classXerxes_1_1Register.html#afe3aed90c002e514dce07e67ff7a06a0',1,'Xerxes::Register']]],
+  ['offsetpv1_1254',['offsetPv1',['../classXerxes_1_1Register.html#ad54cd8d27531196926b127a67513b73a',1,'Xerxes::Register']]],
+  ['offsetpv2_1255',['offsetPv2',['../classXerxes_1_1Register.html#a8ff9b180c441826de133c97b9fe2b6d4',1,'Xerxes::Register']]],
+  ['offsetpv3_1256',['offsetPv3',['../classXerxes_1_1Register.html#a9300ab0c36a337accaf02f17e4579fbd',1,'Xerxes::Register']]]
 ];

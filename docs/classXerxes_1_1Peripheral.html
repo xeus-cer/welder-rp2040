@@ -70,6 +70,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="classXerxes_1_1Peripheral-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Xerxes::Peripheral Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -85,15 +86,21 @@ Inheritance diagram for Xerxes::Peripheral:</div>
 <div class="dyncontent">
 <div class="center"><img src="classXerxes_1_1Peripheral__inherit__graph.png" border="0" usemap="#aXerxes_1_1Peripheral_inherit__map" alt="Inheritance graph"/></div>
 <map name="aXerxes_1_1Peripheral_inherit__map" id="aXerxes_1_1Peripheral_inherit__map">
-<area shape="rect" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="147,5,289,32"/>
-<area shape="rect" href="classXerxes_1_1DigitalInputOutput.html" title=" " alt="" coords="30,80,225,107"/>
-<area shape="rect" href="classXerxes_1_1Sensor.html" title="Sensor class." alt="" coords="277,80,396,107"/>
-<area shape="rect" href="classXerxes_1_1__4DI4DO.html" title=" " alt="" coords="5,155,137,181"/>
-<area shape="rect" href="classXerxes_1_1ABP.html" title=" " alt="" coords="162,155,263,181"/>
-<area shape="rect" href="classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="288,155,441,181"/>
-<area shape="rect" href="classXerxes_1_1SCL3X00.html" title=" " alt="" coords="465,155,597,181"/>
-<area shape="rect" href="classXerxes_1_1SCL3300.html" title=" " alt="" coords="389,229,519,256"/>
-<area shape="rect" href="classXerxes_1_1SCL3400.html" title=" " alt="" coords="543,229,674,256"/>
+<area shape="rect" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="5,132,147,159"/>
+<area shape="rect" href="classXerxes_1_1DigitalInputOutput.html" title=" " alt="" coords="195,56,389,83"/>
+<area shape="rect" href="classXerxes_1_1Sensor.html" title="Sensor class." alt="" coords="233,157,351,184"/>
+<area shape="rect" href="classXerxes_1_1__4DI4DO.html" title=" " alt="" coords="448,5,580,32"/>
+<area shape="rect" href="classXerxes_1_1Encoder.html" title=" " alt="" coords="645,5,771,32"/>
+<area shape="rect" href="classXerxes_1_1Cutter.html" title="Cutter class." alt="" coords="825,5,940,32"/>
+<area shape="rect" href="classXerxes_1_1ABP.html" title="Honeywell ABP sensor." alt="" coords="463,56,565,83"/>
+<area shape="rect" href="classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="437,107,591,133"/>
+<area shape="rect" href="classXerxes_1_1DS18B20.html" title=" " alt="" coords="447,157,581,184"/>
+<area shape="rect" href="classXerxes_1_1HX711.html" title="HX711 ADC." alt="" coords="455,208,573,235"/>
+<area shape="rect" href="classXerxes_1_1LightSound.html" title=" " alt="" coords="441,259,587,285"/>
+<area shape="rect" href="classXerxes_1_1SCL3X00.html" title=" " alt="" coords="448,309,580,336"/>
+<area shape="rect" href="classXerxes_1_1SCL3300.html" title=" " alt="" coords="643,259,773,285"/>
+<area shape="rect" href="classXerxes_1_1SCL3300a.html" title=" " alt="" coords="639,309,777,336"/>
+<area shape="rect" href="classXerxes_1_1SCL3400.html" title=" " alt="" coords="643,360,773,387"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -112,11 +119,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afda1ec989b48cf1002b20f115e388a55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">getDevid</a> ()</td></tr>
 <tr class="memdesc:afda1ec989b48cf1002b20f115e388a55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Devid object.  <a href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">More...</a><br /></td></tr>
 <tr class="separator:afda1ec989b48cf1002b20f115e388a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4acd2eaef7a43c1dda990558eeca5b79"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a4acd2eaef7a43c1dda990558eeca5b79">getJson</a> ()=0</td></tr>
+<tr class="separator:a4acd2eaef7a43c1dda990558eeca5b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a2185d22bbe15d320b8a7c009c63524a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a2185d22bbe15d320b8a7c009c63524a5">_devid</a> {0}</td></tr>
 <tr class="separator:a2185d22bbe15d320b8a7c009c63524a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a4a81d08bbd388c13db00087b742dec3f"><td class="memItemLeft" align="right" valign="top">constexpr static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a4a81d08bbd388c13db00087b742dec3f">_usInS</a> = 1000000</td></tr>
+<tr class="separator:a4a81d08bbd388c13db00087b742dec3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions - init, update, stop.">Peripheral</a> base class with pure virtual functions - init, update, stop. </p>
@@ -176,6 +190,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a4acd2eaef7a43c1dda990558eeca5b79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4acd2eaef7a43c1dda990558eeca5b79">&#9670;&nbsp;</a></span>getJson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string Xerxes::Peripheral::getJson </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classXerxes_1_1SCL3400.html#ae5915c6e8e52442050b491607ec31661">Xerxes::SCL3400</a>, <a class="el" href="classXerxes_1_1SCL3300a.html#aaf14a44d42a829e59100c45ad9bc8fb3">Xerxes::SCL3300a</a>, <a class="el" href="classXerxes_1_1SCL3300.html#a60e1c36c81f5a8bdefbe016bee518a4d">Xerxes::SCL3300</a>, <a class="el" href="classXerxes_1_1ABP.html#a1d33d1aff84e8234147f64eca02ef9de">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1HX711.html#a55f43b3497c263cc9b5dc49dd8b43906">Xerxes::HX711</a>, <a class="el" href="classXerxes_1_1LightSound.html#ac5604d096df8a530a53340c4be3a9975">Xerxes::LightSound</a>, <a class="el" href="classXerxes_1_1DS18B20.html#ae7d803887bc17a2ae76b799922c190fc">Xerxes::DS18B20</a>, <a class="el" href="classXerxes_1_1Encoder.html#aec00d5370f39c1217106b5715cc9bc86">Xerxes::Encoder</a>, <a class="el" href="classXerxes_1_1DigitalInputOutput.html#a08f0aadd7e77a831eb8561cd4574eaf7">Xerxes::DigitalInputOutput</a>, and <a class="el" href="classXerxes_1_1AnalogInput.html#ae3413661e3538914dd7af7e757da7d85">Xerxes::AnalogInput</a>.</p>
+
+</div>
+</div>
 <a id="a9eb6ccb588446e6bbad898b961bc1168"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9eb6ccb588446e6bbad898b961bc1168">&#9670;&nbsp;</a></span>init()</h2>
 
@@ -199,7 +240,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classXerxes_1_1SCL3400.html#ab76f2355f722bea477cde61f37663383">Xerxes::SCL3400</a>, <a class="el" href="classXerxes_1_1SCL3300.html#a8e47941d4d9ad1657a74c6ad8845fde5">Xerxes::SCL3300</a>, <a class="el" href="classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1AnalogInput.html#a1b79c5c8b43bacbe43c75322f03112a3">Xerxes::AnalogInput</a>, and <a class="el" href="classXerxes_1_1__4DI4DO.html#ab696a58722dad6c8f51d0291722ea486">Xerxes::_4DI4DO</a>.</p>
+<p>Implemented in <a class="el" href="classXerxes_1_1SCL3400.html#ab76f2355f722bea477cde61f37663383">Xerxes::SCL3400</a>, <a class="el" href="classXerxes_1_1SCL3300a.html#a4ba4e514fe2ba71daf61934324ac3ecd">Xerxes::SCL3300a</a>, <a class="el" href="classXerxes_1_1SCL3300.html#a8e47941d4d9ad1657a74c6ad8845fde5">Xerxes::SCL3300</a>, <a class="el" href="classXerxes_1_1ABP.html#ac13095f3edff5ec4c0f6160ff9ea9f75">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1HX711.html#a9cb297e094ccacfc5bd3d5588d230c23">Xerxes::HX711</a>, <a class="el" href="classXerxes_1_1LightSound.html#a37e78aa2087729dbf65dc808da27accd">Xerxes::LightSound</a>, <a class="el" href="classXerxes_1_1DS18B20.html#ace6600194e2a915e5f87a65c13e89c68">Xerxes::DS18B20</a>, <a class="el" href="classXerxes_1_1Encoder.html#a16b14da7a3c594d0989960b3ab7e04e7">Xerxes::Encoder</a>, <a class="el" href="classXerxes_1_1Cutter.html#a3c4b2d2265670b5b70b7f2b923dba5ca">Xerxes::Cutter</a>, <a class="el" href="classXerxes_1_1__4DI4DO.html#ab696a58722dad6c8f51d0291722ea486">Xerxes::_4DI4DO</a>, and <a class="el" href="classXerxes_1_1AnalogInput.html#a1b79c5c8b43bacbe43c75322f03112a3">Xerxes::AnalogInput</a>.</p>
 
 </div>
 </div>
@@ -226,7 +267,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classXerxes_1_1SCL3X00.html#a0b4ebf3ee67ae632d29d4cd18b2c3764">Xerxes::SCL3X00</a>, <a class="el" href="classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1DigitalInputOutput.html#a6baea0f325242453b46b1ae7955a8296">Xerxes::DigitalInputOutput</a>, and <a class="el" href="classXerxes_1_1AnalogInput.html#a5060a761add87a2792ad2932a9d95633">Xerxes::AnalogInput</a>.</p>
+<p>Implemented in <a class="el" href="classXerxes_1_1SCL3X00.html#a0b4ebf3ee67ae632d29d4cd18b2c3764">Xerxes::SCL3X00</a>, <a class="el" href="classXerxes_1_1ABP.html#af33fa6b75b6aa8ee2a2fd7ef957c8148">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1HX711.html#a093907d86733b00c46b9aa2731c0d5dd">Xerxes::HX711</a>, <a class="el" href="classXerxes_1_1LightSound.html#a8ed92dcf20dac2a90bbb022a6be514b7">Xerxes::LightSound</a>, <a class="el" href="classXerxes_1_1DS18B20.html#a5094cadd9caac070f43ee11a72589078">Xerxes::DS18B20</a>, <a class="el" href="classXerxes_1_1DigitalInputOutput.html#a6baea0f325242453b46b1ae7955a8296">Xerxes::DigitalInputOutput</a>, and <a class="el" href="classXerxes_1_1AnalogInput.html#a5060a761add87a2792ad2932a9d95633">Xerxes::AnalogInput</a>.</p>
 
 </div>
 </div>
@@ -253,7 +294,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classXerxes_1_1Sensor.html#a848cc965bedd095f0fe421371ec54065">Xerxes::Sensor</a>, <a class="el" href="classXerxes_1_1SCL3400.html#a7ada0e7b142704dd0ae1b269ec0c6933">Xerxes::SCL3400</a>, <a class="el" href="classXerxes_1_1SCL3300.html#a230fb3622423c0001b456238c8fc0f9b">Xerxes::SCL3300</a>, <a class="el" href="classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315">Xerxes::DigitalInputOutput</a>, <a class="el" href="classXerxes_1_1AnalogInput.html#aba2e6c6055860fde97cf7723f713bed9">Xerxes::AnalogInput</a>, and <a class="el" href="classXerxes_1_1__4DI4DO.html#a48540e72f7900a2a5dd014e1379c7563">Xerxes::_4DI4DO</a>.</p>
+<p>Implemented in <a class="el" href="classXerxes_1_1Sensor.html#a848cc965bedd095f0fe421371ec54065">Xerxes::Sensor</a>, <a class="el" href="classXerxes_1_1SCL3400.html#a7ada0e7b142704dd0ae1b269ec0c6933">Xerxes::SCL3400</a>, <a class="el" href="classXerxes_1_1SCL3300a.html#acafb1ba1b358db8ac3c0919b50b8f339">Xerxes::SCL3300a</a>, <a class="el" href="classXerxes_1_1SCL3300.html#a230fb3622423c0001b456238c8fc0f9b">Xerxes::SCL3300</a>, <a class="el" href="classXerxes_1_1ABP.html#ac5432252805da4edc9d0842affa92b9a">Xerxes::ABP</a>, <a class="el" href="classXerxes_1_1HX711.html#a63cc07526aaf5f0e4a9f43a342dc521d">Xerxes::HX711</a>, <a class="el" href="classXerxes_1_1LightSound.html#a3322be8cfdb978e3882fcc0036e999e4">Xerxes::LightSound</a>, <a class="el" href="classXerxes_1_1DS18B20.html#a7fbf16f46b24bbef3c7e3558aa0c721f">Xerxes::DS18B20</a>, <a class="el" href="classXerxes_1_1Encoder.html#a32bde9b6b8a38c840b465b2ff8290d82">Xerxes::Encoder</a>, <a class="el" href="classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315">Xerxes::DigitalInputOutput</a>, <a class="el" href="classXerxes_1_1Cutter.html#a4e80a78ee013993cfe3cf8572dc8e602">Xerxes::Cutter</a>, <a class="el" href="classXerxes_1_1__4DI4DO.html#a48540e72f7900a2a5dd014e1379c7563">Xerxes::_4DI4DO</a>, and <a class="el" href="classXerxes_1_1AnalogInput.html#aba2e6c6055860fde97cf7723f713bed9">Xerxes::AnalogInput</a>.</p>
 
 </div>
 </div>
@@ -274,6 +315,28 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a81d08bbd388c13db00087b742dec3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a81d08bbd388c13db00087b742dec3f">&#9670;&nbsp;</a></span>_usInS</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr static uint32_t Xerxes::Peripheral::_usInS = 1000000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: src/Sensors/Generic/DigitalInputOutput.hpp Source File</title>
+<title>Sensor RP2040: src/Sensors/Generic/DIO/DigitalInputOutput.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_afe58f6d0ef7eec69c2706509daaefe7.html">Sensors</a></li><li class="navelem"><a class="el" href="dir_3c1e1a5b7c62d3caa221551e0ecce290.html">Generic</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_afe58f6d0ef7eec69c2706509daaefe7.html">Sensors</a></li><li class="navelem"><a class="el" href="dir_3c1e1a5b7c62d3caa221551e0ecce290.html">Generic</a></li><li class="navelem"><a class="el" href="dir_f43fdd542793310a31d232a1cac5f0e0.html">DIO</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -77,7 +77,7 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Peripheral_8hpp.html">Sensors/Peripheral.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Register_8hpp.html">Core/Register.hpp</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="xerxes__rp2040_8h.html">Hardware/Board/xerxes_rp2040.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceXerxes.html">Xerxes</a></div>
@@ -91,48 +91,55 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#aee5c32e1dbd16a9d869290f022eb9e05">   19</a></span>&#160;    uint32_t <a class="code" href="classXerxes_1_1DigitalInputOutput.html#aee5c32e1dbd16a9d869290f022eb9e05">used_iomask</a> = <a class="code" href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">SHIELD_MASK</a>;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7">   27</a></span>&#160;    <a class="code" href="classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7">DigitalInputOutput</a>(<a class="code" href="classXerxes_1_1Register.html">Register</a> *reg) : </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <a class="code" href="classXerxes_1_1DigitalInputOutput.html#abf4f7dd48e1f2740b7ff75d541be3d77">_reg</a>(reg)</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {};</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5">   36</a></span>&#160;    <a class="code" href="classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5">DigitalInputOutput</a>() : </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="classXerxes_1_1DigitalInputOutput.html#abf4f7dd48e1f2740b7ff75d541be3d77">_reg</a>(nullptr)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {};</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a992bca4db142524517dc15736777b6bc">~DigitalInputOutput</a>();</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">init</a>(uint32_t iomask, uint32_t direction);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315">update</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a6baea0f325242453b46b1ae7955a8296">stop</a>();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">friend</span> std::ostream&amp; <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a15e59a25feb7c0b3492e42520a7c2568">operator&lt;&lt;</a>(std::ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classXerxes_1_1DigitalInputOutput.html">DigitalInputOutput</a>&amp; dt);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;};</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#aa17eb1e00258f52f5fd6ac03adc4e314">   21</a></span>&#160;    constexpr <span class="keyword">static</span> uint32_t <a class="code" href="classXerxes_1_1DigitalInputOutput.html#aa17eb1e00258f52f5fd6ac03adc4e314">_updateRateHz</a> = 10000;  <span class="comment">// update frequency in Hz</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#a1d1d8ace8dd05ceb6c2ba9c3f46aa5ee">   22</a></span>&#160;    constexpr <span class="keyword">static</span> uint32_t <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a1d1d8ace8dd05ceb6c2ba9c3f46aa5ee">_updateRateUs</a> = <a class="code" href="classXerxes_1_1Peripheral.html#a4a81d08bbd388c13db00087b742dec3f">_usInS</a> / <a class="code" href="classXerxes_1_1DigitalInputOutput.html#aa17eb1e00258f52f5fd6ac03adc4e314">_updateRateHz</a>;  <span class="comment">// update rate in microseconds</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7">   30</a></span>&#160;    <a class="code" href="classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7">DigitalInputOutput</a>(<a class="code" href="classXerxes_1_1Register.html">Register</a> *reg) : </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <a class="code" href="classXerxes_1_1DigitalInputOutput.html#abf4f7dd48e1f2740b7ff75d541be3d77">_reg</a>(reg)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5">   39</a></span>&#160;    <a class="code" href="classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5">DigitalInputOutput</a>() : </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="classXerxes_1_1DigitalInputOutput.html#abf4f7dd48e1f2740b7ff75d541be3d77">_reg</a>(nullptr)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a992bca4db142524517dc15736777b6bc">~DigitalInputOutput</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">init</a>(uint32_t iomask, uint32_t direction);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315">update</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a6baea0f325242453b46b1ae7955a8296">stop</a>();</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}   <span class="comment">// namespace Xerxes</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__DIGITALINPUTOUTPUT_HPP</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    std::string <a class="code" href="classXerxes_1_1DigitalInputOutput.html#a08f0aadd7e77a831eb8561cd4574eaf7">getJson</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}   <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__DIGITALINPUTOUTPUT_HPP</span></div>
 <div class="ttc" id="aPeripheral_8hpp_html"><div class="ttname"><a href="Peripheral_8hpp.html">Peripheral.hpp</a></div></div>
 <div class="ttc" id="aRegister_8hpp_html"><div class="ttname"><a href="Register_8hpp.html">Register.hpp</a></div></div>
 <div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html">Xerxes::DigitalInputOutput</a></div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:15</div></div>
-<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a15e59a25feb7c0b3492e42520a7c2568"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a15e59a25feb7c0b3492e42520a7c2568">Xerxes::DigitalInputOutput::operator&lt;&lt;</a></div><div class="ttdeci">friend std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const DigitalInputOutput &amp;dt)</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:48</div></div>
-<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a6346c594f4401d46115d3c0ea90b4315"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315">Xerxes::DigitalInputOutput::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update the DIO.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:31</div></div>
-<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a6baea0f325242453b46b1ae7955a8296"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a6baea0f325242453b46b1ae7955a8296">Xerxes::DigitalInputOutput::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stop the DIO.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:41</div></div>
-<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a992bca4db142524517dc15736777b6bc"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a992bca4db142524517dc15736777b6bc">Xerxes::DigitalInputOutput::~DigitalInputOutput</a></div><div class="ttdeci">~DigitalInputOutput()</div><div class="ttdoc">Destroy the Digital Input Output object.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:12</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a08f0aadd7e77a831eb8561cd4574eaf7"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a08f0aadd7e77a831eb8561cd4574eaf7">Xerxes::DigitalInputOutput::getJson</a></div><div class="ttdeci">std::string getJson()</div><div class="ttdoc">Get the Json object - returns sensor data as json string.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:53</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a1d1d8ace8dd05ceb6c2ba9c3f46aa5ee"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a1d1d8ace8dd05ceb6c2ba9c3f46aa5ee">Xerxes::DigitalInputOutput::_updateRateUs</a></div><div class="ttdeci">constexpr static uint32_t _updateRateUs</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:22</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a6346c594f4401d46115d3c0ea90b4315"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a6346c594f4401d46115d3c0ea90b4315">Xerxes::DigitalInputOutput::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Update the DIO.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:36</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a6baea0f325242453b46b1ae7955a8296"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a6baea0f325242453b46b1ae7955a8296">Xerxes::DigitalInputOutput::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Stop the DIO.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:46</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_a992bca4db142524517dc15736777b6bc"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#a992bca4db142524517dc15736777b6bc">Xerxes::DigitalInputOutput::~DigitalInputOutput</a></div><div class="ttdeci">~DigitalInputOutput()</div><div class="ttdoc">Destroy the Digital Input Output object.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.cpp:13</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_aa17eb1e00258f52f5fd6ac03adc4e314"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#aa17eb1e00258f52f5fd6ac03adc4e314">Xerxes::DigitalInputOutput::_updateRateHz</a></div><div class="ttdeci">constexpr static uint32_t _updateRateHz</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:21</div></div>
 <div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_abf4f7dd48e1f2740b7ff75d541be3d77"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#abf4f7dd48e1f2740b7ff75d541be3d77">Xerxes::DigitalInputOutput::_reg</a></div><div class="ttdeci">Register * _reg</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:17</div></div>
-<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_ae8c4f845feabdcb09e9908d62778cde7"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7">Xerxes::DigitalInputOutput::DigitalInputOutput</a></div><div class="ttdeci">DigitalInputOutput(Register *reg)</div><div class="ttdoc">Construct a new Digital Input Output object.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:27</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_ae8c4f845feabdcb09e9908d62778cde7"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7">Xerxes::DigitalInputOutput::DigitalInputOutput</a></div><div class="ttdeci">DigitalInputOutput(Register *reg)</div><div class="ttdoc">Construct a new Digital Input Output object.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:30</div></div>
 <div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_aee5c32e1dbd16a9d869290f022eb9e05"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#aee5c32e1dbd16a9d869290f022eb9e05">Xerxes::DigitalInputOutput::used_iomask</a></div><div class="ttdeci">uint32_t used_iomask</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:19</div></div>
-<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_affb495519b1d65613cc8e5dbc546e6c5"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5">Xerxes::DigitalInputOutput::DigitalInputOutput</a></div><div class="ttdeci">DigitalInputOutput()</div><div class="ttdoc">Construct a new Digital Input Output object.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:36</div></div>
-<div class="ttc" id="aclassXerxes_1_1Peripheral_html"><div class="ttname"><a href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></div><div class="ttdoc">Peripheral base class with pure virtual functions - init, update, stop.</div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:17</div></div>
+<div class="ttc" id="aclassXerxes_1_1DigitalInputOutput_html_affb495519b1d65613cc8e5dbc546e6c5"><div class="ttname"><a href="classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5">Xerxes::DigitalInputOutput::DigitalInputOutput</a></div><div class="ttdeci">DigitalInputOutput()</div><div class="ttdoc">Construct a new Digital Input Output object.</div><div class="ttdef"><b>Definition:</b> DigitalInputOutput.hpp:39</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html"><div class="ttname"><a href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></div><div class="ttdoc">Peripheral base class with pure virtual functions - init, update, stop.</div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:29</div></div>
+<div class="ttc" id="aclassXerxes_1_1Peripheral_html_a4a81d08bbd388c13db00087b742dec3f"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a4a81d08bbd388c13db00087b742dec3f">Xerxes::Peripheral::_usInS</a></div><div class="ttdeci">constexpr static uint32_t _usInS</div><div class="ttdef"><b>Definition:</b> Peripheral.hpp:35</div></div>
 <div class="ttc" id="aclassXerxes_1_1Peripheral_html_a9eb6ccb588446e6bbad898b961bc1168"><div class="ttname"><a href="classXerxes_1_1Peripheral.html#a9eb6ccb588446e6bbad898b961bc1168">Xerxes::Peripheral::init</a></div><div class="ttdeci">virtual void init()=0</div></div>
-<div class="ttc" id="aclassXerxes_1_1Register_html"><div class="ttname"><a href="classXerxes_1_1Register.html">Xerxes::Register</a></div><div class="ttdoc">Register class for storing all data in memory mapped registers.</div><div class="ttdef"><b>Definition:</b> Register.hpp:23</div></div>
-<div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
+<div class="ttc" id="aclassXerxes_1_1Register_html"><div class="ttname"><a href="classXerxes_1_1Register.html">Xerxes::Register</a></div><div class="ttdoc">Register class for storing all data in memory mapped registers.</div><div class="ttdef"><b>Definition:</b> Register.hpp:112</div></div>
+<div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> EspUart.hpp:12</div></div>
 <div class="ttc" id="axerxes__rp2040_8h_html"><div class="ttname"><a href="xerxes__rp2040_8h.html">xerxes_rp2040.h</a></div></div>
 <div class="ttc" id="axerxes__rp2040_8h_html_a3b4d947bc567b9ea3e1e0e8f3039001d"><div class="ttname"><a href="xerxes__rp2040_8h.html#a3b4d947bc567b9ea3e1e0e8f3039001d">SHIELD_MASK</a></div><div class="ttdeci">#define SHIELD_MASK</div><div class="ttdoc">Mask of pins that are used by the shield and not used by the board, eq. 0x3fc0033f.</div><div class="ttdef"><b>Definition:</b> xerxes_rp2040.h:64</div></div>
 </div><!-- fragment --></div><!-- contents -->

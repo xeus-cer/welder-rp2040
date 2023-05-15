@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bind_677',['bind',['../classXerxes_1_1Slave.html#ac5cce6695ed7252cb33e81885b1045de',1,'Xerxes::Slave']]],
-  ['broadcast_678',['broadcast',['../namespaceXerxes.html#a2f42f1b786d92d0443597b573909b84f',1,'Xerxes']]]
+  ['at_922',['at',['../classXerxes_1_1Message.html#a19e66bddbcd2fb0958f903acc8414505',1,'Xerxes::Message::at()'],['../classXerxes_1_1Packet.html#a6a294f31d0324a5e1e0140a0a1d951e1',1,'Xerxes::Packet::at()']]]
 ];
