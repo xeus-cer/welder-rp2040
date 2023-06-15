@@ -13,6 +13,7 @@
 #include "Generic/hx711.hpp"
 #include "Generic/DIO/Encoder.hpp"
 #include "Generic/DIO/Cutter.hpp"
+#include "Generic/DIO/Tier.hpp"
 #include "Generic/ds18b20/ds18b20.hpp"
 #include "Generic/Enviro/LightSound.hpp"
 

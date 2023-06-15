@@ -16,7 +16,7 @@
 
 extern Xerxes::Slave xs;
 extern Xerxes::Register _reg;
-extern Xerxes::__DEVICE_CLASS device;
+extern __DEVICE_CLASS device;
 
 
 namespace Xerxes
