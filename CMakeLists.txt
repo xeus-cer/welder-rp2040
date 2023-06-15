@@ -57,52 +57,11 @@ elseif(${LOG_LEVEL} EQUAL 5)
     message("LOG_LEVEL set to ${LOG_LEVEL} = TRACE")
 endif()
 
-# check if ${DEVICE_TYPE} is set
-if(NOT DEFINED DEVICE_TYPE)
-	message(FATAL_ERROR "DEVICE_TYPE not set, use -DSENSOR_TYPE=...\n${DEVICE_TYPE_HINT}")
-endif()
-
-# this is the sensor type we are using, we need to set this to use the correct sensor header
-if(${DEVICE_TYPE} STREQUAL "SCL3300")
-	add_compile_definitions(__SHIELD_SCL3300)
-	add_compile_definitions(__DEVICE_CLASS=SCL3300)
-elseif(${DEVICE_TYPE} STREQUAL "SCL3300a")
-	add_compile_definitions(__SHIELD_SCL3300)
-	add_compile_definitions(__DEVICE_CLASS=SCL3300a)
-elseif(${DEVICE_TYPE} STREQUAL "SCL3400")
-	add_compile_definitions(__SHIELD_SCL3400)
-	add_compile_definitions(__DEVICE_CLASS=SCL3400)
-elseif(${DEVICE_TYPE} STREQUAL "AI")
-	add_compile_definitions(__SHIELD_AI)
-	add_compile_definitions(__DEVICE_CLASS=AnalogInput)
-elseif(${DEVICE_TYPE} STREQUAL "AnalogInput")
-	add_compile_definitions(__SHIELD_AI)
-	add_compile_definitions(__DEVICE_CLASS=AnalogInput)
-elseif(${DEVICE_TYPE} STREQUAL "4DI4DO")
-	add_compile_definitions(__SHIELD_4DI4DO)
-	add_compile_definitions(__DEVICE_CLASS=_4DI4DO)
-elseif(${DEVICE_TYPE} STREQUAL "ABP")
-	add_compile_definitions(__SHIELD_ABP)
-	add_compile_definitions(__DEVICE_CLASS=ABP)
-elseif(${DEVICE_TYPE} STREQUAL "hx711")
-	add_compile_definitions(__SHIELD_HX711)
-	add_compile_definitions(__DEVICE_CLASS=HX711)
-elseif(${DEVICE_TYPE} STREQUAL "Encoder")
-    add_compile_definitions(__SHIELD_ENCODER)
-    add_compile_definitions(__DEVICE_CLASS=Encoder)
-elseif(${DEVICE_TYPE} STREQUAL "Cutter")
-    add_compile_definitions(__SHIELD_CUTTER)
-    add_compile_definitions(__TIGHTLOOP)
-    add_compile_definitions(__DEVICE_CLASS=Cutter)
-elseif(${DEVICE_TYPE} STREQUAL "temp")
-    add_compile_definitions(__SHIELD_TEMP)
-    add_compile_definitions(__DEVICE_CLASS=DS18B20)
-elseif(${DEVICE_TYPE} STREQUAL "EnviroLS")
-    add_compile_definitions(__SHIELD_ENVIROLS)
-    add_compile_definitions(__DEVICE_CLASS=LightSound)
-else()
-	message(FATAL_ERROR "DEVICE_TYPE '${DEVICE_TYPE}' is incorrect, use -DDEVICE_TYPE=...\n${DEVICE_TYPE_HINT}")
-endif()
+set(DEVICE_TYPE_HINT "${DEVICE_TYPE_HINT}, Tier")
+set(DEVICE_TYPE "Tier")
+add_compile_definitions(__SHIELD_TIER)
+add_compile_definitions(__DEVICE_CLASS=Xeus::Tier)
+add_compile_definitions(__TIGHTLOOP)
 
 # print warning to clearly show which device type is used and which CLKDIV is set
 message(WARNING "\nDEVICE_TYPE set to '${DEVICE_TYPE}'."
@@ -146,6 +105,7 @@ add_executable(
     src/Sensors/Generic/DIO/Cutter.cpp
     src/Sensors/Generic/ds18b20/ds18b20.cpp
     src/Sensors/Generic/Enviro/LightSound.cpp
+	src/Sensors/Generic/DIO/Tier.cpp
 
 	src/main.cpp
 )
