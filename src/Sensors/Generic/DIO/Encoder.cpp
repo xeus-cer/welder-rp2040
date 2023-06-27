@@ -47,21 +47,6 @@ void Encoder::encoderIrqHandler(uint gpio)
             (*encoderVal) --;
         } 
     }
-    if(pinZ)
-    {
-        int8_t _add = 0;
-        if((*encoderVal) % 1000 >= 500 && (*encoderVal) > 0) 
-        {
-            _add = 1;
-        }
-        if((*encoderVal) % 1000 < -500 && (*encoderVal) < 0)
-        {
-            _add = -1;
-        }
-        {
-            (*encoderVal) = (_add + int((*encoderVal) / 1000)) * 1000;
-        }
-    }
 }
 
 
