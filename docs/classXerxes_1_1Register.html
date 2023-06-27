@@ -97,105 +97,150 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9bd5c8e4de8d4e672a3a91c6ef2aee82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac54032e0252b604762987dca08eac712"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ac54032e0252b604762987dca08eac712">~Register</a> ()</td></tr>
 <tr class="separator:ac54032e0252b604762987dca08eac712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf8f05db0e107ad5edf94378946e1c40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#abf8f05db0e107ad5edf94378946e1c40">errorSet</a> (const uint64_t &amp;errorBit)</td></tr>
+<tr class="memdesc:abf8f05db0e107ad5edf94378946e1c40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the error bit.  <a href="classXerxes_1_1Register.html#abf8f05db0e107ad5edf94378946e1c40">More...</a><br /></td></tr>
+<tr class="separator:abf8f05db0e107ad5edf94378946e1c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174aeb54f02b2212a2f4826dac6845a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a174aeb54f02b2212a2f4826dac6845a8">errorClear</a> (const uint64_t &amp;errorBit)</td></tr>
+<tr class="memdesc:a174aeb54f02b2212a2f4826dac6845a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear the error bit.  <a href="classXerxes_1_1Register.html#a174aeb54f02b2212a2f4826dac6845a8">More...</a><br /></td></tr>
+<tr class="separator:a174aeb54f02b2212a2f4826dac6845a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a336ff866b43a24d653a6767a80742a3e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a336ff866b43a24d653a6767a80742a3e">errorCheck</a> (const uint64_t &amp;errorBit)</td></tr>
+<tr class="memdesc:a336ff866b43a24d653a6767a80742a3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the error bit is set.  <a href="classXerxes_1_1Register.html#a336ff866b43a24d653a6767a80742a3e">More...</a><br /></td></tr>
+<tr class="separator:a336ff866b43a24d653a6767a80742a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae49fb471363ad7668982c16aabd1e95d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> [<a class="el" href="Definitions_8h.html#abe2f7b6344bb4d51dfea9c9f58609427">REGISTER_SIZE</a>]</td></tr>
 <tr class="separator:ae49fb471363ad7668982c16aabd1e95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbe6a4312bcfcdc1d5d6c4910ad8c6b5"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#acbe6a4312bcfcdc1d5d6c4910ad8c6b5">gainPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d">GAIN_PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:acbe6a4312bcfcdc1d5d6c4910ad8c6b5"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#acbe6a4312bcfcdc1d5d6c4910ad8c6b5">gainPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ae820f53ebbdb8cc370d492aefb438c6d">GAIN_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:acbe6a4312bcfcdc1d5d6c4910ad8c6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4793b23d79b48517d304ef87806770e0"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a4793b23d79b48517d304ef87806770e0">gainPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a7cefdb9c40ac079711a14e964bc52c57">GAIN_PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:a4793b23d79b48517d304ef87806770e0"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a4793b23d79b48517d304ef87806770e0">gainPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a7cefdb9c40ac079711a14e964bc52c57">GAIN_PV1_OFFSET</a>)</td></tr>
 <tr class="separator:a4793b23d79b48517d304ef87806770e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb4eee309c90c7ab5d90a2df022172fe"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#adb4eee309c90c7ab5d90a2df022172fe">gainPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#aa5de2bb4f617035815e182fcb5e82c53">GAIN_PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:adb4eee309c90c7ab5d90a2df022172fe"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#adb4eee309c90c7ab5d90a2df022172fe">gainPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aa5de2bb4f617035815e182fcb5e82c53">GAIN_PV2_OFFSET</a>)</td></tr>
 <tr class="separator:adb4eee309c90c7ab5d90a2df022172fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e43e88c04cdcdf87fc249e7141ed970"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a5e43e88c04cdcdf87fc249e7141ed970">gainPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f">GAIN_PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:a5e43e88c04cdcdf87fc249e7141ed970"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a5e43e88c04cdcdf87fc249e7141ed970">gainPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f">GAIN_PV3_OFFSET</a>)</td></tr>
 <tr class="separator:a5e43e88c04cdcdf87fc249e7141ed970"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe3aed90c002e514dce07e67ff7a06a0"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#afe3aed90c002e514dce07e67ff7a06a0">offsetPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a61c9edcc0849edeb8a440f675ec30e6f">OFFSET_PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:afe3aed90c002e514dce07e67ff7a06a0"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#afe3aed90c002e514dce07e67ff7a06a0">offsetPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a61c9edcc0849edeb8a440f675ec30e6f">OFFSET_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:afe3aed90c002e514dce07e67ff7a06a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad54cd8d27531196926b127a67513b73a"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad54cd8d27531196926b127a67513b73a">offsetPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a9221f2f28c59dd1642ddfeb8f7937710">OFFSET_PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:ad54cd8d27531196926b127a67513b73a"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad54cd8d27531196926b127a67513b73a">offsetPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a9221f2f28c59dd1642ddfeb8f7937710">OFFSET_PV1_OFFSET</a>)</td></tr>
 <tr class="separator:ad54cd8d27531196926b127a67513b73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ff9b180c441826de133c97b9fe2b6d4"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8ff9b180c441826de133c97b9fe2b6d4">offsetPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#afb86c14d4a9ac4a3bccd7179fcf0ec17">OFFSET_PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:a8ff9b180c441826de133c97b9fe2b6d4"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8ff9b180c441826de133c97b9fe2b6d4">offsetPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#afb86c14d4a9ac4a3bccd7179fcf0ec17">OFFSET_PV2_OFFSET</a>)</td></tr>
 <tr class="separator:a8ff9b180c441826de133c97b9fe2b6d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9300ab0c36a337accaf02f17e4579fbd"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a9300ab0c36a337accaf02f17e4579fbd">offsetPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a69c9b5be6f1dbfff3cc4e8cfc3889163">OFFSET_PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:a9300ab0c36a337accaf02f17e4579fbd"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a9300ab0c36a337accaf02f17e4579fbd">offsetPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a69c9b5be6f1dbfff3cc4e8cfc3889163">OFFSET_PV3_OFFSET</a>)</td></tr>
 <tr class="separator:a9300ab0c36a337accaf02f17e4579fbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa4178aaa0a9197ce844a696a836bff3"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#afa4178aaa0a9197ce844a696a836bff3">desiredCycleTimeUs</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#acdb6a0f25470b7256117f8d5e5234a47">OFFSET_DESIRED_CYCLE_TIME</a>)</td></tr>
-<tr class="memdesc:afa4178aaa0a9197ce844a696a836bff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desired cycle time of sensor loop in microseconds.  <a href="classXerxes_1_1Register.html#afa4178aaa0a9197ce844a696a836bff3">More...</a><br /></td></tr>
+<tr class="memitem:afa4178aaa0a9197ce844a696a836bff3"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#afa4178aaa0a9197ce844a696a836bff3">desiredCycleTimeUs</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#acdb6a0f25470b7256117f8d5e5234a47">OFFSET_DESIRED_CYCLE_TIME</a>)</td></tr>
+<tr class="memdesc:afa4178aaa0a9197ce844a696a836bff3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Desired cycle time of device loop in microseconds.  <a href="classXerxes_1_1Register.html#afa4178aaa0a9197ce844a696a836bff3">More...</a><br /></td></tr>
 <tr class="separator:afa4178aaa0a9197ce844a696a836bff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38edc6de5b69dfa474315c036f4549fc"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a38edc6de5b69dfa474315c036f4549fc">devAddress</a> = (uint8_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ae18cdd963b28b7bb6cb43305af65dd59">OFFSET_ADDRESS</a>)</td></tr>
+<tr class="memitem:a38edc6de5b69dfa474315c036f4549fc"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a38edc6de5b69dfa474315c036f4549fc">devAddress</a> = (uint8_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ae18cdd963b28b7bb6cb43305af65dd59">OFFSET_ADDRESS</a>)</td></tr>
 <tr class="memdesc:a38edc6de5b69dfa474315c036f4549fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Address of the device (1 byte)  <a href="classXerxes_1_1Register.html#a38edc6de5b69dfa474315c036f4549fc">More...</a><br /></td></tr>
 <tr class="separator:a38edc6de5b69dfa474315c036f4549fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0258b95aeae643b4af195d3864022f31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a0258b95aeae643b4af195d3864022f31">config</a> = (<a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a> *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ad5f13ee1f83eb2f1991b249e14e683eb">OFFSET_CONFIG_BITS</a>)</td></tr>
+<tr class="memitem:a0258b95aeae643b4af195d3864022f31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a0258b95aeae643b4af195d3864022f31">config</a> = (<a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a> *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ad5f13ee1f83eb2f1991b249e14e683eb">OFFSET_CONFIG_BITS</a>)</td></tr>
 <tr class="memdesc:a0258b95aeae643b4af195d3864022f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config bits of the device (1 byte)  <a href="classXerxes_1_1Register.html#a0258b95aeae643b4af195d3864022f31">More...</a><br /></td></tr>
 <tr class="separator:a0258b95aeae643b4af195d3864022f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3283afe3e53526cc89709e16d4ddc5b"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad3283afe3e53526cc89709e16d4ddc5b">netCycleTimeUs</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a2f7cb8e327db9818475ba59e6f2d3bd5">OFFSET_NET_CYCLE_TIME</a>)</td></tr>
+<tr class="memitem:ad3283afe3e53526cc89709e16d4ddc5b"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad3283afe3e53526cc89709e16d4ddc5b">netCycleTimeUs</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a2f7cb8e327db9818475ba59e6f2d3bd5">OFFSET_NET_CYCLE_TIME</a>)</td></tr>
 <tr class="memdesc:ad3283afe3e53526cc89709e16d4ddc5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual cycle time of measurement loop in microseconds.  <a href="classXerxes_1_1Register.html#ad3283afe3e53526cc89709e16d4ddc5b">More...</a><br /></td></tr>
 <tr class="separator:ad3283afe3e53526cc89709e16d4ddc5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1458da6a77a7bdf149dd03a008a66e9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab1458da6a77a7bdf149dd03a008a66e9">pv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab5fd9b7bf0cc714360bf4ea112edfd70">PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:af03a3e52e3592016656812a1a035a2bf"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#af03a3e52e3592016656812a1a035a2bf">config_val0</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a9e5e962e8de723b9a3a66d76a962d528">CONFIG_VAL0_OFFSET</a>)</td></tr>
+<tr class="memdesc:af03a3e52e3592016656812a1a035a2bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config bits of the device (1 byte)  <a href="classXerxes_1_1Register.html#af03a3e52e3592016656812a1a035a2bf">More...</a><br /></td></tr>
+<tr class="separator:af03a3e52e3592016656812a1a035a2bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf1e3d9662e42bab78ee9716e356988"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#afcf1e3d9662e42bab78ee9716e356988">config_val1</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a010565301d264651f94291358c2ea5f1">CONFIG_VAL1_OFFSET</a>)</td></tr>
+<tr class="memdesc:afcf1e3d9662e42bab78ee9716e356988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config bits of the device (1 byte)  <a href="classXerxes_1_1Register.html#afcf1e3d9662e42bab78ee9716e356988">More...</a><br /></td></tr>
+<tr class="separator:afcf1e3d9662e42bab78ee9716e356988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad51d5f9de1919c54c33cc19d8e4c5899"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad51d5f9de1919c54c33cc19d8e4c5899">config_val2</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ae9c6c23a6d8368422cef2e678c04aafa">CONFIG_VAL2_OFFSET</a>)</td></tr>
+<tr class="memdesc:ad51d5f9de1919c54c33cc19d8e4c5899"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config bits of the device (1 byte)  <a href="classXerxes_1_1Register.html#ad51d5f9de1919c54c33cc19d8e4c5899">More...</a><br /></td></tr>
+<tr class="separator:ad51d5f9de1919c54c33cc19d8e4c5899"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a0ddf07b037d16445ab107a61d848a7"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a3a0ddf07b037d16445ab107a61d848a7">config_val3</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aaeb974f97e9b04a2642bb0c9eb04468d">CONFIG_VAL3_OFFSET</a>)</td></tr>
+<tr class="memdesc:a3a0ddf07b037d16445ab107a61d848a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config bits of the device (1 byte)  <a href="classXerxes_1_1Register.html#a3a0ddf07b037d16445ab107a61d848a7">More...</a><br /></td></tr>
+<tr class="separator:a3a0ddf07b037d16445ab107a61d848a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1458da6a77a7bdf149dd03a008a66e9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab1458da6a77a7bdf149dd03a008a66e9">pv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab5fd9b7bf0cc714360bf4ea112edfd70">PV0_OFFSET</a>)</td></tr>
 <tr class="memdesc:ab1458da6a77a7bdf149dd03a008a66e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to process value 0.  <a href="classXerxes_1_1Register.html#ab1458da6a77a7bdf149dd03a008a66e9">More...</a><br /></td></tr>
 <tr class="separator:ab1458da6a77a7bdf149dd03a008a66e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9645bc3189c012cf1b56d37ce19e18d"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab9645bc3189c012cf1b56d37ce19e18d">pv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a6ed158a058e6258352cf1af6e5574170">PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:ab9645bc3189c012cf1b56d37ce19e18d"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab9645bc3189c012cf1b56d37ce19e18d">pv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a6ed158a058e6258352cf1af6e5574170">PV1_OFFSET</a>)</td></tr>
 <tr class="memdesc:ab9645bc3189c012cf1b56d37ce19e18d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to process value 1.  <a href="classXerxes_1_1Register.html#ab9645bc3189c012cf1b56d37ce19e18d">More...</a><br /></td></tr>
 <tr class="separator:ab9645bc3189c012cf1b56d37ce19e18d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1a1d01e1b2b7bd56e31f2eeea068c06"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad1a1d01e1b2b7bd56e31f2eeea068c06">pv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#aae13749ec01672acd303f19e4acc3b38">PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:ad1a1d01e1b2b7bd56e31f2eeea068c06"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad1a1d01e1b2b7bd56e31f2eeea068c06">pv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aae13749ec01672acd303f19e4acc3b38">PV2_OFFSET</a>)</td></tr>
 <tr class="memdesc:ad1a1d01e1b2b7bd56e31f2eeea068c06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to process value 2.  <a href="classXerxes_1_1Register.html#ad1a1d01e1b2b7bd56e31f2eeea068c06">More...</a><br /></td></tr>
 <tr class="separator:ad1a1d01e1b2b7bd56e31f2eeea068c06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c8aa135a8a4a4dd151fbeabe980c3ff"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8c8aa135a8a4a4dd151fbeabe980c3ff">pv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a3f71c3848c796fa1fed4080799b97a56">PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:a8c8aa135a8a4a4dd151fbeabe980c3ff"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8c8aa135a8a4a4dd151fbeabe980c3ff">pv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a3f71c3848c796fa1fed4080799b97a56">PV3_OFFSET</a>)</td></tr>
 <tr class="memdesc:a8c8aa135a8a4a4dd151fbeabe980c3ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to process value 3.  <a href="classXerxes_1_1Register.html#a8c8aa135a8a4a4dd151fbeabe980c3ff">More...</a><br /></td></tr>
 <tr class="separator:a8c8aa135a8a4a4dd151fbeabe980c3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e63924d2b45972cedba9e919fc0fef9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a7e63924d2b45972cedba9e919fc0fef9">meanPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a9466eae9fc58e8e3139207852bd8d25b">MEAN_PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:a7e63924d2b45972cedba9e919fc0fef9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a7e63924d2b45972cedba9e919fc0fef9">meanPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a9466eae9fc58e8e3139207852bd8d25b">MEAN_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:a7e63924d2b45972cedba9e919fc0fef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a239ddfab28dfe388d6e579440d677ed9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a239ddfab28dfe388d6e579440d677ed9">meanPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a4de00c05d3153ba59fff61236ffae5f5">MEAN_PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:a239ddfab28dfe388d6e579440d677ed9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a239ddfab28dfe388d6e579440d677ed9">meanPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a4de00c05d3153ba59fff61236ffae5f5">MEAN_PV1_OFFSET</a>)</td></tr>
 <tr class="separator:a239ddfab28dfe388d6e579440d677ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e0189e7f41cad2a05423e8d40c5318b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a1e0189e7f41cad2a05423e8d40c5318b">meanPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0c864ee91a31a59939aaf2f7f47e726b">MEAN_PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:a1e0189e7f41cad2a05423e8d40c5318b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a1e0189e7f41cad2a05423e8d40c5318b">meanPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a0c864ee91a31a59939aaf2f7f47e726b">MEAN_PV2_OFFSET</a>)</td></tr>
 <tr class="separator:a1e0189e7f41cad2a05423e8d40c5318b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3ed03dbaba8fd6b9f3ad18022b3d20a"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab3ed03dbaba8fd6b9f3ad18022b3d20a">meanPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a329e150989b4e43e3f74572e651b1cbb">MEAN_PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:ab3ed03dbaba8fd6b9f3ad18022b3d20a"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab3ed03dbaba8fd6b9f3ad18022b3d20a">meanPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a329e150989b4e43e3f74572e651b1cbb">MEAN_PV3_OFFSET</a>)</td></tr>
 <tr class="separator:ab3ed03dbaba8fd6b9f3ad18022b3d20a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12122b76bd012e905d5498705115a0b4"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a12122b76bd012e905d5498705115a0b4">stdDevPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a62b1fcfba1fa3c9409ea6bd5701b06d2">STDDEV_PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:a12122b76bd012e905d5498705115a0b4"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a12122b76bd012e905d5498705115a0b4">stdDevPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a62b1fcfba1fa3c9409ea6bd5701b06d2">STDDEV_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:a12122b76bd012e905d5498705115a0b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28c1f6c5a54161116af58ee8f178ca40"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a28c1f6c5a54161116af58ee8f178ca40">stdDevPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a1d15218e58f076ad768a944a02b6c547">STDDEV_PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:a28c1f6c5a54161116af58ee8f178ca40"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a28c1f6c5a54161116af58ee8f178ca40">stdDevPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a1d15218e58f076ad768a944a02b6c547">STDDEV_PV1_OFFSET</a>)</td></tr>
 <tr class="separator:a28c1f6c5a54161116af58ee8f178ca40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab34d954e49f4bdc7c43b6a236b6815c9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab34d954e49f4bdc7c43b6a236b6815c9">stdDevPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a36d15cbad9484bc0c5f6f45a0e70c902">STDDEV_PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:ab34d954e49f4bdc7c43b6a236b6815c9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab34d954e49f4bdc7c43b6a236b6815c9">stdDevPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a36d15cbad9484bc0c5f6f45a0e70c902">STDDEV_PV2_OFFSET</a>)</td></tr>
 <tr class="separator:ab34d954e49f4bdc7c43b6a236b6815c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad90973bb32729dda41457422bb1f449b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad90973bb32729dda41457422bb1f449b">stdDevPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a6ddfaeff9a8ad1cd812e31f0fff88156">STDDEV_PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:ad90973bb32729dda41457422bb1f449b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad90973bb32729dda41457422bb1f449b">stdDevPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a6ddfaeff9a8ad1cd812e31f0fff88156">STDDEV_PV3_OFFSET</a>)</td></tr>
 <tr class="separator:ad90973bb32729dda41457422bb1f449b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade9a97ff06badeb5817431396ded4718"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ade9a97ff06badeb5817431396ded4718">minPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a362034e4187043adedd4785e07ea60ba">MIN_PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:ade9a97ff06badeb5817431396ded4718"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ade9a97ff06badeb5817431396ded4718">minPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a362034e4187043adedd4785e07ea60ba">MIN_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:ade9a97ff06badeb5817431396ded4718"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4653751aad56ba8e41187524c9a34d82"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a4653751aad56ba8e41187524c9a34d82">minPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab5c75e223fa2a616763b8b7162c1b54a">MIN_PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:a4653751aad56ba8e41187524c9a34d82"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a4653751aad56ba8e41187524c9a34d82">minPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab5c75e223fa2a616763b8b7162c1b54a">MIN_PV1_OFFSET</a>)</td></tr>
 <tr class="separator:a4653751aad56ba8e41187524c9a34d82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dbde58da55808c5a2aaa47fefa9cb8b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a3dbde58da55808c5a2aaa47fefa9cb8b">minPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a373ce3fd3e9d8a563575e3f1784750b8">MIN_PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:a3dbde58da55808c5a2aaa47fefa9cb8b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a3dbde58da55808c5a2aaa47fefa9cb8b">minPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a373ce3fd3e9d8a563575e3f1784750b8">MIN_PV2_OFFSET</a>)</td></tr>
 <tr class="separator:a3dbde58da55808c5a2aaa47fefa9cb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22f9c94292c59d6c65f08faee8cf5e03"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a22f9c94292c59d6c65f08faee8cf5e03">minPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a84bf3009d98a08350d77b02d3c9b61ef">MIN_PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:a22f9c94292c59d6c65f08faee8cf5e03"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a22f9c94292c59d6c65f08faee8cf5e03">minPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a84bf3009d98a08350d77b02d3c9b61ef">MIN_PV3_OFFSET</a>)</td></tr>
 <tr class="separator:a22f9c94292c59d6c65f08faee8cf5e03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22288423a6e613d7bc833aa26cd55158"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a22288423a6e613d7bc833aa26cd55158">maxPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a61b659c9644eeaa8140bf70fc8ff45a2">MAX_PV0_OFFSET</a>)</td></tr>
+<tr class="memitem:a22288423a6e613d7bc833aa26cd55158"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a22288423a6e613d7bc833aa26cd55158">maxPv0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a61b659c9644eeaa8140bf70fc8ff45a2">MAX_PV0_OFFSET</a>)</td></tr>
 <tr class="separator:a22288423a6e613d7bc833aa26cd55158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5532391ab898e05a98091c7750ba169b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a5532391ab898e05a98091c7750ba169b">maxPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a7354c939b341c55114059c7966b1cf02">MAX_PV1_OFFSET</a>)</td></tr>
+<tr class="memitem:a5532391ab898e05a98091c7750ba169b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a5532391ab898e05a98091c7750ba169b">maxPv1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a7354c939b341c55114059c7966b1cf02">MAX_PV1_OFFSET</a>)</td></tr>
 <tr class="separator:a5532391ab898e05a98091c7750ba169b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f65fd7774187d8bf96e7d0da9b647b3"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a9f65fd7774187d8bf96e7d0da9b647b3">maxPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ad1e044240e55a3a1c658752b80180ffc">MAX_PV2_OFFSET</a>)</td></tr>
+<tr class="memitem:a9f65fd7774187d8bf96e7d0da9b647b3"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a9f65fd7774187d8bf96e7d0da9b647b3">maxPv2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ad1e044240e55a3a1c658752b80180ffc">MAX_PV2_OFFSET</a>)</td></tr>
 <tr class="separator:a9f65fd7774187d8bf96e7d0da9b647b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8de5b616f404df783b0284174a4d6bcc"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8de5b616f404df783b0284174a4d6bcc">maxPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0875c8d38dddd3fde369b70a6df092c0">MAX_PV3_OFFSET</a>)</td></tr>
+<tr class="memitem:a8de5b616f404df783b0284174a4d6bcc"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8de5b616f404df783b0284174a4d6bcc">maxPv3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a0875c8d38dddd3fde369b70a6df092c0">MAX_PV3_OFFSET</a>)</td></tr>
 <tr class="separator:a8de5b616f404df783b0284174a4d6bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6baa8a07c45ed4cf536f4d4e2da9e61b"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a6baa8a07c45ed4cf536f4d4e2da9e61b">dv0</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a1a24d9aed602b87c6ab6e49ce756c2d8">DV0_OFFSET</a>)</td></tr>
+<tr class="memitem:a6baa8a07c45ed4cf536f4d4e2da9e61b"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a6baa8a07c45ed4cf536f4d4e2da9e61b">dv0</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a1a24d9aed602b87c6ab6e49ce756c2d8">DV0_OFFSET</a>)</td></tr>
 <tr class="memdesc:a6baa8a07c45ed4cf536f4d4e2da9e61b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to digital value 0.  <a href="classXerxes_1_1Register.html#a6baa8a07c45ed4cf536f4d4e2da9e61b">More...</a><br /></td></tr>
 <tr class="separator:a6baa8a07c45ed4cf536f4d4e2da9e61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac43535f5a3ad834fb6c63671bbe811d9"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ac43535f5a3ad834fb6c63671bbe811d9">dv1</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab3f09a35dd154a458562df9f45e2fc85">DV1_OFFSET</a>)</td></tr>
+<tr class="memitem:ac43535f5a3ad834fb6c63671bbe811d9"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ac43535f5a3ad834fb6c63671bbe811d9">dv1</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab3f09a35dd154a458562df9f45e2fc85">DV1_OFFSET</a>)</td></tr>
 <tr class="memdesc:ac43535f5a3ad834fb6c63671bbe811d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to digital value 1.  <a href="classXerxes_1_1Register.html#ac43535f5a3ad834fb6c63671bbe811d9">More...</a><br /></td></tr>
 <tr class="separator:ac43535f5a3ad834fb6c63671bbe811d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4d532801b6cbaf8c8d37252d0661eaa"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad4d532801b6cbaf8c8d37252d0661eaa">dv2</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0d7c6574a259859d78ab30ccce77af71">DV2_OFFSET</a>)</td></tr>
+<tr class="memitem:ad4d532801b6cbaf8c8d37252d0661eaa"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ad4d532801b6cbaf8c8d37252d0661eaa">dv2</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a0d7c6574a259859d78ab30ccce77af71">DV2_OFFSET</a>)</td></tr>
 <tr class="memdesc:ad4d532801b6cbaf8c8d37252d0661eaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to digital value 2.  <a href="classXerxes_1_1Register.html#ad4d532801b6cbaf8c8d37252d0661eaa">More...</a><br /></td></tr>
 <tr class="separator:ad4d532801b6cbaf8c8d37252d0661eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29d6e2e1655cd8b21518f032f22c1517"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a29d6e2e1655cd8b21518f032f22c1517">dv3</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a6e8bc8974c6495a73a6b473ef77c71c4">DV3_OFFSET</a>)</td></tr>
+<tr class="memitem:a29d6e2e1655cd8b21518f032f22c1517"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a29d6e2e1655cd8b21518f032f22c1517">dv3</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a6e8bc8974c6495a73a6b473ef77c71c4">DV3_OFFSET</a>)</td></tr>
 <tr class="memdesc:a29d6e2e1655cd8b21518f032f22c1517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to digital value 3.  <a href="classXerxes_1_1Register.html#a29d6e2e1655cd8b21518f032f22c1517">More...</a><br /></td></tr>
 <tr class="separator:a29d6e2e1655cd8b21518f032f22c1517"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea6cfe03cdb07a522a04eef6942691b2"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#aea6cfe03cdb07a522a04eef6942691b2">memUnlocked</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab29cef64192ff9a3b7af6be7ff6456f6">MEM_UNLOCKED_OFFSET</a>)</td></tr>
+<tr class="memitem:ab8609856e654925e79b188bce4b9b627"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ab8609856e654925e79b188bce4b9b627">av0</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#af3150d9e6c87aa6f27c17a112faf8017">AV0_OFFSET</a>)</td></tr>
+<tr class="memdesc:ab8609856e654925e79b188bce4b9b627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to analog value 0.  <a href="classXerxes_1_1Register.html#ab8609856e654925e79b188bce4b9b627">More...</a><br /></td></tr>
+<tr class="separator:ab8609856e654925e79b188bce4b9b627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc7793a6ab2fad5ce4193dd7f99909e9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#adc7793a6ab2fad5ce4193dd7f99909e9">av1</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aa74bdb26265d797da9e9ba1ecaf1356d">AV1_OFFSET</a>)</td></tr>
+<tr class="memdesc:adc7793a6ab2fad5ce4193dd7f99909e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to analog value 1.  <a href="classXerxes_1_1Register.html#adc7793a6ab2fad5ce4193dd7f99909e9">More...</a><br /></td></tr>
+<tr class="separator:adc7793a6ab2fad5ce4193dd7f99909e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05aecc7052e5fb609916f264fa617add"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a05aecc7052e5fb609916f264fa617add">av2</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a8cf511173a2ff92e616b26bfb33790bd">AV2_OFFSET</a>)</td></tr>
+<tr class="memdesc:a05aecc7052e5fb609916f264fa617add"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to analog value 2.  <a href="classXerxes_1_1Register.html#a05aecc7052e5fb609916f264fa617add">More...</a><br /></td></tr>
+<tr class="separator:a05aecc7052e5fb609916f264fa617add"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b88e64e0efcd23583356088f2858d9f"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a7b88e64e0efcd23583356088f2858d9f">av3</a> = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a75a57cad7463880fac793b6074b8c979">AV3_OFFSET</a>)</td></tr>
+<tr class="memdesc:a7b88e64e0efcd23583356088f2858d9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to analog value 3.  <a href="classXerxes_1_1Register.html#a7b88e64e0efcd23583356088f2858d9f">More...</a><br /></td></tr>
+<tr class="separator:a7b88e64e0efcd23583356088f2858d9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8615bc09eb1ea15a2b41c6c34eab5e72"><td class="memItemLeft" align="right" valign="top">int32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a8615bc09eb1ea15a2b41c6c34eab5e72">sv0</a> = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a5fa1fc137a5db6ed8b79537b8407f757">SV0_OFFSET</a>)</td></tr>
+<tr class="memdesc:a8615bc09eb1ea15a2b41c6c34eab5e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to set value 0.  <a href="classXerxes_1_1Register.html#a8615bc09eb1ea15a2b41c6c34eab5e72">More...</a><br /></td></tr>
+<tr class="separator:a8615bc09eb1ea15a2b41c6c34eab5e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae87e86d8de6af58ac296d81a2c29802a"><td class="memItemLeft" align="right" valign="top">int32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ae87e86d8de6af58ac296d81a2c29802a">sv1</a> = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a3006ee6612f9b91ecafa1ec762f82759">SV1_OFFSET</a>)</td></tr>
+<tr class="memdesc:ae87e86d8de6af58ac296d81a2c29802a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to set value 1.  <a href="classXerxes_1_1Register.html#ae87e86d8de6af58ac296d81a2c29802a">More...</a><br /></td></tr>
+<tr class="separator:ae87e86d8de6af58ac296d81a2c29802a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af56350c2f656211081759e7daa153ba6"><td class="memItemLeft" align="right" valign="top">int32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#af56350c2f656211081759e7daa153ba6">sv2</a> = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#af4d95f82328eefed33c882303c4d3130">SV2_OFFSET</a>)</td></tr>
+<tr class="memdesc:af56350c2f656211081759e7daa153ba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to set value 2.  <a href="classXerxes_1_1Register.html#af56350c2f656211081759e7daa153ba6">More...</a><br /></td></tr>
+<tr class="separator:af56350c2f656211081759e7daa153ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f2c5c10f85d9064503f007ecf6931f"><td class="memItemLeft" align="right" valign="top">int32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#ae6f2c5c10f85d9064503f007ecf6931f">sv3</a> = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ad6047c4f072bd5bdf0c7a4650320cf5e">SV3_OFFSET</a>)</td></tr>
+<tr class="memdesc:ae6f2c5c10f85d9064503f007ecf6931f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to set value 3.  <a href="classXerxes_1_1Register.html#ae6f2c5c10f85d9064503f007ecf6931f">More...</a><br /></td></tr>
+<tr class="separator:ae6f2c5c10f85d9064503f007ecf6931f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea6cfe03cdb07a522a04eef6942691b2"><td class="memItemLeft" align="right" valign="top">uint32_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#aea6cfe03cdb07a522a04eef6942691b2">memUnlocked</a> = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab29cef64192ff9a3b7af6be7ff6456f6">MEM_UNLOCKED_OFFSET</a>)</td></tr>
 <tr class="memdesc:aea6cfe03cdb07a522a04eef6942691b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">0x55AA55AA = unlocked, anything else = locked  <a href="classXerxes_1_1Register.html#aea6cfe03cdb07a522a04eef6942691b2">More...</a><br /></td></tr>
 <tr class="separator:aea6cfe03cdb07a522a04eef6942691b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56fea948cc78d3ecc3032f0330683ccf"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a56fea948cc78d3ecc3032f0330683ccf">error</a> = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a34da2490156c0fde3a3a9e8b658e6639">ERROR_OFFSET</a>)</td></tr>
+<tr class="memitem:a56fea948cc78d3ecc3032f0330683ccf"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a56fea948cc78d3ecc3032f0330683ccf">error</a> = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a34da2490156c0fde3a3a9e8b658e6639">ERROR_OFFSET</a>)</td></tr>
 <tr class="memdesc:a56fea948cc78d3ecc3032f0330683ccf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Error register, holds error codes.  <a href="classXerxes_1_1Register.html#a56fea948cc78d3ecc3032f0330683ccf">More...</a><br /></td></tr>
 <tr class="separator:a56fea948cc78d3ecc3032f0330683ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac87ce7cfa5742ccff56af272145d9b8"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#aac87ce7cfa5742ccff56af272145d9b8">status</a> = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ac3959778b8b4ee593c16fa33a06d844c">STATUS_OFFSET</a>)</td></tr>
+<tr class="memitem:aac87ce7cfa5742ccff56af272145d9b8"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#aac87ce7cfa5742ccff56af272145d9b8">status</a> = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ac3959778b8b4ee593c16fa33a06d844c">STATUS_OFFSET</a>)</td></tr>
 <tr class="memdesc:aac87ce7cfa5742ccff56af272145d9b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Status register, holds status codes.  <a href="classXerxes_1_1Register.html#aac87ce7cfa5742ccff56af272145d9b8">More...</a><br /></td></tr>
 <tr class="separator:aac87ce7cfa5742ccff56af272145d9b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1514f451e89db6d28e97d07345cdf80e"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a1514f451e89db6d28e97d07345cdf80e">uid</a> = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a3c8c639a6072f8d27e9ac202c82ce0ff">UID_OFFSET</a>)</td></tr>
+<tr class="memitem:a1514f451e89db6d28e97d07345cdf80e"><td class="memItemLeft" align="right" valign="top">uint64_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a1514f451e89db6d28e97d07345cdf80e">uid</a> = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a3c8c639a6072f8d27e9ac202c82ce0ff">UID_OFFSET</a>)</td></tr>
 <tr class="memdesc:a1514f451e89db6d28e97d07345cdf80e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique ID of the device.  <a href="classXerxes_1_1Register.html#a1514f451e89db6d28e97d07345cdf80e">More...</a><br /></td></tr>
 <tr class="separator:a1514f451e89db6d28e97d07345cdf80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79940912ac7dd73e8006b0be2bf6ac16"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Register.html#a79940912ac7dd73e8006b0be2bf6ac16">message</a> = (char *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0e6700eb736c18bdf2cae9f2d1daf188">MESSAGE_OFFSET</a>)</td></tr>
@@ -240,7 +285,155 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a336ff866b43a24d653a6767a80742a3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a336ff866b43a24d653a6767a80742a3e">&#9670;&nbsp;</a></span>errorCheck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Xerxes::Register::errorCheck </td>
+          <td>(</td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname"><em>errorBit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the error bit is set. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">errorBit</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the error bit is set </dd>
+<dd>
+false if the error bit is not set </dd></dl>
+
+</div>
+</div>
+<a id="a174aeb54f02b2212a2f4826dac6845a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a174aeb54f02b2212a2f4826dac6845a8">&#9670;&nbsp;</a></span>errorClear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::Register::errorClear </td>
+          <td>(</td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname"><em>errorBit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear the error bit. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">errorBit</td><td><br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abf8f05db0e107ad5edf94378946e1c40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf8f05db0e107ad5edf94378946e1c40">&#9670;&nbsp;</a></span>errorSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::Register::errorSet </td>
+          <td>(</td>
+          <td class="paramtype">const uint64_t &amp;&#160;</td>
+          <td class="paramname"><em>errorBit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the error bit. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">errorBit</td><td><br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab8609856e654925e79b188bce4b9b627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8609856e654925e79b188bce4b9b627">&#9670;&nbsp;</a></span>av0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* Xerxes::Register::av0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#af3150d9e6c87aa6f27c17a112faf8017">AV0_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to analog value 0. </p>
+
+</div>
+</div>
+<a id="adc7793a6ab2fad5ce4193dd7f99909e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc7793a6ab2fad5ce4193dd7f99909e9">&#9670;&nbsp;</a></span>av1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* Xerxes::Register::av1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aa74bdb26265d797da9e9ba1ecaf1356d">AV1_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to analog value 1. </p>
+
+</div>
+</div>
+<a id="a05aecc7052e5fb609916f264fa617add"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05aecc7052e5fb609916f264fa617add">&#9670;&nbsp;</a></span>av2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* Xerxes::Register::av2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a8cf511173a2ff92e616b26bfb33790bd">AV2_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to analog value 2. </p>
+
+</div>
+</div>
+<a id="a7b88e64e0efcd23583356088f2858d9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b88e64e0efcd23583356088f2858d9f">&#9670;&nbsp;</a></span>av3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* Xerxes::Register::av3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a75a57cad7463880fac793b6074b8c979">AV3_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to analog value 3. </p>
+
+</div>
+</div>
 <a id="a0258b95aeae643b4af195d3864022f31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0258b95aeae643b4af195d3864022f31">&#9670;&nbsp;</a></span>config</h2>
 
@@ -248,7 +441,71 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a>* Xerxes::Register::config = (<a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a> *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ad5f13ee1f83eb2f1991b249e14e683eb">OFFSET_CONFIG_BITS</a>)</td>
+          <td class="memname"><a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a>* Xerxes::Register::config = (<a class="el" href="unionConfigBitsUnion.html">ConfigBitsUnion</a> *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ad5f13ee1f83eb2f1991b249e14e683eb">OFFSET_CONFIG_BITS</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config bits of the device (1 byte) </p>
+
+</div>
+</div>
+<a id="af03a3e52e3592016656812a1a035a2bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af03a3e52e3592016656812a1a035a2bf">&#9670;&nbsp;</a></span>config_val0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t* Xerxes::Register::config_val0 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a9e5e962e8de723b9a3a66d76a962d528">CONFIG_VAL0_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config bits of the device (1 byte) </p>
+
+</div>
+</div>
+<a id="afcf1e3d9662e42bab78ee9716e356988"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf1e3d9662e42bab78ee9716e356988">&#9670;&nbsp;</a></span>config_val1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t* Xerxes::Register::config_val1 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a010565301d264651f94291358c2ea5f1">CONFIG_VAL1_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config bits of the device (1 byte) </p>
+
+</div>
+</div>
+<a id="ad51d5f9de1919c54c33cc19d8e4c5899"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad51d5f9de1919c54c33cc19d8e4c5899">&#9670;&nbsp;</a></span>config_val2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t* Xerxes::Register::config_val2 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ae9c6c23a6d8368422cef2e678c04aafa">CONFIG_VAL2_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Config bits of the device (1 byte) </p>
+
+</div>
+</div>
+<a id="a3a0ddf07b037d16445ab107a61d848a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a0ddf07b037d16445ab107a61d848a7">&#9670;&nbsp;</a></span>config_val3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t* Xerxes::Register::config_val3 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aaeb974f97e9b04a2642bb0c9eb04468d">CONFIG_VAL3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -264,12 +521,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::desiredCycleTimeUs = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#acdb6a0f25470b7256117f8d5e5234a47">OFFSET_DESIRED_CYCLE_TIME</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::desiredCycleTimeUs = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#acdb6a0f25470b7256117f8d5e5234a47">OFFSET_DESIRED_CYCLE_TIME</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Desired cycle time of sensor loop in microseconds. </p>
+<p>Desired cycle time of device loop in microseconds. </p>
 
 </div>
 </div>
@@ -280,7 +537,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t* Xerxes::Register::devAddress = (uint8_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ae18cdd963b28b7bb6cb43305af65dd59">OFFSET_ADDRESS</a>)</td>
+          <td class="memname">uint8_t* Xerxes::Register::devAddress = (uint8_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ae18cdd963b28b7bb6cb43305af65dd59">OFFSET_ADDRESS</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -296,7 +553,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::dv0 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a1a24d9aed602b87c6ab6e49ce756c2d8">DV0_OFFSET</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::dv0 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a1a24d9aed602b87c6ab6e49ce756c2d8">DV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -312,7 +569,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::dv1 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab3f09a35dd154a458562df9f45e2fc85">DV1_OFFSET</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::dv1 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab3f09a35dd154a458562df9f45e2fc85">DV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -328,7 +585,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::dv2 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0d7c6574a259859d78ab30ccce77af71">DV2_OFFSET</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::dv2 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a0d7c6574a259859d78ab30ccce77af71">DV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -344,7 +601,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::dv3 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a6e8bc8974c6495a73a6b473ef77c71c4">DV3_OFFSET</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::dv3 = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a6e8bc8974c6495a73a6b473ef77c71c4">DV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -360,7 +617,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t* Xerxes::Register::error = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a34da2490156c0fde3a3a9e8b658e6639">ERROR_OFFSET</a>)</td>
+          <td class="memname">uint64_t* Xerxes::Register::error = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a34da2490156c0fde3a3a9e8b658e6639">ERROR_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -376,7 +633,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::gainPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ae820f53ebbdb8cc370d492aefb438c6d">GAIN_PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::gainPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ae820f53ebbdb8cc370d492aefb438c6d">GAIN_PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -390,7 +647,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::gainPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a7cefdb9c40ac079711a14e964bc52c57">GAIN_PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::gainPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a7cefdb9c40ac079711a14e964bc52c57">GAIN_PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -404,7 +661,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::gainPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#aa5de2bb4f617035815e182fcb5e82c53">GAIN_PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::gainPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aa5de2bb4f617035815e182fcb5e82c53">GAIN_PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -418,7 +675,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::gainPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f">GAIN_PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::gainPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a428b2e4e4002687b1c626feeb7cc2c6f">GAIN_PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -432,7 +689,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::maxPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a61b659c9644eeaa8140bf70fc8ff45a2">MAX_PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::maxPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a61b659c9644eeaa8140bf70fc8ff45a2">MAX_PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -446,7 +703,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::maxPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a7354c939b341c55114059c7966b1cf02">MAX_PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::maxPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a7354c939b341c55114059c7966b1cf02">MAX_PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -460,7 +717,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::maxPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ad1e044240e55a3a1c658752b80180ffc">MAX_PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::maxPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ad1e044240e55a3a1c658752b80180ffc">MAX_PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -474,7 +731,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::maxPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0875c8d38dddd3fde369b70a6df092c0">MAX_PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::maxPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a0875c8d38dddd3fde369b70a6df092c0">MAX_PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -488,7 +745,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::meanPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a9466eae9fc58e8e3139207852bd8d25b">MEAN_PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::meanPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a9466eae9fc58e8e3139207852bd8d25b">MEAN_PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -502,7 +759,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::meanPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a4de00c05d3153ba59fff61236ffae5f5">MEAN_PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::meanPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a4de00c05d3153ba59fff61236ffae5f5">MEAN_PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -516,7 +773,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::meanPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a0c864ee91a31a59939aaf2f7f47e726b">MEAN_PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::meanPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a0c864ee91a31a59939aaf2f7f47e726b">MEAN_PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -530,7 +787,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::meanPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a329e150989b4e43e3f74572e651b1cbb">MEAN_PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::meanPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a329e150989b4e43e3f74572e651b1cbb">MEAN_PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -558,7 +815,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::memUnlocked = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab29cef64192ff9a3b7af6be7ff6456f6">MEM_UNLOCKED_OFFSET</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::memUnlocked = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab29cef64192ff9a3b7af6be7ff6456f6">MEM_UNLOCKED_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -590,7 +847,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::minPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a362034e4187043adedd4785e07ea60ba">MIN_PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::minPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a362034e4187043adedd4785e07ea60ba">MIN_PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -604,7 +861,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::minPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab5c75e223fa2a616763b8b7162c1b54a">MIN_PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::minPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab5c75e223fa2a616763b8b7162c1b54a">MIN_PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -618,7 +875,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::minPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a373ce3fd3e9d8a563575e3f1784750b8">MIN_PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::minPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a373ce3fd3e9d8a563575e3f1784750b8">MIN_PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -632,7 +889,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::minPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a84bf3009d98a08350d77b02d3c9b61ef">MIN_PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::minPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a84bf3009d98a08350d77b02d3c9b61ef">MIN_PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -646,7 +903,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t* Xerxes::Register::netCycleTimeUs = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a2f7cb8e327db9818475ba59e6f2d3bd5">OFFSET_NET_CYCLE_TIME</a>)</td>
+          <td class="memname">uint32_t* Xerxes::Register::netCycleTimeUs = (uint32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a2f7cb8e327db9818475ba59e6f2d3bd5">OFFSET_NET_CYCLE_TIME</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -662,7 +919,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::offsetPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a61c9edcc0849edeb8a440f675ec30e6f">OFFSET_PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::offsetPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a61c9edcc0849edeb8a440f675ec30e6f">OFFSET_PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -676,7 +933,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::offsetPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a9221f2f28c59dd1642ddfeb8f7937710">OFFSET_PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::offsetPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a9221f2f28c59dd1642ddfeb8f7937710">OFFSET_PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -690,7 +947,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::offsetPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#afb86c14d4a9ac4a3bccd7179fcf0ec17">OFFSET_PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::offsetPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#afb86c14d4a9ac4a3bccd7179fcf0ec17">OFFSET_PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -704,7 +961,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::offsetPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a69c9b5be6f1dbfff3cc4e8cfc3889163">OFFSET_PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::offsetPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a69c9b5be6f1dbfff3cc4e8cfc3889163">OFFSET_PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -718,7 +975,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::pv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ab5fd9b7bf0cc714360bf4ea112edfd70">PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::pv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ab5fd9b7bf0cc714360bf4ea112edfd70">PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -734,7 +991,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::pv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a6ed158a058e6258352cf1af6e5574170">PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::pv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a6ed158a058e6258352cf1af6e5574170">PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -750,7 +1007,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::pv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#aae13749ec01672acd303f19e4acc3b38">PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::pv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#aae13749ec01672acd303f19e4acc3b38">PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -766,7 +1023,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::pv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a3f71c3848c796fa1fed4080799b97a56">PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::pv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a3f71c3848c796fa1fed4080799b97a56">PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -782,7 +1039,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t* Xerxes::Register::status = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#ac3959778b8b4ee593c16fa33a06d844c">STATUS_OFFSET</a>)</td>
+          <td class="memname">uint64_t* Xerxes::Register::status = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ac3959778b8b4ee593c16fa33a06d844c">STATUS_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -798,7 +1055,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::stdDevPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a62b1fcfba1fa3c9409ea6bd5701b06d2">STDDEV_PV0_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::stdDevPv0 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a62b1fcfba1fa3c9409ea6bd5701b06d2">STDDEV_PV0_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -812,7 +1069,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::stdDevPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a1d15218e58f076ad768a944a02b6c547">STDDEV_PV1_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::stdDevPv1 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a1d15218e58f076ad768a944a02b6c547">STDDEV_PV1_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -826,7 +1083,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::stdDevPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a36d15cbad9484bc0c5f6f45a0e70c902">STDDEV_PV2_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::stdDevPv2 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a36d15cbad9484bc0c5f6f45a0e70c902">STDDEV_PV2_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -840,10 +1097,74 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float* Xerxes::Register::stdDevPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a6ddfaeff9a8ad1cd812e31f0fff88156">STDDEV_PV3_OFFSET</a>)</td>
+          <td class="memname">float* Xerxes::Register::stdDevPv3 = (float *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a6ddfaeff9a8ad1cd812e31f0fff88156">STDDEV_PV3_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8615bc09eb1ea15a2b41c6c34eab5e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8615bc09eb1ea15a2b41c6c34eab5e72">&#9670;&nbsp;</a></span>sv0</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t* Xerxes::Register::sv0 = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a5fa1fc137a5db6ed8b79537b8407f757">SV0_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to set value 0. </p>
+
+</div>
+</div>
+<a id="ae87e86d8de6af58ac296d81a2c29802a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae87e86d8de6af58ac296d81a2c29802a">&#9670;&nbsp;</a></span>sv1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t* Xerxes::Register::sv1 = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a3006ee6612f9b91ecafa1ec762f82759">SV1_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to set value 1. </p>
+
+</div>
+</div>
+<a id="af56350c2f656211081759e7daa153ba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56350c2f656211081759e7daa153ba6">&#9670;&nbsp;</a></span>sv2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t* Xerxes::Register::sv2 = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#af4d95f82328eefed33c882303c4d3130">SV2_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to set value 2. </p>
+
+</div>
+</div>
+<a id="ae6f2c5c10f85d9064503f007ecf6931f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f2c5c10f85d9064503f007ecf6931f">&#9670;&nbsp;</a></span>sv3</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int32_t* Xerxes::Register::sv3 = (int32_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#ad6047c4f072bd5bdf0c7a4650320cf5e">SV3_OFFSET</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pointer to set value 3. </p>
 
 </div>
 </div>
@@ -854,7 +1175,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint64_t* Xerxes::Register::uid = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="Definitions_8h.html#a3c8c639a6072f8d27e9ac202c82ce0ff">UID_OFFSET</a>)</td>
+          <td class="memname">uint64_t* Xerxes::Register::uid = (uint64_t *)(<a class="el" href="classXerxes_1_1Register.html#ae49fb471363ad7668982c16aabd1e95d">memTable</a> + <a class="el" href="MemoryMap_8h.html#a3c8c639a6072f8d27e9ac202c82ce0ff">UID_OFFSET</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">

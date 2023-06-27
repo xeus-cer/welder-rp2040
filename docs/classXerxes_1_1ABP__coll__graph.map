@@ -1,5 +1,5 @@
 <map id="Xerxes::ABP" name="Xerxes::ABP">
-<area shape="rect" id="node1" title=" " alt="" coords="204,408,305,435"/>
+<area shape="rect" id="node1" title="Honeywell ABP sensor." alt="" coords="204,408,305,435"/>
 <area shape="rect" id="node2" href="$classXerxes_1_1Sensor.html" title="Sensor class." alt="" coords="195,332,314,359"/>
 <area shape="rect" id="node3" href="$classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="5,191,147,218"/>
 <area shape="rect" id="node4" href="$classXerxes_1_1StatisticBuffer.html" title=" " alt="" coords="171,184,339,225"/>

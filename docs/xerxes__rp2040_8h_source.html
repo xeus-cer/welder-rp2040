@@ -192,28 +192,29 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a868e795ee21e547e10edf12a3aeafbc9">  120</a></span>&#160;<span class="preprocessor">#define PICO_BOOT_STAGE2_CHOOSE_W25Q080 1</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">#ifndef PICO_FLASH_SPI_CLKDIV</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">  129</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SPI_CLKDIV 32</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_FLASH_SPI_CLKDIV</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#ifndef PICO_XOSC_STARTUP_DELAY_MULTIPLIER</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#aafe78184edbb372dbd08feca4dae87cd">  133</a></span>&#160;<span class="preprocessor">#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 16</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_XOSC_STARTUP_DELAY_MULTIPLIER</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#ifndef PICO_FLASH_SIZE_BYTES</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">  142</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SIZE_BYTES (16 * 1024 * 1024)</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_FLASH_SIZE_BYTES</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">// All boards have B1 RP2040</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#ifndef PICO_RP2040_B0_SUPPORTED </span></div>
-<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a78554b289c077f9733b51c5b53c1d3b7">  147</a></span>&#160;<span class="preprocessor">#define PICO_RP2040_B0_SUPPORTED  0</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_RP2040_B0_SUPPORTED</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __cplusplus</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// XERXES_RP2040_H</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a090528628a511947179066f60c2aeb8a">  130</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SPI_CLKDIV __CLKDIV</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_FLASH_SPI_CLKDIV</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#ifndef PICO_XOSC_STARTUP_DELAY_MULTIPLIER</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#aafe78184edbb372dbd08feca4dae87cd">  135</a></span>&#160;<span class="preprocessor">#define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 16</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_XOSC_STARTUP_DELAY_MULTIPLIER</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#ifndef PICO_FLASH_SIZE_BYTES</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a7ad5a8273ffcd10db868c3c3e03d5bf0">  144</a></span>&#160;<span class="preprocessor">#define PICO_FLASH_SIZE_BYTES (16 * 1024 * 1024)</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_FLASH_SIZE_BYTES</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment">// All boards have B1 RP2040</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">#ifndef PICO_RP2040_B0_SUPPORTED </span></div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="xerxes__rp2040_8h.html#a78554b289c077f9733b51c5b53c1d3b7">  149</a></span>&#160;<span class="preprocessor">#define PICO_RP2040_B0_SUPPORTED  0</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !PICO_RP2040_B0_SUPPORTED</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// __cplusplus</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// XERXES_RP2040_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

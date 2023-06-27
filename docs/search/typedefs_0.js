@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['devid_5ft_971',['devid_t',['../DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511',1,'DeviceIds.h']]]
+  ['address_5ft_1325',['address_t',['../Master_8hpp.html#a41342f53a317c4e33154729427cbb979',1,'Master.hpp']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Sensor RP2040: src/Communication/Message.hpp Source File</title>
+<title>Sensor RP2040: lib/xerxes-protocol-cpp/src/Message.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_fb35f8d28c5a1c2121d46772e18e7ebe.html">Communication</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_0c7976e48304412d2ca646dbfc44dbe5.html">xerxes-protocol-cpp</a></li><li class="navelem"><a class="el" href="dir_aaaac4b844a69530a5c93b743fb0bab2.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -109,31 +109,43 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html">Packet</a> <a class="code" href="classXerxes_1_1Message.html#a4d5af69b0da585623ba4c82d31a02e49">toPacket</a>();</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    std::vector&lt;uint8_t&gt;::const_iterator <a class="code" href="classXerxes_1_1Message.html#a0ddbb29a9d543d09b71169f84b7c2c65">payloadBegin</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::vector&lt;uint8_t&gt;::const_iterator <a class="code" href="classXerxes_1_1Message.html#ae35f743ce2d5bde61eb696325e3997e8">end</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;};</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="classXerxes_1_1Packet.html">Packet</a> <a class="code" href="classXerxes_1_1Message.html#a4d5af69b0da585623ba4c82d31a02e49">toPacket</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    std::vector&lt;uint8_t&gt;::const_iterator <a class="code" href="classXerxes_1_1Message.html#a0ddbb29a9d543d09b71169f84b7c2c65">payloadBegin</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    std::vector&lt;uint8_t&gt;::const_iterator <a class="code" href="classXerxes_1_1Message.html#a58bd104d3e2438516f020b5e93ec263b">begin</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__MESSAGE_HPP</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    std::vector&lt;uint8_t&gt;::const_iterator <a class="code" href="classXerxes_1_1Message.html#ae35f743ce2d5bde61eb696325e3997e8">end</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    uint8_t* <a class="code" href="classXerxes_1_1Message.html#a6478d8483cd7697e5d2f6a534e1ff12a">data</a>();</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespaceXerxes.html#a09d30a5a5d7ebaa9a81c89129877a42d">packetIsValidMessage</a>(<span class="keyword">const</span> <a class="code" href="classXerxes_1_1Packet.html">Packet</a> &amp;packet);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;} <span class="comment">// namespace Xerxes</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// !__MESSAGE_HPP</span></div>
 <div class="ttc" id="aPacket_8hpp_html"><div class="ttname"><a href="Packet_8hpp.html">Packet.hpp</a></div></div>
 <div class="ttc" id="aclassXerxes_1_1Message_html"><div class="ttname"><a href="classXerxes_1_1Message.html">Xerxes::Message</a></div><div class="ttdoc">Message container class.</div><div class="ttdef"><b>Definition:</b> Message.hpp:17</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_a0ddbb29a9d543d09b71169f84b7c2c65"><div class="ttname"><a href="classXerxes_1_1Message.html#a0ddbb29a9d543d09b71169f84b7c2c65">Xerxes::Message::payloadBegin</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt;::const_iterator payloadBegin() const</div><div class="ttdoc">Get the Payload Begin object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:90</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a0ddbb29a9d543d09b71169f84b7c2c65"><div class="ttname"><a href="classXerxes_1_1Message.html#a0ddbb29a9d543d09b71169f84b7c2c65">Xerxes::Message::payloadBegin</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt;::const_iterator payloadBegin() const</div><div class="ttdoc">Get the Payload Begin object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:97</div></div>
 <div class="ttc" id="aclassXerxes_1_1Message_html_a13427f384cd32cd7d9872e28ab2db5cb"><div class="ttname"><a href="classXerxes_1_1Message.html#a13427f384cd32cd7d9872e28ab2db5cb">Xerxes::Message::msgId</a></div><div class="ttdeci">uint16_t msgId</div><div class="ttdoc">Message id of the message.</div><div class="ttdef"><b>Definition:</b> Message.hpp:27</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_a19e66bddbcd2fb0958f903acc8414505"><div class="ttname"><a href="classXerxes_1_1Message.html#a19e66bddbcd2fb0958f903acc8414505">Xerxes::Message::at</a></div><div class="ttdeci">uint8_t at(const uint8_t pos) const</div><div class="ttdoc">get the byte at the given position</div><div class="ttdef"><b>Definition:</b> Message.cpp:109</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_a3f678cc53d7d62349c1e813d2e8d15da"><div class="ttname"><a href="classXerxes_1_1Message.html#a3f678cc53d7d62349c1e813d2e8d15da">Xerxes::Message::update</a></div><div class="ttdeci">void update(const uint8_t source, const uint8_t destination, const uint16_t msgid)</div><div class="ttdoc">Update the message with new data.</div><div class="ttdef"><b>Definition:</b> Message.cpp:75</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_a4d5af69b0da585623ba4c82d31a02e49"><div class="ttname"><a href="classXerxes_1_1Message.html#a4d5af69b0da585623ba4c82d31a02e49">Xerxes::Message::toPacket</a></div><div class="ttdeci">Packet toPacket()</div><div class="ttdoc">Convert the message to a valid packet.</div><div class="ttdef"><b>Definition:</b> Message.cpp:69</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_a7a04a148807dded1e98aaeb9b25078bd"><div class="ttname"><a href="classXerxes_1_1Message.html#a7a04a148807dded1e98aaeb9b25078bd">Xerxes::Message::Message</a></div><div class="ttdeci">Message()</div><div class="ttdoc">Construct a new Message object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:10</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_a9d8b18deecf1c37addede0928019838f"><div class="ttname"><a href="classXerxes_1_1Message.html#a9d8b18deecf1c37addede0928019838f">Xerxes::Message::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdoc">get the size of the message</div><div class="ttdef"><b>Definition:</b> Message.cpp:102</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_abdfae20ecb7dda5a605296363449b289"><div class="ttname"><a href="classXerxes_1_1Message.html#abdfae20ecb7dda5a605296363449b289">Xerxes::Message::~Message</a></div><div class="ttdeci">~Message()</div><div class="ttdoc">Destroy the Message object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:64</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a19e66bddbcd2fb0958f903acc8414505"><div class="ttname"><a href="classXerxes_1_1Message.html#a19e66bddbcd2fb0958f903acc8414505">Xerxes::Message::at</a></div><div class="ttdeci">uint8_t at(const uint8_t pos) const</div><div class="ttdoc">get the byte at the given position</div><div class="ttdef"><b>Definition:</b> Message.cpp:116</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a3f678cc53d7d62349c1e813d2e8d15da"><div class="ttname"><a href="classXerxes_1_1Message.html#a3f678cc53d7d62349c1e813d2e8d15da">Xerxes::Message::update</a></div><div class="ttdeci">void update(const uint8_t source, const uint8_t destination, const uint16_t msgid)</div><div class="ttdoc">Update the message with new data.</div><div class="ttdef"><b>Definition:</b> Message.cpp:82</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a4d5af69b0da585623ba4c82d31a02e49"><div class="ttname"><a href="classXerxes_1_1Message.html#a4d5af69b0da585623ba4c82d31a02e49">Xerxes::Message::toPacket</a></div><div class="ttdeci">Packet toPacket()</div><div class="ttdoc">Convert the message to a valid packet.</div><div class="ttdef"><b>Definition:</b> Message.cpp:70</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a58bd104d3e2438516f020b5e93ec263b"><div class="ttname"><a href="classXerxes_1_1Message.html#a58bd104d3e2438516f020b5e93ec263b">Xerxes::Message::begin</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt;::const_iterator begin() const</div><div class="ttdoc">Get the Begin object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:122</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a6478d8483cd7697e5d2f6a534e1ff12a"><div class="ttname"><a href="classXerxes_1_1Message.html#a6478d8483cd7697e5d2f6a534e1ff12a">Xerxes::Message::data</a></div><div class="ttdeci">uint8_t * data()</div><div class="ttdef"><b>Definition:</b> Message.cpp:127</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a7a04a148807dded1e98aaeb9b25078bd"><div class="ttname"><a href="classXerxes_1_1Message.html#a7a04a148807dded1e98aaeb9b25078bd">Xerxes::Message::Message</a></div><div class="ttdeci">Message()</div><div class="ttdoc">Construct a new Message object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:11</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_a9d8b18deecf1c37addede0928019838f"><div class="ttname"><a href="classXerxes_1_1Message.html#a9d8b18deecf1c37addede0928019838f">Xerxes::Message::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdoc">get the size of the message</div><div class="ttdef"><b>Definition:</b> Message.cpp:109</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_abdfae20ecb7dda5a605296363449b289"><div class="ttname"><a href="classXerxes_1_1Message.html#abdfae20ecb7dda5a605296363449b289">Xerxes::Message::~Message</a></div><div class="ttdeci">~Message()</div><div class="ttdoc">Destroy the Message object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:65</div></div>
 <div class="ttc" id="aclassXerxes_1_1Message_html_ad1676a866880f3390d48e8460ed393ce"><div class="ttname"><a href="classXerxes_1_1Message.html#ad1676a866880f3390d48e8460ed393ce">Xerxes::Message::dstAddr</a></div><div class="ttdeci">uint8_t dstAddr</div><div class="ttdoc">Destination address of the message.</div><div class="ttdef"><b>Definition:</b> Message.hpp:25</div></div>
 <div class="ttc" id="aclassXerxes_1_1Message_html_ada8b8e91077f26279236170fac4da546"><div class="ttname"><a href="classXerxes_1_1Message.html#ada8b8e91077f26279236170fac4da546">Xerxes::Message::srcAddr</a></div><div class="ttdeci">uint8_t srcAddr</div><div class="ttdoc">Source address of the message.</div><div class="ttdef"><b>Definition:</b> Message.hpp:23</div></div>
-<div class="ttc" id="aclassXerxes_1_1Message_html_ae35f743ce2d5bde61eb696325e3997e8"><div class="ttname"><a href="classXerxes_1_1Message.html#ae35f743ce2d5bde61eb696325e3997e8">Xerxes::Message::end</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt;::const_iterator end() const</div><div class="ttdoc">Get the Payload End object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:96</div></div>
-<div class="ttc" id="aclassXerxes_1_1Packet_html"><div class="ttname"><a href="classXerxes_1_1Packet.html">Xerxes::Packet</a></div><div class="ttdoc">Packet container class.</div><div class="ttdef"><b>Definition:</b> Packet.hpp:26</div></div>
-<div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> RingBuffer.hpp:10</div></div>
+<div class="ttc" id="aclassXerxes_1_1Message_html_ae35f743ce2d5bde61eb696325e3997e8"><div class="ttname"><a href="classXerxes_1_1Message.html#ae35f743ce2d5bde61eb696325e3997e8">Xerxes::Message::end</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt;::const_iterator end() const</div><div class="ttdoc">Get the Payload End object.</div><div class="ttdef"><b>Definition:</b> Message.cpp:103</div></div>
+<div class="ttc" id="aclassXerxes_1_1Packet_html"><div class="ttname"><a href="classXerxes_1_1Packet.html">Xerxes::Packet</a></div><div class="ttdoc">Packet container class.</div><div class="ttdef"><b>Definition:</b> Packet.hpp:28</div></div>
+<div class="ttc" id="anamespaceXerxes_html"><div class="ttname"><a href="namespaceXerxes.html">Xerxes</a></div><div class="ttdef"><b>Definition:</b> EspUart.hpp:12</div></div>
+<div class="ttc" id="anamespaceXerxes_html_a09d30a5a5d7ebaa9a81c89129877a42d"><div class="ttname"><a href="namespaceXerxes.html#a09d30a5a5d7ebaa9a81c89129877a42d">Xerxes::packetIsValidMessage</a></div><div class="ttdeci">bool packetIsValidMessage(const Packet &amp;packet)</div><div class="ttdef"><b>Definition:</b> Message.cpp:133</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

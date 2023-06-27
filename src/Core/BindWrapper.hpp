@@ -4,7 +4,7 @@
 #include "Definitions.h"
 #include "Core/Register.hpp"
 #include <functional>
-#include <xerxes-protocol/Message.hpp>
+#include <Message.hpp>
 
 extern Xerxes::Register _reg;
 

@@ -67,10 +67,10 @@ $(function() {
 <div class="title">sensor-rp2040 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md5"></a>
 Overview</h1>
 <p>Sensor RP2040 is a library of sensors for the RP2040 microcontroller using shield</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Installation</h1>
 <div class="fragment"><div class="line"># clone this repository</div>
 <div class="line">git clone ###</div>
@@ -86,9 +86,27 @@ Installation</h1>
 <div class="line"> </div>
 <div class="line"># build and upload firmware</div>
 <div class="line">make -j 16 install</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+Sensor types</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Sensor type   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SCL3300   </td><td class="markdownTableBodyNone">2 axis inclinometer, range +- 90°    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SCL3400   </td><td class="markdownTableBodyNone">2 axis inclinometer, range +- 30°    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">AI   </td><td class="markdownTableBodyNone">Analog input - 4 analog inputs    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">AnalogInput   </td><td class="markdownTableBodyNone">Same as "AI")    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">4DI4DO   </td><td class="markdownTableBodyNone">4 digital inputs and 4 digital outputs    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ABP   </td><td class="markdownTableBodyNone">pressure sensor, range 0-60 mbar = 0-6 kPa (differential)   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Other remarks</h1>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 low latency USB Serial</h2>
 <div class="fragment"><div class="line">echo 1 | sudo tee /sys/bus/usb-serial/devices/ttyUSB0/latency_timer  # change ttyUSB0 for your device</div>
 </div><!-- fragment --> </div></div><!-- contents -->

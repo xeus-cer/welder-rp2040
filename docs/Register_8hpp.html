@@ -69,7 +69,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Register.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -80,10 +81,12 @@ Include dependency graph for Register.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="Register_8hpp__incl.png" border="0" usemap="#asrc_2Core_2Register_8hpp" alt=""/></div>
 <map name="asrc_2Core_2Register_8hpp" id="asrc_2Core_2Register_8hpp">
-<area shape="rect" title=" " alt="" coords="70,5,231,32"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="81,80,220,107"/>
+<area shape="rect" title=" " alt="" coords="150,5,311,32"/>
+<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="161,80,300,107"/>
 <area shape="rect" title=" " alt="" coords="5,155,136,181"/>
 <area shape="rect" title=" " alt="" coords="161,155,301,181"/>
+<area shape="rect" href="MemoryMap_8h.html" title=" " alt="" coords="325,155,441,181"/>
+<area shape="rect" title=" " alt="" coords="347,229,418,256"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -91,30 +94,42 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="Register_8hpp__dep__incl.png" border="0" usemap="#asrc_2Core_2Register_8hppdep" alt=""/></div>
 <map name="asrc_2Core_2Register_8hppdep" id="asrc_2Core_2Register_8hppdep">
-<area shape="rect" title=" " alt="" coords="1501,5,1662,32"/>
-<area shape="rect" href="Callbacks_8cpp.html" title=" " alt="" coords="526,423,768,449"/>
-<area shape="rect" href="BindWrapper_8hpp.html" title=" " alt="" coords="1620,80,1810,107"/>
-<area shape="rect" href="src_2main_8cpp.html" title=" " alt="" coords="1470,423,1576,449"/>
-<area shape="rect" href="Register_8cpp.html" title=" " alt="" coords="1835,80,1995,107"/>
-<area shape="rect" href="InitUtils_8cpp.html" title=" " alt="" coords="2020,80,2210,107"/>
-<area shape="rect" href="DigitalInputOutput_8hpp.html" title=" " alt="" coords="209,155,384,196"/>
-<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="1150,80,1322,107"/>
-<area shape="rect" href="all_8hpp.html" title=" " alt="" coords="575,341,719,367"/>
-<area shape="rect" href="4DI4DO_8hpp.html" title=" " alt="" coords="46,244,197,285"/>
-<area shape="rect" href="DigitalInputOutput_8cpp.html" title=" " alt="" coords="272,244,446,285"/>
-<area shape="rect" href="4DI4DO_8cpp.html" title=" " alt="" coords="46,333,197,375"/>
-<area shape="rect" href="Callbacks_8hpp.html" title=" " alt="" coords="1323,341,1566,367"/>
-<area shape="rect" href="AnalogInput_8hpp.html" title=" " alt="" coords="572,155,722,196"/>
-<area shape="rect" href="ABP_8hpp.html" title=" " alt="" coords="798,155,968,196"/>
-<area shape="rect" href="SCL3X00_8hpp.html" title=" " alt="" coords="1163,155,1310,196"/>
-<area shape="rect" href="Sensor_8cpp.html" title=" " alt="" coords="1395,162,1566,189"/>
-<area shape="rect" href="AnalogInput_8cpp.html" title=" " alt="" coords="572,244,722,285"/>
-<area shape="rect" href="ABP_8cpp.html" title=" " alt="" coords="798,244,968,285"/>
-<area shape="rect" href="SCL3300_8hpp.html" title=" " alt="" coords="992,244,1139,285"/>
-<area shape="rect" href="SCL3400_8hpp.html" title=" " alt="" coords="1163,244,1310,285"/>
-<area shape="rect" href="SCL3X00_8cpp.html" title=" " alt="" coords="1334,244,1480,285"/>
-<area shape="rect" href="SCL3300_8cpp.html" title=" " alt="" coords="982,333,1128,375"/>
-<area shape="rect" href="SCL3400_8cpp.html" title=" " alt="" coords="1152,333,1299,375"/>
+<area shape="rect" title=" " alt="" coords="2301,5,2463,32"/>
+<area shape="rect" href="Callbacks_8cpp.html" title=" " alt="" coords="1042,527,1285,553"/>
+<area shape="rect" href="BindWrapper_8hpp.html" title=" " alt="" coords="2353,177,2544,203"/>
+<area shape="rect" href="src_2main_8cpp.html" title=" " alt="" coords="2057,527,2163,553"/>
+<area shape="rect" href="Register_8cpp.html" title=" " alt="" coords="2619,87,2779,114"/>
+<area shape="rect" href="InitUtils_8cpp.html" title=" " alt="" coords="2804,87,2995,114"/>
+<area shape="rect" href="DigitalInputOutput_8hpp.html" title=" " alt="" coords="341,80,543,121"/>
+<area shape="rect" href="SCL3X00_8cpp.html" title=" " alt="" coords="2347,348,2494,389"/>
+<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="1425,177,1597,203"/>
+<area shape="rect" href="all_8hpp.html" title=" " alt="" coords="1091,445,1235,471"/>
+<area shape="rect" href="4DI4DO_8hpp.html" title=" " alt="" coords="97,169,248,211"/>
+<area shape="rect" href="DigitalInputOutput_8cpp.html" title=" " alt="" coords="272,169,473,211"/>
+<area shape="rect" href="4DI4DO_8cpp.html" title=" " alt="" coords="272,259,423,300"/>
+<area shape="rect" href="Encoder_8hpp.html" title=" " alt="" coords="97,259,248,300"/>
+<area shape="rect" href="Cutter_8hpp.html" title=" " alt="" coords="47,348,197,389"/>
+<area shape="rect" href="Encoder_8cpp.html" title=" " alt="" coords="221,348,372,389"/>
+<area shape="rect" href="Cutter_8cpp.html" title=" " alt="" coords="47,437,197,479"/>
+<area shape="rect" href="Callbacks_8hpp.html" title=" " alt="" coords="1569,445,1811,471"/>
+<area shape="rect" href="AnalogInput_8hpp.html" title=" " alt="" coords="1528,259,1679,300"/>
+<area shape="rect" href="ds18b20_8hpp.html" title=" " alt="" coords="578,259,746,300"/>
+<area shape="rect" href="LightSound_8hpp.html" title=" " alt="" coords="770,259,941,300"/>
+<area shape="rect" href="hx711_8hpp.html" title=" " alt="" coords="1160,259,1311,300"/>
+<area shape="rect" href="ABP_8hpp.html" title=" " alt="" coords="1335,259,1504,300"/>
+<area shape="rect" href="SCL3X00_8hpp.html" title=" " alt="" coords="2006,259,2153,300"/>
+<area shape="rect" href="Sensor_8cpp.html" title=" " alt="" coords="965,266,1135,293"/>
+<area shape="rect" href="AnalogInput_8cpp.html" title=" " alt="" coords="1508,348,1659,389"/>
+<area shape="rect" href="ds18b20_8cpp.html" title=" " alt="" coords="600,348,767,389"/>
+<area shape="rect" href="LightSound_8cpp.html" title=" " alt="" coords="842,348,1013,389"/>
+<area shape="rect" href="hx711_8cpp.html" title=" " alt="" coords="1088,348,1239,389"/>
+<area shape="rect" href="ABP_8cpp.html" title=" " alt="" coords="1315,348,1484,389"/>
+<area shape="rect" href="SCL3300_8hpp.html" title=" " alt="" coords="1835,348,1982,389"/>
+<area shape="rect" href="SCL3300a_8hpp.html" title=" " alt="" coords="2006,348,2153,389"/>
+<area shape="rect" href="SCL3400_8hpp.html" title=" " alt="" coords="2177,348,2323,389"/>
+<area shape="rect" href="SCL3300_8cpp.html" title=" " alt="" coords="1835,437,1982,479"/>
+<area shape="rect" href="SCL3300a_8cpp.html" title=" " alt="" coords="2006,437,2153,479"/>
+<area shape="rect" href="SCL3400_8cpp.html" title=" " alt="" coords="2177,437,2323,479"/>
 </map>
 </div>
 </div>
@@ -130,6 +145,33 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceXerxes"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html">Xerxes</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0fe0256a4e48d70317464fbbbfebb541"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a0fe0256a4e48d70317464fbbbfebb541"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a0fe0256a4e48d70317464fbbbfebb541">Xerxes::bitSet</a> (T &amp;reg, const T &amp;mask)</td></tr>
+<tr class="memdesc:a0fe0256a4e48d70317464fbbbfebb541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the bits of a register to 1.  <a href="namespaceXerxes.html#a0fe0256a4e48d70317464fbbbfebb541">More...</a><br /></td></tr>
+<tr class="separator:a0fe0256a4e48d70317464fbbbfebb541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd775456c0c29650c3c315d6c3acd88"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a5cd775456c0c29650c3c315d6c3acd88"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a5cd775456c0c29650c3c315d6c3acd88">Xerxes::bitSet</a> (T &amp;reg, const uint8_t n)</td></tr>
+<tr class="memdesc:a5cd775456c0c29650c3c315d6c3acd88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the n-th bit of a register to 1.  <a href="namespaceXerxes.html#a5cd775456c0c29650c3c315d6c3acd88">More...</a><br /></td></tr>
+<tr class="separator:a5cd775456c0c29650c3c315d6c3acd88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d8aea3b2c006377e23c0a1f7344dc01"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a0d8aea3b2c006377e23c0a1f7344dc01"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a0d8aea3b2c006377e23c0a1f7344dc01">Xerxes::bitClear</a> (T &amp;reg, const T &amp;mask)</td></tr>
+<tr class="memdesc:a0d8aea3b2c006377e23c0a1f7344dc01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the bits of a register to 0.  <a href="namespaceXerxes.html#a0d8aea3b2c006377e23c0a1f7344dc01">More...</a><br /></td></tr>
+<tr class="separator:a0d8aea3b2c006377e23c0a1f7344dc01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab500c4503f63173e368065444d4decb2"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ab500c4503f63173e368065444d4decb2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#ab500c4503f63173e368065444d4decb2">Xerxes::bitClear</a> (T &amp;reg, const uint8_t n)</td></tr>
+<tr class="memdesc:ab500c4503f63173e368065444d4decb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the n-th bit of a register.  <a href="namespaceXerxes.html#ab500c4503f63173e368065444d4decb2">More...</a><br /></td></tr>
+<tr class="separator:ab500c4503f63173e368065444d4decb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2727d1549906ab5547edfbd7e60d69b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ae2727d1549906ab5547edfbd7e60d69b"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#ae2727d1549906ab5547edfbd7e60d69b">Xerxes::bitCheck</a> (T &amp;reg, const T &amp;mask)</td></tr>
+<tr class="memdesc:ae2727d1549906ab5547edfbd7e60d69b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the bits of a register are set to 1.  <a href="namespaceXerxes.html#ae2727d1549906ab5547edfbd7e60d69b">More...</a><br /></td></tr>
+<tr class="separator:ae2727d1549906ab5547edfbd7e60d69b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d08325413c109bc801034b196315ba"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ac1d08325413c109bc801034b196315ba"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#ac1d08325413c109bc801034b196315ba">Xerxes::bitCheck</a> (T &amp;reg, const uint8_t n)</td></tr>
+<tr class="memdesc:ac1d08325413c109bc801034b196315ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the n-th bit of a register is set to 1.  <a href="namespaceXerxes.html#ac1d08325413c109bc801034b196315ba">More...</a><br /></td></tr>
+<tr class="separator:ac1d08325413c109bc801034b196315ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,6 +1,8 @@
-<map id="src/Communication/Network.hpp" name="src/Communication/Network.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,240,32"/>
-<area shape="rect" id="node2" href="$Packet_8hpp.html" title=" " alt="" coords="76,80,169,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="47,155,110,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="135,155,201,181"/>
+<map id="lib/xerxes&#45;protocol&#45;cpp/src/Network.hpp" name="lib/xerxes&#45;protocol&#45;cpp/src/Network.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="93,5,253,47"/>
+<area shape="rect" id="node2" href="$Packet_8hpp.html" title=" " alt="" coords="126,95,219,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,169,68,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="93,169,159,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="183,169,258,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="282,169,341,196"/>
 </map>

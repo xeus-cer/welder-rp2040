@@ -9,7 +9,7 @@ namespace Xerxes
 {
 
 /// @brief default number of oversampling bits
-constexpr uint8_t defaultOversampleBits     = 3;
+constexpr uint8_t defaultOversampleBits     = 4;
 /// @brief default number of used ADC channels
 constexpr uint8_t defaultChannels           = 4;
 /// @brief bit depth of RP2040 ADC

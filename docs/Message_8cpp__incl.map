@@ -1,9 +1,12 @@
-<map id="src/Communication/Message.cpp" name="src/Communication/Message.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="42,5,279,32"/>
-<area shape="rect" id="node2" href="$Message_8hpp.html" title=" " alt="" coords="41,80,149,107"/>
-<area shape="rect" id="node6" href="$MessageId_8h.html" title=" " alt="" coords="181,80,285,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,229,68,256"/>
-<area shape="rect" id="node4" title=" " alt="" coords="113,229,179,256"/>
-<area shape="rect" id="node5" href="$Packet_8hpp.html" title=" " alt="" coords="35,155,129,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="204,155,275,181"/>
+<map id="lib/xerxes&#45;protocol&#45;cpp/src/Message.cpp" name="lib/xerxes&#45;protocol&#45;cpp/src/Message.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="240,5,403,47"/>
+<area shape="rect" id="node2" href="$Message_8hpp.html" title=" " alt="" coords="130,95,238,121"/>
+<area shape="rect" id="node8" href="$MessageId_8h.html" title=" " alt="" coords="269,95,373,121"/>
+<area shape="rect" id="node10" title=" " alt="" coords="397,95,464,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="278,244,341,271"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,244,72,271"/>
+<area shape="rect" id="node5" href="$Packet_8hpp.html" title=" " alt="" coords="124,169,217,196"/>
+<area shape="rect" id="node6" title=" " alt="" coords="179,244,253,271"/>
+<area shape="rect" id="node7" title=" " alt="" coords="96,244,155,271"/>
+<area shape="rect" id="node9" title=" " alt="" coords="293,169,363,196"/>
 </map>

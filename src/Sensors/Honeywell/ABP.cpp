@@ -7,6 +7,7 @@
 #include <array>
 #include <sstream>
 #include <iostream>
+#include "Utils/Log.h"
 
 
 namespace Xerxes
@@ -29,6 +30,7 @@ void ABP::init()
 
     // init spi with freq 800kHz, return actual frequency
     uint baudrate = spi_init(spi0, 800'000);
+    xlog_info("ABP spi init, baudrate: " << baudrate);
 
     // Set the GPIO pin mux to the SPI
     gpio_set_function(SPI0_MISO_PIN, GPIO_FUNC_SPI);
@@ -67,14 +69,15 @@ void ABP::update()
     spi_read_blocking(spi0, 0, data, 4);
     sleep_us(3);
     gpio_put(SPI0_CSN_PIN, 1);
+    xlog_debug("ABP data: " << (int)data[0] << " " << (int)data[1] << " " << (int)data[2] << " " << (int)data[3]);
 
     // check if data is ok (no spi error) and set error bit if not
     if(!isSpiDataOk(data, sizeof(data)))
     {
         // set error bit in error register - sensor is not connected
-        _reg->errorCheck(ERROR_MASK_SENSOR_CONNECTION);
+        _reg->errorSet(ERROR_MASK_SENSOR_CONNECTION);
         // set error bit in error register - sensor was not connected in past
-        _reg->errorCheck(ERROR_MASK_SENSOR_CONNECTION_MEM);  // set error flag
+        _reg->errorSet(ERROR_MASK_SENSOR_CONNECTION_MEM);  // set error flag
     }
     else
     {
@@ -87,23 +90,36 @@ void ABP::update()
     p_val = (uint16_t)(((data[0] & 0b00111111)<<8) + data[1]);
     t_val = (uint16_t)(((data[2]<<8) + (data[3] & 0b11100000))>>5);
     
-    *_reg->pv0 = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
-    *_reg->pv3 = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
+    float pressure_Pa = (float)((((p_val-VALmin)*(Pmax-Pmin))/(VALmax-VALmin)) + Pmin); 
+    float temperature = (float)((t_val*200.0/2047.0)-50.0);     // calculate internal temperature
+    // calculate density of mono propylene glycol (MPG) at given temperature
+    float density = (-1.09010989 * temperature) + 1045.824176;
+    // calculate pressure of monopropylene glycol column (density = 1.035 g/cm^3)
+    float pressure_mmMPG = 1e3f * pressure_Pa / (density * 9.80665); // calculate pressure in mmMPG
+    xlogd("Density: " << density << "[kg/m^3]");
 
+    *_reg->pv0 = pressure_Pa;
+    *_reg->pv1 = pressure_mmMPG;
+    *_reg->pv3 = temperature;
+
+    xlog_debug("ABP p: " << *_reg->pv0 << "[Pa] = " << *_reg->pv1 << "[mmMPG], t: " << *_reg->pv3 << "[°C]");
 
     // if calcStat is true, update statistics
     if(_reg->config->bits.calcStat)
     {
         // insert new values into ring buffer
         rbpv0.insertOne(*_reg->pv0);
+        rbpv1.insertOne(*_reg->pv1);
         rbpv3.insertOne(*_reg->pv3);
 
         // update statistics
         rbpv0.updateStatistics();
+        rbpv1.updateStatistics();
         rbpv3.updateStatistics();
 
         // update min, max stddev etc...
         rbpv0.getStatistics(_reg->minPv0, _reg->maxPv0, _reg->meanPv0, _reg->stdDevPv0);
+        rbpv1.getStatistics(_reg->minPv1, _reg->maxPv1, _reg->meanPv1, _reg->stdDevPv1);
         rbpv3.getStatistics(_reg->minPv3, _reg->maxPv3, _reg->meanPv3, _reg->stdDevPv3);
     }
 }
@@ -115,7 +131,8 @@ std::string ABP::getJson()
 
     // return values as JSON
     ss << "{" << std::endl;
-    ss << "\t\"p\": " << *_reg->pv0 << "," << std::endl;
+    ss << "\t\"p[Pa]\": " << *_reg->pv0 << "," << std::endl;
+    ss << "\t\"p[mmMPG]\": " << *_reg->pv1 << "," << std::endl;
     ss << "\t\"Avg(t)\": " << *_reg->meanPv3 << "," << std::endl;
     ss << "\t\"Avg(p)\": " << *_reg->meanPv0 << "," << std::endl;
     ss << "\t\"StdDev(p)\": " << *_reg->stdDevPv0 << "," << std::endl;

@@ -89,23 +89,38 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab77b402a8726aa0359c851343e581e79"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#ab77b402a8726aa0359c851343e581e79">Packet</a> (std::vector&lt; uint8_t &gt; &amp;message)</td></tr>
 <tr class="memdesc:ab77b402a8726aa0359c851343e581e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classXerxes_1_1Packet.html" title="Packet container class.">Packet</a> object from a vector.  <a href="classXerxes_1_1Packet.html#ab77b402a8726aa0359c851343e581e79">More...</a><br /></td></tr>
 <tr class="separator:ab77b402a8726aa0359c851343e581e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407c678df976ba632ade06d8c7e9856d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#a407c678df976ba632ade06d8c7e9856d">Packet</a> (const std::vector&lt; uint8_t &gt; &amp;message)</td></tr>
+<tr class="separator:a407c678df976ba632ade06d8c7e9856d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae572f3b3de92242cec975491b9298dae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#ae572f3b3de92242cec975491b9298dae">~Packet</a> ()</td></tr>
 <tr class="separator:ae572f3b3de92242cec975491b9298dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5269f562439267ab86ec7364f09b8502"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#a5269f562439267ab86ec7364f09b8502">size</a> () const</td></tr>
 <tr class="memdesc:a5269f562439267ab86ec7364f09b8502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of the packet.  <a href="classXerxes_1_1Packet.html#a5269f562439267ab86ec7364f09b8502">More...</a><br /></td></tr>
 <tr class="separator:a5269f562439267ab86ec7364f09b8502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bd7699d19c2c7cb1a4130f2129a9018"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018">getData</a> () const</td></tr>
-<tr class="memdesc:a2bd7699d19c2c7cb1a4130f2129a9018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Data object as a vector.  <a href="classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018">More...</a><br /></td></tr>
+<tr class="memdesc:a2bd7699d19c2c7cb1a4130f2129a9018"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Data object as a vector. Data object contains all bytes from the packet including SOH, LEN and CHECKSUM.  <a href="classXerxes_1_1Packet.html#a2bd7699d19c2c7cb1a4130f2129a9018">More...</a><br /></td></tr>
 <tr class="separator:a2bd7699d19c2c7cb1a4130f2129a9018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10a680ac8db5ecedd03b77417b130471"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#a10a680ac8db5ecedd03b77417b130471">setData</a> (const std::vector&lt; uint8_t &gt; &amp;<a class="el" href="classXerxes_1_1Packet.html#aae00315ba1088123b96cd566f663e5d5">data</a>)</td></tr>
+<tr class="separator:a10a680ac8db5ecedd03b77417b130471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae00315ba1088123b96cd566f663e5d5"><td class="memItemLeft" align="right" valign="top">const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#aae00315ba1088123b96cd566f663e5d5">data</a> () const</td></tr>
+<tr class="separator:aae00315ba1088123b96cd566f663e5d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a294f31d0324a5e1e0140a0a1d951e1"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#a6a294f31d0324a5e1e0140a0a1d951e1">at</a> (const uint8_t pos) const</td></tr>
 <tr class="memdesc:a6a294f31d0324a5e1e0140a0a1d951e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data at a specific position.  <a href="classXerxes_1_1Packet.html#a6a294f31d0324a5e1e0140a0a1d951e1">More...</a><br /></td></tr>
 <tr class="separator:a6a294f31d0324a5e1e0140a0a1d951e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af90b0d9d395b869cdbc8e965b1607f6f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#af90b0d9d395b869cdbc8e965b1607f6f">isValidPacket</a> () const</td></tr>
+<tr class="memdesc:af90b0d9d395b869cdbc8e965b1607f6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the packet is valid.  <a href="classXerxes_1_1Packet.html#af90b0d9d395b869cdbc8e965b1607f6f">More...</a><br /></td></tr>
+<tr class="separator:af90b0d9d395b869cdbc8e965b1607f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae04b855d59a0c188ed5eeba0049e9fc5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#ae04b855d59a0c188ed5eeba0049e9fc5">toString</a> () const</td></tr>
+<tr class="memdesc:ae04b855d59a0c188ed5eeba0049e9fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return representation of the packet for debugging.  <a href="classXerxes_1_1Packet.html#ae04b855d59a0c188ed5eeba0049e9fc5">More...</a><br /></td></tr>
+<tr class="separator:ae04b855d59a0c188ed5eeba0049e9fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a912ffc041442d69ae63d2679b08cbeb1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classXerxes_1_1Packet.html">Packet</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#a912ffc041442d69ae63d2679b08cbeb1">EmptyPacket</a> ()</td></tr>
-<tr class="memdesc:a912ffc041442d69ae63d2679b08cbeb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the empty packet.  <a href="classXerxes_1_1Packet.html#a912ffc041442d69ae63d2679b08cbeb1">More...</a><br /></td></tr>
+<tr class="memdesc:a912ffc041442d69ae63d2679b08cbeb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the empty packet with SOH, LEN and checksum precalcualted.  <a href="classXerxes_1_1Packet.html#a912ffc041442d69ae63d2679b08cbeb1">More...</a><br /></td></tr>
 <tr class="separator:a912ffc041442d69ae63d2679b08cbeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae70afb084bdfb003fcf38c62e472188c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Packet.html#ae70afb084bdfb003fcf38c62e472188c">isValidPacket</a> (const std::vector&lt; uint8_t &gt; &amp;<a class="el" href="classXerxes_1_1Packet.html#aae00315ba1088123b96cd566f663e5d5">data</a>)</td></tr>
+<tr class="memdesc:ae70afb084bdfb003fcf38c62e472188c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the data may represent a valid xerxes packet.  <a href="classXerxes_1_1Packet.html#ae70afb084bdfb003fcf38c62e472188c">More...</a><br /></td></tr>
+<tr class="separator:ae70afb084bdfb003fcf38c62e472188c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classXerxes_1_1Packet.html" title="Packet container class.">Packet</a> container class. </p>
@@ -113,7 +128,7 @@ Static Public Member Functions</h2></td></tr>
 <p>The packet format is as follows: SOH | LEN | DATA | CHECKSUM </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaf47f823aa875f991b3c19fa8f93fe95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf47f823aa875f991b3c19fa8f93fe95">&#9670;&nbsp;</a></span>Packet() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf47f823aa875f991b3c19fa8f93fe95">&#9670;&nbsp;</a></span>Packet() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -132,7 +147,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ab77b402a8726aa0359c851343e581e79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab77b402a8726aa0359c851343e581e79">&#9670;&nbsp;</a></span>Packet() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab77b402a8726aa0359c851343e581e79">&#9670;&nbsp;</a></span>Packet() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,6 +169,24 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a407c678df976ba632ade06d8c7e9856d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a407c678df976ba632ade06d8c7e9856d">&#9670;&nbsp;</a></span>Packet() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Xerxes::Packet::Packet </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>message</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -202,6 +235,23 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aae00315ba1088123b96cd566f663e5d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae00315ba1088123b96cd566f663e5d5">&#9670;&nbsp;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const uint8_t * Xerxes::Packet::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a912ffc041442d69ae63d2679b08cbeb1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a912ffc041442d69ae63d2679b08cbeb1">&#9670;&nbsp;</a></span>EmptyPacket()</h2>
 
@@ -225,7 +275,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the empty packet. </p>
+<p>Get the empty packet with SOH, LEN and checksum precalcualted. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classXerxes_1_1Packet.html" title="Packet container class.">Packet</a> empty packet </dd></dl>
 
 </div>
@@ -245,8 +295,85 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the Data object as a vector. </p>
+<p>Get the Data object as a vector. Data object contains all bytes from the packet including SOH, LEN and CHECKSUM. </p>
 <dl class="section return"><dt>Returns</dt><dd>std::vector&lt;uint8_t&gt; data of the packet </dd></dl>
+
+</div>
+</div>
+<a id="af90b0d9d395b869cdbc8e965b1607f6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af90b0d9d395b869cdbc8e965b1607f6f">&#9670;&nbsp;</a></span>isValidPacket() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Xerxes::Packet::isValidPacket </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the packet is valid. </p>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="ae70afb084bdfb003fcf38c62e472188c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae70afb084bdfb003fcf38c62e472188c">&#9670;&nbsp;</a></span>isValidPacket() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Xerxes::Packet::isValidPacket </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the data may represent a valid xerxes packet. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a10a680ac8db5ecedd03b77417b130471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10a680ac8db5ecedd03b77417b130471">&#9670;&nbsp;</a></span>setData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::Packet::setData </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -270,9 +397,29 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae04b855d59a0c188ed5eeba0049e9fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae04b855d59a0c188ed5eeba0049e9fc5">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Xerxes::Packet::toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return representation of the packet for debugging. </p>
+<dl class="section return"><dt>Returns</dt><dd>std::string </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/Communication/<a class="el" href="Packet_8hpp_source.html">Packet.hpp</a></li>
-<li>src/Communication/<a class="el" href="Packet_8cpp.html">Packet.cpp</a></li>
+<li>lib/xerxes-protocol-cpp/src/<a class="el" href="Packet_8hpp_source.html">Packet.hpp</a></li>
+<li>lib/xerxes-protocol-cpp/src/<a class="el" href="Packet_8cpp.html">Packet.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -130,11 +130,15 @@ public:
     float* offsetPv2     = (float *)(memTable + OFFSET_PV2_OFFSET);
     float* offsetPv3     = (float *)(memTable + OFFSET_PV3_OFFSET);
 
-    uint32_t *desiredCycleTimeUs     = (uint32_t *)(memTable + OFFSET_DESIRED_CYCLE_TIME);  ///< Desired cycle time of sensor loop in microseconds
+    uint32_t *desiredCycleTimeUs     = (uint32_t *)(memTable + OFFSET_DESIRED_CYCLE_TIME);  ///< Desired cycle time of device loop in microseconds
     uint8_t *devAddress              = (uint8_t *)(memTable + OFFSET_ADDRESS);  ///< Address of the device (1 byte)
     ConfigBitsUnion *config          = (ConfigBitsUnion *)(memTable + OFFSET_CONFIG_BITS);  ///< Config bits of the device (1 byte)
     uint32_t *netCycleTimeUs         = (uint32_t *)(memTable + OFFSET_NET_CYCLE_TIME);  ///< Actual cycle time of measurement loop in microseconds
 
+    uint32_t *config_val0            = (uint32_t *)(memTable + CONFIG_VAL0_OFFSET);  ///< Config bits of the device (1 byte)
+    uint32_t *config_val1            = (uint32_t *)(memTable + CONFIG_VAL1_OFFSET);  ///< Config bits of the device (1 byte)
+    uint32_t *config_val2            = (uint32_t *)(memTable + CONFIG_VAL2_OFFSET);  ///< Config bits of the device (1 byte)
+    uint32_t *config_val3            = (uint32_t *)(memTable + CONFIG_VAL3_OFFSET);  ///< Config bits of the device (1 byte)
 
     /* ### VOLATILE - PROCESS VALUES ### */
     float* pv0           = (float *)(memTable + PV0_OFFSET);    ///< Pointer to process value 0
@@ -171,6 +175,11 @@ public:
     float* av1          = (float *)(memTable + AV1_OFFSET);    ///< Pointer to analog value 1
     float* av2          = (float *)(memTable + AV2_OFFSET);    ///< Pointer to analog value 2
     float* av3          = (float *)(memTable + AV3_OFFSET);    ///< Pointer to analog value 3
+
+    int32_t* sv0        = (int32_t *)(memTable + SV0_OFFSET);  ///< Pointer to set value 0
+    int32_t* sv1        = (int32_t *)(memTable + SV1_OFFSET);  ///< Pointer to set value 1
+    int32_t* sv2        = (int32_t *)(memTable + SV2_OFFSET);  ///< Pointer to set value 2
+    int32_t* sv3        = (int32_t *)(memTable + SV3_OFFSET);  ///< Pointer to set value 3
 
     /** @brief 0x55AA55AA = unlocked, anything else = locked */
     uint32_t* memUnlocked   = (uint32_t *)(memTable + MEM_UNLOCKED_OFFSET);

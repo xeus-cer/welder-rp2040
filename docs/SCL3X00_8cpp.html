@@ -79,34 +79,40 @@ $(function() {
 <code>#include &quot;hardware/clocks.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="xerxes__rp2040_8h_source.html">Hardware/Board/xerxes_rp2040.h</a>&quot;</code><br />
 <code>#include &quot;pico/time.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="Errors_8h_source.html">Core/Errors.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Register_8hpp_source.html">Core/Register.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SCL3X00.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="SCL3X00_8cpp__incl.png" border="0" usemap="#asrc_2Sensors_2Murata_2SCL3X00_8cpp" alt=""/></div>
 <map name="asrc_2Sensors_2Murata_2SCL3X00_8cpp" id="asrc_2Sensors_2Murata_2SCL3X00_8cpp">
-<area shape="rect" title=" " alt="" coords="1216,5,1363,47"/>
-<area shape="rect" href="SCL3X00_8hpp.html" title=" " alt="" coords="1135,102,1241,129"/>
-<area shape="rect" title=" " alt="" coords="877,408,1017,435"/>
-<area shape="rect" title=" " alt="" coords="1031,259,1150,285"/>
-<area shape="rect" href="xerxes__rp2040_8h.html" title=" " alt="" coords="1327,95,1502,136"/>
-<area shape="rect" title=" " alt="" coords="1526,102,1621,129"/>
-<area shape="rect" title=" " alt="" coords="1031,333,1097,360"/>
-<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="601,184,751,211"/>
-<area shape="rect" title=" " alt="" coords="1158,333,1234,360"/>
-<area shape="rect" title=" " alt="" coords="1073,184,1151,211"/>
-<area shape="rect" href="Register_8hpp.html" title=" " alt="" coords="375,259,513,285"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="375,333,513,360"/>
-<area shape="rect" href="Peripheral_8hpp.html" title=" " alt="" coords="836,259,1007,285"/>
-<area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="113,259,300,285"/>
-<area shape="rect" title=" " alt="" coords="538,259,665,285"/>
-<area shape="rect" title=" " alt="" coords="689,259,812,285"/>
-<area shape="rect" title=" " alt="" coords="379,408,509,435"/>
-<area shape="rect" href="DeviceIds_8h.html" title=" " alt="" coords="855,333,987,360"/>
-<area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="147,333,266,360"/>
-<area shape="rect" title=" " alt="" coords="5,408,61,435"/>
-<area shape="rect" title=" " alt="" coords="85,408,157,435"/>
-<area shape="rect" title=" " alt="" coords="182,408,245,435"/>
-<area shape="rect" title=" " alt="" coords="269,408,349,435"/>
+<area shape="rect" title=" " alt="" coords="1171,5,1317,47"/>
+<area shape="rect" href="SCL3X00_8hpp.html" title=" " alt="" coords="420,102,527,129"/>
+<area shape="rect" href="Register_8hpp.html" title=" " alt="" coords="1089,259,1228,285"/>
+<area shape="rect" title=" " alt="" coords="1214,408,1354,435"/>
+<area shape="rect" title=" " alt="" coords="946,259,1065,285"/>
+<area shape="rect" href="xerxes__rp2040_8h.html" title=" " alt="" coords="1282,95,1457,136"/>
+<area shape="rect" title=" " alt="" coords="1481,102,1575,129"/>
+<area shape="rect" href="Errors_8h.html" title=" " alt="" coords="1505,184,1612,211"/>
+<area shape="rect" title=" " alt="" coords="128,333,195,360"/>
+<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="524,184,673,211"/>
+<area shape="rect" href="DeviceIds_8h.html" title=" " alt="" coords="5,333,104,360"/>
+<area shape="rect" title=" " alt="" coords="305,333,381,360"/>
+<area shape="rect" title=" " alt="" coords="697,184,775,211"/>
+<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="1055,333,1193,360"/>
+<area shape="rect" href="Peripheral_8hpp.html" title=" " alt="" coords="140,259,311,285"/>
+<area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="684,259,871,285"/>
+<area shape="rect" title=" " alt="" coords="386,259,513,285"/>
+<area shape="rect" title=" " alt="" coords="537,259,660,285"/>
+<area shape="rect" title=" " alt="" coords="1059,408,1189,435"/>
+<area shape="rect" href="MemoryMap_8h.html" title=" " alt="" coords="918,408,1034,435"/>
+<area shape="rect" title=" " alt="" coords="941,483,1011,509"/>
+<area shape="rect" title=" " alt="" coords="219,333,277,360"/>
+<area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="698,333,817,360"/>
+<area shape="rect" title=" " alt="" coords="549,408,605,435"/>
+<area shape="rect" title=" " alt="" coords="629,408,701,435"/>
+<area shape="rect" title=" " alt="" coords="726,408,789,435"/>
+<area shape="rect" title=" " alt="" coords="813,408,893,435"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -121,8 +127,6 @@ Functions</h2></td></tr>
 <tr class="separator:afdd71ba6895074978a5fd6f4322f24a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a348609edeee05818ba30fe51f9c511d8"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a348609edeee05818ba30fe51f9c511d8">Xerxes::CRC8</a> (uint8_t BitValue, uint8_t CRC)</td></tr>
 <tr class="separator:a348609edeee05818ba30fe51f9c511d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00a4a08709a186f9c7dc0e79aee49027"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a00a4a08709a186f9c7dc0e79aee49027">Xerxes::operator&lt;&lt;</a> (std::ostream &amp;os, const SCL3X00 &amp;scl)</td></tr>
-<tr class="separator:a00a4a08709a186f9c7dc0e79aee49027"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

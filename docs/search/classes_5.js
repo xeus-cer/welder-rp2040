@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['network_576',['Network',['../classXerxes_1_1Network.html',1,'Xerxes']]]
+  ['hx711_775',['HX711',['../classXerxes_1_1HX711.html',1,'Xerxes']]]
 ];

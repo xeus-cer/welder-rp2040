@@ -16,14 +16,17 @@
 #include "Hardware/Sleep.hpp"
 #include "Sensors/all.hpp"
 #include "Communication/RS485.hpp"
+#include "Utils/Log.h"
 
+// preprocess token into string
+#define _quote(x) #x
 
 using namespace std;
 using namespace Xerxes;
 
 
 // forward declaration
-__SENSOR_CLASS sensor;
+__DEVICE_CLASS device;
 
 
 Register _reg;  // main register
@@ -45,22 +48,21 @@ volatile bool awake = true;
 /**
  * @brief Core 1 entry point, runs in background
  */
-void core1Entry();  
+void core1Entry();
 
 
 int main(void)
-{
-    // enable watchdog for 200ms, pause on debug = true
+{    // enable watchdog for 200ms, pause on debug = true
     watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
     
     // init system
     userInit();  // 374us
-
-    // blink led for 1 ms - we are alive
-    gpio_put(USR_LED_PIN, 1);
-    sleep_ms(1);
-    gpio_put(USR_LED_PIN, 0);
         
+    // blink led for 10 ms - we are alive
+    gpio_put(USR_LED_PIN, 1);
+    sleep_ms(10);
+    gpio_put(USR_LED_PIN, 0);
+
     // clear error register
     _reg.errorClear(0xFFFFFFFF);
 
@@ -79,13 +81,10 @@ int main(void)
     
 
     watchdog_update();
-    sensor = __SENSOR_CLASS(&_reg);
-
-    #ifdef SHIELD_AI
-    sensor.init(2, 3);
-    #else
-    sensor.init();
-    #endif // !SHIELD_AI
+    device = __DEVICE_CLASS(&_reg);
+    device.init();
+    watchdog_update();
+    device.update();
     watchdog_update();
     
     if(useUsb)
@@ -94,12 +93,24 @@ int main(void)
         stdio_usb_init();
         userInitUartDisabled();
         
-        // wait for usb to be ready
-        sleep_hp(2'000'000);
-        // print out error register
-        cout << "error register: " << bitset<32>(*_reg.error) << endl;
+        while (!stdio_usb_connected())
+        {
+            watchdog_update();
+        }
+        xlog_info("USB Connected");
+        cout << "{\n";
+        cout << "\t\"version\": \"" << __VERSION << "\",\n";
         // cout sampling speed in Hz
-        cout << "sampling speed: " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << "Hz" << endl;
+        // cout << "sampling speed: " << (1000000.0f /
+        // (float)(*_reg.desiredCycleTimeUs)) << "Hz" << "\n";
+        cout << "\t\"samplingSpeedHz\": " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << ",\n";
+        // print out device identification
+        cout << "\t\"deviceUID\": " << uint64_t(*_reg.uid) << ",\n";
+        // print out device address
+        cout << "\t\"deviceAddress\": " << int(*_reg.devAddress) << "\n";
+        
+        cout << "}\n";
+
         
         // set to free running mode and calculate statistics for usb uart mode so we can see the values
         _reg.config->bits.freeRun = 1;
@@ -125,8 +136,9 @@ int main(void)
     while(!queue_is_empty(&txFifo)) queue_remove_blocking(&txFifo, NULL);
     while(!queue_is_empty(&rxFifo)) queue_remove_blocking(&rxFifo, NULL);
 
-    // start core1
+    // start core1 for device operation
     multicore_launch_core1(core1Entry);
+    
 
     // main loop, runs forever, handles all communication in this loop
     while(1)
@@ -136,19 +148,18 @@ int main(void)
 
         if(useUsb)
         {
-            constexpr uint32_t printFrequencyHz = 10;
-            constexpr uint64_t printIntervalUs = 1000000 / printFrequencyHz;
+            constexpr uint32_t printFrequencyHz = 1;
+            constexpr uint64_t printIntervalUs = 1e6 / printFrequencyHz;
 
             // cout timestamp and net cycle time in json format
             auto timestamp = time_us_64();
             cout << "{" << endl;
             cout << "\"timestamp\":" << timestamp << "," << endl;
-            cout << "\"samplingSpeedHz\":" << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
-            cout << "\"errors\":" << (*_reg.error) << "," << endl;
+            cout << "\"errors\": 0b" << bitset<32>(*_reg.error) << ",\n";
                         
-            // cout sensor values in json format
-            cout << "\"sensor\":" << sensor.getJson() << endl;
+            // cout device values in json format
+            cout << "\"device\":" << device.getJson() << endl;
             cout << "}" << endl << endl;
 
             auto end = time_us_64();
@@ -210,7 +221,31 @@ void core1Entry()
     // let core0 lockout core1
     multicore_lockout_victim_init ();
 
+    // enable gpio interrupts for core1 e.g. for actors or encoders
+    #if defined(__SHIELD_ENCODER) || defined(__SHIELD_CUTTER)
+    // top priority to catch encoder events
+    irq_set_priority(IO_IRQ_BANK0, 0);
 
+    // enable gpio interrupts for encoder using lambda function and set callback simultaneously
+    gpio_set_irq_enabled_with_callback(
+        Xerxes::ENCODER_PIN_A, 
+        GPIO_IRQ_EDGE_RISE, 
+        true, 
+        [](uint gpio, uint32_t)
+        {
+            device.encoderIrqHandler(gpio);
+        }
+    );
+    # endif // __SHIELD_ENCODER
+
+    #if defined(__TIGHTLOOP)
+    // set core1 to free run mode, process device data as fast as possible
+    while(true)
+    {
+        device.update();
+    }
+
+    #else // __TIGHTLOOP
     // core1 mainloop
     while(true)
     {
@@ -222,7 +257,7 @@ void core1Entry()
 
         if(_reg.config->bits.freeRun)
         {
-            sensor.update(); 
+            device.update(); 
         }
 
         // turn off led
@@ -250,8 +285,8 @@ void core1Entry()
         {
             _reg.errorSet(ERROR_MASK_SENSOR_OVERLOAD);
         }
-        
     }
+    #endif // __TIGHTLOOP
     
     core1idle = true;
 }

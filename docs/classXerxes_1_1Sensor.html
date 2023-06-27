@@ -86,13 +86,17 @@ Inheritance diagram for Xerxes::Sensor:</div>
 <div class="dyncontent">
 <div class="center"><img src="classXerxes_1_1Sensor__inherit__graph.png" border="0" usemap="#aXerxes_1_1Sensor_inherit__map" alt="Inheritance graph"/></div>
 <map name="aXerxes_1_1Sensor_inherit__map" id="aXerxes_1_1Sensor_inherit__map">
-<area shape="rect" title="Sensor class." alt="" coords="149,80,267,107"/>
-<area shape="rect" href="classXerxes_1_1ABP.html" title=" " alt="" coords="5,155,107,181"/>
-<area shape="rect" href="classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="131,155,285,181"/>
-<area shape="rect" href="classXerxes_1_1SCL3X00.html" title=" " alt="" coords="309,155,441,181"/>
-<area shape="rect" href="classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="137,5,279,32"/>
-<area shape="rect" href="classXerxes_1_1SCL3300.html" title=" " alt="" coords="232,229,363,256"/>
-<area shape="rect" href="classXerxes_1_1SCL3400.html" title=" " alt="" coords="387,229,517,256"/>
+<area shape="rect" title="Sensor class." alt="" coords="195,132,313,159"/>
+<area shape="rect" href="classXerxes_1_1ABP.html" title="Honeywell ABP sensor." alt="" coords="387,5,489,32"/>
+<area shape="rect" href="classXerxes_1_1AnalogInput.html" title="Analog input sensor class." alt="" coords="361,56,515,83"/>
+<area shape="rect" href="classXerxes_1_1DS18B20.html" title=" " alt="" coords="371,107,505,133"/>
+<area shape="rect" href="classXerxes_1_1HX711.html" title="HX711 ADC." alt="" coords="379,157,497,184"/>
+<area shape="rect" href="classXerxes_1_1LightSound.html" title=" " alt="" coords="365,208,511,235"/>
+<area shape="rect" href="classXerxes_1_1SCL3X00.html" title=" " alt="" coords="372,259,504,285"/>
+<area shape="rect" href="classXerxes_1_1Peripheral.html" title="Peripheral base class with pure virtual functions &#45; init, update, stop." alt="" coords="5,132,147,159"/>
+<area shape="rect" href="classXerxes_1_1SCL3300.html" title=" " alt="" coords="567,208,697,235"/>
+<area shape="rect" href="classXerxes_1_1SCL3300a.html" title=" " alt="" coords="563,259,701,285"/>
+<area shape="rect" href="classXerxes_1_1SCL3400.html" title=" " alt="" coords="567,309,697,336"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -134,6 +138,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afda1ec989b48cf1002b20f115e388a55 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">getDevid</a> ()</td></tr>
 <tr class="memdesc:afda1ec989b48cf1002b20f115e388a55 inherit pub_methods_classXerxes_1_1Peripheral"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Devid object.  <a href="classXerxes_1_1Peripheral.html#afda1ec989b48cf1002b20f115e388a55">More...</a><br /></td></tr>
 <tr class="separator:afda1ec989b48cf1002b20f115e388a55 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4acd2eaef7a43c1dda990558eeca5b79 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a4acd2eaef7a43c1dda990558eeca5b79">getJson</a> ()=0</td></tr>
+<tr class="separator:a4acd2eaef7a43c1dda990558eeca5b79 inherit pub_methods_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
 Protected Types</h2></td></tr>
@@ -159,6 +165,12 @@ Protected Attributes</h2></td></tr>
 <tr class="inherit_header pro_attribs_classXerxes_1_1Peripheral"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classXerxes_1_1Peripheral')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></td></tr>
 <tr class="memitem:a2185d22bbe15d320b8a7c009c63524a5 inherit pro_attribs_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top"><a class="el" href="DeviceIds_8h.html#a1f078037203242d887b8060b3a6df511">devid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a2185d22bbe15d320b8a7c009c63524a5">_devid</a> {0}</td></tr>
 <tr class="separator:a2185d22bbe15d320b8a7c009c63524a5 inherit pro_attribs_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_static_attribs_classXerxes_1_1Peripheral"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classXerxes_1_1Peripheral')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classXerxes_1_1Peripheral.html">Xerxes::Peripheral</a></td></tr>
+<tr class="memitem:a4a81d08bbd388c13db00087b742dec3f inherit pro_static_attribs_classXerxes_1_1Peripheral"><td class="memItemLeft" align="right" valign="top">constexpr static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Peripheral.html#a4a81d08bbd388c13db00087b742dec3f">_usInS</a> = 1000000</td></tr>
+<tr class="separator:a4a81d08bbd388c13db00087b742dec3f inherit pro_static_attribs_classXerxes_1_1Peripheral"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classXerxes_1_1Sensor.html" title="Sensor class.">Sensor</a> class. </p>

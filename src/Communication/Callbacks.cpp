@@ -2,7 +2,7 @@
 
 
 #include "Hardware/UserFlash.hpp"
-#include <xerxes-protocol/DeviceIds.h>
+#include <DeviceIds.h>
 #include "Hardware/Sleep.hpp"
 #include "Hardware/InitUtils.hpp"
 #include "hardware/watchdog.h"
@@ -11,11 +11,12 @@
 #include "Core/Slave.hpp"
 #include "Core/Register.hpp"
 #include "Sensors/all.hpp"
+#include "Version.h"
 
 
 extern Xerxes::Slave xs;
 extern Xerxes::Register _reg;
-extern Xerxes::__SENSOR_CLASS sensor;
+extern Xerxes::__DEVICE_CLASS device;
 
 
 namespace Xerxes
@@ -24,7 +25,7 @@ namespace Xerxes
 
 void pingCallback(const Xerxes::Message &msg)
 {
-    uint8_t _devid = sensor.getDevid();
+    uint8_t _devid = device.getDevid();
     std::vector<uint8_t> payload {_devid, PROTOCOL_VERSION_MAJ, PROTOCOL_VERSION_MIN};
     xs.send(msg.srcAddr, MSGID_PING_REPLY, payload);
 }
@@ -32,7 +33,7 @@ void pingCallback(const Xerxes::Message &msg)
 
 void syncCallback(const Xerxes::Message &msg)
 {   
-    sensor.update();
+    device.update();
 }
 
 

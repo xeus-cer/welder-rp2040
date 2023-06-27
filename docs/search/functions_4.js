@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['emptypacket_685',['EmptyPacket',['../classXerxes_1_1Packet.html#a912ffc041442d69ae63d2679b08cbeb1',1,'Xerxes::Packet']]],
-  ['end_686',['end',['../classXerxes_1_1Message.html#ae35f743ce2d5bde61eb696325e3997e8',1,'Xerxes::Message']]],
-  ['exchangeblock_687',['ExchangeBlock',['../classXerxes_1_1SCL3X00.html#a796aeede8ff6841a33151b4a42e5f5d7',1,'Xerxes::SCL3X00']]]
+  ['data_934',['data',['../classXerxes_1_1Message.html#a6478d8483cd7697e5d2f6a534e1ff12a',1,'Xerxes::Message::data()'],['../classXerxes_1_1Packet.html#aae00315ba1088123b96cd566f663e5d5',1,'Xerxes::Packet::data()']]],
+  ['digitalinputoutput_935',['DigitalInputOutput',['../classXerxes_1_1DigitalInputOutput.html#ae8c4f845feabdcb09e9908d62778cde7',1,'Xerxes::DigitalInputOutput::DigitalInputOutput(Register *reg)'],['../classXerxes_1_1DigitalInputOutput.html#affb495519b1d65613cc8e5dbc546e6c5',1,'Xerxes::DigitalInputOutput::DigitalInputOutput()'],['../classXerxes_1_1__4DI4DO.html#ae8c4f845feabdcb09e9908d62778cde7',1,'Xerxes::_4DI4DO::DigitalInputOutput(Register *reg)'],['../classXerxes_1_1__4DI4DO.html#affb495519b1d65613cc8e5dbc546e6c5',1,'Xerxes::_4DI4DO::DigitalInputOutput()']]]
 ];
