@@ -18,6 +18,7 @@ namespace Xerxes
 void Sen55::init()
 {    
     _devid = DEVID_AIR_POL_CO_NOX_VOC_PM;
+    *_reg->desiredCycleTimeUs = 1e5;  // 100ms
 
     //init i2c with freq 100kHz, return actual frequency
     uint baudrate = i2c_init(i2c0, 100'000);
@@ -35,10 +36,29 @@ void Sen55::init()
     // Make the I2C pins available to picotool
     bi_decl(bi_2pins_with_func(PICO_DEFAULT_I2C_SDA_PIN, PICO_DEFAULT_I2C_SCL_PIN, GPIO_FUNC_I2C));
 
-    // write START_MEASUREMENT command to the slave device
+    // read device product name
+    if(_send_command(SenCmd::READ_PRODUCT_NAME))
+    {
+        uint8_t data[32];
+        xlog_debug("Sen55 I2C read product name");
+        sleep_ms(50);
+        i2c_read_blocking(i2c0, _SEN55_ADDR, data, 32, false);
 
-    uint8_t cmd[] = {CMD::START_MEASUREMENT >> 8, CMD::START_MEASUREMENT & 0xFF};
-    size_t len = i2c_write_blocking(i2c0, _SEN55_ADDR, cmd, 2, true);
+        // remove every third character (checksums)
+        std::string name;
+        for (int i = 0; i < 32; i++)
+        {
+            if (i % 3 != 2)
+            {
+                name += data[i];
+            }
+        }
+        xlog_info("Sen55 Product name: " << name);
+    }
+
+
+    // write START_MEASUREMENT command to the slave device
+    size_t len = _send_command(SenCmd::START_MEASUREMENT);
     if (len == PICO_ERROR_GENERIC)
     {
         // test if device is on the bus:
@@ -57,9 +77,8 @@ void Sen55::init()
     }
     else
     {
-        // log command and bytes written
-        xlog_debug("Sen55 I2C write, cmd: " << CMD::START_MEASUREMENT << ", len: " << len);
         xlog_info("Sen55 Measurement started");
+        sleep_ms(50);
     }
 }
 
@@ -69,7 +88,7 @@ void Sen55::update()
     if(_data_ready())
     {
         uint8_t data[24];
-        if(_send_command(CMD::READ_MEASURED_VALUES))
+        if(_send_command(SenCmd::READ_MEASURED_VALUES))
         {
             i2c_read_blocking(i2c0, _SEN55_ADDR, data, 24, false);
 
@@ -116,33 +135,35 @@ void Sen55::stop()
 
 std::string Sen55::getJson()
 {
-    return "";
+    std::stringstream ss;
+    ss << "{";
+    ss << "}";
+    return ss.str();
 }
 
 
 bool Sen55::_data_ready()
 {   
-    if(_send_command(CMD::DATA_READY))
+    if(_send_command(SenCmd::READ_DATA_READY_FLAG))
     {
-        uint8_t data[3];  // data[0] - unused, data[1] - data ready flag, data[2] - checksum
-        i2c_read_blocking(i2c0, _SEN55_ADDR, data, 3, false);
-        xlog_debug("Sen55 I2C read data: 0x" << std::hex << int(0) << (int)data[1] << (int)data[2] << std::dec);
-        auto crc = _crc_8(data);
-        if (crc != data[2])
+        sleep_ms(20);  // wait for the data to be ready (20ms is the minimum)
+        uint8_t data[2];  // data[0] - unused, data[1] - data ready flag
+        int status = _read_block(data);
+        if(status == 2)
         {
-            xlog_err("Sen55 I2C CRC error");
-            return false;
+            xlog_debug("Sen55 I2C read data: 0x" << std::hex << (int)data[0] << (int)data[1] << std::dec);
+            if(data[1] == 0x01 && data[0] == 0x00)
+            {
+                return true;
+            }
         }
         else
         {
-            return data[1];
+            xlog_err("Sen55 I2C read data ready flag error, status: " << status);
         }
     }
-    else
-    {
-        return false;
-    }
 
+    return false;
 }
 
 
@@ -169,25 +190,27 @@ uint8_t Sen55::_crc_8(uint8_t *data)
 }
 
 
-int Sen55::_send_command(uint16_t command)
+int Sen55::_send_command(SenCmd command)
 {
-    uint8_t cmd[] = {command >> 8, command & 0xFF};
-    int len = i2c_write_blocking(i2c0, _SEN55_ADDR, cmd, 2, true);
-    if(len > 0)
-    {
-        return true;
-    }
-    else
-    {
-        xlog_err("Sen55 I2C write error");
-        return false;
-    }
+    return _send_command((uint16_t)command);
 }
 
 
-int Sen55::_read_block(uint8_t *two_bytes, uint8_t len = 2)  // TODO: Finish me!
+int Sen55::_send_command(uint16_t command)
 {
-    uint8_t data[3]
+    uint8_t cmd[] = {(uint8_t)(command >> 8), (uint8_t)(command & 0xFF)};
+    int len = i2c_write_blocking(i2c0, _SEN55_ADDR, cmd, 2, true);
+    if(len <= 0)
+    {
+        xlog_err("Sen55 I2C write error");
+    }
+    return len;
+}
+
+
+int Sen55::_read_block(uint8_t *two_bytes)
+{
+    uint8_t data[3];
     i2c_read_blocking(i2c0, _SEN55_ADDR, data, 3, false);
     xlog_debug("Sen55 I2C read data: 0x" << std::hex << (int)data[0] << (int)data[1] << (int)data[2] << std::dec);
     auto crc = _crc_8(data);
@@ -201,6 +224,7 @@ int Sen55::_read_block(uint8_t *two_bytes, uint8_t len = 2)  // TODO: Finish me!
         two_bytes[0] = data[0];
         two_bytes[1] = data[1];
         return 2;
+    }
 }
 
 } // namespace Xerxes

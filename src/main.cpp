@@ -149,6 +149,10 @@ int main(void)
 
         if(useUsb)
         {
+            while(!core1idle)
+            {
+                watchdog_update();
+            }
             constexpr uint32_t printFrequencyHz = 1;
             constexpr uint64_t printIntervalUs = 1e6 / printFrequencyHz;
 
