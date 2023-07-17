@@ -149,6 +149,7 @@ int main(void)
 
         if(useUsb)
         {
+            auto timestamp = time_us_64();
             while(!core1idle)
             {
                 watchdog_update();
@@ -157,7 +158,6 @@ int main(void)
             constexpr uint64_t printIntervalUs = 1e6 / printFrequencyHz;
 
             // cout timestamp and net cycle time in json format
-            auto timestamp = time_us_64();
             cout << "{" << endl;
             cout << "\"timestamp\":" << timestamp << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
