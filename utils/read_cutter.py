@@ -142,9 +142,11 @@ if __name__ == "__main__":
     while True:
         try:
             encoder_value = leaf.sv0
+            pLength = leaf.dv0
+            pOffset = leaf.dv1
             status = leaf.device_status
             print(
-                f"Encoder value: {encoder_value}, Status: {status}." + " " * 10,
+                f"Encoder value: {encoder_value}, Status: {status}, pLength[{pLength}], pOffset[{pOffset}]." + " " * 10,
                 end="\r"
             )
             if args.history: 
