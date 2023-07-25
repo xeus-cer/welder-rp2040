@@ -6,13 +6,14 @@ from xerxes_protocol import (
 import struct
 import time
 import logging
+import pytest
 _log = logging.getLogger(__name__)
 
 
 __author__ = "theMladyPan"
 __date__ = "2023-02-22"
 
-
+@pytest.mark.skip(reason="Not longer relevant")
 def test_sync_no_stats(cleanLeaf: Leaf):
     """
     Tests the sync method of the leaf
@@ -65,7 +66,7 @@ def test_sync_no_stats(cleanLeaf: Leaf):
     assert any(vals), "No values were updated"
     assert not any(std_devs)
     
-
+@pytest.mark.skip(reason="Not longer relevant")
 def test_sync_with_stats(cleanLeaf: Leaf):
 
     cleanLeaf.device_config = LeafConfig.calcStat

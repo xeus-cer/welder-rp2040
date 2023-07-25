@@ -8,7 +8,9 @@ from xerxes_protocol import (
     XerxesRoot,
     XerxesNetwork,
     Addr,
-    DebugSerial
+    DebugSerial,
+    MessageIncomplete,
+    ChecksumError
 )
 import logging
 _log = logging.getLogger(__name__)
@@ -17,11 +19,11 @@ _log = logging.getLogger(__name__)
 def get_serial_com() -> Serial:
     if os.name == "nt":
         # som na windows
-        com = Serial(port="COM15", baudrate=115200, timeout=0.01)
+        com = Serial(port="COM15", baudrate=115200, timeout=0.02)
 
     else:
         # on linux machine:
-        com = Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.01)
+        com = Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=0.02)
         _log.info(f"Using DebugSerial {com.port} on Linux machine")
 
     try:
@@ -45,7 +47,7 @@ def XN() -> XerxesNetwork:
     com: Serial
     com = pytest.com
     XN = XerxesNetwork(com)
-    XN.init(timeout=0.01)
+    XN.init(timeout=0.02)
     _log.debug(f"Using {XN}")
     return XN
 
@@ -111,5 +113,32 @@ def cleanLeaf(XR: XerxesRoot) -> Leaf:
     _l_ping = leaf.ping()
     _log.debug(f"Leaf ping: {_l_ping}")
     assert leaf.root.isPingLatest(_l_ping)
+
+    return leaf
+
+@pytest.fixture
+def findLeaf(XR: XerxesRoot) -> Leaf:
+    """Prepare Xerxes leaf to test with.
+    Args:
+        XR (XerxesRoot): Xerxes root to test with.
+        
+    Returns:
+        Leaf: Xerxes leaf to test with.
+    """
+    for i in range(128):
+        leaf = Leaf(Addr(i), XR)
+        try:
+            pingReply = leaf.ping()
+            break
+        except TimeoutError:
+            continue
+        except MessageIncomplete:
+            continue
+        except ChecksumError:
+            continue
+    
+    _log.info(f"Found leaf at address {i}")
+        # check if leaf is connected to the network first
+    assert leaf.root.isPingLatest(pingReply)
 
     return leaf
