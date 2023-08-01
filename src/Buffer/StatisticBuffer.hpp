@@ -15,6 +15,7 @@ protected:
     float max;
     float mean;
     float stdDev;
+    float median;
 public:
     using RingBuffer<T>::RingBuffer; // inherit constructors
     void updateStatistics();
@@ -23,6 +24,7 @@ public:
     const float & getStdDev();
     const float & getMax();
     const float & getMin();
+    const float & getMedian();
     void getStatistics(T* min, T* max, T* mean, T* stdDev);
 };
 
@@ -71,6 +73,19 @@ void StatisticBuffer<T>::updateStatistics()
     }
 
     stdDev = sqrtf(sumOfSquaredErrors / this->maxCursor);
+
+    // Calculate the median
+    std::sort(sortedBuffer.begin(), sortedBuffer.end());
+    if (this->maxCursor % 2 == 0)
+    {
+        // If the number of elements is even, take the average of the middle two elements
+        median = (sortedBuffer[this->maxCursor / 2 - 1] + sortedBuffer[this->maxCursor / 2]) / 2.0;
+    }
+    else
+    {
+        // If the number of elements is odd, take the middle element
+        median = sortedBuffer[this->maxCursor / 2];
+    }
 }
 
 
@@ -99,6 +114,12 @@ template <class T>
 const float & StatisticBuffer<T>::getMax()
 {
     return max;
+}
+
+template <class T>
+const float & StatisticBuffer<T>::getMedian()
+{
+    return median;
 }
 
 

@@ -79,6 +79,16 @@ int main(void)
     // if user button is pressed, load default values a.k.a. FACTORY RESET
     if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
     
+    if(useUsb){
+        // init usb uart
+        stdio_usb_init();
+        userInitUartDisabled();
+        
+        while (!stdio_usb_connected())
+        {
+            watchdog_update();
+        }
+    }
 
     watchdog_update();
     device = __DEVICE_CLASS(&_reg);
@@ -89,14 +99,6 @@ int main(void)
     
     if(useUsb)
     {
-        // init usb uart
-        stdio_usb_init();
-        userInitUartDisabled();
-        
-        while (!stdio_usb_connected())
-        {
-            watchdog_update();
-        }
         xlog_info("USB Connected");
         cout << "{\n";
         cout << "\t\"version\": \"" << __VERSION << "\",\n";
