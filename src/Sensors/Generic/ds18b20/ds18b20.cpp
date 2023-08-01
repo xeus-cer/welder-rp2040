@@ -283,18 +283,18 @@ unsigned DS18B20::_readBit(uint pin)
 void DS18B20::_write0(uint pin)
 {
     _setLow(pin);
-    sleep_us(90);
+    sleep_us(65);
     _release(pin);
-    sleep_us(20);            
+    sleep_us(10);            
 }
 
 
 void DS18B20::_write1(uint pin)
 {
     _setLow(pin);
-    sleep_us(10);
+    sleep_us(5);
     _release(pin);
-    sleep_us(70);          
+    sleep_us(60);          
 }
 
 
