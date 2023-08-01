@@ -2,6 +2,7 @@
 #define STATISTIC_BUFFER_HPP
 
 #include "RingBuffer.hpp"
+#include "Utils/Log.h"
 
 namespace Xerxes
 {
@@ -25,17 +26,40 @@ public:
     const float & getMax();
     const float & getMin();
     const float & getMedian();
-    void getStatistics(T* min, T* max, T* mean, T* stdDev);
+    void getStatistics(T* min, 
+                       T* max, 
+                       T* mean, 
+                       T* stdDev, 
+                       T* median = nullptr);
 };
 
 
 template <class T>
-void StatisticBuffer<T>::getStatistics(T* min, T* max, T* mean, T* stdDev)
+void StatisticBuffer<T>::getStatistics(T* min, 
+                                       T* max, 
+                                       T* mean, 
+                                       T* stdDev, 
+                                       T* median)
 {
-    *min = this->min;
-    *max = this->max;
-    *mean = this->mean;
-    *stdDev = this->stdDev;
+    if (min != nullptr) {
+        *min = this->min;
+    }
+
+    if (max != nullptr) {
+        *max = this->max;
+    }
+
+    if (mean != nullptr) {
+        *mean = this->mean;
+    }
+
+    if (stdDev != nullptr) {
+        *stdDev = this->stdDev;
+    }
+    
+    if (median != nullptr) {
+        *median = this->median;
+    }
 }
 
 
@@ -48,6 +72,7 @@ void StatisticBuffer<T>::updateStatistics()
 
     double sumOfElements {0};
     double sumOfSquaredErrors {0};
+    std::vector<T> sortedBuffer(this->maxCursor);
 
     for(int i=0; i<this->maxCursor; i++)
     {
@@ -63,6 +88,8 @@ void StatisticBuffer<T>::updateStatistics()
         {
             max = el;
         }
+
+        sortedBuffer[i] = el;
     }
 
     mean = sumOfElements / this->maxCursor;
@@ -86,6 +113,13 @@ void StatisticBuffer<T>::updateStatistics()
         // If the number of elements is odd, take the middle element
         median = sortedBuffer[this->maxCursor / 2];
     }
+    
+    // print content of the sorted buffer
+    for (int i = 0; i < this->maxCursor; i++)
+    {
+        xlogd("Sorted buffer[" << i << "]: " << sortedBuffer[i]);
+    }
+    xlogd("Median: " << median);
 }
 
 

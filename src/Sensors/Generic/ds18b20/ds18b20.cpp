@@ -13,7 +13,7 @@ namespace Xerxes
 
 void DS18B20::init()
 {
-    this->init(2);
+    this->init(3);
 }
 
 
@@ -26,10 +26,10 @@ void DS18B20::init(int _numChannels)
     // set update rate
     *_reg->desiredCycleTimeUs = _updateRateUs;
 
-    rbpv0 = StatisticBuffer<float>(_updateRateHz * 10);
-    rbpv1 = StatisticBuffer<float>(_updateRateHz * 10);
-    rbpv2 = StatisticBuffer<float>(_updateRateHz * 10);
-    rbpv3 = StatisticBuffer<float>(_updateRateHz * 10);
+    rbpv0 = StatisticBuffer<float>(_updateRateHz * 5);
+    rbpv1 = StatisticBuffer<float>(_updateRateHz * 5);
+    rbpv2 = StatisticBuffer<float>(_updateRateHz * 5);
+    rbpv3 = StatisticBuffer<float>(_updateRateHz * 5);
 
     // enable power supply to sensor
     gpio_init(EXT_3V3_EN_PIN);
@@ -39,21 +39,17 @@ void DS18B20::init(int _numChannels)
     sleep_us(1000); // wait for sensor to power up
 
     gpio_init(temp_channel_0);
-    startAll(temp_channel_0);
     if (numChannels > 1)
     {
         gpio_init(temp_channel_1);
-        startAll(temp_channel_1);
     }
     if(numChannels > 2)
     {
         gpio_init(temp_channel_2);
-        startAll(temp_channel_2);
     }
     if(numChannels > 3)
     {   
         gpio_init(temp_channel_3);
-        startAll(temp_channel_3);
     }
 
     // update sensor values
@@ -102,7 +98,7 @@ void DS18B20::update()
         rbpv0.updateStatistics();
 
         // update min, max stddev etc...
-        rbpv0.getStatistics(_reg->minPv0, _reg->maxPv0, _reg->meanPv0, _reg->stdDevPv0);
+        rbpv0.getStatistics(_reg->minPv0, _reg->maxPv0, nullptr, _reg->stdDevPv0, _reg->meanPv0);
     }
 
     // if calcStat is true and numChannels > 1, update statistics for pv1
@@ -110,7 +106,7 @@ void DS18B20::update()
     {
         rbpv1.insertOne(*_reg->pv1);
         rbpv1.updateStatistics();
-        rbpv1.getStatistics(_reg->minPv1, _reg->maxPv1, _reg->meanPv1, _reg->stdDevPv1);
+        rbpv1.getStatistics(_reg->minPv1, _reg->maxPv1, nullptr, _reg->stdDevPv1, _reg->meanPv1);
     }
 
     // if calcStat is true and numChannels > 2, update statistics for pv2
@@ -118,7 +114,7 @@ void DS18B20::update()
     {
         rbpv2.insertOne(*_reg->pv2);
         rbpv2.updateStatistics();
-        rbpv2.getStatistics(_reg->minPv2, _reg->maxPv2, _reg->meanPv2, _reg->stdDevPv2);
+        rbpv2.getStatistics(_reg->minPv2, _reg->maxPv2, nullptr, _reg->stdDevPv2, _reg->meanPv2);
     }
 
     // if calcStat is true and numChannels > 3, update statistics for pv3
@@ -126,7 +122,7 @@ void DS18B20::update()
     {
         rbpv3.insertOne(*_reg->pv3);
         rbpv3.updateStatistics();
-        rbpv3.getStatistics(_reg->minPv3, _reg->maxPv3, _reg->meanPv3, _reg->stdDevPv3);
+        rbpv3.getStatistics(_reg->minPv3, _reg->maxPv3, nullptr, _reg->stdDevPv3, _reg->meanPv3);
     }
 }
 
@@ -239,7 +235,6 @@ std::string DS18B20::getJson()
 
 void DS18B20::_setLow(uint pin)
 {   
-    xlogd("setLow pin " << pin); 
     // set pin as output = clear the tris bit
     gpio_set_dir(pin, GPIO_OUT);
     // Set pin Low
@@ -249,7 +244,6 @@ void DS18B20::_setLow(uint pin)
 
 void DS18B20::_setHigh(uint pin)
 {
-    xlogd("setHigh pin " << pin);
     // set pin as output = clear the tris bit
     gpio_set_dir(pin, GPIO_OUT);
     // set pin high
@@ -259,7 +253,6 @@ void DS18B20::_setHigh(uint pin)
 
 void DS18B20::_release(uint pin)
 {
-    xlogd("release pin " << pin);
     // set pin as input
     gpio_set_dir(pin, GPIO_IN);
     // set pullup resistor
@@ -269,7 +262,6 @@ void DS18B20::_release(uint pin)
 
 unsigned DS18B20::_getVal(uint pin)
 {
-    xlogd("getVal pin " << pin);
     //read pin 
     _release(pin);
     return gpio_get(pin);
@@ -279,12 +271,11 @@ unsigned DS18B20::_getVal(uint pin)
 unsigned DS18B20::_readBit(uint pin)
 {
     _setLow(pin);
-    sleep_us(10);
+    sleep_us(5);
     _release(pin);
-    sleep_us(15);
+    sleep_us(5);
     unsigned sample = _getVal(pin);
-    sleep_us(75);
-    xlogd("readBit pin " << pin << " sample " << sample);
+    sleep_us(55);
     return sample;
 }
 
@@ -295,7 +286,6 @@ void DS18B20::_write0(uint pin)
     sleep_us(90);
     _release(pin);
     sleep_us(20);            
-    xlogd("write0 pin " << pin);
 }
 
 
@@ -305,13 +295,11 @@ void DS18B20::_write1(uint pin)
     sleep_us(10);
     _release(pin);
     sleep_us(70);          
-    xlogd("write1 pin " << pin);
 }
 
 
 void DS18B20::_writeBit(uint pin, unsigned data)
 {
-    xlogd("writeBit pin " << pin << " data " << data);
     if(data)
     {
         _write1(pin);
@@ -335,7 +323,6 @@ char DS18B20::OWReadByte(uint pin)
             result |= 0x80; // if result is one, then set MS-bit
         }
     }
-    xlog_debug("ReadByte pin " << pin << " result " << (int)result);
     return (result);
 }
 
@@ -348,7 +335,6 @@ void DS18B20::OWWriteByte(uint pin, char write_data)
         _writeBit(pin, (write_data & 0x01)); //Sending LS-bit first
         write_data >>= 1; // shift the data byte for the next bit to send
     }
-    xlog_debug("WriteByte pin " << pin << " write_data " << (int)write_data);
 }
 
 
@@ -356,15 +342,14 @@ bool DS18B20::OWReset(uint pin)
 {
     unsigned present = 0;
     _setLow(pin);
-    sleep_us(480);
+    sleep_us(500);
     _release(pin);
-    sleep_us(70);
+    sleep_us(60);
     
     // after reset, read bus
     present = _getVal(pin);
     
-    sleep_us(410);
-    xlog_debug("Reset pin " << pin << " present " << present);
+    sleep_us(440);
     
     //if device is present, return 1
     return !present;    
@@ -373,7 +358,6 @@ bool DS18B20::OWReset(uint pin)
 
 bool DS18B20::_writeAll(uint pin, char write_data)
 {
-    xlog_debug("Writing " << (int)write_data << " to all sensors on pin " << pin);
     // reset bus takes approx 1ms
     bool present = OWReset(pin);
     // skip ROM
@@ -390,7 +374,6 @@ bool DS18B20::_writeAll(uint pin, char write_data)
 bool DS18B20::startAll(uint pin)
 {
     // write 0x44 command to start measurement of all sensors on the line
-    xlog_info("Initializing DS18B20 on pin " << pin << "...");
     return _writeAll(pin, 0x44);
 }
 
@@ -399,7 +382,6 @@ double DS18B20::readJustOneTemp(uint pin)
 {
     // write to all sensors 0xBE, must be just one connected.
     _writeAll(pin, 0xBE);
-
     char tempL = OWReadByte(pin);
     char tempH = OWReadByte(pin);
     // log values as decimal
