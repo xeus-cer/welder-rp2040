@@ -22,24 +22,23 @@ for i in range(32):
         break
     except TimeoutError:
         continue
-    
 log.info(f"Found leaf at address {l.address}")
 log.info(f"UUID: {l.device_uid}")
     
 mean_vals = {}
-labels = ["pv0", "pv1", "pv2", "pv3"]
 while True:
     try:
-        for label in labels:
-            mean_vals[label] = getattr(l, f"mean_{label}")
-            print(f"{label}:\t{mean_vals[label]:.4f}", end="\t")
+        mean_vals["pv0"] = l.mean_pv0 * 25
+        mean_vals["pv1"] = l.mean_pv1 * 25
         
         print(
+            f"Measurement:\t{mean_vals['pv0']:.4f}mm"
+            f"\tReference:\t{mean_vals['pv1']:.4f}mm"
+            f"\tStdDev:\t{(l.std_dev_pv0+l.std_dev_pv1) * 25e3 / 2:.2f}um   ",
             end="\r"
         )
         time.sleep(.04)
     except KeyboardInterrupt:
-        del XN
         break
     except TimeoutError:
         log.warning(f"TimeoutError reading leaf {l.address}")
