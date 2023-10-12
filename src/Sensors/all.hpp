@@ -8,6 +8,7 @@
 #include "Murata/SCL3400.hpp"
 #include "Honeywell/ABP.hpp"
 #include "Generic/AnalogInput.hpp"
+#include "Generic/DiscreteAnalog.hpp"
 #include "Generic/DIO/DigitalInputOutput.hpp"
 #include "Generic/DIO/4DI4DO.hpp"
 #include "Generic/hx711.hpp"
