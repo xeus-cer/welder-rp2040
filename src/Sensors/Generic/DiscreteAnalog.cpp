@@ -32,7 +32,7 @@ void DiscreteAnalog::_SetContinuous() {
     _WriteConfig(config);
 }
 
-uint16_t DiscreteAnalog::_ReadConversionResult() {
+int16_t DiscreteAnalog::_ReadConversionResult() {
     uint8_t data[1] = {0x00};  // points to conversion register
     int len = i2c_write_blocking(PICO_DEFAULT_I2C, 0x48, data, 1, false);
     assert(len == 1);  // check if write was successful
@@ -46,6 +46,13 @@ uint16_t DiscreteAnalog::_ReadConversionResult() {
     int16_t resultInt = (result[0] << 8) | result[1];
     xlog_debug("ADS1115 read: " << resultInt);
     return resultInt;
+}
+
+int16_t DiscreteAnalog::_ReadCh0() {
+    uint16_t config = ADS1X15_OS_START_SINGLE | ADS1X15_READ_0 | ADS1X15_PGA_2_048V | ADS1X15_MODE_SINGLE | ADS1X15_DR_860SPS;
+    _WriteConfig(config);
+    sleep_ms(2);
+    return _ReadConversionResult();
 }
 
 void DiscreteAnalog::init()
@@ -78,7 +85,7 @@ void DiscreteAnalog::init()
 
 void DiscreteAnalog::update() {
     // result is 16 bit from 0 to VREF
-    *_reg->pv0 = _ReadConversionResult() * VREF / 65536.0;
+    *_reg->pv0 = _ReadCh0() * VREF / 32768;
 }
 
 void DiscreteAnalog::stop()

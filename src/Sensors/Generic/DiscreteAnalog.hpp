@@ -46,21 +46,15 @@ namespace Xerxes
 #define ADS1X15_MODE_CONTINUE       0x0000
 #define ADS1X15_MODE_SINGLE         0x0100
 
-//  BIT 5-7     data rate sample per second  // (0..7) << 5
-/*
-differs for different devices, check datasheet or readme.md
-
-|  data rate  |  ADS101x  |  ADS111x  |   Notes   |
-|:-----------:|----------:|----------:|:---------:|
-|     0       |   128     |    8      |  slowest  |
-|     1       |   250     |    16     |           |
-|     2       |   490     |    32     |           |
-|     3       |   920     |    64     |           |
-|     4       |   1600    |    128    |  default  |
-|     5       |   2400    |    250    |           |
-|     6       |   3300    |    475    |           |
-|     7       |   3300    |    860    |  fastest  |
-*/
+//  BIT 5-7     data rate                    //  (0..7) << 5
+#define ADS1X15_DR_8SPS             0x0000
+#define ADS1X15_DR_16SPS            0x0020
+#define ADS1X15_DR_32SPS            0x0040
+#define ADS1X15_DR_64SPS            0x0060
+#define ADS1X15_DR_128SPS           0x0080   //  default
+#define ADS1X15_DR_250SPS           0x00A0
+#define ADS1X15_DR_475SPS           0x00C0
+#define ADS1X15_DR_860SPS           0x00E0
 
 //  BIT 4 comparator modi                    // 1 << 4
 #define ADS1X15_COMP_MODE_TRADITIONAL   0x0000
@@ -110,7 +104,8 @@ class DiscreteAnalog : public AnalogInput {
 private:
     void _WriteConfig(const uint16_t config);
     void _SetContinuous();
-    uint16_t _ReadConversionResult();
+    int16_t _ReadConversionResult();
+    int16_t _ReadCh0();
 public:
     using AnalogInput::AnalogInput;
     using AnalogInput::operator=;
