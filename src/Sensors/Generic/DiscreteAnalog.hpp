@@ -98,7 +98,7 @@ namespace Xerxes
 #define ADS_CONF_COMP    0x20
 
 
-constexpr float VREF = 2.5;  // reference voltage
+constexpr float VREF = 4.096;  // reference voltage
 
 class DiscreteAnalog : public AnalogInput {
 private:

@@ -49,7 +49,7 @@ int16_t DiscreteAnalog::_ReadConversionResult() {
 }
 
 int16_t DiscreteAnalog::_ReadCh0() {
-    uint16_t config = ADS1X15_OS_START_SINGLE | ADS1X15_READ_0 | ADS1X15_PGA_2_048V | ADS1X15_MODE_SINGLE | ADS1X15_DR_860SPS;
+    uint16_t config = ADS1X15_OS_START_SINGLE | ADS1X15_READ_0 | ADS1X15_PGA_4_096V | ADS1X15_MODE_SINGLE | ADS1X15_DR_860SPS;
     _WriteConfig(config);
     sleep_ms(2);
     return _ReadConversionResult();
