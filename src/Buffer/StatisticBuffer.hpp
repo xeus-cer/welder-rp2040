@@ -117,9 +117,9 @@ void StatisticBuffer<T>::updateStatistics()
     // print content of the sorted buffer
     for (int i = 0; i < this->maxCursor; i++)
     {
-        xlogd("Sorted buffer[" << i << "]: " << sortedBuffer[i]);
+        xlog_trace("Sorted buffer[" << i << "]: " << sortedBuffer[i]);
     }
-    xlogd("Median: " << median);
+    xlog_debug("Median: " << median);
 }
 
 
