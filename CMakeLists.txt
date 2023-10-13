@@ -10,9 +10,10 @@ project(${PROJECT_NAME} C CXX ASM)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_C_STANDARD 11)
 
+set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 
 set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, "
-"SCL3400, AI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS")
+"SCL3400, AI, DiscreteAI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS")
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
@@ -100,6 +101,9 @@ elseif(${DEVICE_TYPE} STREQUAL "temp")
 elseif(${DEVICE_TYPE} STREQUAL "EnviroLS")
     add_compile_definitions(__SHIELD_ENVIROLS)
     add_compile_definitions(__DEVICE_CLASS=LightSound)
+elseif(${DEVICE_TYPE} STREQUAL "DiscreteAI")
+    add_compile_definitions(__SHIELD_DISCRETE_AI)
+    add_compile_definitions(__DEVICE_CLASS=DiscreteAnalog)
 else()
 	message(FATAL_ERROR "DEVICE_TYPE '${DEVICE_TYPE}' is incorrect, use -DDEVICE_TYPE=...\n${DEVICE_TYPE_HINT}")
 endif()
@@ -134,6 +138,7 @@ add_executable(
 	src/Sensors/Peripheral.cpp
 	src/Sensors/Sensor.cpp
 	src/Sensors/Generic/AnalogInput.cpp
+    src/Sensors/Generic/DiscreteAnalog.cpp
 	src/Sensors/Generic/DIO/DigitalInputOutput.cpp
 	src/Sensors/Generic/DIO/4DI4DO.cpp
 	src/Sensors/Murata/SCL3X00.cpp
@@ -163,6 +168,7 @@ target_link_libraries(
 	hardware_flash
 	hardware_sync
 	hardware_spi
+    hardware_i2c
 	xerxes-protocol
 )
 
