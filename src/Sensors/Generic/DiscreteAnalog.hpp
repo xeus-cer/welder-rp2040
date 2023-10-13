@@ -8,108 +8,128 @@
 namespace Xerxes
 {
 
-//  REGISTERS
-#define ADS1X15_REG_CONVERT         0x00
-#define ADS1X15_REG_CONFIG          0x01
-#define ADS1X15_REG_LOW_THRESHOLD   0x02
-#define ADS1X15_REG_HIGH_THRESHOLD  0x03
+namespace ADS1X15 {
+
+enum REGISTERS : uint8_t {
+    RESULT = 0x00,
+    CONFIG = 0x01,
+    LOW_THRESHOLD = 0x02,
+    HIGH_THRESHOLD = 0x03
+};
+
+enum STATUS : uint16_t {
+    BUSY = 0x0000,
+    START_SINGLE_NOT_BUSY = 0x8000
+};
+
+enum MUX : uint16_t {
+    DIFF_0_1 = 0x0000,
+    DIFF_0_3 = 0x1000,
+    DIFF_1_3 = 0x2000,
+    DIFF_2_3 = 0x3000,
+    GND_0 = 0x4000,
+    GND_1 = 0x5000,
+    GND_2 = 0x6000,
+    GND_3 = 0x7000
+};
+
+enum PGA : uint16_t {
+    V_6_144 = 0x0000,
+    V_4_096 = 0x0200,
+    V_2_048 = 0x0400,
+    V_1_024 = 0x0600,
+    V_0_512 = 0x0800,
+    V_0_256 = 0x0A00
+};
+
+enum MODE : uint16_t {
+    CONTINUOUS = 0x0000,
+    SINGLE = 0x0100
+};
+
+enum DR : uint16_t {
+    SPS_8 = 0x0000,
+    SPS_16 = 0x0020,
+    SPS_32 = 0x0040,
+    SPS_64 = 0x0060,
+    SPS_128 = 0x0080,
+    SPS_250 = 0x00A0,
+    SPS_475 = 0x00C0,
+    SPS_860 = 0x00E0
+};
+
+enum COMP_MODE : uint16_t {
+    TRADITIONAL = 0x0000,
+    WINDOW = 0x0010
+};
+
+enum COMP_POLARITY : uint16_t {
+    ACTIVE_LOW = 0x0000,
+    ACTIVE_HIGH = 0x0008
+};
+
+enum COMP_LATCHING : uint16_t {
+    NON_LATCHING = 0x0000,
+    LATCHING = 0x0004
+};
+
+enum COMP_QUEUE : uint16_t {
+    ASSERT_AFTER_1 = 0x0000,
+    ASSERT_AFTER_2 = 0x0001,
+    ASSERT_AFTER_4 = 0x0002,
+    DISABLE = 0x0003
+};
+
+enum ADDRESS : uint8_t {
+    GND = 0x48,
+    VDD = 0x49,
+    SDA = 0x4A,
+    SCL = 0x4B
+};
+
+constexpr uint I2C_FREQUENCY_LOW = 400'000;  // 400kHz
+constexpr uint I2C_FREQUENCY_HIGH = 3'400'000;  // 3.4MHz
 
 
-//  CONFIG REGISTER
+}  // namespace ADS1X15
 
-//  BIT 15      Operational Status           // 1 << 15
-#define ADS1X15_OS_BUSY             0x0000
-#define ADS1X15_OS_NOT_BUSY         0x8000
-#define ADS1X15_OS_START_SINGLE     0x8000
-
-//  BIT 12-14   read differential
-#define ADS1X15_MUX_DIFF_0_1        0x0000
-#define ADS1X15_MUX_DIFF_0_3        0x1000
-#define ADS1X15_MUX_DIFF_1_3        0x2000
-#define ADS1X15_MUX_DIFF_2_3        0x3000
-//              read single
-#define ADS1X15_READ_0              0x4000   //  pin << 12
-#define ADS1X15_READ_1              0x5000   //  pin = 0..3
-#define ADS1X15_READ_2              0x6000
-#define ADS1X15_READ_3              0x7000
-
-
-//  BIT 9-11    gain                         //  (0..5) << 9
-#define ADS1X15_PGA_6_144V          0x0000   //  voltage
-#define ADS1X15_PGA_4_096V          0x0200   //
-#define ADS1X15_PGA_2_048V          0x0400   //  default
-#define ADS1X15_PGA_1_024V          0x0600
-#define ADS1X15_PGA_0_512V          0x0800
-#define ADS1X15_PGA_0_256V          0x0A00
-
-//  BIT 8       mode                         //  1 << 8
-#define ADS1X15_MODE_CONTINUE       0x0000
-#define ADS1X15_MODE_SINGLE         0x0100
-
-//  BIT 5-7     data rate                    //  (0..7) << 5
-#define ADS1X15_DR_8SPS             0x0000
-#define ADS1X15_DR_16SPS            0x0020
-#define ADS1X15_DR_32SPS            0x0040
-#define ADS1X15_DR_64SPS            0x0060
-#define ADS1X15_DR_128SPS           0x0080   //  default
-#define ADS1X15_DR_250SPS           0x00A0
-#define ADS1X15_DR_475SPS           0x00C0
-#define ADS1X15_DR_860SPS           0x00E0
-
-//  BIT 4 comparator modi                    // 1 << 4
-#define ADS1X15_COMP_MODE_TRADITIONAL   0x0000
-#define ADS1X15_COMP_MODE_WINDOW        0x0010
-
-//  BIT 3 ALERT active value                 // 1 << 3
-#define ADS1X15_COMP_POL_ACTIV_LOW      0x0000
-#define ADS1X15_COMP_POL_ACTIV_HIGH     0x0008
-
-//  BIT 2 ALERT latching                     // 1 << 2
-#define ADS1X15_COMP_NON_LATCH          0x0000
-#define ADS1X15_COMP_LATCH              0x0004
-
-//  BIT 0-1 ALERT mode                       // (0..3)
-#define ADS1X15_COMP_QUE_1_CONV         0x0000  //  trigger alert after 1 convert
-#define ADS1X15_COMP_QUE_2_CONV         0x0001  //  trigger alert after 2 converts
-#define ADS1X15_COMP_QUE_4_CONV         0x0002  //  trigger alert after 4 converts
-#define ADS1X15_COMP_QUE_NONE           0x0003  //  disable comparator
-
-
-// _CONFIG masks
-//
-//  |  bit  |  description           |
-//  |:-----:|:-----------------------|
-//  |   0   |  # channels            |
-//  |   1   |  -                     |
-//  |   2   |  resolution            |
-//  |   3   |  -                     |
-//  |   4   |  GAIN supported        |
-//  |   5   |  COMPARATOR supported  |
-//  |   6   |  -                     |
-//  |   7   |  -                     |
-//
-#define ADS_CONF_CHAN_1  0x00
-#define ADS_CONF_CHAN_4  0x01
-#define ADS_CONF_RES_12  0x00
-#define ADS_CONF_RES_16  0x04
-#define ADS_CONF_NOGAIN  0x00
-#define ADS_CONF_GAIN    0x10
-#define ADS_CONF_NOCOMP  0x00
-#define ADS_CONF_COMP    0x20
-
-
-constexpr float VREF = 4.096;  // reference voltage
 
 class DiscreteAnalog : public AnalogInput {
 private:
-    void _WriteConfig(const uint16_t config);
-    void _SetContinuous();
-    int16_t _ReadConversionResult();
-    int16_t _ReadCh0();
+    void _writeConfig(const uint16_t config) const;
+    const uint16_t _readConfig() const;
+    const int16_t _readConversionResult() const;
+    const bool _isBusy() const;
+    const bool _isConversionReady() const;
+
+    const int16_t _readChannel(const uint16_t channelRegister) const;
+
+    void _setProgrammableGainAmplifier(const uint16_t ref);
+    void _setOperationMode(const uint16_t);
+    void _setDataRate(const uint16_t rate);
+    void _setAddress(const uint16_t address);
+
+    void _waitForResultUs(const uint32_t timeoutUs) const;
+    void _waitForResult() const;
+
+    void _updateFullScaleVoltage();
+    void _updateSampleTime();
+
+    uint16_t _programmableGainAmplifier = ADS1X15::PGA::V_4_096;
+    uint16_t _operationMode = ADS1X15::MODE::SINGLE;
+    uint16_t _dataRate = ADS1X15::DR::SPS_860;
+    uint16_t _address = ADS1X15::ADDRESS::GND;
+    double _fullScaleVoltage = 4.096;
+    uint32_t _sampleTimeUs = 1'000'000 / 860;
+
+protected:
+    typedef AnalogInput super;
+    constexpr static uint32_t _updateRateHz = 10;  // update frequency in Hz
+    constexpr static uint32_t _updateRateUs = _usInS / _updateRateHz;  // update rate in microseconds
+
 public:
     using AnalogInput::AnalogInput;
     using AnalogInput::operator=;
-    using AnalogInput::getJson;
     using AnalogInput::getJsonLast;
     using AnalogInput::getJsonMin;
     using AnalogInput::getJsonMax;
@@ -124,6 +144,7 @@ public:
 
     void stop();
 
+    std::string getJson() override;
 };
     
 }  // namespace Xerxes
