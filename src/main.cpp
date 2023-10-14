@@ -256,14 +256,14 @@ void core1Entry()
 
         // turn on led for a short time to signal start of cycle
         gpio_put(USR_LED_PIN, 1);
+        sleep_us(10);
+        // turn off led
+        gpio_put(USR_LED_PIN, 0);
 
         if(_reg.config->bits.freeRun)
         {
             device.update(); 
         }
-
-        // turn off led
-        gpio_put(USR_LED_PIN, 0);
 
         // calculate how long it took to finish cycle
         endOfCycle = time_us_64();
