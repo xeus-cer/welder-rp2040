@@ -233,7 +233,7 @@ void DiscreteAnalog::init()
     gpio_put(ADC0_PIN, true);
 
     // initialize I2C
-    i2c_init(PICO_DEFAULT_I2C, ADS1X15::I2C_FREQUENCY_LOW);
+    i2c_init(PICO_DEFAULT_I2C, ADS1X15::I2C_FREQUENCY_HIGH);
 
     gpio_set_function(I2C0_SDA_PIN, GPIO_FUNC_I2C);
     gpio_set_function(I2C0_SCL_PIN, GPIO_FUNC_I2C);
@@ -249,7 +249,7 @@ void DiscreteAnalog::init()
     assert(len == 1);  // check if read was successful
     xlog_info("I2C read success, device ready for use");
 
-    _setDataRate(ADS1X15::DR::SPS_64);
+    _setDataRate(ADS1X15::DR::SPS_475);
     _setProgrammableGainAmplifier(ADS1X15::PGA::V_4_096);
     _setOperationMode(ADS1X15::MODE::SINGLE);
 

@@ -88,7 +88,7 @@ enum ADDRESS : uint8_t {
 };
 
 constexpr uint I2C_FREQUENCY_LOW = 400'000;  // 400kHz
-constexpr uint I2C_FREQUENCY_HIGH = 3'400'000;  // 3.4MHz
+constexpr uint I2C_FREQUENCY_HIGH = 1'000'000;  // 1MHz
 
 
 }  // namespace ADS1X15
@@ -124,7 +124,7 @@ private:
 
 protected:
     typedef AnalogInput super;
-    constexpr static uint32_t _updateRateHz = 10;  // update frequency in Hz
+    constexpr static uint32_t _updateRateHz = 50;  // update frequency in Hz
     constexpr static uint32_t _updateRateUs = _usInS / _updateRateHz;  // update rate in microseconds
 
 public:
