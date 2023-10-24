@@ -83,7 +83,7 @@ else:
     port = Serial(args.port, timeout=args.timeout)
     
 def test_leaf(leaf: Leaf) -> str:
-    test_output = ""
+    test_output = {}
     pvs = [[] for _ in range(4)]
     for _ in range(args.num_tests):
         pvs[0].append(leaf.pv0)
@@ -95,8 +95,10 @@ def test_leaf(leaf: Leaf) -> str:
     for i in range(4):
         stdev = statistics.stdev(pvs[i])
         mean = statistics.mean(pvs[i])
-        test_output += f"PV{i} stdev: {1000*stdev:.4f} /1000\n"
-        test_output += f"PV{i} mean: {mean:.4f}\n"
+        # test_output += f"PV{i} mean: {mean:.4f}\n"
+        # test_output += f"PV{i} stdev: {1000*stdev:.4f} /1000\n"
+        test_output[f"PV{i} mean"] = mean
+        test_output[f"PV{i} stdev [x1000]"] = 1000*stdev
     
     return test_output   
     
@@ -130,17 +132,20 @@ reply = leaf.exchange(payload)
 
 log.info(f"Reply latency: {reply.latency} ms")
 
-from pprint import pprint
+import json
 
-device_info = reply.payload.decode()
+device_info = json.loads(reply.payload.decode())
+
 log.info(f"Device info: {device_info}")
 log.info("Running tests ...")
 test_output = test_leaf(leaf)
 log.info("###############################################################")
-log.info(f"Test output: {test_output}")
+log.info(f"Test output: \n\n{test_output}")
 log.info("###############################################################")
 
-device_info += "\n" + test_output
+device_info["Test output"] = test_output
+
+device_info = json.dumps(device_info, indent=4)
 
 # By default, the client will connect to a Jira instance started from the Atlassian Plugin SDK
 # (see https://developer.atlassian.com/display/DOCS/Installing+the+Atlassian+Plugin+SDK for details).
