@@ -48,7 +48,7 @@ parser.add_argument(
     "--timeout",
     metavar="TIMEOUT",
     type=float,
-    default=0.1,
+    default=0.05,
     help="serial port timeout in seconds"
 )
 parser.add_argument(
@@ -62,8 +62,9 @@ parser.add_argument(
 parser.add_argument(
     "-c",
     "--create",
-    action="store_true",
-    help="create new Jira task if UUID not found"
+    metavar="SUMMARY",
+    type=str,
+    help="create new Jira task if UUID not found with SUMMARY as summary"
 )
 
 args = parser.parse_args()
@@ -94,8 +95,8 @@ def test_leaf(leaf: Leaf) -> str:
     for i in range(4):
         stdev = statistics.stdev(pvs[i])
         mean = statistics.mean(pvs[i])
-        test_output += f"PV{i} stdev: {stdev}\n"
-        test_output += f"PV{i} mean: {mean}\n"
+        test_output += f"PV{i} stdev: {1000*stdev:.4f} /1000\n"
+        test_output += f"PV{i} mean: {mean:.4f}\n"
     
     return test_output   
     
@@ -139,6 +140,7 @@ log.info("###############################################################")
 log.info(f"Test output: {test_output}")
 log.info("###############################################################")
 
+device_info += "\n" + test_output
 
 # By default, the client will connect to a Jira instance started from the Atlassian Plugin SDK
 # (see https://developer.atlassian.com/display/DOCS/Installing+the+Atlassian+Plugin+SDK for details).
@@ -163,18 +165,20 @@ assert(uuid), "UUID not found in device info"
 uuid=uuid[1]
 # get all tasks in "SN" project matching the UUID
 issues = jira.search_issues(f"project=SN AND text~{uuid}")
-if len(issues) == 0 and args.create:
-    log.info(f"UUID not found, creating new task for {uuid}")       
-    # try to create a new issue:
-    issue_dict = {
-        'project': {'key': "SN"},
-        'summary': 'XSIM-A7670E',
-        'description': device_info,
-        'issuetype': {'name': 'Device'},
-    }
-    
-    # new_issue = jira.create_issue(fields=issue_dict)  # uncomment to create
-    # log.info(f"New Issue key: {new_issue.key}")
+if len(issues) == 0:
+    log.warning("UUID not found")
+    if args.create:
+        log.info(f"Creating new task for {uuid}")       
+        # try to create a new issue:
+        issue_dict = {
+            'project': {'key': "SN"},
+            'summary': args.create,
+            'description': device_info,
+            'issuetype': {'name': 'Device'},
+        }
+        
+        new_issue = jira.create_issue(fields=issue_dict)  # uncomment to create
+        log.info(f"New Issue key: {new_issue.key}")
 elif len(issues) > 1:
     log.error(f"Found more than one task matching the UUID: {uuid}")
 else:
