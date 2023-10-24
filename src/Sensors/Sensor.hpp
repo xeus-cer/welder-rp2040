@@ -55,7 +55,17 @@ public:
         _reg(nullptr)
     {};
 
+    /**
+     * @brief Update the sensor data
+     */
     void update();
+
+    /**
+     * @brief Get the Info object
+     * 
+     * @return std::string 
+     */
+    std::string getInfoJson();
     
 };
 

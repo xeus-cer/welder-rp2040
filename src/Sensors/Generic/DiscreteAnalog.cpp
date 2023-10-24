@@ -225,6 +225,9 @@ void DiscreteAnalog::_setAddress(const uint16_t address) {
 
 void DiscreteAnalog::init()
 {
+    _devid = DEVID_IO_3AI;
+    _label = "3AI 16bit ADS1115, VRef 2.5V";
+
     // enable power supply to sensor
     gpio_init(ADC0_PIN);
     gpio_set_dir(ADC0_PIN, GPIO_OUT);
@@ -246,7 +249,10 @@ void DiscreteAnalog::init()
     // read 1 bytes from I2C to check if it works
     uint8_t data[1];
     int len = i2c_read_blocking(PICO_DEFAULT_I2C, _address, data, 1, false);
-    assert(len == 1);  // check if read was successful
+    if(len == PICO_ERROR_GENERIC) {
+        xlog_error("I2C read error, device not ready");
+        throw std::runtime_error("I2C read error, device not ready");
+    }
     xlog_info("I2C read success, device ready for use");
 
     _setDataRate(ADS1X15::DR::SPS_475);

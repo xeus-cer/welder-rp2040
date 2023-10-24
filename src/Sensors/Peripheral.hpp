@@ -33,6 +33,7 @@ protected:
     devid_t _devid{0};
 
     constexpr static uint32_t _usInS = 1000000;  // microseconds in a second
+    std::string _label{"Xerxes Peripheral"};
     
 public:
     Peripheral();
@@ -51,6 +52,8 @@ public:
     devid_t getDevid();
 
     virtual std::string getJson() = 0;
+
+    virtual std::string getInfoJson() = 0;
 };
 
 

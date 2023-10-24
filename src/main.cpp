@@ -92,7 +92,15 @@ int main(void)
 
     watchdog_update();
     device = __DEVICE_CLASS(&_reg);
-    device.init();
+    try {
+        device.init();
+    } catch (const std::exception& e) {
+        xlog_error("Exception in device init: " << e.what());
+        _reg.errorSet(ERROR_MASK_DEVICE_INIT);
+    } catch (...) {
+        xlog_error("Unknown exception in device init");
+        _reg.errorSet(ERROR_MASK_DEVICE_INIT);
+    }
     watchdog_update();
     device.update();
     watchdog_update();
@@ -100,19 +108,8 @@ int main(void)
     if(useUsb)
     {
         xlog_info("USB Connected");
-        cout << "{\n";
-        cout << "\t\"version\": \"" << __VERSION << "\",\n";
-        // cout sampling speed in Hz
-        // cout << "sampling speed: " << (1000000.0f /
-        // (float)(*_reg.desiredCycleTimeUs)) << "Hz" << "\n";
-        cout << "\t\"samplingSpeedHz\": " << (1000000.0f / (float)(*_reg.desiredCycleTimeUs)) << ",\n";
-        // print out device identification
-        cout << "\t\"deviceUID\": " << uint64_t(*_reg.uid) << ",\n";
-        // print out device address
-        cout << "\t\"deviceAddress\": " << int(*_reg.devAddress) << "\n";
         
-        cout << "}\n";
-
+        cout << device.getInfoJson() << endl;
         
         // set to free running mode and calculate statistics for usb uart mode so we can see the values
         _reg.config->bits.freeRun = 1;
@@ -133,6 +130,7 @@ int main(void)
     xs.bind(MSGID_SLEEP,        broadcast(  sleepCallback));
     xs.bind(MSGID_RESET_SOFT,   broadcast(  softResetCallback));
     xs.bind(MSGID_RESET_HARD,   unicast(    factoryResetCallback));
+    xs.bind(MSGID_GET_INFO,     unicast(    getSensorInfoCallback));  
 
     // drain uart fifos, just in case there is something in there
     while(!queue_is_empty(&txFifo)) queue_remove_blocking(&txFifo, NULL);
