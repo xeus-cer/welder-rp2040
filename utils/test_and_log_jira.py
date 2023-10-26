@@ -66,6 +66,14 @@ parser.add_argument(
     type=str,
     help="create new Jira task if UUID not found with SUMMARY as summary"
 )
+parser.add_argument(
+    "-l",
+    "--link",
+    metavar="TASK",
+    type=str,
+    help="link to existing Jira task"
+)
+    
 
 args = parser.parse_args()
 
@@ -117,7 +125,7 @@ else:
         leaf = Leaf(i, XR)
         try:
             ping_reply = leaf.ping()
-            log.info(f"Found leaf at address {i}, latency: {ping_reply.latency} ms")
+            log.info(f"Found leaf at address {i}[{hex(i)}], latency: {ping_reply.latency} ms")
             break
         except Exception as e:
             pass
@@ -140,7 +148,9 @@ log.info(f"Device info: {device_info}")
 log.info("Running tests ...")
 test_output = test_leaf(leaf)
 log.info("###############################################################")
-log.info(f"Test output: \n\n{test_output}")
+log.info(f"Test output:")
+from pprint import pprint
+pprint(test_output)
 log.info("###############################################################")
 
 device_info["Test output"] = test_output
@@ -170,6 +180,9 @@ assert(uuid), "UUID not found in device info"
 uuid=uuid[1]
 # get all tasks in "SN" project matching the UUID
 issues = jira.search_issues(f"project=SN AND text~{uuid}")
+
+issue = None
+
 if len(issues) == 0:
     log.warning("UUID not found")
     if args.create:
@@ -184,6 +197,7 @@ if len(issues) == 0:
         
         new_issue = jira.create_issue(fields=issue_dict)  # uncomment to create
         log.info(f"New Issue key: {new_issue.key}")
+        issue = new_issue
 elif len(issues) > 1:
     log.error(f"Found more than one task matching the UUID: {uuid}")
 else:
@@ -191,3 +205,23 @@ else:
     log.info(f"Found task {issue.key} - {issue.fields.summary}")
     issue.update(fields={"description": device_info})
     log.info(f"Updated task {issue.key} - {issue.fields.summary}")    
+
+if args.link:
+    log.info(f"Linking task {issue.key} to {args.link}")
+    # issue.update(fields={"issuelinks": [{"add": {"issueKey": args.link}}]})
+    
+    #check if the task exists
+    link_to = jira.issue(args.link)
+    if not link_to:
+        log.error(f"Task {args.link} not found!")
+        sys.exit(1)
+    
+    # Link to a project
+    issue_link = jira.create_issue_link(
+        type="Relates",
+        inwardIssue=link_to.key,
+        outwardIssue=issue.key,
+        comment={"body": "Linked related issue!"}
+    )
+    
+    log.info(f"Linked task {issue.key} to {link_to.key}")
