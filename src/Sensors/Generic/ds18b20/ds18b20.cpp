@@ -13,13 +13,14 @@ namespace Xerxes
 
 void DS18B20::init()
 {
-    this->init(3);
+    this->init(4);
 }
 
 
 void DS18B20::init(int _numChannels)
 {
     _devid = DEVID_TEMP_DS18B20;  // device id
+    _label = "DS18B20 temperature sensor -55°C to +125°C";           // device label
     numChannels = _numChannels;
     xlog_info("Initializing DS18B20 using " << numChannels << " channels");
     
@@ -275,7 +276,7 @@ unsigned DS18B20::_readBit(uint pin)
     _release(pin);
     sleep_us(5);
     unsigned sample = _getVal(pin);
-    sleep_us(55);
+    sleep_us(50);
     return sample;
 }
 
@@ -283,9 +284,9 @@ unsigned DS18B20::_readBit(uint pin)
 void DS18B20::_write0(uint pin)
 {
     _setLow(pin);
-    sleep_us(65);
+    sleep_us(80);
     _release(pin);
-    sleep_us(10);            
+    sleep_us(15);            
 }
 
 
@@ -294,7 +295,7 @@ void DS18B20::_write1(uint pin)
     _setLow(pin);
     sleep_us(5);
     _release(pin);
-    sleep_us(60);          
+    sleep_us(95);          
 }
 
 
@@ -344,12 +345,12 @@ bool DS18B20::OWReset(uint pin)
     _setLow(pin);
     sleep_us(500);
     _release(pin);
-    sleep_us(60);
+    sleep_us(50);
     
     // after reset, read bus
     present = _getVal(pin);
     
-    sleep_us(440);
+    sleep_us(450);
     
     //if device is present, return 1
     return !present;    
@@ -382,6 +383,7 @@ double DS18B20::readJustOneTemp(uint pin)
 {
     // write to all sensors 0xBE, must be just one connected.
     _writeAll(pin, 0xBE);
+    sleep_us(10);
     char tempL = OWReadByte(pin);
     char tempH = OWReadByte(pin);
     // log values as decimal
@@ -390,6 +392,7 @@ double DS18B20::readJustOneTemp(uint pin)
     double temp_c = 0.0625 * raw_temp;
     xlog_info("raw_temp: " << raw_temp << ", C°: " << temp_c);
     // convert to double and return
+    sleep_us(10);
     startAll(pin); // retrig conversion
 
     if(temp_c > 125.0)

@@ -13,7 +13,7 @@ set(CMAKE_C_STANDARD 11)
 set(PICO_CXX_ENABLE_EXCEPTIONS 1)
 
 set(DEVICE_TYPE_HINT "Possible options for SENSOR_TYPE: SCL3300, SCL3300a, "
-"SCL3400, AI, DiscreteAI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS")
+"SCL3400, AI, DiscreteAI, 4DI4DO, ABP, hx711, Encoder, Cutter, EnviroLS, temp")
 
 # this is the board we are using, we need to set this to use the correct board header and bootloader
 # the board file is: src/Hardware/Board/xerxes_rp2040.h
