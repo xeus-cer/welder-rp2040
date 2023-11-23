@@ -76,46 +76,44 @@ $(function() {
 <div class="textblock"><code>#include &quot;<a class="el" href="ds18b20_8hpp_source.html">ds18b20.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="xerxes__rp2040_8h_source.html">Hardware/Board/xerxes_rp2040.h</a>&quot;</code><br />
 <code>#include &quot;hardware/adc.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="Log_8h_source.html">Utils/Log.h</a>&quot;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
-<code>#include &quot;<a class="el" href="ds18b20_8h_source.html">ds18b20.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ds18b20.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="ds18b20_8cpp__incl.png" border="0" usemap="#asrc_2Sensors_2Generic_2ds18b20_2ds18b20_8cpp" alt=""/></div>
 <map name="asrc_2Sensors_2Generic_2ds18b20_2ds18b20_8cpp" id="asrc_2Sensors_2Generic_2ds18b20_2ds18b20_8cpp">
-<area shape="rect" title=" " alt="" coords="1234,5,1401,47"/>
-<area shape="rect" href="ds18b20_8hpp.html" title=" " alt="" coords="834,102,939,129"/>
-<area shape="rect" title=" " alt="" coords="1225,333,1284,360"/>
-<area shape="rect" title=" " alt="" coords="943,259,1065,285"/>
-<area shape="rect" href="xerxes__rp2040_8h.html" title=" " alt="" coords="1293,95,1467,136"/>
-<area shape="rect" title=" " alt="" coords="1785,259,1860,285"/>
-<area shape="rect" href="ds18b20_8h.html" title=" " alt="" coords="1517,102,1606,129"/>
-<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="696,184,845,211"/>
-<area shape="rect" href="Register_8hpp.html" title=" " alt="" coords="231,259,369,285"/>
-<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="161,333,300,360"/>
-<area shape="rect" href="Peripheral_8hpp.html" title=" " alt="" coords="393,259,564,285"/>
-<area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="588,259,775,285"/>
-<area shape="rect" title=" " alt="" coords="1090,259,1217,285"/>
-<area shape="rect" title=" " alt="" coords="799,259,918,285"/>
-<area shape="rect" title=" " alt="" coords="5,408,136,435"/>
-<area shape="rect" title=" " alt="" coords="161,408,301,435"/>
-<area shape="rect" href="MemoryMap_8h.html" title=" " alt="" coords="325,408,441,435"/>
-<area shape="rect" title=" " alt="" coords="395,483,466,509"/>
-<area shape="rect" title=" " alt="" coords="339,333,405,360"/>
-<area shape="rect" href="DeviceIds_8h.html" title=" " alt="" coords="429,333,528,360"/>
-<area shape="rect" title=" " alt="" coords="553,333,629,360"/>
-<area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="869,333,987,360"/>
-<area shape="rect" title=" " alt="" coords="812,408,868,435"/>
-<area shape="rect" title=" " alt="" coords="892,408,964,435"/>
-<area shape="rect" title=" " alt="" coords="989,408,1051,435"/>
-<area shape="rect" title=" " alt="" coords="1392,408,1472,435"/>
-<area shape="rect" href="onewire_8h.html" title=" " alt="" coords="1297,184,1383,211"/>
-<area shape="rect" href="Log_8h.html" title=" " alt="" coords="1528,184,1619,211"/>
-<area shape="rect" title=" " alt="" coords="1293,259,1387,285"/>
-<area shape="rect" title=" " alt="" coords="1463,259,1529,285"/>
-<area shape="rect" title=" " alt="" coords="1554,259,1619,285"/>
-<area shape="rect" title=" " alt="" coords="1644,259,1711,285"/>
+<area shape="rect" title=" " alt="" coords="1149,5,1316,47"/>
+<area shape="rect" href="ds18b20_8hpp.html" title=" " alt="" coords="839,102,944,129"/>
+<area shape="rect" title=" " alt="" coords="1043,408,1102,435"/>
+<area shape="rect" href="Log_8h.html" title=" " alt="" coords="1231,333,1322,360"/>
+<area shape="rect" title=" " alt="" coords="1622,408,1697,435"/>
+<area shape="rect" title=" " alt="" coords="1027,259,1150,285"/>
+<area shape="rect" href="xerxes__rp2040_8h.html" title=" " alt="" coords="1397,95,1570,136"/>
+<area shape="rect" href="Sensor_8hpp.html" title=" " alt="" coords="652,184,800,211"/>
+<area shape="rect" href="Register_8hpp.html" title=" " alt="" coords="525,259,663,285"/>
+<area shape="rect" href="Definitions_8h.html" title=" " alt="" coords="306,333,445,360"/>
+<area shape="rect" href="Peripheral_8hpp.html" title=" " alt="" coords="637,333,807,360"/>
+<area shape="rect" href="StatisticBuffer_8hpp.html" title=" " alt="" coords="817,259,1001,285"/>
+<area shape="rect" title=" " alt="" coords="232,259,359,285"/>
+<area shape="rect" title=" " alt="" coords="383,259,501,285"/>
+<area shape="rect" title=" " alt="" coords="310,408,441,435"/>
+<area shape="rect" title=" " alt="" coords="5,408,145,435"/>
+<area shape="rect" href="MemoryMap_8h.html" title=" " alt="" coords="169,408,285,435"/>
+<area shape="rect" title=" " alt="" coords="335,483,405,509"/>
+<area shape="rect" title=" " alt="" coords="689,408,755,435"/>
+<area shape="rect" href="DeviceIds_8h.html" title=" " alt="" coords="465,408,563,435"/>
+<area shape="rect" title=" " alt="" coords="588,408,664,435"/>
+<area shape="rect" href="RingBuffer_8hpp.html" title=" " alt="" coords="850,333,967,360"/>
+<area shape="rect" title=" " alt="" coords="963,408,1019,435"/>
+<area shape="rect" title=" " alt="" coords="779,408,851,435"/>
+<area shape="rect" title=" " alt="" coords="876,408,939,435"/>
+<area shape="rect" title=" " alt="" coords="1126,408,1206,435"/>
+<area shape="rect" title=" " alt="" coords="1231,408,1325,435"/>
+<area shape="rect" title=" " alt="" coords="1350,408,1417,435"/>
+<area shape="rect" title=" " alt="" coords="1441,408,1507,435"/>
+<area shape="rect" title=" " alt="" coords="1531,408,1598,435"/>
 </map>
 </div>
 </div><table class="memberdecls">

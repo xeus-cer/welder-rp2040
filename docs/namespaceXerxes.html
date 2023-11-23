@@ -64,6 +64,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
@@ -73,6 +74,11 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespaceXerxes_1_1ADS1X15"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes_1_1ADS1X15.html">ADS1X15</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1EspUart.html">EspUart</a></td></tr>
@@ -120,6 +126,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1DigitalInputOutput.html">DigitalInputOutput</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1Encoder.html">Encoder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1DiscreteAnalog.html">DiscreteAnalog</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXerxes_1_1DS18B20.html">DS18B20</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,6 +192,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a84a6af23f8e4d76ca93538c4c40d6e23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a84a6af23f8e4d76ca93538c4c40d6e23">factoryResetCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
 <tr class="memdesc:a84a6af23f8e4d76ca93538c4c40d6e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to perform factory reset.  <a href="namespaceXerxes.html#a84a6af23f8e4d76ca93538c4c40d6e23">More...</a><br /></td></tr>
 <tr class="separator:a84a6af23f8e4d76ca93538c4c40d6e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad48ee874b0fb446f7fa31827aacda96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#aad48ee874b0fb446f7fa31827aacda96">getSensorInfoCallback</a> (const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;msg)</td></tr>
+<tr class="memdesc:aad48ee874b0fb446f7fa31827aacda96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="classXerxes_1_1Sensor.html" title="Sensor class.">Sensor</a> Info Callback object.  <a href="namespaceXerxes.html#aad48ee874b0fb446f7fa31827aacda96">More...</a><br /></td></tr>
+<tr class="separator:aad48ee874b0fb446f7fa31827aacda96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ba8e4357abc1a01f99ac1e77551de1b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceXerxes.html#a4ba8e4357abc1a01f99ac1e77551de1b">remainingTime</a> (const uint64_t &amp;start, const uint64_t &amp;timeout)</td></tr>
 <tr class="memdesc:a4ba8e4357abc1a01f99ac1e77551de1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get amount of time remaining from start to timeout.  <a href="namespaceXerxes.html#a4ba8e4357abc1a01f99ac1e77551de1b">More...</a><br /></td></tr>
 <tr class="separator:a4ba8e4357abc1a01f99ac1e77551de1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -759,6 +770,32 @@ template&lt;typename Func &gt; </div>
   </dd>
 </dl>
 <p>0x55AA55AA = unlocked, anything else = locked</p>
+
+</div>
+</div>
+<a id="aad48ee874b0fb446f7fa31827aacda96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad48ee874b0fb446f7fa31827aacda96">&#9670;&nbsp;</a></span>getSensorInfoCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Xerxes::getSensorInfoCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classXerxes_1_1Message.html">Xerxes::Message</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the <a class="el" href="classXerxes_1_1Sensor.html" title="Sensor class.">Sensor</a> Info Callback object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">msg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

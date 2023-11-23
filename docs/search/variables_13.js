@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['v_5fmajor_1315',['v_major',['../structping__reply__t.html#a96588235187f0daf02a43803c6f9ca6a',1,'ping_reply_t']]],
-  ['v_5fminor_1316',['v_minor',['../structping__reply__t.html#afb6931cca520c2a0f9de60339c3a2075',1,'ping_reply_t']]],
-  ['valmax_1317',['VALmax',['../namespaceXerxes.html#a21c6373e8b61dfb956fe1f6296c7343e',1,'Xerxes']]],
-  ['valmin_1318',['VALmin',['../namespaceXerxes.html#a3746d63f68de2b558e0169959c01eecb',1,'Xerxes']]]
+  ['uid_1428',['uid',['../classXerxes_1_1Register.html#a1514f451e89db6d28e97d07345cdf80e',1,'Xerxes::Register']]],
+  ['used_5fiomask_1429',['used_iomask',['../classXerxes_1_1DigitalInputOutput.html#aee5c32e1dbd16a9d869290f022eb9e05',1,'Xerxes::DigitalInputOutput']]],
+  ['useusb_1430',['useUsb',['../src_2main_8cpp.html#a89b4873bea82438d52932da866b82224',1,'main.cpp']]],
+  ['usrswitchon_1431',['usrSwitchOn',['../src_2main_8cpp.html#abf0c0c5ebb268e406fc60643cebc340e',1,'main.cpp']]],
+  ['uuid_1432',['uuid',['../namespacetest__and__log__jira.html#ad4bae0be9ffafd3d2e6d2080bebae2af',1,'test_and_log_jira']]]
 ];

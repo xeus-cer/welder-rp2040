@@ -132,6 +132,12 @@ Variables</h2></td></tr>
 <tr class="separator:a7352ddc633ec39e0907350faa2f343c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e63d342c94aa44b1865036b2393b0b6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#a3e63d342c94aa44b1865036b2393b0b6">MSGID_SLEEP</a> = 0x0004</td></tr>
 <tr class="separator:a3e63d342c94aa44b1865036b2393b0b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9922ae79d934c0f794a1789ead38ebe"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#ad9922ae79d934c0f794a1789ead38ebe">MSGID_GET_INFO</a> = 0x0005</td></tr>
+<tr class="memdesc:ad9922ae79d934c0f794a1789ead38ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get device info - device id, firmware version, etc.  <a href="MessageId_8h.html#ad9922ae79d934c0f794a1789ead38ebe">More...</a><br /></td></tr>
+<tr class="separator:ad9922ae79d934c0f794a1789ead38ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9099c8aade568754b5f9226d2a932194"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#a9099c8aade568754b5f9226d2a932194">MSGID_INFO</a> = 0x0006</td></tr>
+<tr class="memdesc:a9099c8aade568754b5f9226d2a932194"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reply to MSGID_GET_INFO message - device id, firmware version, etc.  <a href="MessageId_8h.html#a9099c8aade568754b5f9226d2a932194">More...</a><br /></td></tr>
+<tr class="separator:a9099c8aade568754b5f9226d2a932194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa220b26e362cfc03ab1ab2ab885c6253"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MessageId_8h.html#aa220b26e362cfc03ab1ab2ab885c6253">MSGID_RESET_HARD</a> = 0x00fe</td></tr>
 <tr class="memdesc:aa220b26e362cfc03ab1ab2ab885c6253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request for hard reset of the device - return to factory settings.  <a href="MessageId_8h.html#aa220b26e362cfc03ab1ab2ab885c6253">More...</a><br /></td></tr>
 <tr class="separator:aa220b26e362cfc03ab1ab2ab885c6253"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,6 +272,38 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obsolete - use MSGID_READ instead. </p>
+
+</div>
+</div>
+<a id="ad9922ae79d934c0f794a1789ead38ebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9922ae79d934c0f794a1789ead38ebe">&#9670;&nbsp;</a></span>MSGID_GET_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a> MSGID_GET_INFO = 0x0005</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get device info - device id, firmware version, etc. </p>
+
+</div>
+</div>
+<a id="a9099c8aade568754b5f9226d2a932194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9099c8aade568754b5f9226d2a932194">&#9670;&nbsp;</a></span>MSGID_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="MessageId_8h.html#a65c266a463f72ff771b3b60f0af86778">msgid_t</a> MSGID_INFO = 0x0006</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reply to MSGID_GET_INFO message - device id, firmware version, etc. </p>
 
 </div>
 </div>

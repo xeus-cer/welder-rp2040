@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// sleep_ms(1) is used to prevent the log messages from being printed in the</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// wrong order, enough for 200 bytes with baudrate 1500000</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="Log_8h.html#ade5c07b7eae44f78fe70b768199188ac">   39</a></span>&#160;<span class="preprocessor">#define xlog(level, msg) do { \</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">    float timestamp = time_us_64() / 1000000.0f; \</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">    double timestamp = time_us_64() / 1000000.0f; \</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">    std::cout &lt;&lt; _CLR_GREY &lt;&lt; &quot;[&quot;</span> &lt;&lt; timestamp &lt;&lt; &quot;][&quot; &lt;&lt; _CLR_RST &lt;&lt; level &lt;&lt; _CLR_GREY &lt;&lt; &quot;] — [&quot; &lt;&lt; __FILENAME__ &lt;&lt; &quot;:&quot; &lt;&lt; __LINE__ &lt;&lt; &quot; &quot; &lt;&lt; __func__ &lt;&lt; &quot;()] — &quot; &lt;&lt; _CLR_RST &lt;&lt; msg &lt;&lt; std::endl; \</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    sleep_ms(1); \</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} while (0)</div>
@@ -164,8 +164,20 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="Log_8h.html#a3144d09daf25ad75e27bd510e70f17c1">   91</a></span>&#160;<span class="preprocessor">#define xlogd(msg) xlog_debug(msg)</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="Log_8h.html#af22968f12bdb76e3cf7778c8b476275a">   92</a></span>&#160;<span class="preprocessor">#define xlog_dbg(msg) xlog_debug(msg)</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif    </span><span class="comment">/* LOG_HPP */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#if (_LOG_LEVEL &gt;= 5)</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#define xlog_trace(msg) do { \</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">    xlog(_CLR_B_GREY &lt;&lt; &quot;TRACE&quot;</span> &lt;&lt; _CLR_RST, _CLR_GREY &lt;&lt; msg &lt;&lt; _CLR_RST); \</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;} while (0) </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="Log_8h.html#a87508eebb8c8b735f5b96e9a3bc9c7ce">   99</a></span>&#160;<span class="preprocessor">#define xlog_trace(msg) do { } while (0)</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// _LOG_LEVEL</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">// convenience macros</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="Log_8h.html#a9d58651f018f5ba4994934aa646edcef">  103</a></span>&#160;<span class="preprocessor">#define xlogt(msg) xlog_trace(msg)</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="Log_8h.html#a7ff9ded91eb41789b5fad340c9f8dbbe">  104</a></span>&#160;<span class="preprocessor">#define xlog_trc(msg) xlog_trace(msg)</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#endif    </span><span class="comment">/* LOG_HPP */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
