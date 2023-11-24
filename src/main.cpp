@@ -245,7 +245,12 @@ void core1Entry()
     // set core1 to free run mode, process device data as fast as possible
     while (true)
     {
-        device.update();
+        // TODO: This is hack - remove after testing
+        if(!gpio_get(USR_BTN_PIN)){
+            // *_reg.dv1 = 100000.f;  // 10ms
+            device.update();
+            sleep_ms(3e3);  // 3s
+        } 
     }
 
 #else  // __TIGHTLOOP
