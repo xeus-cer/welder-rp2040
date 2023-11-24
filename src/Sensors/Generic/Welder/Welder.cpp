@@ -5,6 +5,7 @@
 #include "Hardware/ClockUtils.hpp"
 #include "hardware/pwm.h"
 #include <sstream>
+#include "Hardware/Sleep.hpp"
 
 namespace Xerxes
 {
@@ -74,10 +75,12 @@ void Welder::update()
         *pDurationUs = 0;
     }
     */
-    
+    gpio_put(USR_LED_PIN, 1);
     gpio_put(PWM5_A_PIN, true);
-    sleep_ms(30);
+    sleep_ms(40);
+    gpio_put(USR_LED_PIN, 0);
     gpio_put(PWM5_A_PIN, false);
+    sleep_hp(1e6);  // 1s
 }
 
 std::string Welder::getJson(){
