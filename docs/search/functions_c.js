@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['owreadbyte_975',['OWReadByte',['../onewire_8h.html#a1cb2be6c94e738f5b1c83d235e3176b3',1,'onewire.h']]],
-  ['owreset_976',['OWReset',['../onewire_8h.html#aa886f8ee13854788e63aab6bada5b9ce',1,'onewire.h']]],
-  ['owwritebyte_977',['OWWriteByte',['../onewire_8h.html#a5870aef72a5599eab9ae26ae825b616f',1,'onewire.h']]]
+  ['owreadbyte_1067',['OWReadByte',['../classXerxes_1_1DS18B20.html#ae2f5b66e379fd3c10213da2114074d7d',1,'Xerxes::DS18B20']]],
+  ['owreset_1068',['OWReset',['../classXerxes_1_1DS18B20.html#a07613f1db4c55bd0ba13f0429f1e3c6c',1,'Xerxes::DS18B20']]],
+  ['owwritebyte_1069',['OWWriteByte',['../classXerxes_1_1DS18B20.html#ac4e73e432cc7088a20fed704e3e3c8e7',1,'Xerxes::DS18B20']]]
 ];

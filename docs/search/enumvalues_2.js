@@ -1,22 +1,6 @@
 var searchData=
 [
-  ['devid_5faccel_5fxyz_1335',['DEVID_ACCEL_XYZ',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaaf929494e3fc683aa445ad9db806601b6',1,'DeviceIds.h']]],
-  ['devid_5fair_5fpol_5fco_5fnox_5fvoc_1336',['DEVID_AIR_POL_CO_NOX_VOC',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaabcdc75fec1c319fa01baf6560d115a06',1,'DeviceIds.h']]],
-  ['devid_5fair_5fpol_5fco_5fnox_5fvoc_5fpm_1337',['DEVID_AIR_POL_CO_NOX_VOC_PM',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa039ba2f279fd2688c278ad272c99917e',1,'DeviceIds.h']]],
-  ['devid_5fair_5fpol_5fco_5fnox_5fvoc_5fpm_5fgps_1338',['DEVID_AIR_POL_CO_NOX_VOC_PM_GPS',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa4b28e8a7addb3028e46fa91f27c2a01d',1,'DeviceIds.h']]],
-  ['devid_5fair_5fpol_5fpm_1339',['DEVID_AIR_POL_PM',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaae899564ad1b78da30352e5544eca6853',1,'DeviceIds.h']]],
-  ['devid_5fangle_5fxy_5f30_1340',['DEVID_ANGLE_XY_30',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa8a1d67b584343ce6a03af78c43c4b4ab',1,'DeviceIds.h']]],
-  ['devid_5fangle_5fxy_5f90_1341',['DEVID_ANGLE_XY_90',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa46d7d250f92b981fa4448aea318f878d',1,'DeviceIds.h']]],
-  ['devid_5fcutter_1342',['DEVID_CUTTER',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaad95aaf574e3fbae0e1e501e071f52890',1,'DeviceIds.h']]],
-  ['devid_5fdist_5f225mm_1343',['DEVID_DIST_225MM',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa706720e5aa6400d49221ad969b141c78',1,'DeviceIds.h']]],
-  ['devid_5fdist_5f22mm_1344',['DEVID_DIST_22MM',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaad8c21882c5eac604de480209abfdeeea',1,'DeviceIds.h']]],
-  ['devid_5fenc_5f1000ppr_1345',['DEVID_ENC_1000PPR',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa816e0a034be8c5e61fbc682dcca70564',1,'DeviceIds.h']]],
-  ['devid_5fio_5f4ai_1346',['DEVID_IO_4AI',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa0ea6747ad720c83421799a70d96426a3',1,'DeviceIds.h']]],
-  ['devid_5fio_5f4di_5f4do_1347',['DEVID_IO_4DI_4DO',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaab09e251a4085b0b86c9ee0ff294fd483',1,'DeviceIds.h']]],
-  ['devid_5fio_5f8di_5f8do_1348',['DEVID_IO_8DI_8DO',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa699e50b1ac83d5bd51601c6cd2faf112',1,'DeviceIds.h']]],
-  ['devid_5flight_5fsound_5fpollution_1349',['DEVID_LIGHT_SOUND_POLLUTION',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa385f8c976b5e87945ada16235813f199',1,'DeviceIds.h']]],
-  ['devid_5fpressure_5f600mbar_1350',['DEVID_PRESSURE_600MBAR',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaaedb7a1fd3bbca60d1b0040292082878e',1,'DeviceIds.h']]],
-  ['devid_5fpressure_5f60mbar_1351',['DEVID_PRESSURE_60MBAR',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa1ddb6edaf837c8df8a7547c1044162d5',1,'DeviceIds.h']]],
-  ['devid_5fstrain_5f24bit_1352',['DEVID_STRAIN_24BIT',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaaa0699a9c7b7e32ff9e104f437119f34e',1,'DeviceIds.h']]],
-  ['devid_5ftemp_5fds18b20_1353',['DEVID_TEMP_DS18B20',['../DeviceIds_8h.html#a387a2d29e222516a72c8e9c23ecbf4aaa22759ccfa69b77211f1cea5dbc354410',1,'DeviceIds.h']]]
+  ['config_1469',['CONFIG',['../namespaceXerxes_1_1ADS1X15.html#ac8ada8c785a6713788366297b772d8aca0644c7b6a100a195ae6a4678b1a4f231',1,'Xerxes::ADS1X15']]],
+  ['continuous_1470',['CONTINUOUS',['../namespaceXerxes_1_1ADS1X15.html#af6dc72599081bb66ef3ea622f54fcc54aae395e922804b54746e96dd4fecd44d0',1,'Xerxes::ADS1X15']]],
+  ['cpu_5foverload_1471',['CPU_OVERLOAD',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06bae541398fd8d93a1494ea08f6bcf6f6f3',1,'Errors.h']]]
 ];

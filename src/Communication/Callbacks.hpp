@@ -87,6 +87,13 @@ void softResetCallback(const Xerxes::Message &msg);
  */
 void factoryResetCallback(const Xerxes::Message &msg);
 
+/**
+ * @brief Get the Sensor Info Callback object
+ * 
+ * @param msg 
+ */
+void getSensorInfoCallback(const Xerxes::Message &msg);
+
 
 } // namespace Xerxes
 

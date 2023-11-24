@@ -1,4 +1,5 @@
 #include "Sensors/Peripheral.hpp"
+#include <sstream>
 
 namespace Xerxes
 {
@@ -41,6 +42,7 @@ devid_t Peripheral::getDevid()
 {
     return _devid;
 }
+
 
 }   // namespace Xerxes
 

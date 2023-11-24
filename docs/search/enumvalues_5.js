@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['sensor_5fconnection_1364',['SENSOR_CONNECTION',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06bab2ccae34a8259a8fbedc88437ad55e6a',1,'Errors.h']]],
-  ['sensor_5fconnection_5fmem_1365',['SENSOR_CONNECTION_MEM',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06baf84f641d74b0bd90a26544b0c6fdc55e',1,'Errors.h']]],
-  ['sensor_5foverload_1366',['SENSOR_OVERLOAD',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06ba010b4929879e68796f0194366ab52b02',1,'Errors.h']]],
-  ['startup_1367',['STARTUP',['../namespaceXerxes.html#a0ea1ea83b2b2f3b4b2765b1d0090ae2fa26ebb077920b0e200b84bd6481589d64',1,'Xerxes']]]
+  ['gnd_1508',['GND',['../namespaceXerxes_1_1ADS1X15.html#acd0867f975ff3f0b0a14766d5e04dd70aa7f59d75774f0df540e94db6a466013f',1,'Xerxes::ADS1X15']]],
+  ['gnd_5f0_1509',['GND_0',['../namespaceXerxes_1_1ADS1X15.html#a93aeefc5e21c3b9eeaeb642678ce9d72ad2d254ad7ab83438ca38cb3fd39f098d',1,'Xerxes::ADS1X15']]],
+  ['gnd_5f1_1510',['GND_1',['../namespaceXerxes_1_1ADS1X15.html#a93aeefc5e21c3b9eeaeb642678ce9d72ab853fe945f78d20d768405362105a65f',1,'Xerxes::ADS1X15']]],
+  ['gnd_5f2_1511',['GND_2',['../namespaceXerxes_1_1ADS1X15.html#a93aeefc5e21c3b9eeaeb642678ce9d72a745b53b757862015c279f57ce38de35b',1,'Xerxes::ADS1X15']]],
+  ['gnd_5f3_1512',['GND_3',['../namespaceXerxes_1_1ADS1X15.html#a93aeefc5e21c3b9eeaeb642678ce9d72a3ac8452466dbdb8d854c542b0c5e47ca',1,'Xerxes::ADS1X15']]]
 ];

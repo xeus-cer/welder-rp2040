@@ -4,3 +4,4 @@ docs/latex
 build-*/
 **__pycache__**
 pytest.log
+.env

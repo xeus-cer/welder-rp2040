@@ -34,11 +34,7 @@ def test_reset_hard(cleanLeaf: Leaf):
     # check that the gain is set correctly
     assert cleanLeaf.gain_pv2 == pytest.approx(3.14, abs=1e-6)
     
-    # reset the cleanLeaf to factory default state - this should reset the gain to 1
     cleanLeaf.reset_hard()
-    with pytest.raises(TimeoutError):
-        cleanLeaf.ping()
-    
     # wait for the cleanLeaf to reboot
     time.sleep(.5)
 

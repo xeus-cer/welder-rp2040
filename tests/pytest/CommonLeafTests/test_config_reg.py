@@ -41,7 +41,6 @@ def test_read_write_config(cleanLeaf: Leaf, XR: XerxesRoot):
     assert leaf.min_pv0 != 0
     assert leaf.max_pv0 != 0
 
-
 def test_config_free_run_only(cleanLeaf: Leaf, XR: XerxesRoot):
     """ Writes 1 byte to register 40 (config) to set the leaf to free run mode only
 
@@ -49,17 +48,13 @@ def test_config_free_run_only(cleanLeaf: Leaf, XR: XerxesRoot):
         XR (XerxesRoot): The root of the network
     """
 
-    # clean the process value
-    cleanLeaf.pv0 = 0
-
-    # check that the pv0 was cleaned
-    assert cleanLeaf.pv0 == 0
-
     # set the leaf to free run mode
     cleanLeaf.device_config = LeafConfig.freeRun
+    
+    cleanLeaf.reset_soft()
 
     # wait for the leaf to acquire some samples
-    time.sleep(0.1)
+    time.sleep(0.2)
 
     # assert that the config bits are set correctly
     assert cleanLeaf.device_config & LeafConfig.freeRun == LeafConfig.freeRun

@@ -1,23 +1,9 @@
 var searchData=
 [
-  ['xerxes_731',['Xerxes',['../namespaceXerxes.html',1,'']]],
-  ['xerxes_5frp2040_732',['XERXES_RP2040',['../xerxes__rp2040_8h.html#a5b92b2c8083414b85cfc23163ac45607',1,'xerxes_rp2040.h']]],
-  ['xerxes_5frp2040_2eh_733',['xerxes_rp2040.h',['../xerxes__rp2040_8h.html',1,'']]],
-  ['xlog_734',['xlog',['../Log_8h.html#ade5c07b7eae44f78fe70b768199188ac',1,'Log.h']]],
-  ['xlog_5fdbg_735',['xlog_dbg',['../Log_8h.html#af22968f12bdb76e3cf7778c8b476275a',1,'Log.h']]],
-  ['xlog_5fdebug_736',['xlog_debug',['../Log_8h.html#a055111bae058a00e1cffbeda646c1171',1,'Log.h']]],
-  ['xlog_5ferr_737',['xlog_err',['../Log_8h.html#a39f954ed27756b8c4c381f09c4295e98',1,'Log.h']]],
-  ['xlog_5ferror_738',['xlog_error',['../Log_8h.html#a39a3332be029a09d62a288e419ef6903',1,'Log.h']]],
-  ['xlog_5finfo_739',['xlog_info',['../Log_8h.html#a0b90345f15985b23627290a2375ebbc5',1,'Log.h']]],
-  ['xlog_5fwarn_740',['xlog_warn',['../Log_8h.html#ad533c26261651c31fbd2bea50e9f061f',1,'Log.h']]],
-  ['xlog_5fwarning_741',['xlog_warning',['../Log_8h.html#a5ad78d209ce60d31b2141c02fd0c3143',1,'Log.h']]],
-  ['xlogd_742',['xlogd',['../Log_8h.html#a3144d09daf25ad75e27bd510e70f17c1',1,'Log.h']]],
-  ['xloge_743',['xloge',['../Log_8h.html#a6429c3408ebcbae2c0029776f88afdc5',1,'Log.h']]],
-  ['xlogi_744',['xlogi',['../Log_8h.html#a720903210464db82ea921905eeb31c27',1,'Log.h']]],
-  ['xlogw_745',['xlogw',['../Log_8h.html#a09d4deda3e41d5e837f40aa86525218e',1,'Log.h']]],
-  ['xn_746',['XN',['../namespaceread__cutter.html#a6c72edf16c6fca8e450b98a658995527',1,'read_cutter.XN()'],['../namespaceconftest.html#a920580ceca81827a51cbf10991ff04b8',1,'conftest.XN()']]],
-  ['xn_747',['xn',['../src_2main_8cpp.html#a0e04530535720b8c0af1052ec2824b3d',1,'main.cpp']]],
-  ['xp_748',['xp',['../src_2main_8cpp.html#af2164c95214ef3bd3229246caea5923a',1,'main.cpp']]],
-  ['xr_749',['XR',['../namespaceread__cutter.html#abe4fa4efb062a8de4384da67eea8c3ed',1,'read_cutter.XR()'],['../namespaceconftest.html#adbc422f622980fa50a86bde2f3b91497',1,'conftest.XR()']]],
-  ['xs_750',['xs',['../Callbacks_8cpp.html#a7b934a8fd9ec6c1d3cf56933c51a0019',1,'Callbacks.cpp']]]
+  ['wake_5fup_5ffrom_5fpower_5fdown_5fmode_806',['Wake_up_from_power_down_mode',['../namespaceCMD.html#a8ed013ed66621e7af06f260e4257135f',1,'CMD']]],
+  ['watchdog_5ftimeout_807',['WATCHDOG_TIMEOUT',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06bae676d35fa448189652afa6a08b0afbe2',1,'Errors.h']]],
+  ['window_808',['WINDOW',['../namespaceXerxes_1_1ADS1X15.html#a73afe81b341a87011808d8a867c2c9fca8bb6352ba5fedff7ac0de71fc031f4e0',1,'Xerxes::ADS1X15']]],
+  ['writememory_809',['writeMemory',['../classXerxes_1_1Master.html#adb763789c5ed8892e168098e6fb9f35b',1,'Xerxes::Master']]],
+  ['writeregcallback_810',['writeRegCallback',['../namespaceXerxes.html#a94afd3fc3c8b1dfdb7175139bcee7362',1,'Xerxes']]],
+  ['writevalue_811',['writeValue',['../classXerxes_1_1Leaf.html#a9861069b46969b45d7ea67f337a24f20',1,'Xerxes::Leaf::writeValue()'],['../classXerxes_1_1Master.html#a27e52af2095713e8424778897120b065',1,'Xerxes::Master::writeValue()']]]
 ];

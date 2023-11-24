@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uart_5foverload_1368',['UART_OVERLOAD',['../Errors_8h.html#a6594cb155d53b91ae8e4ec026fb9d06bad38cda460d91b7796256123d74893ae5',1,'Errors.h']]]
+  ['high_5fthreshold_1513',['HIGH_THRESHOLD',['../namespaceXerxes_1_1ADS1X15.html#ac8ada8c785a6713788366297b772d8aca15da8fa7e5819fdd0c4bf2b3c32e4934',1,'Xerxes::ADS1X15']]]
 ];

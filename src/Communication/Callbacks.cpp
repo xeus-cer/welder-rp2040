@@ -165,5 +165,12 @@ void factoryResetCallback(const Xerxes::Message &msg)
     }
 }
 
+void getSensorInfoCallback(const Xerxes::Message &msg)
+{
+    std::string info = device.getInfoJson();
+    std::vector<uint8_t> payload(info.begin(), info.end());
+    xs.send(msg.srcAddr, MSGID_INFO, payload);
+}
+
 
 } // namespace Xerxes

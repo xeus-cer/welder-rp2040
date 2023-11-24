@@ -34,7 +34,7 @@ void Cutter::init()
 
 void Cutter::update()
 {
-    if(*status == 0 && *pLength > 0)
+    if(*status == 0 && (int32_t)*pLength > 0)
     {
         // the bar is not being cut, but the length is set
         // start the cutting process:
@@ -42,10 +42,6 @@ void Cutter::update()
         // calculate the lengths of the bar in pulses from pLength, offset (in mm)
         lengthPulses = *pLength * *pulsesPerMeter / 1000;
         offsetPulses = *pOffset * *pulsesPerMeter / 1000;
-
-        // clear the registers for the next cut
-        *pLength = 0;
-        *pOffset = 0;
 
         // start rewinding the bar
         gpio_put(MOTOR_PIN_FWD, 0);
@@ -58,7 +54,7 @@ void Cutter::update()
     // 1. rewind the bar if extruded length is too long
     //    wait for the bar to be retracted enough then
     //    stop rewinding the bar if it is retracted enough and start clock
-    if (*status == 1 && *encoderVal <= (lengthPulses + *rampUpPulses))
+    if (*status == 1 && (int32_t)*encoderVal <= (lengthPulses - (int32_t)*rampUpPulses))
     {
         // the rod is retracted enough
         gpio_put(MOTOR_PIN_RUN, 0);
@@ -76,7 +72,7 @@ void Cutter::update()
     }    
 
     // 3. check if the bar is long enough, then cut
-    if (*status == 3 && *encoderVal >= lengthPulses)
+    if (*status == 3 && (int32_t)*encoderVal >= lengthPulses)
     {
         gpio_put(MOTOR_PIN_RUN, 0);
         gpio_put(MOTOR_PIN_CUT, 1);
@@ -98,10 +94,18 @@ void Cutter::update()
 
     // 5. wait for the bar to be pushed to the place pOffset - rampDownPulses
     //    and stop (let the motor slow down)
-    if (*status == 5 && *encoderVal >= offsetPulses - *rampDownPulses)
+    if (*status == 5 && (int32_t)*encoderVal >= offsetPulses - (int32_t)*rampDownPulses)
     {
         gpio_put(MOTOR_PIN_RUN, 0);
         gpio_put(MOTOR_PIN_FWD, 0);
+
+        // clear the registers for the next cut
+        *pLength = 0;
+        *pOffset = 0;
+
+        lengthPulses = 0;
+        offsetPulses = 0;
+
         *status = 0;  // status 0 means the bar is in the place pOffset and cutter is ready for the next cut
     }
 }

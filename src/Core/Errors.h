@@ -16,7 +16,8 @@ enum class ERROR_NUM {
     WATCHDOG_TIMEOUT        = 3,
     SENSOR_OVERLOAD         = 4,
     SENSOR_CONNECTION       = 5,
-    SENSOR_CONNECTION_MEM   = 6
+    SENSOR_CONNECTION_MEM   = 6,
+    DEVICE_INIT             = 7
 };
 
 
@@ -32,7 +33,8 @@ enum : uint64_t
     ERROR_MASK_WATCHDOG_TIMEOUT         = 1 << static_cast<uint64_t>(ERROR_NUM::WATCHDOG_TIMEOUT),  // 0b1000 = 8
     ERROR_MASK_SENSOR_OVERLOAD          = 1 << static_cast<uint64_t>(ERROR_NUM::SENSOR_OVERLOAD),  // 0b10000 = 16
     ERROR_MASK_SENSOR_CONNECTION        = 1 << static_cast<uint64_t>(ERROR_NUM::SENSOR_CONNECTION),  // 0b100000 = 32
-    ERROR_MASK_SENSOR_CONNECTION_MEM    = 1 << static_cast<uint64_t>(ERROR_NUM::SENSOR_CONNECTION_MEM)  // 0b1000000 = 64
+    ERROR_MASK_SENSOR_CONNECTION_MEM    = 1 << static_cast<uint64_t>(ERROR_NUM::SENSOR_CONNECTION_MEM),  // 0b1000000 = 64
+    ERROR_MASK_DEVICE_INIT              = 1 << static_cast<uint64_t>(ERROR_NUM::DEVICE_INIT)  // 0b10000000 = 128
 };
 
 #ifdef	__cplusplus

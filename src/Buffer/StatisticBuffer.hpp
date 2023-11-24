@@ -2,6 +2,7 @@
 #define STATISTIC_BUFFER_HPP
 
 #include "RingBuffer.hpp"
+#include "Utils/Log.h"
 
 namespace Xerxes
 {
@@ -15,6 +16,7 @@ protected:
     float max;
     float mean;
     float stdDev;
+    float median;
 public:
     using RingBuffer<T>::RingBuffer; // inherit constructors
     void updateStatistics();
@@ -23,17 +25,41 @@ public:
     const float & getStdDev();
     const float & getMax();
     const float & getMin();
-    void getStatistics(T* min, T* max, T* mean, T* stdDev);
+    const float & getMedian();
+    void getStatistics(T* min, 
+                       T* max, 
+                       T* mean, 
+                       T* stdDev, 
+                       T* median = nullptr);
 };
 
 
 template <class T>
-void StatisticBuffer<T>::getStatistics(T* min, T* max, T* mean, T* stdDev)
+void StatisticBuffer<T>::getStatistics(T* min, 
+                                       T* max, 
+                                       T* mean, 
+                                       T* stdDev, 
+                                       T* median)
 {
-    *min = this->min;
-    *max = this->max;
-    *mean = this->mean;
-    *stdDev = this->stdDev;
+    if (min != nullptr) {
+        *min = this->min;
+    }
+
+    if (max != nullptr) {
+        *max = this->max;
+    }
+
+    if (mean != nullptr) {
+        *mean = this->mean;
+    }
+
+    if (stdDev != nullptr) {
+        *stdDev = this->stdDev;
+    }
+    
+    if (median != nullptr) {
+        *median = this->median;
+    }
 }
 
 
@@ -46,6 +72,7 @@ void StatisticBuffer<T>::updateStatistics()
 
     double sumOfElements {0};
     double sumOfSquaredErrors {0};
+    std::vector<T> sortedBuffer(this->maxCursor);
 
     for(int i=0; i<this->maxCursor; i++)
     {
@@ -61,6 +88,8 @@ void StatisticBuffer<T>::updateStatistics()
         {
             max = el;
         }
+
+        sortedBuffer[i] = el;
     }
 
     mean = sumOfElements / this->maxCursor;
@@ -71,6 +100,26 @@ void StatisticBuffer<T>::updateStatistics()
     }
 
     stdDev = sqrtf(sumOfSquaredErrors / this->maxCursor);
+
+    // Calculate the median
+    std::sort(sortedBuffer.begin(), sortedBuffer.end());
+    if (this->maxCursor % 2 == 0)
+    {
+        // If the number of elements is even, take the average of the middle two elements
+        median = (sortedBuffer[this->maxCursor / 2 - 1] + sortedBuffer[this->maxCursor / 2]) / 2.0;
+    }
+    else
+    {
+        // If the number of elements is odd, take the middle element
+        median = sortedBuffer[this->maxCursor / 2];
+    }
+    
+    // print content of the sorted buffer
+    for (int i = 0; i < this->maxCursor; i++)
+    {
+        xlog_trace("Sorted buffer[" << i << "]: " << sortedBuffer[i]);
+    }
+    xlog_debug("Median: " << median);
 }
 
 
@@ -99,6 +148,12 @@ template <class T>
 const float & StatisticBuffer<T>::getMax()
 {
     return max;
+}
+
+template <class T>
+const float & StatisticBuffer<T>::getMedian()
+{
+    return median;
 }
 
 

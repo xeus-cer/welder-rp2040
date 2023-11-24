@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['hex_1431',['HEX',['../lib_2xerxes-protocol-cpp_2build_2CMakeFiles_23_822_81_2CompilerIdC_2CMakeCCompilerId_8c.html#a46d5d95daa1bef867bd0179594310ed5',1,'HEX():&#160;CMakeCCompilerId.c'],['../lib_2xerxes-protocol-cpp_2build_2CMakeFiles_23_822_81_2CompilerIdCXX_2CMakeCXXCompilerId_8cpp.html#a46d5d95daa1bef867bd0179594310ed5',1,'HEX():&#160;CMakeCXXCompilerId.cpp'],['../tests_2build_2CMakeFiles_23_822_81_2CompilerIdC_2CMakeCCompilerId_8c.html#a46d5d95daa1bef867bd0179594310ed5',1,'HEX():&#160;CMakeCCompilerId.c'],['../tests_2build_2CMakeFiles_23_822_81_2CompilerIdCXX_2CMakeCXXCompilerId_8cpp.html#a46d5d95daa1bef867bd0179594310ed5',1,'HEX():&#160;CMakeCXXCompilerId.cpp']]]
+  ['i2c0_5fscl_5fpin_1602',['I2C0_SCL_PIN',['../xerxes__rp2040_8h.html#a1e30c459b21b57de018d51644a767929',1,'xerxes_rp2040.h']]],
+  ['i2c0_5fsda_5fpin_1603',['I2C0_SDA_PIN',['../xerxes__rp2040_8h.html#a0a6c8b4ecca4f35aaa82d33f8a1d9742',1,'xerxes_rp2040.h']]],
+  ['i2c1_5fscl_5fpin_1604',['I2C1_SCL_PIN',['../xerxes__rp2040_8h.html#add009e081e638094ee54b280661d862e',1,'xerxes_rp2040.h']]],
+  ['i2c1_5fsda_5fpin_1605',['I2C1_SDA_PIN',['../xerxes__rp2040_8h.html#a68697a8aca56f616b38aa23f82edecd5',1,'xerxes_rp2040.h']]]
 ];

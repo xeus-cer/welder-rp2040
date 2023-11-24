@@ -37,7 +37,7 @@
 // sleep_ms(1) is used to prevent the log messages from being printed in the
 // wrong order, enough for 200 bytes with baudrate 1500000
 #define xlog(level, msg) do { \
-    float timestamp = time_us_64() / 1000000.0f; \
+    double timestamp = time_us_64() / 1000000.0f; \
     std::cout << _CLR_GREY << "[" << timestamp << "][" << _CLR_RST << level << _CLR_GREY << "] — [" << __FILENAME__ << ":" << __LINE__ << " " << __func__ << "()] — " << _CLR_RST << msg << std::endl; \
     sleep_ms(1); \
 } while (0)
@@ -90,6 +90,18 @@
 // convenience macros
 #define xlogd(msg) xlog_debug(msg)
 #define xlog_dbg(msg) xlog_debug(msg)
+
+#if (_LOG_LEVEL >= 5)
+#define xlog_trace(msg) do { \
+    xlog(_CLR_B_GREY << "TRACE" << _CLR_RST, _CLR_GREY << msg << _CLR_RST); \
+} while (0) 
+#else
+#define xlog_trace(msg) do { } while (0)
+#endif // _LOG_LEVEL
+
+// convenience macros
+#define xlogt(msg) xlog_trace(msg)
+#define xlog_trc(msg) xlog_trace(msg)
 
 
 #endif    /* LOG_HPP */
