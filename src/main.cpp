@@ -24,25 +24,23 @@
 using namespace std;
 using namespace Xerxes;
 
-
 // forward declaration
 __DEVICE_CLASS device;
 
-
-Register _reg;  // main register
+Register _reg; // main register
 
 /// @brief transmit FIFO queue for UART
 queue_t txFifo;
 /// @brief receive FIFO queue for UART
 queue_t rxFifo;
 
-RS485 xn(&txFifo, &rxFifo);     // RS485 interface
-Protocol xp(&xn);               // Xerxes protocol implementation
-Slave xs(&xp, *_reg.devAddress);   ///< Xerxes slave implementation
+RS485 xn(&txFifo, &rxFifo); // RS485 interface
+Protocol xp(&xn);           // Xerxes protocol implementation
+Slave xs;
 
-volatile bool usrSwitchOn;                // user switch state
-volatile bool core1idle = true;  // core1 idle flag
-volatile bool useUsb = false;    // use usb uart flag
+volatile bool usrSwitchOn;      // user switch state
+volatile bool core1idle = true; // core1 idle flag
+volatile bool useUsb = false;   // use usb uart flag
 volatile bool awake = true;
 
 /**
@@ -50,14 +48,14 @@ volatile bool awake = true;
  */
 void core1Entry();
 
-
 int main(void)
-{    // enable watchdog for 200ms, pause on debug = true
+{ // enable watchdog for 200ms, pause on debug = true
     watchdog_enable(DEFAULT_WATCHDOG_DELAY, true);
-    
+
     // init system
-    userInit();  // 374us
-        
+    userInit();                        // 374us
+    xs = Slave(&xp, *_reg.devAddress); ///< Xerxes slave implementation
+
     // blink led for 10 ms - we are alive
     gpio_put(USR_LED_PIN, 1);
     sleep_ms(10);
@@ -66,24 +64,25 @@ int main(void)
     // clear error register
     _reg.errorClear(0xFFFFFFFF);
 
-    //determine reason for restart:
+    // determine reason for restart:
     if (watchdog_caused_reboot())
     {
         _reg.errorSet(ERROR_MASK_WATCHDOG_TIMEOUT);
     }
-    
+
     // check if user switch is on, if so, use usb uart
     useUsb = gpio_get(USR_SW_PIN);
 
-    
     // if user button is pressed, load default values a.k.a. FACTORY RESET
-    if(!gpio_get(USR_BTN_PIN)) userLoadDefaultValues();
-    
-    if(useUsb){
+    if (!gpio_get(USR_BTN_PIN))
+        userLoadDefaultValues();
+
+    if (useUsb)
+    {
         // init usb uart
         stdio_usb_init();
         userInitUartDisabled();
-        
+
         while (!stdio_usb_connected())
         {
             watchdog_update();
@@ -92,25 +91,30 @@ int main(void)
 
     watchdog_update();
     device = __DEVICE_CLASS(&_reg);
-    try {
+    try
+    {
         device.init();
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         xlog_error("Exception in device init: " << e.what());
         _reg.errorSet(ERROR_MASK_DEVICE_INIT);
-    } catch (...) {
+    }
+    catch (...)
+    {
         xlog_error("Unknown exception in device init");
         _reg.errorSet(ERROR_MASK_DEVICE_INIT);
     }
     watchdog_update();
     device.update();
     watchdog_update();
-    
-    if(useUsb)
+
+    if (useUsb)
     {
         xlog_info("USB Connected");
-        
+
         cout << device.getInfoJson() << endl;
-        
+
         // set to free running mode and calculate statistics for usb uart mode so we can see the values
         _reg.config->bits.freeRun = 1;
         _reg.config->bits.calcStat = 1;
@@ -121,32 +125,32 @@ int main(void)
         userInitUart();
     }
 
-
     // bind callbacks, ~204us
-    xs.bind(MSGID_PING,         unicast(    pingCallback));
-    xs.bind(MSGID_WRITE,        unicast(    writeRegCallback));
-    xs.bind(MSGID_READ,         unicast(    readRegCallback));
-    xs.bind(MSGID_SYNC,         broadcast(  syncCallback));
-    xs.bind(MSGID_SLEEP,        broadcast(  sleepCallback));
-    xs.bind(MSGID_RESET_SOFT,   broadcast(  softResetCallback));
-    xs.bind(MSGID_RESET_HARD,   unicast(    factoryResetCallback));
-    xs.bind(MSGID_GET_INFO,     unicast(    getSensorInfoCallback));  
+    xs.bind(MSGID_PING, unicast(pingCallback));
+    xs.bind(MSGID_WRITE, unicast(writeRegCallback));
+    xs.bind(MSGID_READ, unicast(readRegCallback));
+    xs.bind(MSGID_SYNC, broadcast(syncCallback));
+    xs.bind(MSGID_SLEEP, broadcast(sleepCallback));
+    xs.bind(MSGID_RESET_SOFT, broadcast(softResetCallback));
+    xs.bind(MSGID_RESET_HARD, unicast(factoryResetCallback));
+    xs.bind(MSGID_GET_INFO, unicast(getSensorInfoCallback));
 
     // drain uart fifos, just in case there is something in there
-    while(!queue_is_empty(&txFifo)) queue_remove_blocking(&txFifo, NULL);
-    while(!queue_is_empty(&rxFifo)) queue_remove_blocking(&rxFifo, NULL);
+    while (!queue_is_empty(&txFifo))
+        queue_remove_blocking(&txFifo, NULL);
+    while (!queue_is_empty(&rxFifo))
+        queue_remove_blocking(&rxFifo, NULL);
 
     // start core1 for device operation
     multicore_launch_core1(core1Entry);
-    
 
     // main loop, runs forever, handles all communication in this loop
-    while(1)
-    {    
+    while (1)
+    {
         // update watchdog
-         watchdog_update();
+        watchdog_update();
 
-        if(useUsb)
+        if (useUsb)
         {
             constexpr uint32_t printFrequencyHz = 1;
             constexpr uint64_t printIntervalUs = 1e6 / printFrequencyHz;
@@ -157,10 +161,11 @@ int main(void)
             cout << "\"timestamp\":" << timestamp << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
             cout << "\"errors\": 0b" << bitset<32>(*_reg.error) << ",\n";
-                        
+
             // cout device values in json format
             cout << "\"device\":" << device.getJson() << endl;
-            cout << "}" << endl << endl;
+            cout << "}" << endl
+                 << endl;
 
             auto end = time_us_64();
             // calculate remaining sleep time in us - 10us for calculation overhead
@@ -173,17 +178,17 @@ int main(void)
         {
             // running on RS485, sync for incoming messages from master, timeout = 5ms
             xs.sync(5000);
-            
+
             // send char if tx queue is not empty and uart is writable
-            if(!queue_is_empty(&txFifo))
-            {   
+            if (!queue_is_empty(&txFifo))
+            {
                 uint txLen = queue_get_level(&txFifo);
                 assert(txLen <= RX_TX_QUEUE_SIZE);
 
                 uint8_t toSend[txLen];
 
                 // drain queue
-                for(uint i = 0; i < txLen; i++)
+                for (uint i = 0; i < txLen; i++)
                 {
                     queue_remove_blocking(&txFifo, &toSend[i]);
                 }
@@ -191,63 +196,61 @@ int main(void)
                 // write char to bus, this will clear the interrupt
                 uart_write_blocking(uart0, toSend, txLen);
             }
-        
-            if(queue_is_full(&txFifo) || queue_is_full(&rxFifo))
+
+            if (queue_is_full(&txFifo) || queue_is_full(&rxFifo))
             {
                 // rx fifo is full, set the cpu_overload error flag
                 _reg.errorSet(ERROR_MASK_UART_OVERLOAD);
             }
 
-            // save power in release mode
-            #ifdef NDEBUG
-                if(core1idle)
-                {
-                    // setClocksLP();
-                    sleep_us(10);
-                    // setClocksHP();
-                }
-            #endif // NDEBUG
+// save power in release mode
+#ifdef NDEBUG
+            if (core1idle)
+            {
+                // setClocksLP();
+                sleep_us(10);
+                // setClocksHP();
+            }
+#endif // NDEBUG
         }
     }
 }
-
 
 void core1Entry()
 {
     uint64_t endOfCycle = 0;
     uint64_t cycleDuration = 0;
     int64_t sleepFor = 0;
-    
-    // let core0 lockout core1
-    multicore_lockout_victim_init ();
 
-    // enable gpio interrupts for core1 e.g. for actors or encoders
-    #if defined(__SHIELD_ENCODER) || defined(__SHIELD_CUTTER)
+    // let core0 lockout core1
+    multicore_lockout_victim_init();
+
+// enable gpio interrupts for core1 e.g. for actors or encoders
+#if defined(__SHIELD_ENCODER) || defined(__SHIELD_CUTTER)
     // top priority to catch encoder events
     irq_set_priority(IO_IRQ_BANK0, 0);
 
     // enable gpio interrupts for encoder using lambda function and set callback simultaneously
     gpio_set_irq_enabled_with_callback(
-        Xerxes::ENCODER_PIN_A, 
-        GPIO_IRQ_EDGE_RISE, 
-        true, 
+        Xerxes::ENCODER_PIN_A,
+        GPIO_IRQ_EDGE_RISE,
+        true,
         [](uint gpio, uint32_t)
         {
             device.encoderIrqHandler(gpio);
-        }
-    );
-    # endif // __SHIELD_ENCODER
+        });
+#endif // __SHIELD_ENCODER
 
-    #if defined(__TIGHTLOOP)
+#if defined(__TIGHTLOOP)
     // set core1 to free run mode, process device data as fast as possible
-    while(true)
+    while (true)
     {
         device.update();
     }
 
-    #else // __TIGHTLOOP
+#else  // __TIGHTLOOP
     // core1 mainloop
-    while(true)
+    while (true)
     {
         // core is set to free run, start cycle
         auto startOfCycle = time_us_64();
@@ -258,9 +261,9 @@ void core1Entry()
         // turn off led
         gpio_put(USR_LED_PIN, 0);
 
-        if(_reg.config->bits.freeRun)
+        if (_reg.config->bits.freeRun)
         {
-            device.update(); 
+            device.update();
         }
 
         // calculate how long it took to finish cycle
@@ -272,9 +275,9 @@ void core1Entry()
 
         // calculate remaining sleep time
         sleepFor = *_reg.desiredCycleTimeUs - cycleDuration;
-        
+
         // sleep for the remaining time
-        if(sleepFor > 0)
+        if (sleepFor > 0)
         {
             core1idle = true;
             sleep_us(sleepFor);
@@ -286,7 +289,7 @@ void core1Entry()
             _reg.errorSet(ERROR_MASK_SENSOR_OVERLOAD);
         }
     }
-    #endif // __TIGHTLOOP
-    
+#endif // __TIGHTLOOP
+
     core1idle = true;
 }
