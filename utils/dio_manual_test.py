@@ -10,6 +10,7 @@ Version: 1.0
 Date: 2023-05-15
 """
 
+
 import os
 import sys
 import argparse
@@ -21,7 +22,7 @@ from xerxes_protocol import XerxesRoot, XerxesNetwork, Leaf, DebugSerial
 
 # parse arguments
 parser = argparse.ArgumentParser(
-    description="Read process values from Xerxes Cutter device and print them in tight loop. Use Ctrl+C to exit."
+    description="Write to xerxes DO and read from xerxes DI"
 )
 parser.add_argument(
     "-a",
@@ -36,7 +37,7 @@ parser.add_argument(
     "output",
     metavar="OUTPUT",
     type=int,
-    help="output number to set",
+    help="output number to set, use negative number to skip setting output",
 )
 # add argument whether to use debug serial or not
 parser.add_argument(
@@ -99,9 +100,14 @@ if __name__ == "__main__":
     exit_val = 0
 
     try:
-        log.debug(f"Setting output to {args.output}")
-        leaf.dv0 = args.output
-        log.debug(f"leaf.dv0 = {leaf.dv0}")
+        if args.output >= 0:
+            log.debug(f"Setting output to {args.output}")
+            leaf.dv0 = args.output
+            log.debug(f"leaf.dv0 = {leaf.dv0}")
+
+        # read from leaf
+        di = leaf.dv1
+        print(di)
     except TimeoutError:
         log.warning(f"TimeoutError while reading from {leaf}")
     except Exception as e:
