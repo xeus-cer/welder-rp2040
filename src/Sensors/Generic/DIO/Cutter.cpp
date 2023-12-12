@@ -124,7 +124,7 @@ namespace Xerxes
             // start the cutting process:
 
             // calculate the lengths of the bar in pulses from pLength, offset (in mm)
-            lengthPulses = *pLength * *pulsesPerMeter / 1000;
+            lengthPulses = (*pLength * *pulsesPerMeter / 1000) - DEFAULT_CUT_LATENCY_PULSES;
             offsetPulses = *pOffset * *pulsesPerMeter / 1000;
 
             if ((int32_t)*encoderVal >= (lengthPulses - (int32_t)*rampUpPulses))

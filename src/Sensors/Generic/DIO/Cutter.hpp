@@ -12,12 +12,13 @@ namespace Xerxes
     constexpr uint32_t MOTOR_PIN_CUT = DO3_PIN; // 1 = cut, 0 = release
 
     constexpr uint32_t DEFAULT_MOTOR_RAMP_UP = 1000;   // 1000 pulses
-    constexpr uint32_t DEFAULT_MOTOR_RAMP_DOWN = 1000; // 1000 pulses
+    constexpr uint32_t DEFAULT_MOTOR_RAMP_DOWN = 3300; // 3300 pulses
 
     constexpr uint32_t DEFAULT_CONTACTOR_LATENCY_US = 100'000; // 100ms
     constexpr uint32_t DEFAULT_MOTOR_STOP_TIME = 2'000'000;    // 1s
     constexpr uint32_t DEFAULT_MOTOR_CUT_TIME = 500'000;       // 500ms
     constexpr uint32_t DEFAULT_PULSES_PER_METER = 5000;        // 1000 pulses per revolution, 200mm per revolution
+    constexpr uint32_t DEFAULT_CUT_LATENCY_PULSES = 850;       // 850 pulses = 170mm
 
     class Controller
     {
