@@ -1,7 +1,6 @@
 #ifndef __ALL_HPP
 #define __ALL_HPP
 
-
 #include "Sensor.hpp"
 #include "Murata/SCL3300.hpp"
 #include "Murata/SCL3300a.hpp"
@@ -16,6 +15,6 @@
 #include "Generic/DIO/Cutter.hpp"
 #include "Generic/ds18b20/ds18b20.hpp"
 #include "Generic/Enviro/LightSound.hpp"
-
+#include "Generic/DIO/Welder.hpp"
 
 #endif // !__ALL_HPP

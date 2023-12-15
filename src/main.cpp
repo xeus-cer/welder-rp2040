@@ -87,6 +87,12 @@ int main(void)
         {
             watchdog_update();
         }
+        xlog_info("USB Connected");
+    }
+    else
+    {
+        // init uart over RS485
+        userInitUart();
     }
 
     watchdog_update();
@@ -106,40 +112,30 @@ int main(void)
         _reg.errorSet(ERROR_MASK_DEVICE_INIT);
     }
     watchdog_update();
-    device.update();
-    watchdog_update();
-
+    // set to free running mode and calculate statistics for usb uart mode so we can see the values
+    _reg.config->bits.freeRun = 1;
+    _reg.config->bits.calcStat = 1;
     if (useUsb)
     {
-        xlog_info("USB Connected");
-
         cout << device.getInfoJson() << endl;
-
-        // set to free running mode and calculate statistics for usb uart mode so we can see the values
-        _reg.config->bits.freeRun = 1;
-        _reg.config->bits.calcStat = 1;
     }
     else
     {
-        // init uart over RS485
-        userInitUart();
+        // bind callbacks, ~204us
+        xs.bind(MSGID_PING, unicast(pingCallback));
+        xs.bind(MSGID_WRITE, unicast(writeRegCallback));
+        xs.bind(MSGID_READ, unicast(readRegCallback));
+        xs.bind(MSGID_SYNC, broadcast(syncCallback));
+        xs.bind(MSGID_SLEEP, broadcast(sleepCallback));
+        xs.bind(MSGID_RESET_SOFT, broadcast(softResetCallback));
+        xs.bind(MSGID_RESET_HARD, unicast(factoryResetCallback));
+        xs.bind(MSGID_GET_INFO, unicast(getSensorInfoCallback));
+        // drain uart fifos, just in case there is something in there
+        while (!queue_is_empty(&txFifo))
+            queue_remove_blocking(&txFifo, NULL);
+        while (!queue_is_empty(&rxFifo))
+            queue_remove_blocking(&rxFifo, NULL);
     }
-
-    // bind callbacks, ~204us
-    xs.bind(MSGID_PING, unicast(pingCallback));
-    xs.bind(MSGID_WRITE, unicast(writeRegCallback));
-    xs.bind(MSGID_READ, unicast(readRegCallback));
-    xs.bind(MSGID_SYNC, broadcast(syncCallback));
-    xs.bind(MSGID_SLEEP, broadcast(sleepCallback));
-    xs.bind(MSGID_RESET_SOFT, broadcast(softResetCallback));
-    xs.bind(MSGID_RESET_HARD, unicast(factoryResetCallback));
-    xs.bind(MSGID_GET_INFO, unicast(getSensorInfoCallback));
-
-    // drain uart fifos, just in case there is something in there
-    while (!queue_is_empty(&txFifo))
-        queue_remove_blocking(&txFifo, NULL);
-    while (!queue_is_empty(&rxFifo))
-        queue_remove_blocking(&rxFifo, NULL);
 
     // start core1 for device operation
     multicore_launch_core1(core1Entry);
