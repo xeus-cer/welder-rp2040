@@ -18,9 +18,6 @@
 #include "Communication/RS485.hpp"
 #include "Utils/Log.h"
 
-// preprocess token into string
-#define _quote(x) #x
-
 using namespace std;
 using namespace Xerxes;
 
@@ -153,6 +150,7 @@ int main(void)
 
             // cout timestamp and net cycle time in json format
             auto timestamp = time_us_64();
+#ifdef NDEBUG
             cout << "{" << endl;
             cout << "\"timestamp\":" << timestamp << "," << endl;
             cout << "\"netCycleTimeUs\":" << *_reg.netCycleTimeUs << "," << endl;
@@ -162,8 +160,10 @@ int main(void)
             cout << "\"device\":" << device.getJson() << endl;
             cout << "}" << endl
                  << endl;
+#endif // NDEBUG
 
             auto end = time_us_64();
+
             // calculate remaining sleep time in us - 10us for calculation overhead
             auto remainingSleepTime = printIntervalUs - (end - timestamp) - 10;
 
