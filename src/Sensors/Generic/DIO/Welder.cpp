@@ -104,12 +104,24 @@ namespace Xerxes
         *status = 0;
         xlog_info("Welder status initialized");
 
+        // setup update rate to 10Hz
+        *_reg->desiredCycleTimeUs = 1000000;
+
         _devid = DEVID_WELDER;
         xlog_info("Welder devid initialized");
+
+        timer.user_data = this;
     }
 
     void Welder::update()
     {
+        xlog_info(this->_servo_time_us << " " << this->_servo_pulse_us << " " << this->increment);
+
+        if (!gpio_get(USR_BTN_PIN) && *status == 0)
+        {
+            *pWeldTimeMs = 3000;
+        }
+
         if (
             *status == 0 &&
             *pWeldTimeMs > 0)
@@ -127,6 +139,20 @@ namespace Xerxes
         {
             // the bar is gripped
             controller->weld(); // return immediately
+            xlog_info("Adding repeating timer");
+            try
+            {
+                bool timer_added = add_repeating_timer_us(-100, _timerCallback, this, &timer);
+                if (!timer_added)
+                {
+                    xlog_error("Failed to add repeating timer");
+                }
+            }
+            catch (...)
+            {
+                xlog_error("Exception in adding repeating timer");
+            }
+            xlog_info("Repeating timer added");
             timestampUs = time_us_64();
             *status = 2;
         }
@@ -149,7 +175,49 @@ namespace Xerxes
             controller->release(*pGripperOffTimeMs); // return after the gripper is off
             *pWeldTimeMs = 0;                        // reset the weld time so that the next weld can start
             *status = 0;                             // reset the status to 0 so that the next weld can start
+            bool cancelled = cancel_repeating_timer(&timer);
+            if (!cancelled)
+            {
+                xlog_error("Failed to cancel repeating timer");
+            }
+            else
+            {
+                xlog_info("Repeating timer cancelled");
+                gpio_put(MOVE_PIN, 0);
+                sleep_us(5000);
+                gpio_put(MOVE_PIN, 1);
+                sleep_us(1500);
+                gpio_put(MOVE_PIN, 0);
+            }
         }
+    }
+
+    bool _timerCallback(repeating_timer_t *rt)
+    {
+        Welder *instance = (Welder *)rt->user_data;
+        instance->increment++;
+        instance->_servo_time_us += 100;
+        if (instance->_servo_time_us > 5000)
+        {
+            instance->_servo_time_us = 0;
+            instance->_servo_pulse_us += 5;
+        }
+
+        if (instance->_servo_pulse_us > 1000)
+        {
+            instance->_servo_pulse_us = 0;
+        }
+
+        if (instance->_servo_time_us > 1000 + instance->_servo_pulse_us)
+        {
+            gpio_put(MOVE_PIN, 0);
+        }
+        else
+        {
+            gpio_put(MOVE_PIN, 1);
+        }
+
+        return true;
     }
 
 } // namespace Xerxes

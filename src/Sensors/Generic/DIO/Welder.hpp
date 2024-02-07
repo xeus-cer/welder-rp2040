@@ -3,13 +3,15 @@
 
 #include <string>
 #include "4DI4DO.hpp"
+#include "pico/time.h"
 
 namespace Xerxes
 {
 
     constexpr uint32_t GRIP_PIN = DO0_PIN;    // 1 = forward, 0 = reverse
     constexpr uint32_t RELEASE_PIN = DO1_PIN; // 1 = run, 0 = stop
-    constexpr uint32_t WELD_PIN = DO2_PIN;    // 1 = cut, 0 = release
+    constexpr uint32_t WELD_PIN = DO2_PIN;    // 1 = weld, 0 = stop
+    constexpr uint32_t MOVE_PIN = DO3_PIN;    // 1 = move, 0 = stop
 
     constexpr uint32_t DEFAULT_GRIPPER_ON_TIME_MS = 1'000; // 1s
     constexpr uint32_t DEFAULT_GRIPPER_OFF_TIME_MS = 500;  // 0.5s
@@ -50,6 +52,8 @@ namespace Xerxes
         void weldStop();
     };
 
+    bool _timerCallback(repeating_timer_t *rt);
+
     /**
      * @brief Welder class
      *
@@ -78,6 +82,11 @@ namespace Xerxes
 
         uint64_t timestampUs;
 
+        int _servo_pulse_us = 0;
+        int _servo_time_us = 0;
+        uint64_t increment = 0;
+        repeating_timer_t timer;
+
     protected:
         std::string _label{"XUES Welder peripheral"};
 
@@ -93,6 +102,8 @@ namespace Xerxes
          *
          */
         void update();
+
+        friend bool _timerCallback(repeating_timer_t *rt);
     };
 
 }
