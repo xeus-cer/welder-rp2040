@@ -133,36 +133,34 @@ include_directories(
     ${xerxes-protocol_INCLUDE_DIRS}
 )
 
-add_executable(
-    ${PROJECT_NAME}
-    src/Communication/Callbacks.cpp
-    src/Hardware/ClockUtils.cpp
-    src/Hardware/Sleep.cpp
-    src/Hardware/InitUtils.cpp
-    src/Hardware/UserFlash.cpp
-    src/Communication/RS485.cpp
-    src/Core/Slave.cpp
-    src/Core/Register.cpp
-    src/Sensors/Peripheral.cpp
-    src/Sensors/Sensor.cpp
-    src/Sensors/Generic/AnalogInput.cpp
-    src/Sensors/Generic/DiscreteAnalog.cpp
-    src/Sensors/Generic/DIO/DigitalInputOutput.cpp
-    src/Sensors/Generic/DIO/4DI4DO.cpp
-    src/Sensors/Murata/SCL3X00.cpp
-    src/Sensors/Murata/SCL3300.cpp
-    src/Sensors/Murata/SCL3300a.cpp
-    src/Sensors/Murata/SCL3400.cpp
-    src/Sensors/Honeywell/ABP.cpp
-    src/Sensors/Generic/hx711.cpp
-    src/Sensors/Generic/DIO/Encoder.cpp
-    src/Sensors/Generic/DIO/Cutter.cpp
-    src/Sensors/Generic/ds18b20/ds18b20.cpp
-    src/Sensors/Generic/Enviro/LightSound.cpp
-    src/Sensors/Generic/DIO/Welder.cpp
-
-    src/main.cpp
+# Specify the source directories
+set(SOURCE_DIRS
+    src/Communication
+    src/Hardware
+    src/Core
+    src/Sensors
+    src/Sensors/Generic
+    src/Sensors/Generic/DIO
+    src/Sensors/Generic/ds18b20
+    src/Sensors/Generic/Enviro
+    src/Sensors/Murata
+    src/Sensors/Honeywell
 )
+
+# Initialize an empty list to store source files
+set(SOURCE_FILES "")
+
+# Loop through each source directory and recursively collect source files
+foreach(dir ${SOURCE_DIRS})
+    file(GLOB_RECURSE dir_sources ${dir}/*.cpp)
+    list(APPEND SOURCE_FILES ${dir_sources})
+endforeach()
+
+# Add the main.cpp separately
+list(APPEND SOURCE_FILES src/main.cpp)
+
+# Create the executable
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 target_link_libraries(
     ${PROJECT_NAME}
