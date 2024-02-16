@@ -119,7 +119,7 @@ namespace Xerxes
 
         if (!gpio_get(USR_BTN_PIN) && *status == 0)
         {
-            *pWeldTimeMs = 3000;
+            *pWeldTimeMs = DEFAULT_WELD_TIME_MS;
         }
 
         if (
@@ -203,12 +203,12 @@ namespace Xerxes
             instance->_servo_pulse_us += 5;
         }
 
-        if (instance->_servo_pulse_us > 1000)
+        if (instance->_servo_pulse_us > 500)
         {
             instance->_servo_pulse_us = 0;
         }
 
-        if (instance->_servo_time_us > 1000 + instance->_servo_pulse_us)
+        if (instance->_servo_time_us > 1250 + instance->_servo_pulse_us)
         {
             gpio_put(MOVE_PIN, 0);
         }

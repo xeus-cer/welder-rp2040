@@ -13,8 +13,10 @@ namespace Xerxes
     constexpr uint32_t WELD_PIN = DO2_PIN;    // 1 = weld, 0 = stop
     constexpr uint32_t MOVE_PIN = DO3_PIN;    // 1 = move, 0 = stop
 
-    constexpr uint32_t DEFAULT_GRIPPER_ON_TIME_MS = 1'000; // 1s
-    constexpr uint32_t DEFAULT_GRIPPER_OFF_TIME_MS = 500;  // 0.5s
+    constexpr uint32_t DEFAULT_GRIPPER_ON_TIME_MS = 500;  // 0.5s
+    constexpr uint32_t DEFAULT_GRIPPER_OFF_TIME_MS = 500; // 0.5s
+
+    constexpr uint32_t DEFAULT_WELD_TIME_MS = 3000; // 3s
 
     class WeldControl
     {
