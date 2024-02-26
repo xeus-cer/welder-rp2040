@@ -16,7 +16,7 @@ namespace Xerxes
     constexpr uint32_t DEFAULT_GRIPPER_ON_TIME_MS = 500;  // 0.5s
     constexpr uint32_t DEFAULT_GRIPPER_OFF_TIME_MS = 500; // 0.5s
 
-    constexpr uint32_t DEFAULT_WELD_TIME_MS = 3000; // 3s
+    constexpr uint32_t DEFAULT_WELD_TIME_MS = 4000; // 3s
 
     class WeldControl
     {
