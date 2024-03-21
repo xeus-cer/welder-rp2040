@@ -116,6 +116,8 @@ namespace Xerxes
     void Welder::update()
     {
         xlog_info(this->_servo_time_us << " " << this->_servo_pulse_us << " " << this->increment);
+        // print status info
+        xlog_info("Welder status: " << *status);
 
         if (!gpio_get(USR_BTN_PIN) && *status == 0)
         {
@@ -130,6 +132,7 @@ namespace Xerxes
             // start the cutting process:
 
             *status = 1;
+            gpio_put(USR_LED_PIN, 1);
             // start the cutting process by gripping and toggle status to 1
             *pWeldingFor = 0;                    // reset the welding time
             controller->grip(*pGripperOnTimeMs); // return after the gripper is on
@@ -175,6 +178,7 @@ namespace Xerxes
             controller->release(*pGripperOffTimeMs); // return after the gripper is off
             *pWeldTimeMs = 0;                        // reset the weld time so that the next weld can start
             *status = 0;                             // reset the status to 0 so that the next weld can start
+            gpio_put(USR_LED_PIN, 0);
             bool cancelled = cancel_repeating_timer(&timer);
             if (!cancelled)
             {
